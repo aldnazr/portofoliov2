@@ -19,7 +19,7 @@ export const profile = {
   name: "Muhammad Alauddin Azhary",
   initials: "AZ",
   role: "Software Engineer",
-  location: "Surabaya, Indonesia",
+  location: "Jakarta, Indonesia",
   availability: "Open to works",
   email: "alauddinazhary05@gmail.com",
   hero: "Saya mengembangkan aplikasi web dan mobile dari frontend hingga backend dengan fokus pada performa, kualitas, dan pengalaman pengguna.",
