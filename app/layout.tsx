@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Muhammad Alauddin Azhary — Software Engineer",
-  description: "Portofolio Muhammad Alauddin Azhary, Software Engineer yang berfokus pada pengembangan aplikasi web dan mobile end-to-end.",
+  description:
+    "Portofolio Muhammad Alauddin Azhary, Software Engineer yang berfokus pada pengembangan aplikasi web dan mobile end-to-end.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,7 +26,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
