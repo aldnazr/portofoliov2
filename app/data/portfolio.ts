@@ -19,18 +19,18 @@ export const profile = {
   name: "Muhammad Alauddin Azhary",
   initials: "AZ",
   role: "Software Engineer",
-  location: "Jakarta, Indonesia",
+  location: "Surabaya, Indonesia",
   availability: "Open to works",
   email: "alauddinazhary05@gmail.com",
   hero: "Saya mengembangkan aplikasi web dan mobile dari frontend hingga backend dengan fokus pada performa, kualitas, dan pengalaman pengguna.",
   about:
     "Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi end-to-end, mulai dari frontend dan backend hingga pengalaman pengguna. Saya senang menyederhanakan proses dan kebutuhan bisnis menjadi produk digital yang efisien, scalable, dan nyaman digunakan.",
   skills: ["Mobile Development", "Frontend Development", "Backend Development"],
-  stats: [
-    { value: "2+", label: "tahun membangun produk" },
-    { value: "18", label: "rilis digital" },
-    { value: "12", label: "kolaborasi tim" },
-  ],
+  // stats: [
+  //   { value: "2+", label: "tahun membangun produk" },
+  //   { value: "18", label: "rilis digital" },
+  //   { value: "12", label: "kolaborasi tim" },
+  // ],
   socialLinks: [
     { label: "GitHub", href: "https://github.com/aldnazr" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/aldnazr" },
@@ -116,7 +116,7 @@ export const experience = [
   },
   {
     period: "Agustus 2024 — Februari 2025",
-    title: "Frontend Developer",
+    title: "Fullstack Developer",
     company: "PPTA Universitas Dinamika",
     description:
       "Memperbarui website PPTA (pusat pelayanan tugas akhir) untuk meningkatkan aksesibilitas pengguna.",

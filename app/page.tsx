@@ -142,7 +142,7 @@ export default function Home() {
 
           <div className="space-y-6 max-w-3xl">
             <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.15]">
-              Hi, saya{" "}
+              Halo, Saya{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-zinc-200 to-emerald-400">
                 {profile.name}
               </span>
@@ -185,7 +185,7 @@ export default function Home() {
           </div>
 
           {/* Stats Bar */}
-          <div className="pt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* <div className="pt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {profile.stats.map((stat, idx) => (
               <div
                 key={idx}
@@ -201,12 +201,12 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </section>
 
         {/* TENTANG SECTION */}
         <section id="about" className="space-y-8 scroll-mt-28">
-          <SectionHeader badge="Tentang Saya" title="Keahlian & Fokus Utama" />
+          <SectionHeader badge="Tentang Saya" title="Kemampuan" />
 
           <div className="p-1.5 rounded-4xl border border-white/10 bg-white/2">
             <div className="p-8 sm:p-10 rounded-[1.625rem] bg-[#0c0e14] border border-white/5 space-y-8">
