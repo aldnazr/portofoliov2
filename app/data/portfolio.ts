@@ -48,7 +48,7 @@ export const projects: Project[] = [
   {
     number: "01",
     name: "Ahsan Xpress",
-    category: "Logistik dan Transportasi",
+    category: "Mobile - Logistik dan Transportasi",
     description:
       "Memperbarui seluruh ekosistem mulai dari mobile apps (customer & driver), dan juga web admin.",
     technologies: ["Next.js", "Flutter"],
@@ -62,7 +62,7 @@ export const projects: Project[] = [
   {
     number: "02",
     name: "Web SmartVet",
-    category: "Petshop Management SaaS",
+    category: "Fullstack - Petshop Management SaaS",
     description:
       "Klinik petshop untuk manajemen data pasien hewan, pemeriksaan, pengobatan, hingga penjadwalan appointment.",
     technologies: ["Laravel", "PHP", "PostgreSQL", "Livewire"],
@@ -74,7 +74,7 @@ export const projects: Project[] = [
   {
     number: "03",
     name: "Web Inventory SCP",
-    category: "Inventory Management System",
+    category: "Fullstack - Inventory Management System",
     description:
       "Website inventory untuk manajemen data barang, supplier, pembelian, penjualan, dan laporan. yang berfokus pada perusahaan persediaan material",
     technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
@@ -86,7 +86,7 @@ export const projects: Project[] = [
   {
     number: "04",
     name: "Web CatatPro",
-    category: "Accounting Software",
+    category: "Fullstack - Accounting Software",
     description:
       "Software untuk kebutuhan pencatatan pengeluaran dan pemasukan, dilengkapi dengan dashboard, laporan, dan grafik untuk memudahkan pengguna dalam mengelola keuangan mereka.",
     technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
@@ -94,7 +94,7 @@ export const projects: Project[] = [
   {
     number: "05",
     name: "Vault Chain",
-    category: "Crypto APP",
+    category: "Mobile - Crypto APP",
     description:
       "Aplikasi mobile untuk memantau harga dan trending cryptocurrency terkini.",
     technologies: ["Flutter"],
@@ -106,11 +106,19 @@ export const projects: Project[] = [
   },
   {
     number: "06",
-    name: "Backend TokoHP",
+    name: "Backend - TokoHP",
     category: "Backend",
     description:
       "Rest API untuk kebutuhan frontend TokoHP",
-    technologies: ["Laravel", "REST API", "PHP", "SQL", "MySQL"],
+    technologies: ["Laravel", "REST API", "PHP", "MySQL"],
+  },
+  {
+    number: "07",
+    name: "PPTA",
+    category: "Fullstack - Academic Final Project Service Center Website",
+    description:
+      "Website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
+    technologies: ["Laravel", "PHP", "MySQL"],
   },
 ];
 
