@@ -104,6 +104,14 @@ export const projects: Project[] = [
     },
     sourceUrl: "https://github.com/aldnazr/vault-chain.git",
   },
+  {
+    number: "06",
+    name: "Backend TokoHP",
+    category: "Backend",
+    description:
+      "Rest API untuk kebutuhan frontend TokoHP",
+    technologies: ["Laravel", "REST API", "PHP"],
+  },
 ];
 
 export const experience = [
