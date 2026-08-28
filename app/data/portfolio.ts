@@ -110,7 +110,7 @@ export const projects: Project[] = [
     category: "Backend",
     description:
       "Rest API untuk kebutuhan frontend TokoHP",
-    technologies: ["Laravel", "REST API", "PHP"],
+    technologies: ["Laravel", "REST API", "PHP", "SQL", "MySQL"],
   },
 ];
 
