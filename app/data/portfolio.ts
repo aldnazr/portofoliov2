@@ -108,8 +108,7 @@ export const projects: Project[] = [
     number: "06",
     name: "Backend - TokoHP",
     category: "Backend",
-    description:
-      "Rest API untuk kebutuhan frontend TokoHP",
+    description: "Rest API untuk kebutuhan frontend TokoHP",
     technologies: ["Laravel", "REST API", "PHP", "MySQL"],
   },
   {
@@ -117,7 +116,7 @@ export const projects: Project[] = [
     name: "PPTA",
     category: "Fullstack - Academic Final Project Service Center Website",
     description:
-      "Website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
+      "Rebuild website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
     technologies: ["Laravel", "PHP", "SQL"],
   },
 ];
