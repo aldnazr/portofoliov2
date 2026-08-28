@@ -118,7 +118,7 @@ export const projects: Project[] = [
     category: "Fullstack - Academic Final Project Service Center Website",
     description:
       "Website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
-    technologies: ["Laravel", "PHP", "MySQL"],
+    technologies: ["Laravel", "PHP", "SQL"],
   },
 ];
 
