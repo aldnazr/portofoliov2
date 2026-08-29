@@ -73,7 +73,7 @@ export const projects: Project[] = [
   },
   {
     number: "03",
-    name: "Web Inventory SCP",
+    name: "Inventory SCP",
     category: "Fullstack - Inventory Management System",
     description:
       "Website inventory untuk manajemen data barang, supplier, pembelian, penjualan, dan laporan. yang berfokus pada perusahaan persediaan material",
