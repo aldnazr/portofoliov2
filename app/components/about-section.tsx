@@ -3,7 +3,7 @@ import SectionHeader from "@/app/components/section-header";
 
 const allTechnologies = Array.from(
   new Set(projects.flatMap((p) => p.technologies)),
-);
+).sort((a, b) => a.localeCompare(b));
 
 export default function AboutSection() {
   return (
