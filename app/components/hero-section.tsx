@@ -1,4 +1,5 @@
 import { profile } from "@/app/data/portfolio";
+import { ButtonLink } from "./button";
 
 export default function HeroSection() {
   return (
@@ -39,15 +40,12 @@ export default function HeroSection() {
       </div>
 
       <div className="flex flex-wrap items-center gap-4 pt-2">
-        <a
-          href="#project"
-          className="group relative inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-emerald-500 text-zinc-950 font-medium text-sm transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 active:scale-[0.98]"
-        >
+        <ButtonLink href="#project">
           <span>Lihat Proyek</span>
-          <span className="w-6 h-6 rounded-full bg-zinc-950/10 flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+          <span className="w-6 h-6 rounded-full bg-zinc-950/10 flex items-center justify-center group-hover:scale-105 transition-transform">
             ↓
           </span>
-        </a>
+        </ButtonLink>
       </div>
     </section>
   );

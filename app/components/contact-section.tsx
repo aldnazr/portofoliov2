@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { profile } from "@/app/data/portfolio";
+import { Button } from "./button";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -117,21 +118,32 @@ export default function ContactSection() {
             )}
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 pt-2">
-              <button
+              <Button
                 type="submit"
                 disabled={isSending}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 text-zinc-950 font-medium text-sm transition-all hover:bg-emerald-400 hover:shadow-xl hover:shadow-emerald-500/20 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+                size="lg"
+                className="w-full sm:w-auto"
               >
                 <span>
                   {isSending ? "Mengirim..." : "Kirim Pesan Langsung"}
                 </span>
-                <span className="text-xs">↗</span>
-              </button>
+                <span className="w-6 h-6 rounded-full bg-zinc-950/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    className="size-3"
+                  >
+                    <path d="M2.87 2.298a.75.75 0 0 0-.812 1.021L3.39 6.624a1 1 0 0 0 .928.626H8.25a.75.75 0 0 1 0 1.5H4.318a1 1 0 0 0-.927.626l-1.333 3.305a.75.75 0 0 0 .811 1.022 24.89 24.89 0 0 0 11.668-5.115.75.75 0 0 0 0-1.175A24.89 24.89 0 0 0 2.869 2.298Z" />
+                  </svg>
+                </span>
+              </Button>
 
-              <button
+              <Button
                 type="button"
                 onClick={handleCopyEmail}
-                className="w-full sm:w-fit justify-center inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-zinc-200 text-sm font-medium transition-all active:scale-[0.98] cursor-pointer"
+                variant="secondary"
+                className="w-full sm:w-fit gap-2.5"
               >
                 <svg
                   className="w-4 h-4 text-emerald-400"
@@ -147,7 +159,7 @@ export default function ContactSection() {
                   />
                 </svg>
                 <span>{copied ? "Email Tersalin!" : profile.email}</span>
-              </button>
+              </Button>
             </div>
           </form>
 
