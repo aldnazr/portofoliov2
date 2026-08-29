@@ -20,6 +20,18 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Form states for contact email
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSending, setIsSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState<"idle" | "success" | "error">(
+    "idle",
+  );
+  const [errorMessage, setErrorMessage] = useState("");
+
   const ITEMS_PER_PAGE = 3;
   const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
 
@@ -40,6 +52,36 @@ export default function Home() {
     navigator.clipboard.writeText(profile.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleSendEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.message.trim()) return;
+
+    setIsSending(true);
+    setSendStatus("idle");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Gagal mengirim email");
+      }
+
+      setSendStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err) {
+      setSendStatus("error");
+      setErrorMessage((err as Error).message);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -184,26 +226,6 @@ export default function Home() {
                 ↓
               </span>
             </a>
-
-            <button
-              onClick={handleCopyEmail}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-zinc-200 text-sm font-medium transition-all active:scale-[0.98]"
-            >
-              <svg
-                className="w-4 h-4 text-emerald-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
-              <span>{copied ? "Email Tersalin!" : profile.email}</span>
-            </button>
           </div>
 
           {/* Stats Bar */}
@@ -490,26 +512,91 @@ export default function Home() {
               </h2>
 
               <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto">
-                Saya selalu terbuka untuk berdiskusi mengenai proyek web,
-                mobile, atau peluang rekayasa perangkat lunak lainnya.
+                Kirim pesan langsung kepada saya melalui formulir di bawah ini
+                atau salin email saya.
               </p>
 
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 text-zinc-950 font-medium text-sm transition-all hover:bg-emerald-400 hover:shadow-xl hover:shadow-emerald-500/20 active:scale-[0.98]"
-                >
-                  <span>Kirim Email Langsung</span>
-                  <span className="text-xs">↗</span>
-                </a>
+              {/* Direct Email Form */}
+              <form
+                onSubmit={handleSendEmail}
+                className="max-w-xl mx-auto text-left space-y-4 pt-4"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    placeholder="Nama Anda"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email Anda"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors"
+                  />
+                </div>
+                <textarea
+                  required
+                  rows={4}
+                  placeholder="Pesan Anda..."
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors resize-none"
+                />
 
-                <button
-                  onClick={handleCopyEmail}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-zinc-200 text-sm font-medium transition-all active:scale-[0.98]"
-                >
-                  <span>{copied ? "Berhasil Disalin!" : "Salin Email"}</span>
-                </button>
-              </div>
+                {sendStatus === "success" && (
+                  <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center font-medium">
+                    ✓ Pesan berhasil terkirim! Terima kasih telah menghubungi.
+                  </div>
+                )}
+
+                {sendStatus === "error" && (
+                  <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs text-center font-medium">
+                    ✕ Gagal mengirim pesan: {errorMessage}
+                  </div>
+                )}
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSending}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 text-zinc-950 font-medium text-sm transition-all hover:bg-emerald-400 hover:shadow-xl hover:shadow-emerald-500/20 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+                  >
+                    <span>
+                      {isSending ? "Mengirim..." : "Kirim Email Langsung"}
+                    </span>
+                    <span className="text-xs">↗</span>
+                  </button>
+
+                  <button
+                    onClick={handleCopyEmail}
+                    className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 text-zinc-200 text-sm font-medium transition-all active:scale-[0.98]"
+                  >
+                    <svg
+                      className="w-4 h-4 text-emerald-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>{copied ? "Email Tersalin!" : profile.email}</span>
+                  </button>
+                </div>
+              </form>
 
               {/* Socials */}
               <div className="pt-8 border-t border-white/5 flex items-center justify-center gap-6">
