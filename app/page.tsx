@@ -106,7 +106,7 @@ export default function Home() {
                     strokeWidth={2}
                     d="M6 18L18 6M6 6l12 12"
                   />
-                  : <path
+                : <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
@@ -302,7 +302,7 @@ export default function Home() {
                   </div>
                 </div>
               ))
-              : currentProjects.map((item) => (
+            : currentProjects.map((item) => (
                 <div
                   key={item.number}
                   className="group p-1.5 rounded-[2.25rem] border border-white/10 bg-white/2 hover:border-emerald-500/30 transition-all duration-500"
@@ -386,7 +386,7 @@ export default function Home() {
                           fill
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
                         />
-                        : <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-linear-to-br from-zinc-900 to-zinc-950 space-y-3">
+                      : <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-linear-to-br from-zinc-900 to-zinc-950 space-y-3">
                           <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 font-mono font-bold text-lg">
                             {item.number}
                           </div>
@@ -408,7 +408,7 @@ export default function Home() {
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
                 aria-label="Halaman sebelumnya"
               >
                 &larr; Prev
@@ -420,10 +420,11 @@ export default function Home() {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all ${currentPage === page ?
-                        "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold"
+                      className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${
+                        currentPage === page ?
+                          "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold"
                         : "bg-white/5 text-zinc-400 border border-white/10 hover:bg-white/10 hover:text-white"
-                        }`}
+                      }`}
                     >
                       {page}
                     </button>
@@ -434,7 +435,7 @@ export default function Home() {
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
                 aria-label="Halaman berikutnya"
               >
                 Next &rarr;
