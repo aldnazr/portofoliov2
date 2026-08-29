@@ -17,6 +17,24 @@ const allTechnologies = Array.from(
 export default function Home() {
   const [copied, setCopied] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const ITEMS_PER_PAGE = 3;
+  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages || page === currentPage) return;
+    setIsLoading(true);
+    setCurrentPage(page);
+    document.getElementById("project")?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => setIsLoading(false), 350);
+  };
+
+  const currentProjects = projects.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(profile.email);
@@ -254,7 +272,37 @@ export default function Home() {
           <SectionHeader badge="Portofolio Karya" title="Proyek Pilihan" />
 
           <div className="grid grid-cols-1 gap-8">
-            {projects.map((item) => (
+            {isLoading
+              ? Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="p-1.5 rounded-[2.25rem] border border-white/10 bg-white/2 animate-pulse"
+                  >
+                    <div className="p-6 sm:p-8 rounded-[1.875rem] bg-[#0c0e14] border border-white/5 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                      <div className="lg:col-span-7 space-y-5">
+                        <div className="flex items-center gap-3">
+                          <div className="h-6 w-12 rounded-md bg-white/10" />
+                          <div className="h-4 w-28 rounded bg-white/10" />
+                        </div>
+                        <div className="h-7 w-3/4 rounded bg-white/10" />
+                        <div className="space-y-2 pt-1">
+                          <div className="h-4 w-full rounded bg-white/10" />
+                          <div className="h-4 w-5/6 rounded bg-white/10" />
+                        </div>
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          <div className="h-6 w-16 rounded-lg bg-white/10" />
+                          <div className="h-6 w-20 rounded-lg bg-white/10" />
+                          <div className="h-6 w-14 rounded-lg bg-white/10" />
+                        </div>
+                        <div className="pt-3 flex gap-3">
+                          <div className="h-8 w-32 rounded-full bg-white/10" />
+                        </div>
+                      </div>
+                      <div className="lg:col-span-5 relative w-full aspect-16/10 rounded-2xl bg-white/10" />
+                    </div>
+                  </div>
+                ))
+              : currentProjects.map((item) => (
               <div
                 key={item.number}
                 className="group p-1.5 rounded-[2.25rem] border border-white/10 bg-white/2 hover:border-emerald-500/30 transition-all duration-500"
@@ -352,6 +400,45 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 pt-4">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                aria-label="Halaman sebelumnya"
+              >
+                &larr; Prev
+              </button>
+
+              <div className="flex items-center gap-1.5 px-2">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all ${
+                      currentPage === page
+                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold"
+                        : "bg-white/5 text-zinc-400 border border-white/10 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                aria-label="Halaman berikutnya"
+              >
+                Next &rarr;
+              </button>
+            </div>
+          )}
         </section>
 
         {/* PENGALAMAN SECTION */}
