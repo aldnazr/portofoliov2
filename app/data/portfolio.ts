@@ -54,7 +54,7 @@ export const projects: Project[] = [
     technologies: ["Flutter", "Next.js"],
     image: {
       src: "/projects/driver.png",
-      alt: "Visual abstrak antarmuka dashboard NusaPay",
+      alt: "Ahsan Brand",
     },
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=com.ahsanxpress.dev",
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     technologies: ["Laravel", "PHP", "PostgreSQL", "Livewire"],
     image: {
       src: "/projects/nusapay-dashboard.svg",
-      alt: "Visual abstrak dashboard SmartVet",
+      alt: "SmartVet Banner",
     },
   },
   {
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
     image: {
       src: "/projects/karsa-studio.svg",
-      alt: "Visual abstrak komposisi kreatif untuk Karsa Studio",
+      alt: "SCP Banner",
     },
   },
   {
@@ -100,7 +100,7 @@ export const projects: Project[] = [
     technologies: ["Flutter"],
     image: {
       src: "/projects/bitcoin.png",
-      alt: "Visual abstrak antarmuka dashboard NusaPay",
+      alt: "Bitcoin Banner",
     },
     sourceUrl: "https://github.com/aldnazr/vault-chain.git",
   },
@@ -118,6 +118,19 @@ export const projects: Project[] = [
     description:
       "Rebuild website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
     technologies: ["Laravel", "PHP", "SQL"],
+  },
+  {
+    number: "08",
+    name: "Asclepius",
+    category: "Mobile - Cancer Detector App",
+    description:
+      "Asclepius adalah aplikasi Android untuk deteksi kanker berbasis AI on-device menggunakan TensorFlow Lite.",
+    technologies: ["Android", "Kotlin", "Tensorflow Lite"],
+    image: {
+      src: "/projects/asclepius.webp",
+      alt: "Asclepius Banner",
+    },
+    sourceUrl: "https://github.com/aldnazr/android-tensorflow",
   },
 ];
 
