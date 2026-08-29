@@ -132,6 +132,19 @@ export const projects: Project[] = [
     },
     sourceUrl: "https://github.com/aldnazr/android-tensorflow",
   },
+  {
+    number: "09",
+    name: "Blendit",
+    category: "Mobile - Face Recognition for Makeup Recommendation",
+    description:
+      "Pengenalan wajah dan analisis gambar AI Based untuk memberikan rekomendasi produk riasan berdasarkan wajah, warna kulit, dan kondisi kulit pengguna.",
+    technologies: ["Android", "Kotlin"],
+    image: {
+      src: "/projects/blendit.webp",
+      alt: "Blendit Banner",
+    },
+    sourceUrl: "https://github.com/aldnazr/bangkit-capstone",
+  },
 ];
 
 export const experience = [
