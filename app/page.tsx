@@ -571,7 +571,7 @@ export default function Home() {
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-emerald-500 text-zinc-950 font-medium text-sm transition-all hover:bg-emerald-400 hover:shadow-xl hover:shadow-emerald-500/20 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
                   >
                     <span>
-                      {isSending ? "Mengirim..." : "Kirim Email Langsung"}
+                      {isSending ? "Mengirim..." : "Kirim Pesan Langsung"}
                     </span>
                     <span className="text-xs">↗</span>
                   </button>
