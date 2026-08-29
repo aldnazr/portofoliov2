@@ -51,7 +51,7 @@ export const projects: Project[] = [
     category: "Mobile - Logistik dan Transportasi",
     description:
       "Memperbarui seluruh ekosistem mulai dari mobile apps (customer & driver), dan juga web admin.",
-    technologies: ["Next.js", "Flutter"],
+    technologies: ["Flutter", "Next.js"],
     image: {
       src: "/projects/driver.png",
       alt: "Visual abstrak antarmuka dashboard NusaPay",
