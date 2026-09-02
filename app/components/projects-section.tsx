@@ -27,8 +27,12 @@ export default function ProjectsSection() {
       <SectionHeader badge="Portofolio Karya" title="Proyek Pilihan" />
 
       <div className="grid grid-cols-1 gap-8">
-        {currentProjects.map((item) => (
-          <ProjectCard key={item.number} item={item} />
+        {currentProjects.map((item, idx) => (
+          <ProjectCard
+            key={item.name}
+            item={item}
+            index={(currentPage - 1) * ITEMS_PER_PAGE + idx + 1}
+          />
         ))}
       </div>
 

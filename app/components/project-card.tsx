@@ -1,7 +1,15 @@
 import Image from "next/image";
 import { Project } from "@/app/data/portfolio";
 
-export default function ProjectCard({ item }: { item: Project }) {
+export default function ProjectCard({
+  item,
+  index,
+}: {
+  item: Project;
+  index: number;
+}) {
+  const formattedNumber = String(index).padStart(2, "0");
+
   return (
     <div className="group p-1.5 rounded-[2.25rem] border border-white/10 bg-white/2 hover:border-emerald-500/30 transition-all duration-500">
       <div
@@ -10,7 +18,7 @@ export default function ProjectCard({ item }: { item: Project }) {
         <div className="lg:col-span-7 space-y-5">
           <div className="flex items-center gap-3">
             <span className="font-mono text-xs font-bold text-emerald-400 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20">
-              {item.number}
+              {formattedNumber}
             </span>
             <span className="text-xs text-zinc-400 font-medium tracking-wide uppercase font-mono">
               {item.category}
@@ -83,7 +91,7 @@ export default function ProjectCard({ item }: { item: Project }) {
             />
           : <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-linear-to-br from-zinc-900 to-zinc-950 space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400 font-mono font-bold text-lg">
-                {item.number}
+                {formattedNumber}
               </div>
               <div className="text-xs font-mono text-zinc-500">{item.name}</div>
             </div>

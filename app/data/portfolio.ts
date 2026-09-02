@@ -1,5 +1,4 @@
 export type Project = {
-  number: string;
   name: string;
   category: string;
   description: string;
@@ -46,7 +45,6 @@ export const navigation = [
 
 export const projects: Project[] = [
   {
-    number: "01",
     name: "Ahsan Xpress",
     category: "Mobile - Logistik dan Transportasi",
     description:
@@ -60,7 +58,6 @@ export const projects: Project[] = [
       "https://play.google.com/store/apps/details?id=com.ahsanxpress.dev",
   },
   {
-    number: "02",
     name: "Web SmartVet",
     category: "Fullstack - Petshop Management SaaS",
     description:
@@ -72,7 +69,6 @@ export const projects: Project[] = [
     },
   },
   {
-    number: "03",
     name: "Inventory SCP",
     category: "Fullstack - Inventory Management System",
     description:
@@ -84,7 +80,6 @@ export const projects: Project[] = [
     },
   },
   // {
-  //   number: "04",
   //   name: "Web CatatPro",
   //   category: "Fullstack - Accounting Software",
   //   description:
@@ -92,7 +87,6 @@ export const projects: Project[] = [
   //   technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
   // },
   {
-    number: "05",
     name: "Vault Chain",
     category: "Mobile - Crypto APP",
     description:
@@ -105,14 +99,12 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/aldnazr/vault-chain.git",
   },
   {
-    number: "06",
     name: "Backend - TokoHP",
     category: "Backend",
     description: "Rest API untuk kebutuhan frontend",
     technologies: ["Laravel", "REST API", "PHP", "MySQL"],
   },
   {
-    number: "07",
     name: "PPTA",
     category: "Fullstack - Academic Final Project Service Center Website",
     description:
@@ -120,7 +112,6 @@ export const projects: Project[] = [
     technologies: ["Laravel", "PHP", "SQL"],
   },
   {
-    number: "08",
     name: "Asclepius",
     category: "Mobile - Cancer Detector App",
     description:
@@ -133,7 +124,6 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/aldnazr/android-tensorflow",
   },
   {
-    number: "09",
     name: "Blendit",
     category: "Mobile - Face Recognition for Makeup Recommendation",
     description:
