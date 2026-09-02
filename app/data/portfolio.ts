@@ -83,14 +83,14 @@ export const projects: Project[] = [
       alt: "SCP Banner",
     },
   },
-  {
-    number: "04",
-    name: "Web CatatPro",
-    category: "Fullstack - Accounting Software",
-    description:
-      "Software untuk kebutuhan pencatatan pengeluaran dan pemasukan, dilengkapi dengan dashboard, laporan, dan grafik untuk memudahkan pengguna dalam mengelola keuangan mereka.",
-    technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
-  },
+  // {
+  //   number: "04",
+  //   name: "Web CatatPro",
+  //   category: "Fullstack - Accounting Software",
+  //   description:
+  //     "Software untuk kebutuhan pencatatan pengeluaran dan pemasukan, dilengkapi dengan dashboard, laporan, dan grafik untuk memudahkan pengguna dalam mengelola keuangan mereka.",
+  //   technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
+  // },
   {
     number: "05",
     name: "Vault Chain",
