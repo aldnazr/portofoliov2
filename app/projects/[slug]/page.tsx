@@ -76,7 +76,7 @@ export default async function ProjectDetailPage({
       <Header />
 
       {/* Main Content */}
-      <main className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 pt-16 sm:pt-24 pb-24">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-16 sm:pt-24 pb-24">
         <Link
           href="/#project"
           className="group inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-emerald-400"
