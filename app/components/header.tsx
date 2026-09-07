@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { profile, navigation } from "@/app/data/portfolio";
+import { profile } from "@/app/data/profile";
+import { navigation } from "@/app/data/navigation";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

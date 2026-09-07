@@ -1,43 +1,4 @@
-export type Project = {
-  name: string;
-  category: string;
-  description: string;
-  technologies: string[];
-  contributions?: string;
-  role: string[];
-  result?: string;
-  demoUrl?: string;
-  sourceUrl?: string;
-  playStoreUrl?: string;
-  image?: {
-    src: string;
-    alt: string;
-  };
-};
-
-export const profile = {
-  name: "Muhammad Alauddin Azhary",
-  initials: "AZ",
-  role: "Software Engineer",
-  location: "Bogor, Indonesia",
-  availability: "Open to works",
-  email: "alauddinazhary05@gmail.com",
-  hero: "Saya mengembangkan aplikasi web dan mobile dari frontend hingga backend dengan fokus pada performa, kualitas, dan pengalaman pengguna.",
-  about:
-    "Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi end-to-end, mulai dari frontend dan backend. Saya senang menyederhanakan proses dan kebutuhan bisnis menjadi produk digital yang efisien, dan nyaman digunakan.",
-  skills: ["Mobile Development", "Frontend Development", "Backend Development"],
-  socialLinks: [
-    { label: "GitHub", href: "https://github.com/aldnazr" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/aldnazr" },
-  ],
-} as const;
-
-export const navigation = [
-  { label: "Tentang", href: "/#about" },
-  { label: "Proyek", href: "/#project" },
-  { label: "Pengalaman", href: "/#experience" },
-  { label: "Kontak", href: "/#contact" },
-] as const;
+import type { Project } from "@/app/data/types";
 
 export const projects: Project[] = [
   {
@@ -168,33 +129,3 @@ export function slugifyProject(name: string): string {
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => slugifyProject(project.name) === slug);
 }
-
-export const experience = [
-  {
-    period: "Oktober 2025 — Sekarang",
-    title: "Fullstack & Mobile Developer",
-    company: "PT. Shidiq Membangun Indonesia",
-    description:
-      "Berkolaborasi dengan tim untuk merilis aplikasi mobile dan web yang sesuai kebutuhan bisnis user.",
-  },
-  {
-    period: "Agustus 2024 — Februari 2025",
-    title: "Fullstack Developer",
-    company: "PPTA Universitas Dinamika",
-    description:
-      "Memperbarui website PPTA (pusat pelayanan tugas akhir) untuk meningkatkan aksesibilitas pengguna.",
-  },
-  {
-    period: "Februari 2024 — Juni 2024",
-    title: "Mobile Development Learning Path",
-    company: "Bangkit Academy",
-    description:
-      "Bangkit Academy adalah program akademi talenta teknologi eksklusif yang dipimpin oleh Google, GoTo, dan Traveloka serta merupakan salah satu program Kampus Merdeka (MSIB).",
-  },
-  {
-    period: "Februari 2023 — Juni 2023",
-    title: "UI/UX Designer",
-    company: "CV. Aikari Harvest",
-    description: "Merancang tampilan aplikasi inventory internal perusahaan.",
-  },
-] as const;

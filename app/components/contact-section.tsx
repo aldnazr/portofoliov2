@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { profile } from "@/app/data/portfolio";
+import { profile } from "@/app/data/profile";
 import { Button } from "./button";
 
 export default function ContactSection() {

@@ -8,7 +8,7 @@ import {
   projects,
   getProjectBySlug,
   slugifyProject,
-} from "@/app/data/portfolio";
+} from "@/app/data/projects";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -50,17 +50,15 @@ export default async function ProjectDetailPage({
   const formattedNumber = String(projectIndex + 1).padStart(2, "0");
   const totalCount = String(projects.length).padStart(2, "0");
   const nextProject =
-    projects.length > 1
-      ? projects[(projectIndex + 1) % projects.length]
-      : null;
+    projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null;
 
   const links = [
-    project.playStoreUrl
-      ? { label: "Google Play Store", href: project.playStoreUrl }
-      : null,
-    project.sourceUrl
-      ? { label: "Repository GitHub", href: project.sourceUrl }
-      : null,
+    project.playStoreUrl ?
+      { label: "Google Play Store", href: project.playStoreUrl }
+    : null,
+    project.sourceUrl ?
+      { label: "Repository GitHub", href: project.sourceUrl }
+    : null,
     project.demoUrl ? { label: "Demo App", href: project.demoUrl } : null,
   ].filter((link): link is { label: string; href: string } => link !== null);
 

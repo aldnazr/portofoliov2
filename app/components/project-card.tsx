@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Project, slugifyProject } from "@/app/data/portfolio";
+import type { Project } from "@/app/data/types";
+import { slugifyProject } from "@/app/data/projects";
 import ProjectVisual from "@/app/components/project-visual";
 
 export default function ProjectCard({

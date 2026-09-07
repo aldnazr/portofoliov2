@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { projects } from "@/app/data/portfolio";
+import { projects } from "@/app/data/projects";
 import SectionHeader from "@/app/components/section-header";
 import ProjectCard from "@/app/components/project-card";
 
@@ -53,9 +53,9 @@ export default function ProjectsSection() {
                 key={page}
                 onClick={() => handlePageChange(page)}
                 className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${
-                  currentPage === page
-                    ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold"
-                    : "bg-white/5 text-zinc-400 border border-white/10 hover:bg-white/10 hover:text-white"
+                  currentPage === page ?
+                    "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold"
+                  : "bg-white/5 text-zinc-400 border border-white/10 hover:bg-white/10 hover:text-white"
                 }`}
               >
                 {page}

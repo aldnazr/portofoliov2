@@ -1,4 +1,5 @@
-import { profile, projects } from "@/app/data/portfolio";
+import { profile } from "@/app/data/profile";
+import { projects } from "@/app/data/projects";
 import SectionHeader from "@/app/components/section-header";
 
 const allTechnologies = Array.from(

@@ -1,4 +1,4 @@
-import { profile } from "@/app/data/portfolio";
+import { profile } from "@/app/data/profile";
 
 export default function Footer() {
   return (

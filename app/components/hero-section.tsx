@@ -1,4 +1,4 @@
-import { profile } from "@/app/data/portfolio";
+import { profile } from "@/app/data/profile";
 import { ButtonLink } from "./button";
 
 export default function HeroSection() {

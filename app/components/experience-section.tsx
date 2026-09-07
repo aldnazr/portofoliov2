@@ -1,4 +1,4 @@
-import { experience } from "@/app/data/portfolio";
+import { experience } from "@/app/data/experience";
 import SectionHeader from "@/app/components/section-header";
 
 export default function ExperienceSection() {
