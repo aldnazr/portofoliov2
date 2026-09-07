@@ -147,7 +147,7 @@ export default async function ProjectDetailPage({
               Peran
             </dt>
             <dd className="mt-2.5 text-sm leading-relaxed text-zinc-200">
-              {project.role ?? "—"}
+              {project.role.length > 0 ? project.role.join(", ") : "—"}
             </dd>
           </div>
           <div>

@@ -4,7 +4,7 @@ export type Project = {
   description: string;
   technologies: string[];
   contributions?: string;
-  role?: string;
+  role: string[];
   result?: string;
   demoUrl?: string;
   sourceUrl?: string;
@@ -24,13 +24,8 @@ export const profile = {
   email: "alauddinazhary05@gmail.com",
   hero: "Saya mengembangkan aplikasi web dan mobile dari frontend hingga backend dengan fokus pada performa, kualitas, dan pengalaman pengguna.",
   about:
-    "Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi end-to-end, mulai dari frontend dan backend hingga pengalaman pengguna. Saya senang menyederhanakan proses dan kebutuhan bisnis menjadi produk digital yang efisien, scalable, dan nyaman digunakan.",
+    "Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi end-to-end, mulai dari frontend dan backend. Saya senang menyederhanakan proses dan kebutuhan bisnis menjadi produk digital yang efisien, dan nyaman digunakan.",
   skills: ["Mobile Development", "Frontend Development", "Backend Development"],
-  // stats: [
-  //   { value: "2+", label: "tahun membangun produk" },
-  //   { value: "18", label: "rilis digital" },
-  //   { value: "12", label: "kolaborasi tim" },
-  // ],
   socialLinks: [
     { label: "GitHub", href: "https://github.com/aldnazr" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/aldnazr" },
@@ -47,7 +42,8 @@ export const navigation = [
 export const projects: Project[] = [
   {
     name: "Ahsan Xpress",
-    category: "Mobile - Logistik dan Transportasi",
+    category: "Logistik dan Transportasi",
+    role: ["Mobile", "Frontend"],
     description:
       "Memperbarui seluruh ekosistem mulai dari mobile apps (customer & driver), dan juga web admin.",
     technologies: ["Flutter", "Dart", "Riverpod", "Next.js", "Typescript"],
@@ -62,7 +58,8 @@ export const projects: Project[] = [
   },
   {
     name: "Web SmartVet",
-    category: "Fullstack - Petshop Management SaaS",
+    category: "Petshop Management SaaS",
+    role: ["Fullstack"],
     description:
       "Klinik petshop untuk manajemen data pasien hewan, pemeriksaan, pengobatan, hingga penjadwalan appointment.",
     technologies: ["Laravel", "PHP", "PostgreSQL", "Livewire"],
@@ -75,7 +72,8 @@ export const projects: Project[] = [
   },
   {
     name: "Inventory SCP",
-    category: "Fullstack - Inventory Management System",
+    category: "Inventory Management System",
+    role: ["Fullstack"],
     description:
       "Website inventory untuk manajemen data barang, supplier, pembelian, penjualan, dan laporan. yang berfokus pada perusahaan persediaan material",
     technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
@@ -95,7 +93,8 @@ export const projects: Project[] = [
   // },
   {
     name: "Vault Chain",
-    category: "Mobile - Crypto APP",
+    category: "Crypto APP",
+    role: ["Mobile"],
     description:
       "Aplikasi mobile untuk memantau harga dan trending cryptocurrency terkini.",
     technologies: ["Flutter", "Dart", "Provider"],
@@ -109,7 +108,8 @@ export const projects: Project[] = [
   },
   {
     name: "Backend - TokoHP",
-    category: "Backend",
+    category: "Phone Store Transaction",
+    role: ["Backend"],
     description: "Rest API untuk kebutuhan frontend",
     technologies: ["Laravel", "REST API", "PHP", "MySQL"],
     contributions:
@@ -117,7 +117,8 @@ export const projects: Project[] = [
   },
   {
     name: "PPTA",
-    category: "Fullstack - Academic Final Project Service Center Website",
+    category: "Academic Final Project Service Center Website",
+    role: ["Fullstack"],
     description:
       "Rebuild website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
     technologies: ["Laravel", "PHP", "SQL"],
@@ -126,7 +127,8 @@ export const projects: Project[] = [
   },
   {
     name: "Asclepius",
-    category: "Mobile - Cancer Detector App",
+    category: "Cancer Detector App",
+    role: ["Mobile"],
     description:
       "Asclepius adalah aplikasi Android untuk deteksi kanker berbasis AI on-device menggunakan TensorFlow Lite.",
     technologies: ["Android", "Kotlin", "Tensorflow Lite"],
@@ -140,7 +142,8 @@ export const projects: Project[] = [
   },
   {
     name: "Blendit",
-    category: "Mobile - Face Recognition for Makeup Recommendation",
+    category: "Face Recognition for Makeup Recommendation",
+    role: ["Mobile"],
     description:
       "Pengenalan wajah dan analisis gambar AI Based untuk memberikan rekomendasi produk riasan berdasarkan wajah, warna kulit, dan kondisi kulit pengguna.",
     technologies: ["Android", "Kotlin"],
@@ -168,7 +171,7 @@ export function getProjectBySlug(slug: string): Project | undefined {
 
 export const experience = [
   {
-    period: "Oktober 2025 — sekarang",
+    period: "Oktober 2025 — Sekarang",
     title: "Fullstack & Mobile Developer",
     company: "PT. Shidiq Membangun Indonesia",
     description:

@@ -96,8 +96,8 @@ export default function ProjectCard({
             </span>
           </div>
         </div>
-        <div className="lg:col-span-5 group-hover:-translate-y-1 transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]">
-          {item.image ? (
+        <div className="lg:col-span-5">
+          {item.image ?
             <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900">
               <Image
                 src={item.image.src}
@@ -107,14 +107,13 @@ export default function ProjectCard({
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
               />
             </div>
-          ) : (
-            <ProjectVisual
+          : <ProjectVisual
               number={formattedNumber}
               name={item.name}
               category={item.category}
               className="aspect-16/10"
             />
-          )}
+          }
         </div>
       </div>
     </div>
