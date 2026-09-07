@@ -6,10 +6,10 @@ export const projects: Project[] = [
     category: "Logistik dan Transportasi",
     role: ["Mobile", "Frontend"],
     description:
-      "Memperbarui seluruh ekosistem mulai dari mobile apps (customer & driver), dan juga web admin.",
+      "Memperbarui ekosistem mulai dari mobile apps (customer & driver), dan juga web admin.",
     technologies: ["Flutter", "Dart", "Riverpod", "Next.js", "Typescript"],
     contributions:
-      "Saya memimpin pembaruan seluruh ekosistem Ahsan Xpress: membangun ulang aplikasi customer dan driver dengan Flutter serta Riverpod untuk state management yang reaktif, sambil mengembangkan ulang web admin berbasis Next.js dan TypeScript. Pekerjaan saya mencakup perancangan arsitektur fitur baru, integrasi API logistik untuk order, tracking, dan penugasan driver, sampai memastikan pengalaman pengguna di kedua platform tetap konsisten.",
+      "Berkolaborasi denagn tim untuk membangun ulang aplikasi customer dan driver dengan Flutter serta Riverpod untuk state management yang reaktif, sambil mengembangkan ulang web admin berbasis Next.js dan TypeScript. Pekerjaan saya mencakup perancangan arsitektur fitur baru, integrasi API logistik untuk order, tracking, dan penugasan driver, sampai memastikan pengalaman pengguna di kedua platform tetap konsisten.",
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=com.ahsanxpress.dev",
     image: {

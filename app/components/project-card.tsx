@@ -24,7 +24,7 @@ export default function ProjectCard({
       />
 
       <div
-        className={`p-6 sm:p-8 rounded-[1.875rem] bg-[#0c0e14] border border-white/5 grid grid-cols-1 lg:grid-cols-12 ${item.playStoreUrl || item.sourceUrl ? "gap-8" : "gap-2"} sm:gap-8 items-center`}
+        className={`p-6 sm:p-8 rounded-[1.875rem] bg-[#0c0e14] border border-white/5 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center`}
       >
         <div className="lg:col-span-7 space-y-5">
           <div className="flex items-center gap-3">
@@ -55,7 +55,7 @@ export default function ProjectCard({
             ))}
           </div>
 
-          <div className="relative pt-3 flex flex-wrap items-center gap-3">
+          <div className="relative pt-0 sm:pt-3 flex flex-wrap items-center gap-3">
             {item.playStoreUrl && (
               <a
                 href={item.playStoreUrl}
@@ -89,12 +89,12 @@ export default function ProjectCard({
                 <span className="text-xs">↗</span>
               </a>
             )}
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-colors">
+            <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-colors">
               <span>Lihat Detail</span>
               <span className="text-xs group-hover:translate-x-0.5 transition-transform">
                 →
               </span>
-            </span>
+            </button>
           </div>
         </div>
         <div className="lg:col-span-5">
