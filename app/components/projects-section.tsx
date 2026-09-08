@@ -26,7 +26,7 @@ export default function ProjectsSection() {
     <section id="project" className="space-y-10 scroll-mt-28">
       <SectionHeader badge="Portofolio Karya" title="Proyek Pilihan" />
 
-      <div className="grid grid-cols-1 gap-6 sm:gap-8">
+      <div className="grid grid-cols-1 gap-7 sm:gap-8">
         {currentProjects.map((item, idx) => (
           <ProjectCard
             key={item.name}
