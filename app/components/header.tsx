@@ -37,13 +37,13 @@ export default function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
 
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full border border-accent-wash-border bg-accent-wash text-accent-strong text-xs font-medium">
+          {/* <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full border border-accent-wash-border bg-accent-wash text-accent-strong text-xs font-medium">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
             </span>
             <span>{profile.availability}</span>
-          </div>
+          </div> */}
 
           {/* Mobile Hamburger Toggle */}
           <button
