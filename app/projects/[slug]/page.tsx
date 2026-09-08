@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import Reveal from "@/app/components/reveal";
+import BackgroundMesh from "@/app/components/background-mesh";
 import {
   projects,
   getProjectBySlug,
@@ -63,14 +64,9 @@ export default async function ProjectDetailPage({
   ].filter((link): link is { label: string; href: string } => link !== null);
 
   return (
-    <div className="relative min-h-screen bg-[#08090d] text-zinc-100 selection:bg-emerald-500/30 selection:text-emerald-400">
+    <div className="relative min-h-screen bg-background text-foreground">
       {/* Background Glow Mesh */}
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-250 h-125 bg-linear-to-b from-emerald-500/10 via-teal-500/5 to-transparent blur-[120px] rounded-full" />
-        <div className="absolute top-1/3 -left-40 w-125 h-125 bg-emerald-600/5 blur-[140px] rounded-full" />
-        <div className="absolute bottom-10 right-0 w-150 h-150 bg-emerald-500/5 blur-[160px] rounded-full" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-      </div>
+      <BackgroundMesh />
 
       {/* Floating Header */}
       <Header />
@@ -79,7 +75,7 @@ export default async function ProjectDetailPage({
       <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-16 sm:pt-24 pb-24">
         <Link
           href="/#project"
-          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium hover:text-emerald-400 hover:border-emerald-500/30 transition-colors"
+          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-muted text-xs font-medium hover:text-accent-strong hover:border-accent-wash-border transition-colors"
         >
           <span
             aria-hidden="true"
@@ -94,33 +90,33 @@ export default async function ProjectDetailPage({
         <header className="relative mt-12 sm:mt-16">
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -top-8 right-0 select-none bg-linear-to-b from-white/10 via-white/5 to-transparent bg-clip-text font-mono text-[7rem] sm:-top-12 sm:text-[10rem] font-bold leading-none text-transparent"
+            className="pointer-events-none absolute -top-8 right-0 select-none bg-linear-to-b from-overlay-strong via-overlay to-transparent bg-clip-text font-mono text-[7rem] sm:-top-12 sm:text-[10rem] font-bold leading-none text-transparent"
           >
             {formattedNumber}
           </span>
 
           <div className="animate-rise flex items-center gap-4">
-            <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-emerald-400">
+            <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent-strong">
               Proyek
             </span>
             <span
               aria-hidden="true"
-              className="h-px w-12 bg-linear-to-r from-emerald-500/50 to-transparent"
+              className="h-px w-12 bg-linear-to-r from-accent/50 to-transparent"
             />
-            <span className="font-mono text-[11px] tracking-[0.2em] text-zinc-500">
+            <span className="font-mono text-[11px] tracking-[0.2em] text-subtle">
               {formattedNumber} / {totalCount}
             </span>
           </div>
 
           <h1
-            className="animate-rise mt-6 max-w-3xl text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white"
+            className="animate-rise mt-6 max-w-3xl text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground"
             style={{ animationDelay: "90ms" }}
           >
             {project.name}
           </h1>
 
           <p
-            className="animate-rise mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-zinc-400"
+            className="animate-rise mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted"
             style={{ animationDelay: "180ms" }}
           >
             {project.description}
@@ -129,31 +125,31 @@ export default async function ProjectDetailPage({
 
         {/* Spec Sheet */}
         <dl
-          className="animate-rise mt-12 sm:mt-16 grid grid-cols-1 gap-x-10 gap-y-6 border-y border-white/5 py-6 sm:grid-cols-3 sm:py-8"
+          className="animate-rise mt-12 sm:mt-16 grid grid-cols-1 gap-x-10 gap-y-6 border-y border-hairline-soft py-6 sm:grid-cols-3 sm:py-8"
           style={{ animationDelay: "270ms" }}
         >
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
               Kategori
             </dt>
-            <dd className="mt-2.5 text-sm leading-relaxed text-zinc-200">
+            <dd className="mt-2.5 text-sm leading-relaxed text-foreground-soft">
               {project.category}
             </dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
               Peran
             </dt>
-            <dd className="mt-2.5 text-sm leading-relaxed text-zinc-200">
+            <dd className="mt-2.5 text-sm leading-relaxed text-foreground-soft">
               {project.role.length > 0 ? project.role.join(", ") : "—"}{" "}
               {"Developer"}
             </dd>
           </div>
           <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
               Teknologi
             </dt>
-            <dd className="mt-2.5 text-sm leading-relaxed text-zinc-200">
+            <dd className="mt-2.5 text-sm leading-relaxed text-foreground-soft">
               {project.technologies.length} tools dalam stack
             </dd>
           </div>
@@ -164,19 +160,19 @@ export default async function ProjectDetailPage({
           <aside className="lg:col-span-4">
             <div className="space-y-12 lg:sticky lg:top-32">
               <Reveal>
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
                   Teknologi
                 </p>
-                <ul className="mt-2 border-t border-white/5">
+                <ul className="mt-2 border-t border-hairline-soft">
                   {project.technologies.map((tech, i) => (
                     <li
                       key={i}
-                      className="group flex items-baseline gap-4 border-b border-white/5 py-3"
+                      className="group flex items-baseline gap-4 border-b border-hairline-soft py-3"
                     >
-                      <span className="font-mono text-[10px] text-emerald-400/70">
+                      <span className="font-mono text-[10px] text-accent/70">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span className="text-sm text-zinc-300 transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:text-white">
+                      <span className="text-sm text-foreground-soft transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:text-foreground">
                         {tech}
                       </span>
                     </li>
@@ -186,30 +182,30 @@ export default async function ProjectDetailPage({
 
               {links.length > 0 && (
                 <Reveal delay={120}>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
                     Tautan
                   </p>
-                  <div className="mt-2 border-t border-white/5">
+                  <div className="mt-2 border-t border-hairline-soft">
                     {links.map((link) => (
                       <a
                         key={link.href}
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative flex items-center justify-between gap-4 border-b border-white/5 py-4"
+                        className="group relative flex items-center justify-between gap-4 border-b border-hairline-soft py-4"
                       >
-                        <span className="text-sm font-medium text-zinc-300 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-emerald-300">
+                        <span className="text-sm font-medium text-foreground-soft transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover">
                           {link.label}
                         </span>
                         <span
                           aria-hidden="true"
-                          className="font-mono text-xs text-zinc-500 transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-emerald-400"
+                          className="font-mono text-xs text-subtle transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-accent-strong"
                         >
                           ↗
                         </span>
                         <span
                           aria-hidden="true"
-                          className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-emerald-400/60 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
+                          className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-accent/60 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
                         />
                       </a>
                     ))}
@@ -226,18 +222,18 @@ export default async function ProjectDetailPage({
                   <div className="flex items-center gap-3">
                     <span
                       aria-hidden="true"
-                      className="h-px w-8 bg-emerald-400/50"
+                      className="h-px w-8 bg-accent/50"
                     />
-                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-emerald-400">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
                       Kontribusi
                     </p>
                   </div>
-                  <h2 className="mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+                  <h2 className="mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
                     Apa yang Saya Kerjakan
                   </h2>
                 </Reveal>
                 <Reveal delay={120}>
-                  <p className="border-l-2 border-emerald-500/30 pl-5 sm:pl-6 text-sm sm:text-base leading-loose text-zinc-300">
+                  <p className="border-l-2 border-accent-wash-border pl-5 sm:pl-6 text-sm sm:text-base leading-loose text-foreground-soft">
                     {project.contributions}
                   </p>
                 </Reveal>
@@ -250,18 +246,18 @@ export default async function ProjectDetailPage({
                   <div className="flex items-center gap-3">
                     <span
                       aria-hidden="true"
-                      className="h-px w-8 bg-emerald-400/50"
+                      className="h-px w-8 bg-accent/50"
                     />
-                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-emerald-400">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
                       Hasil
                     </p>
                   </div>
-                  <h2 className="mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-white">
+                  <h2 className="mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
                     Dampak & Pencapaian
                   </h2>
                 </Reveal>
                 <Reveal delay={120}>
-                  <p className="text-sm sm:text-base leading-relaxed text-zinc-300">
+                  <p className="text-sm sm:text-base leading-relaxed text-foreground-soft">
                     {project.result}
                   </p>
                 </Reveal>
@@ -273,20 +269,20 @@ export default async function ProjectDetailPage({
         {/* Next Project */}
         {nextProject && (
           <Reveal className="mt-24 sm:mt-32">
-            <div className="border-t border-white/5 pt-10 sm:pt-14">
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-zinc-500">
+            <div className="border-t border-hairline-soft pt-10 sm:pt-14">
+              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
                 Proyek Berikutnya
               </p>
               <Link
                 href={`/projects/${slugifyProject(nextProject.name)}`}
                 className="group mt-5 flex items-center justify-between gap-6"
               >
-                <span className="text-2xl sm:text-4xl font-semibold tracking-tight text-zinc-500 transition-[color,translate] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-2 group-hover:text-white">
+                <span className="text-2xl sm:text-4xl font-semibold tracking-tight text-subtle transition-[color,translate] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-2 group-hover:text-foreground">
                   {nextProject.name}
                 </span>
                 <span
                   aria-hidden="true"
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 text-zinc-500 transition-[color,border-color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-emerald-500/40 group-hover:text-emerald-300 group-hover:translate-x-1"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-hairline text-subtle transition-[color,border-color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-accent-wash-border group-hover:text-accent-hover group-hover:translate-x-1"
                 >
                   →
                 </span>

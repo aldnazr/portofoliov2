@@ -4,9 +4,9 @@ import { ButtonLink } from "./button";
 export default function HeroSection() {
   return (
     <section className="space-y-10">
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-zinc-400 tracking-wide font-mono">
+      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-overlay text-xs text-muted tracking-wide font-mono">
         <svg
-          className="w-3.5 h-3.5 text-emerald-400"
+          className="w-3.5 h-3.5 text-accent"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -28,13 +28,13 @@ export default function HeroSection() {
       </div>
 
       <div className="space-y-6 max-w-3xl">
-        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-white leading-[1.15]">
+        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-foreground leading-[1.15]">
           Halo, Saya{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-zinc-200 to-emerald-400">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-foreground via-foreground to-accent">
             {profile.name}
           </span>
         </h1>
-        <p className="text-lg sm:text-xl text-zinc-400 font-normal leading-relaxed">
+        <p className="text-lg sm:text-xl text-muted font-normal leading-relaxed">
           {profile.hero}
         </p>
       </div>
@@ -42,7 +42,7 @@ export default function HeroSection() {
       <div className="flex flex-wrap items-center gap-4 pt-2">
         <ButtonLink href="#project">
           <span>Lihat Proyek</span>
-          <span className="w-6 h-6 rounded-full bg-zinc-950/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+          <span className="w-6 h-6 rounded-full bg-on-primary-wash flex items-center justify-center group-hover:scale-105 transition-transform">
             ↓
           </span>
         </ButtonLink>

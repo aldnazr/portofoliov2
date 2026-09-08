@@ -15,7 +15,7 @@ export default function ProjectCard({
   const detailHref = `/projects/${slugifyProject(item.name)}`;
 
   return (
-    <div className="group relative p-1.5 rounded-[2.25rem] border border-white/10 bg-white/2 hover:border-emerald-500/30 transition-all duration-500">
+    <div className="group relative p-1.5 rounded-[2.25rem] border border-hairline bg-overlay-faint hover:border-accent-wash-border transition-all duration-500">
       {/* Overlay link ke halaman detail proyek */}
       <Link
         href={detailHref}
@@ -24,23 +24,23 @@ export default function ProjectCard({
       />
 
       <div
-        className={`p-6 sm:p-8 rounded-[1.875rem] bg-[#0c0e14] border border-white/5 grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-8 items-center`}
+        className={`p-6 sm:p-8 rounded-[1.875rem] bg-surface border border-hairline-soft grid grid-cols-1 lg:grid-cols-12 gap-7 sm:gap-8 items-center`}
       >
         <div className="lg:col-span-7 space-y-5">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-xs font-bold text-emerald-400 px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20">
+            <span className="font-mono text-xs font-bold text-accent-strong px-2.5 py-1 rounded-md bg-accent-wash border border-accent-wash-border">
               {formattedNumber}
             </span>
-            <span className="text-xs text-zinc-400 font-medium tracking-wide uppercase font-mono">
+            <span className="text-xs text-muted font-medium tracking-wide uppercase font-mono">
               {item.category}
             </span>
           </div>
 
-          <h3 className="text-xl sm:text-2xl font-semibold text-white group-hover:text-emerald-300 transition-colors">
+          <h3 className="text-xl sm:text-2xl font-semibold text-foreground group-hover:text-accent-hover transition-colors">
             {item.name}
           </h3>
 
-          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+          <p className="text-sm sm:text-base text-muted leading-relaxed">
             {item.description}
           </p>
 
@@ -48,7 +48,7 @@ export default function ProjectCard({
             {item.technologies.map((tech, i) => (
               <span
                 key={i}
-                className="px-3 py-1 rounded-lg bg-zinc-900 border border-white/10 text-xs font-mono text-zinc-300"
+                className="px-3 py-1 rounded-lg bg-surface-muted border border-hairline text-xs font-mono text-foreground-soft"
               >
                 {tech}
               </span>
@@ -61,7 +61,7 @@ export default function ProjectCard({
                 href={item.playStoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium hover:bg-emerald-500/20 transition-colors"
+                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-wash border border-accent-wash-border text-accent-strong text-xs font-medium hover:bg-accent-wash-strong transition-colors"
               >
                 <span>Google Play Store</span>
                 <span className="text-xs">↗</span>
@@ -72,7 +72,7 @@ export default function ProjectCard({
                 href={item.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-medium hover:bg-white/10 hover:text-white transition-colors"
+                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-foreground-soft text-xs font-medium hover:bg-overlay-strong hover:text-foreground transition-colors"
               >
                 <span>Repository GitHub</span>
                 <span className="text-xs">↗</span>
@@ -83,13 +83,13 @@ export default function ProjectCard({
                 href={item.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-300 text-xs font-medium hover:bg-white/10 hover:text-white transition-colors"
+                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-foreground-soft text-xs font-medium hover:bg-overlay-strong hover:text-foreground transition-colors"
               >
                 <span>Demo App</span>
                 <span className="text-xs">↗</span>
               </a>
             )}
-            <button className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-colors">
+            <button className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-muted text-xs font-medium group-hover:text-accent-strong group-hover:border-accent-wash-border transition-colors">
               <span>Lihat Detail</span>
               <span className="text-xs group-hover:translate-x-0.5 transition-transform">
                 →
@@ -99,7 +99,7 @@ export default function ProjectCard({
         </div>
         <div className="lg:col-span-5">
           {item.image ?
-            <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-white/10 bg-zinc-900">
+            <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-hairline bg-surface-muted">
               <Image
                 src={item.image.src}
                 alt={item.image.alt || item.name}

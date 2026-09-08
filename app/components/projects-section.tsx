@@ -41,7 +41,7 @@ export default function ProjectsSection() {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
+            className="px-3.5 py-2 rounded-full border border-hairline bg-overlay text-xs font-medium text-foreground-soft hover:bg-overlay-strong hover:text-foreground disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
             aria-label="Halaman sebelumnya"
           >
             &larr; Prev
@@ -54,8 +54,8 @@ export default function ProjectsSection() {
                 onClick={() => handlePageChange(page)}
                 className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${
                   currentPage === page ?
-                    "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold"
-                  : "bg-white/5 text-zinc-400 border border-white/10 hover:bg-white/10 hover:text-white"
+                    "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-bold"
+                  : "bg-overlay text-muted border border-hairline hover:bg-overlay-strong hover:text-foreground"
                 }`}
               >
                 {page}
@@ -66,7 +66,7 @@ export default function ProjectsSection() {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3.5 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-zinc-300 hover:bg-white/10 hover:text-white disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
+            className="px-3.5 py-2 rounded-full border border-hairline bg-overlay text-xs font-medium text-foreground-soft hover:bg-overlay-strong hover:text-foreground disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
             aria-label="Halaman berikutnya"
           >
             Next &rarr;

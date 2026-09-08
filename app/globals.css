@@ -1,20 +1,118 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: dark;
   --background: #08090d;
+  --surface: #0c0e14;
+  --surface-muted: #18181b;
+  --shade: #3f3f46;
   --foreground: #f3f4f6;
+  --foreground-soft: #d4d4d8;
+  --muted: #a1a1aa;
+  --subtle: #71717a;
+  --hairline: rgba(255, 255, 255, 0.1);
+  --hairline-soft: rgba(255, 255, 255, 0.05);
+  --overlay-faint: rgba(255, 255, 255, 0.02);
+  --overlay: rgba(255, 255, 255, 0.05);
+  --overlay-strong: rgba(255, 255, 255, 0.1);
+  --ghost: rgba(255, 255, 255, 0.04);
+  --accent: #34d399;
+  --accent-strong: #34d399;
+  --accent-hover: #6ee7b7;
+  --accent-wash: rgba(16, 185, 129, 0.1);
+  --accent-wash-border: rgba(16, 185, 129, 0.3);
+  --accent-wash-strong: rgba(16, 185, 129, 0.2);
+  --primary: #10b981;
+  --primary-hover: #34d399;
+  --on-primary: #09090b;
+  --on-primary-wash: rgba(9, 9, 11, 0.1);
+  --danger: #f87171;
+  --danger-wash: rgba(239, 68, 68, 0.1);
+  --danger-border: rgba(239, 68, 68, 0.3);
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --selection-bg: rgba(16, 185, 129, 0.25);
+  --selection-fg: #34d399;
+}
+
+@supports (color: light-dark(#fff, #000)) {
+  :root {
+    color-scheme: light dark;
+    --background: light-dark(#fafafa, #08090d);
+    --surface: light-dark(#ffffff, #0c0e14);
+    --surface-muted: light-dark(#f4f4f5, #18181b);
+    --shade: light-dark(#d4d4d8, #3f3f46);
+    --foreground: light-dark(#18181b, #f3f4f6);
+    --foreground-soft: light-dark(#3f3f46, #d4d4d8);
+    --muted: light-dark(#52525b, #a1a1aa);
+    --subtle: light-dark(#71717a, #71717a);
+    --hairline: light-dark(rgba(24, 24, 27, 0.1), rgba(255, 255, 255, 0.1));
+    --hairline-soft: light-dark(rgba(24, 24, 27, 0.06), rgba(255, 255, 255, 0.05));
+    --overlay-faint: light-dark(rgba(24, 24, 27, 0.03), rgba(255, 255, 255, 0.02));
+    --overlay: light-dark(rgba(24, 24, 27, 0.05), rgba(255, 255, 255, 0.05));
+    --overlay-strong: light-dark(rgba(24, 24, 27, 0.08), rgba(255, 255, 255, 0.1));
+    --ghost: light-dark(rgba(24, 24, 27, 0.06), rgba(255, 255, 255, 0.04));
+    --accent: light-dark(#059669, #34d399);
+    --accent-strong: light-dark(#047857, #34d399);
+    --accent-hover: light-dark(#047857, #6ee7b7);
+    --accent-wash: light-dark(rgba(5, 150, 105, 0.09), rgba(16, 185, 129, 0.1));
+    --accent-wash-border: light-dark(rgba(5, 150, 105, 0.25), rgba(16, 185, 129, 0.3));
+    --accent-wash-strong: light-dark(rgba(5, 150, 105, 0.16), rgba(16, 185, 129, 0.2));
+    --primary: light-dark(#059669, #10b981);
+    --primary-hover: light-dark(#047857, #34d399);
+    --on-primary: light-dark(#ffffff, #09090b);
+    --on-primary-wash: light-dark(rgba(255, 255, 255, 0.22), rgba(9, 9, 11, 0.1));
+    --danger: light-dark(#dc2626, #f87171);
+    --danger-wash: light-dark(rgba(220, 38, 38, 0.08), rgba(239, 68, 68, 0.1));
+    --danger-border: light-dark(rgba(220, 38, 38, 0.3), rgba(239, 68, 68, 0.3));
+    --grid-line: light-dark(rgba(24, 24, 27, 0.06), rgba(255, 255, 255, 0.05));
+    --selection-bg: light-dark(rgba(5, 150, 105, 0.16), rgba(16, 185, 129, 0.25));
+    --selection-fg: light-dark(#047857, #34d399);
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-shade: var(--shade);
   --color-foreground: var(--foreground);
+  --color-foreground-soft: var(--foreground-soft);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-hairline: var(--hairline);
+  --color-hairline-soft: var(--hairline-soft);
+  --color-overlay-faint: var(--overlay-faint);
+  --color-overlay: var(--overlay);
+  --color-overlay-strong: var(--overlay-strong);
+  --color-ghost: var(--ghost);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-wash: var(--accent-wash);
+  --color-accent-wash-border: var(--accent-wash-border);
+  --color-accent-wash-strong: var(--accent-wash-strong);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-on-primary-wash: var(--on-primary-wash);
+  --color-danger: var(--danger);
+  --color-danger-wash: var(--danger-wash);
+  --color-danger-border: var(--danger-border);
+
   --font-sans: var(--font-geist-sans), sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 }
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
 }
 
 body {
@@ -25,8 +123,21 @@ body {
 }
 
 ::selection {
-  background-color: rgba(16, 185, 129, 0.25);
-  color: #34d399;
+  background-color: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+.theme-seg-btn {
+  color: var(--muted);
+}
+.theme-seg-btn:hover {
+  color: var(--foreground);
+}
+[data-theme="system"] .theme-seg-btn[data-mode="system"],
+[data-theme="light"] .theme-seg-btn[data-mode="light"],
+[data-theme="dark"] .theme-seg-btn[data-mode="dark"] {
+  color: var(--accent-strong);
+  background-color: var(--accent-wash);
 }
 
 /* Editorial entrance choreography */

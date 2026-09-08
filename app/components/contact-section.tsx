@@ -55,17 +55,17 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="scroll-mt-28">
-      <div className="p-1.5 rounded-[2.5rem] border border-emerald-500/30 bg-linear-to-b from-emerald-500/10 via-white/2 to-transparent">
-        <div className="p-8 sm:p-14 rounded-[2.125rem] bg-[#0c0e14] border border-white/5 text-center space-y-8">
-          <span className="px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] font-mono text-emerald-400 border border-emerald-500/20 bg-emerald-500/10 inline-block">
+      <div className="p-1.5 rounded-[2.5rem] border border-accent-wash-border bg-linear-to-b from-accent-wash via-overlay-faint to-transparent">
+        <div className="p-8 sm:p-14 rounded-[2.125rem] bg-surface border border-hairline-soft text-center space-y-8">
+          <span className="px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] font-mono text-accent-strong border border-accent-wash-border bg-accent-wash inline-block">
             Mari Berkolaborasi
           </span>
 
-          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight max-w-2xl mx-auto leading-tight">
+          <h2 className="text-3xl sm:text-5xl font-semibold text-foreground tracking-tight max-w-2xl mx-auto leading-tight">
             Punya ide proyek atau peluang kerja sama?
           </h2>
 
-          <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-muted max-w-xl mx-auto">
             Kirim pesan langsung kepada saya melalui formulir di bawah ini atau
             salin email saya.
           </p>
@@ -82,7 +82,7 @@ export default function ContactSection() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-overlay border border-hairline text-foreground placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors"
               />
               <input
                 type="email"
@@ -91,7 +91,7 @@ export default function ContactSection() {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors"
+                className="w-full px-4 py-3 rounded-xl bg-overlay border border-hairline text-foreground placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors"
               />
             </div>
             <textarea
@@ -102,17 +102,17 @@ export default function ContactSection() {
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })
               }
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-overlay border border-hairline text-foreground placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors resize-none"
             />
 
             {sendStatus === "success" && (
-              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs text-center font-medium">
+              <div className="p-3 rounded-xl bg-accent-wash border border-accent-wash-border text-accent-strong text-xs text-center font-medium">
                 ✓ Pesan berhasil terkirim! Terima kasih telah menghubungi.
               </div>
             )}
 
             {sendStatus === "error" && (
-              <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs text-center font-medium">
+              <div className="p-3 rounded-xl bg-danger-wash border border-danger-border text-danger text-xs text-center font-medium">
                 ✕ Gagal mengirim pesan: {errorMessage}
               </div>
             )}
@@ -127,7 +127,7 @@ export default function ContactSection() {
                 <span>
                   {isSending ? "Mengirim..." : "Kirim Pesan Langsung"}
                 </span>
-                <span className="w-6 h-6 rounded-full bg-zinc-950/10 flex items-center justify-center group-hover:scale-105 transition-transform">
+                <span className="w-6 h-6 rounded-full bg-on-primary-wash flex items-center justify-center group-hover:scale-105 transition-transform">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -146,7 +146,7 @@ export default function ContactSection() {
                 className="w-full sm:w-fit gap-2.5"
               >
                 <svg
-                  className="w-4 h-4 text-emerald-400"
+                  className="w-4 h-4 text-accent"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -163,14 +163,14 @@ export default function ContactSection() {
             </div>
           </form>
 
-          <div className="pt-8 border-t border-white/5 flex items-center justify-center gap-6">
+          <div className="pt-8 border-t border-hairline-soft flex items-center justify-center gap-6">
             {profile.socialLinks.map((link, i) => (
               <a
                 key={i}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-zinc-400 hover:text-emerald-400 font-mono transition-colors"
+                className="text-sm text-muted hover:text-accent font-mono transition-colors"
               >
                 {link.label} ↗
               </a>
