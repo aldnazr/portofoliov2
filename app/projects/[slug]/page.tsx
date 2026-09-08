@@ -79,7 +79,7 @@ export default async function ProjectDetailPage({
       <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-16 sm:pt-24 pb-24">
         <Link
           href="/#project"
-          className="group inline-flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.2em] text-zinc-500 transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-emerald-400"
+          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium hover:text-emerald-400 hover:border-emerald-500/30 transition-colors"
         >
           <span
             aria-hidden="true"
@@ -145,7 +145,8 @@ export default async function ProjectDetailPage({
               Peran
             </dt>
             <dd className="mt-2.5 text-sm leading-relaxed text-zinc-200">
-              {project.role.length > 0 ? project.role.join(", ") : "—"}
+              {project.role.length > 0 ? project.role.join(", ") : "—"}{" "}
+              {"Developer"}
             </dd>
           </div>
           <div>

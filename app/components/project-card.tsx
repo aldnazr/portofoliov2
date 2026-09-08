@@ -89,7 +89,7 @@ export default function ProjectCard({
                 <span className="text-xs">↗</span>
               </a>
             )}
-            <button className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-colors">
+            <button className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-zinc-400 text-xs font-medium group-hover:text-emerald-400 group-hover:border-emerald-500/30 transition-colors">
               <span>Lihat Detail</span>
               <span className="text-xs group-hover:translate-x-0.5 transition-transform">
                 →
