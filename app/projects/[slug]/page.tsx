@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import Reveal from "@/app/components/reveal";
 import BackgroundMesh from "@/app/components/background-mesh";
@@ -67,9 +66,6 @@ export default async function ProjectDetailPage({
     <div className="relative min-h-screen bg-background text-foreground">
       {/* Background Glow Mesh */}
       <BackgroundMesh />
-
-      {/* Floating Header */}
-      <Header />
 
       {/* Main Content */}
       <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-16 sm:pt-24 pb-24">

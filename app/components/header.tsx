@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-6 z-50 px-4 sm:px-6 max-w-5xl mx-auto">
-      <div className="rounded-full border border-hairline bg-surface/80 backdrop-blur-xl px-4 py-3 sm:px-6 flex items-center justify-between shadow-2xl shadow-black/50">
+      <div className="rounded-full border border-hairline bg-surface/80 backdrop-blur-xl px-4 py-3 sm:px-6 flex items-center justify-between shadow-elevated">
         <a href="#" className="group flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-accent-wash border border-accent-wash-border flex items-center justify-center text-xs font-mono font-bold text-accent-strong group-hover:scale-105 transition-transform">
             {profile.initials}
@@ -78,7 +78,7 @@ export default function Header() {
 
       {/* Mobile Navigation Menu Dropdown */}
       {mobileMenuOpen && (
-        <nav className="md:hidden mt-3 rounded-2xl border border-hairline bg-surface/95 backdrop-blur-xl p-4 flex flex-col gap-2 shadow-xl">
+        <nav className="md:hidden mt-3 rounded-2xl border border-hairline bg-surface/95 backdrop-blur-xl p-4 flex flex-col gap-2 shadow-elevated">
           {navigation.map((item) => (
             <a
               key={item.href}
