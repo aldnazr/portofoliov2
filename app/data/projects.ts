@@ -13,7 +13,7 @@ export const projects: Project[] = [
     playStoreUrl:
       "https://play.google.com/store/apps/details?id=com.ahsanxpress.dev",
     image: {
-      src: "/projects/driver.png",
+      src: "/projects/driver.webp",
       alt: "Ahsan Brand",
     },
   },
@@ -26,10 +26,6 @@ export const projects: Project[] = [
     technologies: ["Laravel", "PHP", "PostgreSQL", "Livewire"],
     contributions:
       "Saya membangun SmartVet secara end-to-end dengan Laravel, Livewire, dan PostgreSQL: merancang skema database untuk data pasien hewan, rekam medis, dan penjadwalan appointment, lalu mengembangkan antarmuka reaktif dengan Livewire agar pemeriksaan dan pengobatan dapat dicatat tanpa reload halaman.",
-    image: {
-      src: "/projects/nusapay-dashboard.svg",
-      alt: "SmartVet Banner",
-    },
   },
   {
     name: "Inventory SCP",
@@ -40,10 +36,6 @@ export const projects: Project[] = [
     technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
     contributions:
       "Saya mengembangkan sistem inventory SCP dengan Laravel dan Livewire: membangun modul manajemen barang dan supplier, alur pembelian serta penjualan, dan laporan stok yang mencerminkan kebutuhan operasional perusahaan persediaan material.",
-    image: {
-      src: "/projects/karsa-studio.svg",
-      alt: "SCP Banner",
-    },
   },
   // {
   //   name: "Web CatatPro",
@@ -63,7 +55,7 @@ export const projects: Project[] = [
       "Saya mengembangkan Vault Chain dengan Flutter dan Provider: mengintegrasikan public API untuk harga dan trending cryptocurrency, membangun state management untuk watchlist, serta merancang antarmuka yang informatif dan nyaman dipantau.",
     sourceUrl: "https://github.com/aldnazr/vault-chain.git",
     image: {
-      src: "/projects/bitcoin.png",
+      src: "/projects/bitcoin.webp",
       alt: "Bitcoin Banner",
     },
   },
