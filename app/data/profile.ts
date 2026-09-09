@@ -7,7 +7,7 @@ export const profile = {
   email: "alauddinazhary05@gmail.com",
   hero: "Saya mengembangkan aplikasi web dan mobile dari frontend hingga backend dengan fokus pada performa, kualitas, dan pengalaman pengguna.",
   about:
-    "Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi end-to-end, mulai dari frontend dan backend. Saya senang menyederhanakan proses dan kebutuhan bisnis menjadi produk digital yang efisien, dan nyaman digunakan.",
+    "Saya seorang Software Engineer yang berfokus pada pengembangan aplikasi end-to-end, mulai dari frontend dan backend. Saya senang menyederhanakan proses dan kebutuhan bisnis menjadi produk digital yang efisien, scalable dan mudah digunakan.",
   skills: ["Mobile Development", "Frontend Development", "Backend Development"],
   socialLinks: [
     { label: "GitHub", href: "https://github.com/aldnazr" },
