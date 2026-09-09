@@ -1,5 +1,6 @@
 import { profile } from "@/app/data/profile";
 import { ButtonLink } from "./button";
+import { GithubIcon, LinkedinIcon } from "./icons";
 
 export default function HeroSection() {
   return (
@@ -46,6 +47,22 @@ export default function HeroSection() {
             ↓
           </span>
         </ButtonLink>
+
+        <div className="flex items-center gap-2">
+          {profile.socialLinks.map((link, i) => (
+            <a
+              key={i}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={link.label}
+              className="inline-flex items-center justify-center size-10 rounded-full border border-hairline bg-overlay text-muted hover:text-accent hover:border-accent/40 transition-colors"
+            >
+              {link.label === "GitHub" && <GithubIcon className="size-5" />}
+              {link.label === "LinkedIn" && <LinkedinIcon className="size-5" />}
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
