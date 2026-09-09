@@ -56,12 +56,18 @@ export default async function ProjectDetailPage({
     ...(project.playStoreUrl?.map((ps) => ({
       label: ps.title,
       href: ps.url,
+      type: "playstore" as const,
     })) ?? []),
     project.sourceUrl ?
-      { label: "Repository GitHub", href: project.sourceUrl }
+      { label: "Repository GitHub", href: project.sourceUrl, type: "default" as const }
     : null,
-    project.demoUrl ? { label: "Demo App", href: project.demoUrl } : null,
-  ].filter((link): link is { label: string; href: string } => link !== null);
+    project.demoUrl ?
+      { label: "Demo App", href: project.demoUrl, type: "default" as const }
+    : null,
+  ].filter(
+    (link): link is { label: string; href: string; type: "playstore" | "default" } =>
+      link !== null,
+  );
 
   return (
     <div className="relative min-h-screen bg-background text-foreground">
@@ -192,15 +198,35 @@ export default async function ProjectDetailPage({
                         rel="noopener noreferrer"
                         className="group relative flex items-center justify-between gap-4 border-b border-hairline-soft py-3 sm:py-4"
                       >
-                        <span className="text-sm font-medium text-foreground-soft transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover">
-                          {link.label}
-                        </span>
-                        <span
-                          aria-hidden="true"
-                          className="font-mono text-xs text-subtle transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-accent-strong"
-                        >
-                          ↗
-                        </span>
+                        <div className="flex items-center gap-2.5">
+                          {link.type === "playstore" && (
+                            <svg
+                              className="w-4 h-4 shrink-0 stroke-current text-subtle transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover"
+                              viewBox="0 0 48 48"
+                              fill="none"
+                              strokeWidth="3.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              aria-hidden="true"
+                            >
+                              <path d="m25.0274,24.0519l-16.2624,15.8333h0c.5191,1.765,2.1803,3.1148,4.153,3.1148.8306,0,1.5574-.2077,2.1803-.6229h0l18.1694-10.2787-8.2403-8.0464Z" />
+                              <path d="m40.9508,20.2623h0l-7.7869-4.4645-8.1365,8.2541,8.2403,8.0464,7.7869-4.3607c1.3497-.7268,2.2842-2.1803,2.2842-3.7377-.1038-1.5574-1.0383-3.0109-2.388-3.7377Z" />
+                              <path d="m8.765,8.1148c-.1038.3115-.1038.7268-.1038,1.1421v29.5902c0,.4153,0,.7268.1038,1.1421l16.2624-15.9372L8.765,8.1148Z" />
+                              <path d="m25.0274,24.0519l8.1365-8.2541L15.2022,5.623c-.623-.4153-1.4536-.623-2.2842-.623-1.9727,0-3.7377,1.3497-4.153,3.1148h0l16.2624,15.9372Z" />
+                            </svg>
+                          )}
+                          <span className="text-sm font-medium text-foreground-soft transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover">
+                            {link.label}
+                          </span>
+                        </div>
+                        {link.type !== "playstore" && (
+                          <span
+                            aria-hidden="true"
+                            className="font-mono text-xs text-subtle transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-accent-strong"
+                          >
+                            ↗
+                          </span>
+                        )}
                         <span
                           aria-hidden="true"
                           className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-accent/60 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
