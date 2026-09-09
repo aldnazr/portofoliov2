@@ -59,13 +59,19 @@ export default async function ProjectDetailPage({
       type: "playstore" as const,
     })) ?? []),
     project.sourceUrl ?
-      { label: "Repository GitHub", href: project.sourceUrl, type: "default" as const }
+      {
+        label: "Repository GitHub",
+        href: project.sourceUrl,
+        type: "default" as const,
+      }
     : null,
     project.demoUrl ?
       { label: "Demo App", href: project.demoUrl, type: "default" as const }
     : null,
   ].filter(
-    (link): link is { label: string; href: string; type: "playstore" | "default" } =>
+    (
+      link,
+    ): link is { label: string; href: string; type: "playstore" | "default" } =>
       link !== null,
   );
 
@@ -201,7 +207,7 @@ export default async function ProjectDetailPage({
                         <div className="flex items-center gap-2.5">
                           {link.type === "playstore" && (
                             <svg
-                              className="w-4 h-4 shrink-0 stroke-current text-subtle transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover"
+                              className="size-4 shrink-0 stroke-current text-subtle transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover"
                               viewBox="0 0 48 48"
                               fill="none"
                               strokeWidth="3.5"

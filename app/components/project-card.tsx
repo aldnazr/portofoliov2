@@ -65,7 +65,7 @@ export default function ProjectCard({
                 className="relative z-20 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-accent-wash border border-accent-wash-border text-accent-strong text-xs font-medium hover:bg-accent-wash-strong transition-colors"
               >
                 <svg
-                  className="w-3.5 h-3.5 shrink-0 stroke-current"
+                  className="size-3.5 shrink-0 stroke-current"
                   viewBox="0 0 48 48"
                   fill="none"
                   strokeWidth="3.5"
