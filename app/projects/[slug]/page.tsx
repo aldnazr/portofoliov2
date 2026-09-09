@@ -53,9 +53,10 @@ export default async function ProjectDetailPage({
     projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null;
 
   const links = [
-    project.playStoreUrl ?
-      { label: "Google Play Store", href: project.playStoreUrl }
-    : null,
+    ...(project.playStoreUrl?.map((ps) => ({
+      label: ps.title,
+      href: ps.url,
+    })) ?? []),
     project.sourceUrl ?
       { label: "Repository GitHub", href: project.sourceUrl }
     : null,

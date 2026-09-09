@@ -56,17 +56,18 @@ export default function ProjectCard({
           </div>
 
           <div className="relative pt-2 sm:pt-3 flex flex-wrap items-center gap-3">
-            {item.playStoreUrl && (
+            {item.playStoreUrl?.map((ps, i) => (
               <a
-                href={item.playStoreUrl}
+                key={i}
+                href={ps.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent-wash border border-accent-wash-border text-accent-strong text-xs font-medium hover:bg-accent-wash-strong transition-colors"
               >
-                <span>Google Play Store</span>
+                <span>{ps.title}</span>
                 <span className="text-xs">↗</span>
               </a>
-            )}
+            ))}
             {item.sourceUrl && (
               <a
                 href={item.sourceUrl}

@@ -1,3 +1,8 @@
+export type PlayStoreInfo = {
+  title: string;
+  url: string;
+};
+
 export type Project = {
   name: string;
   category: string;
@@ -8,7 +13,7 @@ export type Project = {
   result?: string;
   demoUrl?: string;
   sourceUrl?: string;
-  playStoreUrl?: string;
+  playStoreUrl?: PlayStoreInfo[];
   image?: {
     src: string;
     alt: string;

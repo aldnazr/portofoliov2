@@ -1,4 +1,4 @@
-import type { Project } from "@/app/data/types";
+import { PlayStoreInfo, type Project } from "@/app/data/types";
 
 export const projects: Project[] = [
   {
@@ -10,8 +10,16 @@ export const projects: Project[] = [
     technologies: ["Flutter", "Dart", "Riverpod", "Next.js", "Typescript"],
     contributions:
       "Berkolaborasi dengan tim untuk membangun ulang aplikasi customer dan driver dengan Flutter serta Riverpod untuk state management yang reaktif, sambil mengembangkan ulang web admin berbasis Next.js dan TypeScript. Pekerjaan saya mencakup perancangan arsitektur fitur baru, integrasi API logistik untuk order, tracking, dan penugasan driver, sampai memastikan pengalaman pengguna di kedua platform tetap konsisten.",
-    playStoreUrl:
-      "https://play.google.com/store/apps/details?id=com.ahsanxpress.dev",
+    playStoreUrl: [
+      {
+        title: "Ahsan Driver",
+        url: "https://play.google.com/store/apps/details?id=com.ahsanxpress.driver",
+      },
+      {
+        title: "Ahsan Customer",
+        url: "https://play.google.com/store/apps/details?id=com.ahsanxpress.dev",
+      },
+    ],
     image: {
       src: "/projects/driver.webp",
       alt: "Ahsan Brand",
