@@ -68,14 +68,15 @@ export default async function ProjectDetailPage({
       <BackgroundMesh />
 
       {/* Main Content */}
-      <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-16 sm:pt-24 pb-24">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
         <Link
           href="/#project"
-          className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-muted text-xs font-medium hover:text-accent-strong hover:border-accent-wash-border transition-colors"
+          aria-label="Kembali ke portofolio bagian proyek"
+          className="group inline-flex items-center gap-2.5 rounded-full border border-hairline bg-surface/60 px-4 py-2 text-xs font-medium text-foreground-soft shadow-2xs backdrop-blur-md transition-[color,background-color,border-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-wash-border hover:bg-accent-wash hover:text-foreground active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <span
             aria-hidden="true"
-            className="transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-1"
+            className="inline-block font-mono text-sm text-subtle transition-[color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-1 group-hover:text-accent-strong"
           >
             ←
           </span>
@@ -83,10 +84,10 @@ export default async function ProjectDetailPage({
         </Link>
 
         {/* Masthead */}
-        <header className="relative mt-12 sm:mt-16">
+        <header className="relative mt-6 sm:mt-16">
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -top-8 right-0 select-none bg-linear-to-b from-overlay-strong via-overlay to-transparent bg-clip-text font-mono text-[7rem] sm:-top-12 sm:text-[10rem] font-bold leading-none text-transparent"
+            className="pointer-events-none absolute -top-4 right-0 select-none bg-linear-to-b from-overlay-strong via-overlay to-transparent bg-clip-text font-mono text-6xl sm:-top-12 sm:text-[10rem] font-bold leading-none text-transparent"
           >
             {formattedNumber}
           </span>
@@ -105,14 +106,14 @@ export default async function ProjectDetailPage({
           </div>
 
           <h1
-            className="animate-rise mt-6 max-w-3xl text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground"
+            className="animate-rise mt-4 sm:mt-6 max-w-3xl text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground"
             style={{ animationDelay: "90ms" }}
           >
             {project.name}
           </h1>
 
           <p
-            className="animate-rise mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted"
+            className="animate-rise mt-3 sm:mt-6 max-w-2xl text-sm sm:text-lg leading-relaxed text-muted"
             style={{ animationDelay: "180ms" }}
           >
             {project.description}
@@ -121,14 +122,14 @@ export default async function ProjectDetailPage({
 
         {/* Spec Sheet */}
         <dl
-          className="animate-rise mt-12 sm:mt-16 grid grid-cols-1 gap-x-10 gap-y-6 border-y border-hairline-soft py-6 sm:grid-cols-3 sm:py-8"
+          className="animate-rise mt-8 sm:mt-16 grid grid-cols-1 gap-x-10 gap-y-4 border-y border-hairline-soft py-4 sm:grid-cols-3 sm:py-8"
           style={{ animationDelay: "270ms" }}
         >
           <div>
             <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
               Kategori
             </dt>
-            <dd className="mt-2.5 text-sm leading-relaxed text-foreground-soft">
+            <dd className="mt-1.5 sm:mt-2.5 text-sm leading-relaxed text-foreground-soft">
               {project.category}
             </dd>
           </div>
@@ -136,7 +137,7 @@ export default async function ProjectDetailPage({
             <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
               Peran
             </dt>
-            <dd className="mt-2.5 text-sm leading-relaxed text-foreground-soft">
+            <dd className="mt-1.5 sm:mt-2.5 text-sm leading-relaxed text-foreground-soft">
               {project.role.length > 0 ? project.role.join(", ") : "—"}{" "}
               {"Developer"}
             </dd>
@@ -145,16 +146,16 @@ export default async function ProjectDetailPage({
             <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
               Teknologi
             </dt>
-            <dd className="mt-2.5 text-sm leading-relaxed text-foreground-soft">
+            <dd className="mt-1.5 sm:mt-2.5 text-sm leading-relaxed text-foreground-soft">
               {project.technologies.length} tools dalam stack
             </dd>
           </div>
         </dl>
 
         {/* Body: sticky meta rail + longform */}
-        <div className="mt-16 sm:mt-24 grid grid-cols-1 lg:grid-cols-12 lg:gap-16">
+        <div className="mt-10 sm:mt-24 grid grid-cols-1 lg:grid-cols-12 lg:gap-16">
           <aside className="lg:col-span-4">
-            <div className="space-y-12 lg:sticky lg:top-32">
+            <div className="space-y-8 lg:space-y-12 lg:sticky lg:top-32">
               <Reveal>
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
                   Teknologi
@@ -163,7 +164,7 @@ export default async function ProjectDetailPage({
                   {project.technologies.map((tech, i) => (
                     <li
                       key={i}
-                      className="group flex items-baseline gap-4 border-b border-hairline-soft py-3"
+                      className="group flex items-baseline gap-4 border-b border-hairline-soft py-2.5 sm:py-3"
                     >
                       <span className="font-mono text-[10px] text-accent/70">
                         {String(i + 1).padStart(2, "0")}
@@ -188,7 +189,7 @@ export default async function ProjectDetailPage({
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative flex items-center justify-between gap-4 border-b border-hairline-soft py-4"
+                        className="group relative flex items-center justify-between gap-4 border-b border-hairline-soft py-3 sm:py-4"
                       >
                         <span className="text-sm font-medium text-foreground-soft transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover">
                           {link.label}
@@ -211,9 +212,9 @@ export default async function ProjectDetailPage({
             </div>
           </aside>
 
-          <div className="mt-16 space-y-16 sm:space-y-24 lg:col-span-8 lg:mt-0">
+          <div className="mt-10 space-y-10 sm:space-y-24 lg:col-span-8 lg:mt-0">
             {project.contributions && (
-              <section className="space-y-6">
+              <section className="space-y-4 sm:space-y-6">
                 <Reveal>
                   <div className="flex items-center gap-3">
                     <span
@@ -224,12 +225,12 @@ export default async function ProjectDetailPage({
                       Kontribusi
                     </p>
                   </div>
-                  <h2 className="mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+                  <h2 className="mt-4 sm:mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
                     Apa yang Saya Kerjakan
                   </h2>
                 </Reveal>
                 <Reveal delay={120}>
-                  <p className="border-l-2 border-accent-wash-border pl-5 sm:pl-6 text-sm sm:text-base leading-loose text-foreground-soft">
+                  <p className="border-l-2 border-accent-wash-border pl-4 sm:pl-6 text-sm sm:text-base leading-relaxed sm:leading-loose text-foreground-soft">
                     {project.contributions}
                   </p>
                 </Reveal>
@@ -237,7 +238,7 @@ export default async function ProjectDetailPage({
             )}
 
             {project.result && (
-              <section className="space-y-6">
+              <section className="space-y-4 sm:space-y-6">
                 <Reveal>
                   <div className="flex items-center gap-3">
                     <span
@@ -248,7 +249,7 @@ export default async function ProjectDetailPage({
                       Hasil
                     </p>
                   </div>
-                  <h2 className="mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+                  <h2 className="mt-4 sm:mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
                     Dampak & Pencapaian
                   </h2>
                 </Reveal>
@@ -264,8 +265,8 @@ export default async function ProjectDetailPage({
 
         {/* Next Project */}
         {nextProject && (
-          <Reveal className="mt-24 sm:mt-32">
-            <div className="border-t border-hairline-soft pt-10 sm:pt-14">
+          <Reveal className="mt-14 sm:mt-32">
+            <div className="border-t border-hairline-soft pt-8 sm:pt-14">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
                 Proyek Berikutnya
               </p>
