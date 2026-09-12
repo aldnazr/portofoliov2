@@ -77,14 +77,14 @@ export const projects: Project[] = [
       "Saya merancang dan membangun REST API dengan Laravel untuk kebutuhan frontend: dari perancangan endpoint, autentikasi, relasi antar tabel di MySQL, hingga response yang konsisten agar mudah dikonsumsi oleh aplikasi client.",
   },
   {
-    name: "PPTA",
+    name: "PPTA - Layanan Akademik",
     category: "Academic Final Project Service Center Website",
     role: ["Fullstack"],
     description:
       "Rebuild website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
     technologies: ["Laravel", "PHP", "SQL"],
     contributions:
-      "Saya membangun ulang website PPTA Universitas Dinamika dengan Laravel: memperbarui alur pendaftaran dan pengelolaan tugas akhir, meningkatkan aksesibilitas antarmuka, serta memastikan data akademik terkelola dengan aman dan terstruktur.",
+      "Saya membangun ulang website PPTA Universitas Dinamika dengan Laravel: memperbarui alur pendaftaran dan pengelolaan tugas akhir, meningkatkan aksesibilitas antarmuka, serta memastikan data akademik terkelola terstruktur.",
   },
   {
     name: "Asclepius",
