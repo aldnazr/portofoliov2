@@ -67,15 +67,15 @@ export const projects: Project[] = [
       alt: "Bitcoin Banner",
     },
   },
-  {
-    name: "Backend - TokoHP",
-    category: "Phone Store Transaction",
-    role: ["Backend"],
-    description: "Rest API untuk kebutuhan frontend",
-    technologies: ["Laravel", "REST API", "PHP", "MySQL"],
-    contributions:
-      "Saya merancang dan membangun REST API dengan Laravel untuk kebutuhan frontend: dari perancangan endpoint, autentikasi, relasi antar tabel di MySQL, hingga response yang konsisten agar mudah dikonsumsi oleh aplikasi client.",
-  },
+  // {
+  //   name: "Backend - TokoHP",
+  //   category: "Phone Store Transaction",
+  //   role: ["Backend"],
+  //   description: "Rest API untuk kebutuhan frontend",
+  //   technologies: ["Laravel", "REST API", "PHP", "MySQL"],
+  //   contributions:
+  //     "Saya merancang dan membangun REST API dengan Laravel untuk kebutuhan frontend: dari perancangan endpoint, autentikasi, relasi antar tabel di MySQL, hingga response yang konsisten agar mudah dikonsumsi oleh aplikasi client.",
+  // },
   {
     name: "PPTA - Layanan Akademik",
     category: "Academic Final Project Service Center Website",
