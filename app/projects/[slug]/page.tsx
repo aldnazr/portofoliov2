@@ -105,14 +105,10 @@ export default async function ProjectDetailPage({
             {formattedNumber}
           </span>
 
-          <div className="animate-rise flex items-center gap-4">
+          <div className="animate-rise flex items-baseline gap-3">
             <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent-strong">
               Proyek
             </span>
-            <span
-              aria-hidden="true"
-              className="h-px w-12 bg-linear-to-r from-accent/50 to-transparent"
-            />
             <span className="font-mono text-[11px] tracking-[0.2em] text-subtle">
               {formattedNumber} / {totalCount}
             </span>
@@ -170,21 +166,16 @@ export default async function ProjectDetailPage({
           <aside className="lg:col-span-4">
             <div className="space-y-8 lg:space-y-12 lg:sticky lg:top-32">
               <Reveal>
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
                   Teknologi
                 </p>
-                <ul className="mt-2 border-t border-hairline-soft">
-                  {project.technologies.map((tech, i) => (
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
                     <li
-                      key={i}
-                      className="group flex items-baseline gap-4 border-b border-hairline-soft py-2.5 sm:py-3"
+                      key={tech}
+                      className="px-3 py-1 rounded-lg bg-surface-muted border border-hairline text-xs font-mono text-foreground-soft"
                     >
-                      <span className="font-mono text-[10px] text-accent/70">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-sm text-foreground-soft transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-hover:text-foreground">
-                        {tech}
-                      </span>
+                      {tech}
                     </li>
                   ))}
                 </ul>
@@ -249,15 +240,9 @@ export default async function ProjectDetailPage({
             {project.contributions && (
               <section className="space-y-4 sm:space-y-6">
                 <Reveal>
-                  <div className="flex items-center gap-3">
-                    <span
-                      aria-hidden="true"
-                      className="h-px w-8 bg-accent/50"
-                    />
-                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
-                      Kontribusi
-                    </p>
-                  </div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
+                    Kontribusi
+                  </p>
                   <h2 className="mt-4 sm:mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
                     Apa yang Saya Kerjakan
                   </h2>
@@ -273,15 +258,9 @@ export default async function ProjectDetailPage({
             {project.result && (
               <section className="space-y-4 sm:space-y-6">
                 <Reveal>
-                  <div className="flex items-center gap-3">
-                    <span
-                      aria-hidden="true"
-                      className="h-px w-8 bg-accent/50"
-                    />
-                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
-                      Hasil
-                    </p>
-                  </div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
+                    Hasil
+                  </p>
                   <h2 className="mt-4 sm:mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
                     Dampak & Pencapaian
                   </h2>
