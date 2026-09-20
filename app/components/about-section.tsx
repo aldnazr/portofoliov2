@@ -19,10 +19,10 @@ export default function AboutSection() {
 
           <div className="space-y-3">
             <h3 className="text-xs font-mono uppercase tracking-wider text-subtle">
-              Area Keahlian
+              Tech Stack
             </h3>
             <div className="flex items-center flex-wrap gap-2.5">
-              {profile.skills.map((skill, i) => (
+              {/* {profile.skills.map((skill, i) => (
                 <span
                   key={i}
                   className="px-4 py-2 rounded-xl bg-overlay border border-hairline text-sm text-foreground-soft font-medium hover:border-accent-wash-border hover:text-accent-strong transition-colors"
@@ -33,7 +33,7 @@ export default function AboutSection() {
               <span
                 aria-hidden="true"
                 className="h-6 w-px bg-linear-to-b from-transparent via-hairline to-transparent"
-              />
+              /> */}
               {allTechnologies.map((skill) => (
                 <span
                   key={skill}
