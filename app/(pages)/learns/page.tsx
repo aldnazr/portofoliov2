@@ -4,7 +4,7 @@ import { createHighlighter } from "shiki";
 import { learnContent, paradigmIds, parseParadigm } from "./_data";
 import type { Paradigm } from "./_data/types";
 import LearnExplorer from "./_components/learn-explorer";
-import "./shiki.css";
+// import "./shiki.css";
 import BackgroundMesh from "@/components/background-mesh";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -12,7 +12,7 @@ import Footer from "@/components/footer";
 export const metadata: Metadata = {
   title: "Learn",
   description:
-    "Belajar perbandingan Functional Programming dan Object-Oriented Programming melalui contoh kode TypeScript: pure function, immutability, higher-order function, closure, recursion, encapsulation, inheritance, polymorphism, dan abstraction.",
+    "Belajar perbandingan Functional Programming (TypeScript) dan Object-Oriented Programming (Dart): pure function, immutability, higher-order function, closure, recursion, encapsulation, inheritance, polymorphism, dan abstraction.",
 };
 
 type LearnPageProps = {
@@ -28,7 +28,7 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
   // Highlighter dibuat satu kali, lalu dipakai untuk seluruh snippet.
   // Hanya bahasa dan tema yang dibutuhkan yang dimuat.
   const highlighter = await createHighlighter({
-    langs: ["typescript"],
+    langs: ["typescript", "dart"],
     themes: ["github-light", "github-dark"],
   });
 
@@ -42,9 +42,9 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
         learnContent[paradigm].concepts.map((concept) => [
           concept.id,
           highlighter.codeToHtml(concept.code.trim(), {
-            lang: "typescript",
+            lang: paradigm === "oop" ? "dart" : "typescript",
             themes: { light: "github-light", dark: "github-dark" },
-            defaultColor: false,
+            defaultColor: "light-dark()",
           }),
         ]),
       ),
@@ -81,7 +81,8 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
             </h1>
             <p className="text-sm sm:text-base text-muted leading-relaxed max-w-2xl">
               Dua paradigma pemrograman yang paling banyak dipakai, dipelajari
-              lewat contoh kode TypeScript yang bisa langsung dijalankan.
+              lewat contoh kode TypeScript dan Dart yang bisa langsung
+              dijalankan.
             </p>
           </header>
 

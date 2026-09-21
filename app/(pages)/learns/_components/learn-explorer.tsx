@@ -113,6 +113,7 @@ export default function LearnExplorer({
                 highlightedHtml={highlighted[paradigm][concept.id]}
                 code={concept.code}
                 filename={concept.filename}
+                lang={paradigm === "oop" ? "dart" : "ts"}
               />
             </section>
           ))}

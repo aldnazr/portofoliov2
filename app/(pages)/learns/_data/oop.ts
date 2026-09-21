@@ -5,135 +5,142 @@ export const oopConcepts: LearnConcept[] = [
     id: "encapsulation",
     title: "Encapsulation",
     description:
-      "Encapsulation membungkus data dan perilaku dalam satu class, lalu membatasi aksesnya melalui modifier private, protected, dan public. Getter dan setter menjaga agar state internal tetap valid.",
-    filename: "encapsulation.ts",
+      "Encapsulation membungkus data dan perilaku dalam satu class, lalu membatasi aksesnya. Di Dart, privasi diterapkan di tingkat library menggunakan prefix underscore (_). Getter dan setter menjaga agar state internal tetap valid.",
+    filename: "encapsulation.dart",
     code: `class BankAccount {
-  // private: hanya bisa diakses dari dalam class ini
-  private balance: number;
-  // readonly: hanya bisa diberi nilai saat konstruksi
-  readonly owner: string;
+  // Underscore (_): private dalam lingkup library di Dart
+  double _balance;
+  // final: nilai hanya bisa diberi saat inisialisasi/konstruksi
+  final String owner;
 
-  constructor(owner: string, initialBalance = 0) {
-    this.owner = owner;
-    this.balance = initialBalance;
+  BankAccount(this.owner, [this._balance = 0]);
+
+  // Method publik: bisa diakses dari mana saja
+  void deposit(double amount) {
+    if (amount <= 0) throw ArgumentError("Nominal harus positif");
+    _balance += amount;
   }
 
-  // public (default): bisa diakses dari mana saja
-  public deposit(amount: number): void {
-    if (amount <= 0) throw new Error("Nominal harus positif");
-    this.balance += amount;
+  void withdraw(double amount) {
+    if (amount > _balance) throw StateError("Saldo tidak cukup");
+    _balance -= amount;
   }
 
-  public withdraw(amount: number): void {
-    if (amount > this.balance) throw new Error("Saldo tidak cukup");
-    this.balance -= amount;
-  }
-
-  // Getter: akses baca seperti property, tetapi melalui method
-  public get currentBalance(): number {
-    return this.balance;
-  }
+  // Getter: akses baca property terhitung / terlindungi
+  double get currentBalance => _balance;
 
   // Setter: validasi sebelum nilai diubah
-  public set setBalance(amount: number) {
-    if (amount < 0) throw new Error("Saldo tidak boleh negatif");
-    this.balance = amount;
+  set setBalance(double amount) {
+    if (amount < 0) throw ArgumentError("Saldo tidak boleh negatif");
+    _balance = amount;
   }
 }
 
-const account = new BankAccount("Alauddin", 50_000);
-account.deposit(25_000);
-account.currentBalance; // 75000
-// account.balance; // Error: property 'balance' bersifat private
+void main() {
+  final account = BankAccount("Alauddin", 50000);
+  account.deposit(25000);
+  print(account.currentBalance); // 75000.0
+  // account._balance tidak dapat diakses jika di luar library ini
+}
 `,
   },
   {
     id: "inheritance",
     title: "Inheritance",
     description:
-      "Inheritance membuat class mewarisi properti dan method dari class induk menggunakan extends dan super. Modifier protected memungkinkan subclass mengakses anggota class induk tanpa mengeksposnya ke luar.",
-    filename: "inheritance.ts",
+      "Inheritance membuat class mewarisi properti dan method dari class induk menggunakan extends dan super. Subclass dapat memanfaatkan kembali fungsionalitas class induk tanpa menduplikasi kode.",
+    filename: "inheritance.dart",
     code: `class Animal {
-  constructor(protected name: string) {} // protected: bisa dipakai subclass
+  final String name;
+
+  Animal(this.name);
 
   // Method yang diwariskan ke semua subclass
-  public describe(): string {
-    return \`\${this.name} adalah hewan\`;
+  String describe() {
+    return "\${name} adalah hewan";
   }
 
-  // protected: hanya bisa dipakai oleh class turunannya
-  protected makeSound(): string {
+  String makeSound() {
     return "Suara hewan";
   }
 }
 
 class Dog extends Animal {
-  // 'super' wajib dipanggil sebelum mengakses 'this'
-  constructor(name: string, private breed: string) {
-    super(name);
+  final String breed;
+
+  // super(...) meneruskan parameter ke konstruktor class Animal
+  Dog(super.name, this.breed);
+
+  String bark() {
+    return "\${makeSound()} — gonggongan";
   }
 
-  public bark(): string {
-    // Akses protected member milik class induk
-    return \`\${this.makeSound()} — gonggongan\`;
-  }
-
-  public describe(): string {
-    // super.method() memanggil implementasi class induk
-    return \`\${super.describe()}, ras \${this.breed}\`;
+  @override
+  String describe() {
+    // super.describe() memanggil implementasi class induk
+    return "\${super.describe()}, ras \${breed}";
   }
 }
 
-const dog = new Dog("Bruno", "Shiba Inu");
-dog.describe(); // Bruno adalah hewan, ras Shiba Inu
-dog.bark(); // Suara hewan — gonggongan
+void main() {
+  final dog = Dog("Bruno", "Shiba Inu");
+  print(dog.describe()); // Bruno adalah hewan, ras Shiba Inu
+  print(dog.bark()); // Suara hewan — gonggongan
+}
 `,
   },
   {
     id: "polymorphism-overriding",
     title: "Polymorphism — Overriding",
     description:
-      "Overriding adalah kemampuan subclass menulis ulang method yang ada di class induk. Saat dipanggil melalui tipe class induk, versi subclass yang akan dijalankan (dynamic dispatch).",
-    filename: "polymorphism-overriding.ts",
-    code: `class Shape {
-  constructor(public name: string) {}
+      "Overriding adalah kemampuan subclass menulis ulang method yang ada di class induk. Menggunakan anotasi @override, saat dipanggil melalui tipe class induk, versi subclass yang akan dijalankan (dynamic dispatch).",
+    filename: "polymorphism-overriding.dart",
+    code: `import "dart:math" as math;
 
-  public area(): number {
-    return 0;
-  }
+class Shape {
+  final String name;
 
-  public toString(): string {
-    return \`\${this.name}: \${this.area().toFixed(2)} satuan\`;
+  Shape(this.name);
+
+  double area() => 0.0;
+
+  @override
+  String toString() {
+    return "\${name}: \${area().toStringAsFixed(2)} satuan";
   }
 }
 
 class Circle extends Shape {
-  constructor(private radius: number) {
-    super("Lingkaran");
-  }
+  final double radius;
 
-  // override: menimpa method area() milik class induk
-  public area(): number {
-    return Math.PI * this.radius ** 2;
-  }
+  Circle(this.radius) : super("Lingkaran");
+
+  // @override: menimpa method area() milik class induk
+  @override
+  double area() => math.pi * radius * radius;
 }
 
 class Rectangle extends Shape {
-  constructor(private width: number, private height: number) {
-    super("Persegi panjang");
-  }
+  final double width;
+  final double height;
 
-  public area(): number {
-    return this.width * this.height;
-  }
+  Rectangle(this.width, this.height) : super("Persegi panjang");
+
+  @override
+  double area() => width * height;
 }
 
-// Tipe dideklarasikan sebagai Shape, tapi method yang berjalan
-// disesuaikan dengan class asli objeknya
-const shapes: Shape[] = [new Circle(7), new Rectangle(4, 5)];
+void main() {
+  // Tipe dideklarasikan sebagai Shape, tapi method yang berjalan
+  // disesuaikan dengan class asli objeknya (dynamic dispatch)
+  final List<Shape> shapes = [Circle(7), Rectangle(4, 5)];
 
-shapes.map((shape) => shape.toString());
-// ["Lingkaran: 153.94 satuan", "Persegi panjang: 20.00 satuan"]
+  for (final shape in shapes) {
+    print(shape);
+  }
+  // Lingkaran: 153.94 satuan
+  // Persegi panjang: 20.00 satuan
+}
 `,
   },
 
@@ -141,85 +148,106 @@ shapes.map((shape) => shape.toString());
     id: "polymorphism-overloading",
     title: "Polymorphism — Overloading",
     description:
-      "Overloading adalah pendefinisian beberapa signature method dengan nama yang sama, namun parameter yang berbeda. TypeScript memilih signature yang cocok berdasarkan tipe argumen saat compile-time.",
-    filename: "polymorphism-overloading.ts",
+      "Dart tidak mendukung method overloading tradisional (nama method sama dengan parameter berbeda). Sebagai gantinya, Dart menggunakan optional parameters dan named parameters untuk menangani variasi argumen.",
+    filename: "polymorphism-overloading.dart",
     code: `class Messenger {
-  // Signature 1: hanya pesan teks
-  public send(recipient: string, message: string): void;
-  // Signature 2: pesan teks dengan lampiran
-  public send(recipient: string, message: string, attachment: File): void;
-  // Signature 3: broadcast ke beberapa penerima
-  public send(recipients: string[], message: string): void;
+  // Dart menggunakan named & optional parameters
+  // sebagai pola alternatif overloading
+  void send(
+    dynamic recipientOrRecipients,
+    String message, {
+    String? attachment,
+  }) {
+    final List<String> targets = recipientOrRecipients is List<String>
+        ? recipientOrRecipients
+        : [recipientOrRecipients.toString()];
 
-  // Satu implementasi yang menangani seluruh signature
-  public send(
-    recipientOrRecipients: string | string[],
-    message: string,
-    attachment?: File,
-  ): void {
-    const targets = Array.isArray(recipientOrRecipients) ?
-      recipientOrRecipients
-    : [recipientOrRecipients];
-
-    targets.forEach((target) => {
-      const extra = attachment ? \` + "\${attachment.name}"\` : "";
-      console.log(\`Kirim ke \${target}: \${message}\${extra}\`);
-    });
+    for (final target in targets) {
+      final extra = attachment != null ? ' + "\${attachment}"' : "";
+      print("Kirim ke \${target}: \${message}\${extra}");
+    }
   }
 }
 
-const messenger = new Messenger();
-messenger.send("aldnazr", "Halo"); // signature 1
-messenger.send("aldnazr", "Halo", new File([], "cv.pdf")); // signature 2
-messenger.send(["aldo", "sari"], "Halo semua"); // signature 3
+void main() {
+  final messenger = Messenger();
+
+  // Signature 1: kirim pesan biasa
+  messenger.send("aldnazr", "Halo");
+
+  // Signature 2: pesan dengan named parameter (lampiran)
+  messenger.send("aldnazr", "Halo", attachment: "cv.pdf");
+
+  // Signature 3: broadcast ke list penerima
+  messenger.send(["aldo", "sari"], "Halo semua");
+}
 `,
   },
   {
     id: "abstraction",
     title: "Abstraction",
     description:
-      "Abstraction menyembunyikan detail implementasi dan hanya menampilkan perilaku penting. Abstract class dan interface menyediakan kontrak yang wajib diikuti oleh class turunannya.",
-    filename: "abstraction.ts",
-    code: `// Interface: kontrak murni, tanpa implementasi
-interface Report {
-  readonly title: string;
-  generate(): string;
+      "Abstraction menyembunyikan detail implementasi dan hanya menampilkan perilaku penting. Abstract class di Dart menyediakan kontrak yang wajib diikuti oleh class turunannya.",
+    filename: "abstraction.dart",
+    code: `// Di Dart, abstract class dapat berfungsi sebagai interface kontrak
+abstract class Report {
+  String get title;
+  String generate();
 }
 
-// Abstract class: bisa punya implementasi + method abstract
+// Abstract class dengan implementasi dasar
 abstract class BaseReport implements Report {
-  constructor(public readonly title: string) {}
+  @override
+  final String title;
 
-  // Wajib diimplementasikan oleh subclass
-  protected abstract collectData(): unknown[];
+  BaseReport(this.title);
+
+  // Method abstract: wajib diimplementasikan oleh subclass
+  List<Map<String, dynamic>> collectData();
 
   // Sudah diimplementasikan, bisa langsung dipakai subclass
-  public generate(): string {
-    const data = this.collectData();
-    return \`Laporan "\${this.title}": \${data.length} baris\`;
+  @override
+  String generate() {
+    final data = collectData();
+    return 'Laporan "\${title}": \${data.length} baris';
   }
 }
 
 class SalesReport extends BaseReport {
-  protected collectData(): unknown[] {
-    return [{ product: "Laptop", total: 15 }];
+  SalesReport(super.title);
+
+  @override
+  List<Map<String, dynamic>> collectData() {
+    return [
+      {"product": "Laptop", "total": 15},
+    ];
   }
 }
 
 class VisitorReport extends BaseReport {
-  protected collectData(): unknown[] {
-    return [{ visitor: 1 }, { visitor: 2 }];
+  VisitorReport(super.title);
+
+  @override
+  List<Map<String, dynamic>> collectData() {
+    return [
+      {"visitor": 1},
+      {"visitor": 2},
+    ];
   }
 }
 
-const reports: Report[] = [
-  new SalesReport("Penjualan"),
-  new VisitorReport("Pengunjung"),
-];
+void main() {
+  final List<Report> reports = [
+    SalesReport("Penjualan"),
+    VisitorReport("Pengunjung"),
+  ];
 
-reports.forEach((report) => report.generate());
-// Laporan "Penjualan": 1 baris
-// Laporan "Pengunjung": 2 baris
+  for (final report in reports) {
+    print(report.generate());
+  }
+  // Laporan "Penjualan": 1 baris
+  // Laporan "Pengunjung": 2 baris
+}
 `,
   },
 ];

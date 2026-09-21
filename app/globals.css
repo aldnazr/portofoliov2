@@ -140,9 +140,11 @@ body {
 .theme-seg-btn {
   color: var(--muted);
 }
+
 .theme-seg-btn:hover {
   color: var(--foreground);
 }
+
 [data-theme="system"] .theme-seg-btn[data-mode="system"],
 [data-theme="light"] .theme-seg-btn[data-mode="light"],
 [data-theme="dark"] .theme-seg-btn[data-mode="dark"] {
@@ -157,6 +159,7 @@ body {
     transform: translateY(24px);
     filter: blur(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -172,7 +175,56 @@ body {
   html {
     scroll-behavior: auto;
   }
+
   .animate-rise {
     animation: none;
   }
+}
+
+/* ==========================================
+   SHIKI V4 INTEGRATION & CUSTOMIZATION
+   ========================================== */
+
+/* 1. Base Container Reset & Typography */
+.shiki-wrapper>.shiki,
+pre.shiki {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.8125rem;
+  line-height: 1.75;
+  overflow-x: auto;
+}
+
+/* 2. Shiki v4 Color Scheme Adaption (mengikuti color-scheme project) */
+.shiki-wrapper>.shiki,
+.shiki-wrapper>.shiki span,
+pre.shiki,
+pre.shiki span {
+  background-color: transparent !important;
+}
+
+/* 3. Code Layout & Line Reset */
+.shiki-wrapper>.shiki code,
+pre.shiki code {
+  display: block;
+  counter-reset: line;
+}
+
+/* 4. Scrollbar Styling */
+.shiki-wrapper>.shiki::-webkit-scrollbar,
+pre.shiki::-webkit-scrollbar {
+  height: 0.5rem;
+}
+
+.shiki-wrapper>.shiki::-webkit-scrollbar-thumb,
+pre.shiki::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background-color: var(--shade);
+}
+
+.shiki-wrapper>.shiki::-webkit-scrollbar-track,
+pre.shiki::-webkit-scrollbar-track {
+  background-color: transparent;
 }
