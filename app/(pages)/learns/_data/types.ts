@@ -1,4 +1,5 @@
 export type Paradigm = "functional" | "oop";
+export type LearnTopic = "paradigms" | "methods";
 
 /**
  * Satu materi pembelajaran dalam halaman learns.

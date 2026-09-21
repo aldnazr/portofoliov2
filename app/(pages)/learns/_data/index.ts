@@ -1,8 +1,9 @@
-import type { LearnConcept, Paradigm } from "./types";
+import type { LearnConcept, LearnTopic, Paradigm } from "./types";
 import { functionalConcepts } from "./functional";
 import { oopConcepts } from "./oop";
+import { methodsConcepts } from "./methods";
 
-export { functionalConcepts, oopConcepts };
+export { functionalConcepts, oopConcepts, methodsConcepts };
 
 /**
  * Metadata setiap paradigma: label untuk tab, ringkasan singkat,
@@ -31,4 +32,10 @@ export const paradigmIds = Object.keys(learnContent) as Paradigm[];
 /** Validasi nilai dari URL search param agar tetap aman. */
 export function parseParadigm(value: string | undefined): Paradigm {
   return value === "oop" ? "oop" : "functional";
+}
+
+/** Validasi nilai topik pembelajaran dari URL search param. */
+export function parseTopic(value: string | undefined): LearnTopic | null {
+  if (value === "paradigms" || value === "methods") return value;
+  return null;
 }

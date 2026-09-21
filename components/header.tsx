@@ -4,14 +4,17 @@ import { useState } from "react";
 import { profile } from "@/data/profile";
 import { navigation } from "@/data/navigation";
 import ThemeToggle from "@/components/theme-toggle";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathName = usePathname();
+  const isHome = pathName === "/";
 
   return (
     <header className="sticky top-6 z-50 px-4 sm:px-6 max-w-5xl mx-auto">
       <div className="rounded-full border border-hairline bg-surface/80 backdrop-blur-xl px-4 py-3 sm:px-6 flex items-center justify-between shadow-elevated">
-        <a href="#" className="group flex items-center gap-3">
+        <a href={isHome ? "#" : "/"} className="group flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-accent-wash border border-accent-wash-border flex items-center justify-center text-xs font-mono font-bold text-accent-strong group-hover:scale-105 transition-transform">
             {profile.initials}
           </div>

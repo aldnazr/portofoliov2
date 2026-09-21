@@ -35,7 +35,7 @@ export default function LearnExplorer({
       if (next === paradigm) return;
       setParadigm(next);
       // Sinkronkan ke URL tanpa reload agar bisa di-share.
-      router.replace(`${pathname}?paradigm=${next}`, { scroll: false });
+      router.replace(`${pathname}?topic=paradigms&paradigm=${next}`, { scroll: false });
     },
     [paradigm, pathname, router],
   );
