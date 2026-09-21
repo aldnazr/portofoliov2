@@ -1,6 +1,6 @@
-import { profile } from "@/app/data/profile";
-import { projects } from "@/app/data/projects";
-import SectionHeader from "@/app/components/section-header";
+import { profile } from "@/data/profile";
+import { projects } from "@/data/projects";
+import SectionHeader from "@/components/section-header";
 
 const allTechnologies = Array.from(
   new Set(projects.flatMap((p) => p.technologies)),

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { projects } from "@/app/data/projects";
-import SectionHeader from "@/app/components/section-header";
-import ProjectCard from "@/app/components/project-card";
+import { projects } from "@/data/projects";
+import SectionHeader from "@/components/section-header";
+import ProjectCard from "@/components/project-card";
 
 const ITEMS_PER_PAGE = 3;
 

@@ -1,11 +1,11 @@
-import Header from "@/app/components/header";
-import HeroSection from "@/app/components/hero-section";
-import AboutSection from "@/app/components/about-section";
-import ProjectsSection from "@/app/components/projects-section";
-import ExperienceSection from "@/app/components/experience-section";
-import ContactSection from "@/app/components/contact-section";
-import Footer from "@/app/components/footer";
-import BackgroundMesh from "@/app/components/background-mesh";
+import Header from "@/components/header";
+import HeroSection from "@/components/hero-section";
+import AboutSection from "@/components/about-section";
+import ProjectsSection from "@/components/projects-section";
+import ExperienceSection from "@/components/experience-section";
+import ContactSection from "@/components/contact-section";
+import Footer from "@/components/footer";
+import BackgroundMesh from "@/components/background-mesh";
 
 export default function Home() {
   return (

@@ -1,4 +1,4 @@
-import { PlayStoreInfo, type Project } from "@/app/data/types";
+import { PlayStoreInfo, type Project } from "@/data/types";
 
 export const projects: Project[] = [
   {

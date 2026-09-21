@@ -1,5 +1,5 @@
-import { experience } from "@/app/data/experience";
-import SectionHeader from "@/app/components/section-header";
+import { experience } from "@/data/experience";
+import SectionHeader from "@/components/section-header";
 
 export default function ExperienceSection() {
   return (

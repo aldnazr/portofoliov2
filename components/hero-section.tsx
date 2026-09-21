@@ -1,4 +1,4 @@
-import { profile } from "@/app/data/profile";
+import { profile } from "@/data/profile";
 import { ButtonLink } from "./button";
 import { GithubIcon, LinkedinIcon } from "./icons";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { profile } from "@/app/data/profile";
+import { profile } from "@/data/profile";
 import { Button } from "./button";
 import { GithubIcon, LinkedinIcon } from "./icons";
 

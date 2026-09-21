@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Footer from "@/app/components/footer";
-import Reveal from "@/app/components/reveal";
-import BackgroundMesh from "@/app/components/background-mesh";
-import {
-  projects,
-  getProjectBySlug,
-  slugifyProject,
-} from "@/app/data/projects";
+import Footer from "@/components/footer";
+import Reveal from "@/components/reveal";
+import BackgroundMesh from "@/components/background-mesh";
+import { projects, getProjectBySlug, slugifyProject } from "@/data/projects";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;

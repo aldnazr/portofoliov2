@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { profile } from "@/app/data/profile";
-import { navigation } from "@/app/data/navigation";
-import ThemeToggle from "@/app/components/theme-toggle";
+import { profile } from "@/data/profile";
+import { navigation } from "@/data/navigation";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
