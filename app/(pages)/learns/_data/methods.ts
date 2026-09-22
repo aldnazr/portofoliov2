@@ -14,7 +14,7 @@ export const methodsConcepts: LearnConcept[] = [
 }
 
 const users: User[] = [
-  { id: 1, name: "Alauddin", isActive: true },
+  { id: 1, name: "Andi", isActive: true },
   { id: 2, name: "Budi", isActive: false },
   { id: 3, name: "Citra", isActive: true },
 ];
@@ -224,9 +224,9 @@ const [root, ...rest] = path.split("/", 2);
       "Method milik Array (Array.prototype.join) yang menggabungkan seluruh elemen array menjadi sebuah string tunggal, disisipkan oleh separator pemisah yang ditentukan (default tanda koma ','). Merupakan kebalikan (inverse) dari split.",
     filename: "join.ts",
     code: `// 1. Menggabungkan array segmen path menjadi URL
-const pathSegments = ["users", "alauddin", "settings"];
+const pathSegments = ["users", "dewi", "settings"];
 const urlPath = "/" + pathSegments.join("/");
-// "/users/alauddin/settings"
+// "/users/dewi/settings"
 
 // 2. Menggabungkan tag menjadi representasi teks dengan pemisah kustom
 const tags = ["Next.js", "TypeScript", "Tailwind"];
@@ -244,6 +244,71 @@ function slugify(text: string): string {
 
 const slug = slugify("Panduan Praktis Belajar TypeScript Modern");
 // "panduan-praktis-belajar-typescript-modern"
+`,
+  },
+  {
+    id: "slice",
+    title: "slice",
+    description:
+      "Memotong bagian dari string atau array berdasarkan index awal dan akhir (end eksklusif) tanpa memutasi sumber. Mendukung index negatif (dihitung dari akhir). Mengembalikan string baru untuk String.prototype.slice dan array baru untuk Array.prototype.slice.",
+    filename: "slice.ts",
+    code: `// === String.prototype.slice ===
+
+const fullName = "Rizky Pratama";
+
+// 1. Potongan berdasarkan index [start, end)
+const first = fullName.slice(0, 5);
+// "Rizky"
+
+// 2. Index negatif dihitung dari akhir string
+const lastWord = fullName.slice(-7);
+// "Pratama"
+
+// 3. Potong teks panjang untuk preview UI
+const excerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+const short = excerpt.slice(0, 30) + "...";
+// "Lorem ipsum dolor sit amet, conse..."
+
+// === Array.prototype.slice ===
+
+const colors = ["red", "green", "blue", "yellow"];
+
+// 4. Salin sebagian array tanpa memutasi asli (immutable)
+const partial = colors.slice(1, 3);
+// ["green", "blue"]
+
+// 5. Salin penuh array (kloning dangkal)
+const copy = colors.slice();
+// ["red", "green", "blue", "yellow"]
+`,
+  },
+  {
+    id: "substring",
+    title: "substring",
+    description:
+      "Method milik String (String.prototype.substring) yang memotong substring berdasarkan index awal dan akhir (end eksklusif). Tidak mendukung index negatif (dianggap 0) dan otomatis menukar argumen jika start > end. Gunakan slice jika butuh index negatif.",
+    filename: "substring.ts",
+    code: `const email = "rizky@example.com";
+
+// 1. Ambil nama pengguna (bagian sebelum @)
+const username = email.substring(0, email.indexOf("@"));
+// "rizky"
+
+// 2. Ambil domain (bagian setelah @)
+const domain = email.substring(email.indexOf("@") + 1);
+// "example.com"
+
+// 3. Argumen end boleh dilepas (sisa string sampai akhir)
+const fileType = "laporan-2026.pdf";
+const extension = fileType.substring(fileType.lastIndexOf("."));
+// ".pdf"
+
+// 4. start > end otomatis ditukar (tidak error)
+console.log("TypeScript".substring(4, 0)); // "Type"
+
+// 5. Index negatif dianggap 0, berbeda dgn slice
+console.log("TypeScript".substring(-3)); // "TypeScript" (utuh)
+console.log("TypeScript".slice(-3));     // "ipt"
 `,
   },
 ];

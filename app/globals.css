@@ -203,12 +203,10 @@ body {
   position: absolute;
   inset: 0;
   transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--overlay-strong),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--overlay-strong),
+      transparent);
   animation: skeleton-sheen 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
 
@@ -226,7 +224,7 @@ body {
 .shiki-wrapper>.shiki,
 pre.shiki {
   background-color: transparent !important;
-  padding: 8px 22px !important;
+  padding: 6px 22px 8px !important;
   margin: 0 !important;
   font-family: var(--font-mono) !important;
   font-size: 0.8125rem;
@@ -238,7 +236,7 @@ pre.shiki {
 
   .shiki-wrapper>.shiki,
   pre.shiki {
-    padding: 2px 5px !important;
+    padding: 1px 5px 2px !important;
   }
 }
 
