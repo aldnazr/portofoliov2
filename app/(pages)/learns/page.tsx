@@ -19,7 +19,7 @@ import TopicNav from "./_components/topic-nav";
 export const metadata: Metadata = {
   title: "Learn | Interactive Learning Lab",
   description:
-    "Pilihan topik pembelajaran interaktif: Functional vs OOP (TypeScript & Dart) serta panduan lengkap Array & String methods (forEach, map, filter, reduce, flat, flatMap, split, join).",
+    "Pilihan topik pembelajaran interaktif: Functional vs OOP (TypeScript, Dart, dan Kotlin) serta panduan lengkap Array & String methods (forEach, map, filter, reduce, flat, flatMap, split, join).",
 };
 
 type LearnPageProps = {
@@ -31,8 +31,8 @@ const topicConfig = {
   paradigms: {
     title: "Functional Programming & OOP",
     description:
-      "Dua paradigma pemrograman yang paling banyak dipakai, dipelajari lewat contoh kode TypeScript dan Dart yang bisa langsung dijalankan.",
-    langs: ["typescript", "dart"] as const,
+      "Dua paradigma pemrograman yang paling banyak dipakai, dipelajari lewat contoh kode TypeScript, Dart, dan Kotlin yang bisa langsung dijalankan.",
+    langs: ["typescript", "dart", "kotlin"] as const,
     nextTopic: {
       href: "/learns?topic=methods",
       title: "Array & String Methods",
@@ -61,7 +61,9 @@ async function highlightConcepts(
     concepts.map((concept) => [
       concept.id,
       highlighter.codeToHtml(concept.code.trim(), {
-        lang: paradigm === "oop" ? "dart" : "typescript",
+        lang:
+          concept.language ??
+          (paradigm === "oop" ? "dart" : "typescript"),
         themes: { light: "github-light", dark: "github-dark" },
         defaultColor: "light-dark()",
       }),

@@ -11,4 +11,5 @@ export type LearnConcept = {
   description: string;
   code: string;
   filename?: string;
+  language?: "typescript" | "dart" | "kotlin";
 };

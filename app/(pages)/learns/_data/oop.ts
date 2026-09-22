@@ -7,13 +7,9 @@ export const oopConcepts: LearnConcept[] = [
     description:
       "Encapsulation membungkus data dan perilaku dalam satu class, lalu membatasi aksesnya. Di Dart, privasi diterapkan di tingkat library menggunakan prefix underscore (_). Getter dan setter menjaga agar state internal tetap valid.",
     filename: "encapsulation.dart",
-    code: `class BankAccount {
+    code: `class BankAccount(final String owner, [double initialBalance = 0]) {
   // Underscore (_): private dalam lingkup library di Dart
-  double _balance;
-  // final: nilai hanya bisa diberi saat inisialisasi/konstruksi
-  final String owner;
-
-  BankAccount(this.owner, [this._balance = 0]);
+  double _balance = initialBalance;
 
   // Method publik: bisa diakses dari mana saja
   void deposit(double amount) {
@@ -50,11 +46,7 @@ void main() {
     description:
       "Inheritance membuat class mewarisi properti dan method dari class induk menggunakan extends dan super. Subclass dapat memanfaatkan kembali fungsionalitas class induk tanpa menduplikasi kode.",
     filename: "inheritance.dart",
-    code: `class Animal {
-  final String name;
-
-  Animal(this.name);
-
+    code: `class Animal(final String name) {
   // Method yang diwariskan ke semua subclass
   String describe() {
     return "\${name} adalah hewan";
@@ -65,12 +57,8 @@ void main() {
   }
 }
 
-class Dog extends Animal {
-  final String breed;
-
-  // super(...) meneruskan parameter ke konstruktor class Animal
-  Dog(super.name, this.breed);
-
+// super.name meneruskan parameter ke primary constructor Animal.
+class Dog(super.name, final String breed) extends Animal {
   String bark() {
     return "\${makeSound()} — gonggongan";
   }
@@ -97,11 +85,7 @@ void main() {
     filename: "polymorphism-overriding.dart",
     code: `import "dart:math" as math;
 
-class Shape {
-  final String name;
-
-  Shape(this.name);
-
+class Shape(final String name) {
   double area() => 0.0;
 
   @override
@@ -110,21 +94,16 @@ class Shape {
   }
 }
 
-class Circle extends Shape {
-  final double radius;
-
-  Circle(this.radius) : super("Lingkaran");
+class Circle(final double radius) extends Shape {
+  this : super("Lingkaran");
 
   // @override: menimpa method area() milik class induk
   @override
   double area() => math.pi * radius * radius;
 }
 
-class Rectangle extends Shape {
-  final double width;
-  final double height;
-
-  Rectangle(this.width, this.height) : super("Persegi panjang");
+class Rectangle(final double width, final double height) extends Shape {
+  this : super("Persegi panjang");
 
   @override
   double area() => width * height;
@@ -148,38 +127,31 @@ void main() {
     id: "polymorphism-overloading",
     title: "Polymorphism — Overloading",
     description:
-      "Dart tidak mendukung method overloading tradisional (nama method sama dengan parameter berbeda). Sebagai gantinya, Dart menggunakan optional parameters dan named parameters untuk menangani variasi argumen.",
-    filename: "polymorphism-overloading.dart",
+      "Overloading memungkinkan beberapa method memakai nama yang sama selama daftar parameternya berbeda. Contoh ini menggunakan Kotlin karena Dart tidak mendukung method overloading tradisional.",
+    filename: "polymorphism-overloading.kt",
+    language: "kotlin",
     code: `class Messenger {
-  // Dart menggunakan named & optional parameters
-  // sebagai pola alternatif overloading
-  void send(
-    dynamic recipientOrRecipients,
-    String message, {
-    String? attachment,
-  }) {
-    final List<String> targets = recipientOrRecipients is List<String>
-        ? recipientOrRecipients
-        : [recipientOrRecipients.toString()];
+  fun send(recipient: String, message: String) {
+    println("Kirim ke \${recipient}: \${message}")
+  }
 
-    for (final target in targets) {
-      final extra = attachment != null ? ' + "\${attachment}"' : "";
-      print("Kirim ke \${target}: \${message}\${extra}");
+  fun send(recipient: String, message: String, attachment: String) {
+    println("Kirim ke \${recipient}: \${message} + \${attachment}")
+  }
+
+  fun send(recipients: List<String>, message: String) {
+    recipients.forEach { recipient ->
+      println("Kirim ke \${recipient}: \${message}")
     }
   }
 }
 
-void main() {
-  final messenger = Messenger();
+fun main() {
+  val messenger = Messenger()
 
-  // Signature 1: kirim pesan biasa
-  messenger.send("aldnazr", "Halo");
-
-  // Signature 2: pesan dengan named parameter (lampiran)
-  messenger.send("aldnazr", "Halo", attachment: "cv.pdf");
-
-  // Signature 3: broadcast ke list penerima
-  messenger.send(["aldo", "sari"], "Halo semua");
+  messenger.send("aldnazr", "Halo")
+  messenger.send("aldnazr", "Halo", "cv.pdf")
+  messenger.send(listOf("aldo", "sari"), "Halo semua")
 }
 `,
   },
@@ -196,12 +168,7 @@ abstract class Report {
 }
 
 // Abstract class dengan implementasi dasar
-abstract class BaseReport implements Report {
-  @override
-  final String title;
-
-  BaseReport(this.title);
-
+abstract class BaseReport(final String title) implements Report {
   // Method abstract: wajib diimplementasikan oleh subclass
   List<Map<String, dynamic>> collectData();
 
@@ -213,9 +180,7 @@ abstract class BaseReport implements Report {
   }
 }
 
-class SalesReport extends BaseReport {
-  SalesReport(super.title);
-
+class SalesReport(super.title) extends BaseReport {
   @override
   List<Map<String, dynamic>> collectData() {
     return [
@@ -224,9 +189,7 @@ class SalesReport extends BaseReport {
   }
 }
 
-class VisitorReport extends BaseReport {
-  VisitorReport(super.title);
-
+class VisitorReport(super.title) extends BaseReport {
   @override
   List<Map<String, dynamic>> collectData() {
     return [
