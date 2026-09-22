@@ -77,7 +77,7 @@ export default async function ProjectDetailPage({
       <BackgroundMesh />
 
       {/* Main Content */}
-      <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
         <Link
           href="/#project"
           aria-label="Kembali ke portofolio bagian proyek"
@@ -295,7 +295,7 @@ export default async function ProjectDetailPage({
             </div>
           </Reveal>
         )}
-      </main>
+      </div>
 
       {/* Minimal Footer */}
       <Footer />

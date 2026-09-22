@@ -1,9 +1,8 @@
 import Link from "next/link";
-import type { LearnTopic } from "../_data/types";
 
-export default function TopicNav({ currentTopic }: { currentTopic: LearnTopic }) {
+export default function TopicNav() {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="flex items-center justify-between gap-4">
       <Link
         href="/learns"
         aria-label="Kembali ke daftar topik pembelajaran"
@@ -17,29 +16,7 @@ export default function TopicNav({ currentTopic }: { currentTopic: LearnTopic })
         </span>
         <span>Semua Topik Belajar</span>
       </Link>
-
-      <div className="flex items-center gap-1.5 rounded-full border border-hairline bg-surface/60 p-1 backdrop-blur-md">
-        <Link
-          href="/learns?topic=paradigms"
-          className={`rounded-full px-3.5 py-1 text-xs font-medium transition-colors ${
-            currentTopic === "paradigms"
-              ? "bg-accent-wash text-accent-strong border border-accent-wash-border"
-              : "text-muted hover:text-foreground hover:bg-overlay"
-          }`}
-        >
-          1. Functional & OOP
-        </Link>
-        <Link
-          href="/learns?topic=methods"
-          className={`rounded-full px-3.5 py-1 text-xs font-medium transition-colors ${
-            currentTopic === "methods"
-              ? "bg-accent-wash text-accent-strong border border-accent-wash-border"
-              : "text-muted hover:text-foreground hover:bg-overlay"
-          }`}
-        >
-          2. Array & String Methods
-        </Link>
-      </div>
     </div>
   );
 }
+
