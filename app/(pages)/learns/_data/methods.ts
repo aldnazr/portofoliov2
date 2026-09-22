@@ -3,6 +3,7 @@ import type { LearnConcept } from "./types";
 export const methodsConcepts: LearnConcept[] = [
   {
     id: "foreach",
+    kind: "array",
     title: "forEach",
     description:
       "Mengeksekusi fungsi callback pada setiap elemen array secara berurutan. Method ini selalu mengembalikan undefined dan tidak dapat di-break atau di-continue. Gunakan forEach hanya untuk side-effect (seperti logging, menyimpan data, atau mutasi state luar), bukan untuk mentransformasi data.",
@@ -34,6 +35,7 @@ console.log(result); // undefined
   },
   {
     id: "map",
+    kind: "array",
     title: "map",
     description:
       "Mentransformasi setiap elemen array dengan memanggil callback function, lalu mengembalikan array baru dengan panjang yang sama persis tanpa memutasi array asli (immutable). Sangat ideal untuk ekstraksi field objek, formatting data, atau konversi tipe data.",
@@ -64,6 +66,7 @@ const viewModels = products.map((product) => ({
   },
   {
     id: "filter",
+    kind: "array",
     title: "filter",
     description:
       "Menyaring elemen array berdasarkan kondisi boolean (predicate function). Mengembalikan array baru yang hanya memuat elemen yang menghasilkan nilai true tanpa mengubah array sumber. Panjang array hasil bisa sama, lebih sedikit, atau kosong.",
@@ -96,6 +99,7 @@ const truthyValues = rawValues.filter(Boolean);
   },
   {
     id: "reduce",
+    kind: "array",
     title: "reduce",
     description:
       "Mengakumulasi seluruh elemen array menjadi satu nilai tunggal (angka, string, objek, atau array baru). Menerima fungsi (accumulator, current) => nextAccumulator dan nilai awal (initialValue). Sangat fleksibel untuk perhitungan total, pengelompokan data (grouping), atau flattening kustom.",
@@ -138,6 +142,7 @@ const totalByCategory = expenses.reduce<Record<string, number>>(
   },
   {
     id: "flat",
+    kind: "array",
     title: "flat",
     description:
       "Meratakan (flatten) sub-array bersarang menjadi array baru satu dimensi hingga kedalaman tertentu (depth, default bernilai 1). Gunakan argumen Infinity untuk meratakan array berapapun dalamnya tingkat sarangnya, sekaligus menghapus celah kosong (sparse array).",
@@ -164,6 +169,7 @@ const cleaned = sparse.flat();
   },
   {
     id: "flatmap",
+    kind: "array",
     title: "flatMap",
     description:
       "Kombinasi efisien dari memanggil map() yang langsung dilanjutkan dengan flat(1). Memetakan setiap elemen lalu otomatis meratakan hasilnya satu level tanpa membuat array perantara di memori. Sangat berguna untuk mengekstrak array anak dari kumpulan objek atau melakukan filter + map dalam 1 langkah.",
@@ -192,6 +198,7 @@ const words = sentences.flatMap((s) => (s ? s.split(" ") : []));
   },
   {
     id: "split",
+    kind: "string",
     title: "split",
     description:
       "Method milik String (String.prototype.split) yang membagi sebuah string menjadi array potongan kata/teks berdasarkan separator karakter atau Regular Expression yang ditentukan, dengan opsi limit jumlah item yang diambil.",
@@ -219,6 +226,7 @@ const [root, ...rest] = path.split("/", 2);
   },
   {
     id: "join",
+    kind: "array",
     title: "join",
     description:
       "Method milik Array (Array.prototype.join) yang menggabungkan seluruh elemen array menjadi sebuah string tunggal, disisipkan oleh separator pemisah yang ditentukan (default tanda koma ','). Merupakan kebalikan (inverse) dari split.",
@@ -248,6 +256,7 @@ const slug = slugify("Panduan Praktis Belajar TypeScript Modern");
   },
   {
     id: "slice",
+    kind: "both",
     title: "slice",
     description:
       "Memotong bagian dari string atau array berdasarkan index awal dan akhir (end eksklusif) tanpa memutasi sumber. Mendukung index negatif (dihitung dari akhir). Mengembalikan string baru untuk String.prototype.slice dan array baru untuk Array.prototype.slice.",
@@ -284,6 +293,7 @@ const copy = colors.slice();
   },
   {
     id: "substring",
+    kind: "string",
     title: "substring",
     description:
       "Method milik String (String.prototype.substring) yang memotong substring berdasarkan index awal dan akhir (end eksklusif). Tidak mendukung index negatif (dianggap 0) dan otomatis menukar argumen jika start > end. Gunakan slice jika butuh index negatif.",

@@ -1,18 +1,56 @@
 "use client";
 
-import type { LearnConcept } from "../_data/types";
+import { useCallback, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import type { LearnConcept, MethodFilter } from "../_data/types";
+import { parseMethodFilter } from "../_data";
 import CodeBlock from "./code-block";
+import MethodSwitcher from "./method-switcher";
 
 type MethodsExplorerProps = {
   /** Seluruh snippet method sudah di-highlight di server dengan Shiki */
   highlighted: Record<string, string>;
   concepts: LearnConcept[];
+  /** Jenis method awal dari server (berdasarkan URL search param). */
+  initialKind: MethodFilter;
 };
 
+/**
+ * Menampilkan materi methods dengan filter Array vs String:
+ * state filter instan di client (highlight sudah tersedia), URL tetap
+ * diperbarui supaya tautan bisa dibagikan — pola sama dengan LearnExplorer.
+ */
 export default function MethodsExplorer({
   highlighted,
   concepts,
+  initialKind,
 }: MethodsExplorerProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [kind, setKind] = useState<MethodFilter>(initialKind);
+
+  const selectKind = useCallback(
+    (next: MethodFilter) => {
+      if (next === kind) return;
+      setKind(next);
+      // Sinkronkan ke URL tanpa reload agar bisa di-share.
+      router.replace(`${pathname}?topic=methods&kind=${next}`, {
+        scroll: false,
+      });
+    },
+    [kind, pathname, router],
+  );
+
+  // Tangani navigasi browser (back/forward) atau perubahan URL dari luar.
+  useEffect(() => {
+    setKind(parseMethodFilter(searchParams.get("kind") ?? undefined));
+  }, [searchParams]);
+
+  const visible = concepts.filter(
+    (concept) => concept.kind === kind || concept.kind === "both",
+  );
+
   return (
     <div className="flex flex-col gap-10 lg:flex-row lg:gap-12">
       {/* Sidebar navigasi anchor di desktop */}
@@ -21,11 +59,13 @@ export default function MethodsExplorer({
         className="hidden lg:block lg:w-56 lg:shrink-0"
       >
         <div className="sticky top-28 space-y-4">
+          <MethodSwitcher kind={kind} onChange={selectKind} />
+
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong px-3">
             Daftar Method
           </p>
           <div className="space-y-1">
-            {concepts.map((concept, idx) => (
+            {visible.map((concept, idx) => (
               <a
                 key={concept.id}
                 href={`#${concept.id}`}
@@ -44,10 +84,19 @@ export default function MethodsExplorer({
       </nav>
 
       {/* Konten materi */}
-      <div className="flex-1 space-y-10 sm:space-y-12 min-w-0">
+      <div
+        id="method-panel"
+        role="tabpanel"
+        aria-labelledby={`method-tab-${kind}`}
+        className="flex-1 space-y-10 sm:space-y-12 min-w-0"
+      >
+        <header className="lg:hidden">
+          <MethodSwitcher kind={kind} onChange={selectKind} />
+        </header>
+
         {/* Navigasi horizontal di layar kecil/mobile */}
         <div className="lg:hidden pb-2 overflow-x-auto flex gap-2 no-scrollbar">
-          {concepts.map((concept, idx) => (
+          {visible.map((concept, idx) => (
             <a
               key={concept.id}
               href={`#${concept.id}`}
@@ -61,9 +110,13 @@ export default function MethodsExplorer({
           ))}
         </div>
 
-        {concepts.map((concept, index) => {
-          const isStringMethod = concept.id === "split";
-          const methodType = isStringMethod ? "String.prototype" : "Array.prototype";
+        {visible.map((concept, index) => {
+          const methodType =
+            concept.kind === "string"
+              ? "String.prototype"
+              : concept.kind === "both"
+                ? "String & Array"
+                : "Array.prototype";
 
           return (
             <section

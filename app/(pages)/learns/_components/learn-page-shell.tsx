@@ -27,11 +27,11 @@ export default function LearnPageShell({
       <BackgroundMesh />
       {/* <Header /> */}
 
-      <main
+      <div
         className={`relative z-10 ${containerClassName} mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-24`}
       >
         {children}
-      </main>
+      </div>
 
       <ScrollToTop />
       <Footer />

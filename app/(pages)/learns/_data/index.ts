@@ -1,4 +1,4 @@
-import type { LearnConcept, LearnTopic, Paradigm } from "./types";
+import type { LearnConcept, LearnTopic, MethodFilter, Paradigm } from "./types";
 import { functionalConcepts } from "./functional";
 import { oopConcepts } from "./oop";
 import { methodsConcepts } from "./methods";
@@ -28,6 +28,19 @@ export const learnContent: Record<
 };
 
 export const paradigmIds = Object.keys(learnContent) as Paradigm[];
+
+/** Urutan tab filter method di topik methods. */
+export const methodFilterIds: MethodFilter[] = ["array", "string"];
+
+export const methodFilterLabels: Record<MethodFilter, string> = {
+  array: "Array",
+  string: "String",
+};
+
+/** Validasi jenis method dari URL search param agar tetap aman. */
+export function parseMethodFilter(value: string | undefined): MethodFilter {
+  return value === "string" ? "string" : "array";
+}
 
 /** Validasi nilai dari URL search param agar tetap aman. */
 export function parseParadigm(value: string | undefined): Paradigm {

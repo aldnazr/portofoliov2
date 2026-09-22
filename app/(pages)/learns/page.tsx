@@ -5,6 +5,7 @@ import {
   learnContent,
   methodsConcepts,
   paradigmIds,
+  parseMethodFilter,
   parseParadigm,
   parseTopic,
 } from "./_data";
@@ -77,6 +78,7 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
   const rawTopic = Array.isArray(params.topic) ? params.topic[0] : params.topic;
   const rawParadigm =
     Array.isArray(params.paradigm) ? params.paradigm[0] : params.paradigm;
+  const rawKind = Array.isArray(params.kind) ? params.kind[0] : params.kind;
 
   const currentTopic =
     parseTopic(rawTopic) ?? (rawParadigm ? "paradigms" : null);
@@ -97,10 +99,12 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
       <div className="space-y-8">
         <TopicNav />
         <TopicHeader title={config.title} description={config.description} />
-        {/* key per topic: fallback Skeleton ulang tiap ganti topik,
-            ganti paradigma (tanpa ganti key) tetap instan di client. */}
         <Suspense key={currentTopic} fallback={<ContentSkeleton />}>
-          <TopicContent topic={currentTopic} rawParadigm={rawParadigm} />
+          <TopicContent
+            topic={currentTopic}
+            rawParadigm={rawParadigm}
+            rawKind={rawKind}
+          />
         </Suspense>
       </div>
       <NextTopicLink {...config.nextTopic} />
@@ -115,9 +119,11 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
 async function TopicContent({
   topic,
   rawParadigm,
+  rawKind,
 }: {
   topic: LearnTopic;
   rawParadigm: string | undefined;
+  rawKind: string | undefined;
 }) {
   // Topik paradigms: butuh highlight per paradigma
   if (topic === "paradigms") {
@@ -142,5 +148,11 @@ async function TopicContent({
   // Topik methods
   const highlighted = await highlightConcepts(methodsConcepts);
 
-  return <MethodsExplorer concepts={methodsConcepts} highlighted={highlighted} />;
+  return (
+    <MethodsExplorer
+      concepts={methodsConcepts}
+      highlighted={highlighted}
+      initialKind={parseMethodFilter(rawKind)}
+    />
+  );
 }
