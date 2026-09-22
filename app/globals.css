@@ -197,6 +197,29 @@ pre.shiki {
   overflow-x: auto;
 }
 
+@media screen and (width < 768px) {
+
+  .shiki-wrapper>.shiki,
+  pre.shiki {
+    padding: 2px 5px !important;
+  }
+}
+
+/* hide overflow-x */
+.shiki-wrapper>.shiki,
+pre.shiki {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.shiki-wrapper>.shiki::-webkit-scrollbar,
+pre.shiki::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 /* 2. Shiki v4 Color Scheme Adaption (mengikuti color-scheme project) */
 .shiki-wrapper>.shiki,
 .shiki-wrapper>.shiki span,

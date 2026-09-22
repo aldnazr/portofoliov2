@@ -84,7 +84,7 @@ export default async function LearnPage({ searchParams }: LearnPageProps) {
           <div className="space-y-8">
             <TopicNav currentTopic="paradigms" />
 
-            <header className="space-y-1.5 md:space-y-2.5">
+            <header className="space-y-2 md:space-y-3">
               <p className="px-3 py-1 max-w-fit rounded-full text-[10px] uppercase tracking-[0.2em] font-mono text-accent-strong border border-accent-wash-border bg-accent-wash">
                 Topik 01 • Paradigma Pemrograman
               </p>
