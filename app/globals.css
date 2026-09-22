@@ -181,6 +181,43 @@ body {
   }
 }
 
+/* Server-side loading skeleton: sheen sebagai indikator progres streaming */
+@keyframes skeleton-sheen {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--overlay);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--overlay-strong),
+    transparent
+  );
+  animation: skeleton-sheen 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
+
 /* ==========================================
    SHIKI V4 INTEGRATION & CUSTOMIZATION
    ========================================== */
