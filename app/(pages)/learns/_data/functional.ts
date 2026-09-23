@@ -64,7 +64,7 @@ add(["react", "vue"], "svelte"); // ["react", "vue", "svelte"]
     code: `type User = { name: string; role: string; active: boolean };
 
 const users: User[] = [
-  { name: "Alauddin", role: "engineer", active: true },
+  { name: "Raka", role: "engineer", active: true },
   { name: "Sari", role: "designer", active: false },
   { name: "Budi", role: "engineer", active: true },
 ];

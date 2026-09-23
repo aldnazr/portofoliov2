@@ -33,7 +33,7 @@ export const oopConcepts: LearnConcept[] = [
 }
 
 void main() {
-  final account = BankAccount("Alauddin", 50000);
+  final account = BankAccount("Raka", 50000);
   account.deposit(25000);
   print(account.currentBalance); // 75000.0
   // account._balance tidak dapat diakses jika di luar library ini
