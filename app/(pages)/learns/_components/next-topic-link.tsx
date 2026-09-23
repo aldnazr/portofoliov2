@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/reveal";
+import { ArrowIcon } from "@/components/icons";
 
 type NextTopicLinkProps = {
   href: string;
@@ -28,7 +29,7 @@ export default function NextTopicLink({
             aria-hidden="true"
             className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-hairline text-subtle transition-[color,border-color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-accent-wash-border group-hover:text-accent-hover group-hover:translate-x-1"
           >
-            →
+            <ArrowIcon direction="right" />
           </span>
         </Link>
       </div>

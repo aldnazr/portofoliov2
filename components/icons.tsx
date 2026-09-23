@@ -30,14 +30,7 @@ export function LinkedinIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
       aria-hidden="true"
       {...props}
     >
-      <rect
-        width="132"
-        height="132"
-        x="30"
-        y="30"
-        strokeWidth={12}
-        rx="16"
-      />
+      <rect width="132" height="132" x="30" y="30" strokeWidth={12} rx="16" />
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -50,6 +43,34 @@ export function LinkedinIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
         strokeWidth={12}
         d="M126 130v-26c0-9.941-8.059-18-18-18v0c-9.941 0-18 8.059-18 18v26"
       />
+    </svg>
+  );
+}
+
+const ARROW_PATH = {
+  left: "M5 12H19M5 12L11 6M5 12L11 18",
+  right: "M5 12H19M19 12L13 6M19 12L13 18",
+  upright: "M7 17L17 7M17 7H8M17 7V16",
+} as const;
+
+export function ArrowIcon({
+  direction = "left",
+  className,
+  ...props
+}: SVGProps<SVGSVGElement> & { direction?: keyof typeof ARROW_PATH }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className ?? "size-4.5"}
+      aria-hidden="true"
+      {...props}
+    >
+      <path d={ARROW_PATH[direction]} />
     </svg>
   );
 }

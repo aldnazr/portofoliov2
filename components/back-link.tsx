@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowIcon } from "./icons";
 
 type BackLinkProps = {
   /** Tujuan navigasi back. Default `/` (halaman utama portofolio). */
@@ -21,18 +22,7 @@ export default function BackLink({ href = "/", label }: BackLinkProps) {
         aria-hidden="true"
         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-hairline text-subtle transition-[color,border-color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-x-1 group-hover:border-accent-wash-border group-hover:text-accent-hover motion-reduce:transition-none"
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="size-4.5"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M5 12H19M5 12L11 6M5 12L11 18" />
-        </svg>
+        <ArrowIcon />
       </span>
       {label}
     </Link>

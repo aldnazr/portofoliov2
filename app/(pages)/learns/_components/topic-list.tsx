@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BackLink from "@/components/back-link";
 import type { LearnTopic } from "../_data/types";
+import { ArrowIcon } from "@/components/icons";
 
 type TopicCard = {
   id: LearnTopic;
@@ -112,7 +113,7 @@ export default function TopicList() {
                 aria-hidden="true"
                 className="font-mono text-sm text-accent-strong transition-transform duration-300 group-hover:translate-x-1"
               >
-                →
+                <ArrowIcon direction="right" />
               </span>
             </div>
           </Link>

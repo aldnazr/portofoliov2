@@ -7,6 +7,7 @@ import Reveal from "@/components/reveal";
 import BackgroundMesh from "@/components/background-mesh";
 import Breadcrumb from "@/components/breadcrumb";
 import { projects, getProjectBySlug, slugifyProject } from "@/data/projects";
+import { ArrowIcon } from "@/components/icons";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -282,7 +283,7 @@ export default async function ProjectDetailPage({
                   aria-hidden="true"
                   className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-hairline text-subtle transition-[color,border-color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-accent-wash-border group-hover:text-accent-hover group-hover:translate-x-1"
                 >
-                  →
+                  <ArrowIcon direction="right" />
                 </span>
               </Link>
             </div>
