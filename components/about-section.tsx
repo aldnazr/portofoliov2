@@ -13,7 +13,7 @@ export default function AboutSection() {
 
       <div className="p-1.5 rounded-4xl border border-hairline bg-overlay-faint">
         <div className="p-8 sm:p-10 rounded-[1.625rem] bg-surface border border-hairline-soft space-y-8">
-          <p className="text-base sm:text-lg tracking-tight text-foreground-soft leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-foreground-soft leading-relaxed font-normal">
             {profile.about}
           </p>
 

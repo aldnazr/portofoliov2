@@ -40,7 +40,7 @@ export default function ProjectCard({
             {item.name}
           </h3>
 
-          <p className="text-sm sm:text-base text-muted leading-relaxed">
+          <p className="text-sm sm:text-base text-muted tracking-tight leading-relaxed">
             {item.description}
           </p>
 

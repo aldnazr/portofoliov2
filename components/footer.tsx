@@ -46,7 +46,7 @@ const columns = [
 export default function Footer() {
   return (
     <footer className="relative z-10 border-t border-hairline-soft bg-background/50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-6 sm:pt-16 sm:pb-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
           {/* Kolom 1: identitas + social icon-only */}
           <div className="sm:col-span-2 md:col-span-1">
@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-hairline-soft pt-6 sm:mt-16 items-center justify-center flex">
-          <p className="text-sm text-subtle">
+          <p className="text-xs sm:text-sm text-center text-subtle">
             Copyright © {new Date().getFullYear()} {profile.name}. All rights
             reserved.
           </p>
