@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { profile } from "@/data/profile";
 import { Button } from "./button";
-import { GithubIcon, LinkedinIcon } from "./icons";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -169,22 +168,6 @@ export default function ContactSection() {
               </Button>
             </div>
           </form>
-
-          <div className="pt-8 border-t border-hairline-soft flex items-center justify-center gap-6">
-            {profile.socialLinks.map((link, i) => (
-              <a
-                key={i}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent font-mono transition-colors group"
-              >
-                {link.label === "GitHub" && <GithubIcon />}
-                {link.label === "LinkedIn" && <LinkedinIcon />}
-                <span>{link.label}</span>
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </section>

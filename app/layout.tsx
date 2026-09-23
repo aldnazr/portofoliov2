@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { siteDescription, siteTitle } from "@/data/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,9 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Muhammad Alauddin Azhary — Frontend Dev",
-  description:
-    "Portofolio Muhammad Alauddin Azhary, Frontend & Mobile Dev yang berpengalaman membangun aplikasi web maupun mobile.",
+  title: siteTitle,
+  description: siteDescription,
 };
 
 export const viewport: Viewport = {
