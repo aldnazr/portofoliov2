@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/footer";
+import BackLink from "@/components/back-link";
 import Reveal from "@/components/reveal";
 import BackgroundMesh from "@/components/background-mesh";
+import Breadcrumb from "@/components/breadcrumb";
 import { projects, getProjectBySlug, slugifyProject } from "@/data/projects";
 
 type ProjectDetailPageProps = {
@@ -78,19 +80,10 @@ export default async function ProjectDetailPage({
 
       {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
-        <Link
-          href="/#project"
-          aria-label="Kembali ke portofolio bagian proyek"
-          className="group inline-flex items-center gap-2.5 rounded-full border border-hairline bg-surface/60 px-4 py-2 text-xs font-medium text-foreground-soft shadow-2xs backdrop-blur-md transition-[color,background-color,border-color,transform,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-accent-wash-border hover:bg-accent-wash hover:text-foreground active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-        >
-          <span
-            aria-hidden="true"
-            className="inline-block font-mono text-sm text-subtle transition-[color,transform] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-x-1 group-hover:text-accent-strong"
-          >
-            ←
-          </span>
-          <span>Kembali ke Portofolio</span>
-        </Link>
+        <div className="mb-6 mt-2 sm:mt-8 space-y-10">
+          <Breadcrumb currentLabel={project.name} />
+          <BackLink href="/#project" label="Kembali ke Portofolio" />
+        </div>
 
         {/* Masthead */}
         <header className="relative mt-6 sm:mt-16">

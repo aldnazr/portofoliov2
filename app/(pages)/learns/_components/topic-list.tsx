@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BackLink from "@/components/back-link";
 import type { LearnTopic } from "../_data/types";
 
 type TopicCard = {
@@ -52,25 +53,10 @@ const topicCards: TopicCard[] = [
 
 export default function TopicList() {
   return (
-    <div className="space-y-10">
-      <Link
-        href="/"
-        aria-label="Kembali ke halaman utama portofolio"
-        className="group inline-flex items-center gap-2.5 rounded-full border border-hairline bg-surface/60 px-4 py-2 text-xs font-medium text-foreground-soft backdrop-blur-md transition-all duration-300 hover:border-accent-wash-border hover:bg-accent-wash hover:text-foreground active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      >
-        <span
-          aria-hidden="true"
-          className="inline-block font-mono text-sm text-subtle transition-all duration-300 group-hover:-translate-x-1 group-hover:text-accent-strong"
-        >
-          ←
-        </span>
-        <span>Kembali ke Portofolio</span>
-      </Link>
+    <div className="mt-2 sm:mt-8 space-y-10">
+      <BackLink href="/" label="Kembali ke Portofolio" />
 
       <header className="space-y-3">
-        <p className="px-3 py-1 max-w-fit rounded-full text-[10px] uppercase tracking-[0.2em] font-mono text-accent-strong border border-accent-wash-border bg-accent-wash">
-          Learning Lab
-        </p>
         <h1 className="text-3xl sm:text-4xl font-semibold text-foreground tracking-tight">
           Pilih Topik Pembelajaran
         </h1>

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import BackgroundMesh from "@/components/background-mesh";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import Breadcrumb from "@/components/breadcrumb";
 import ScrollToTop from "./scroll-to-top";
 
 type LearnPageShellProps = {
@@ -30,6 +31,9 @@ export default function LearnPageShell({
       <div
         className={`relative z-10 ${containerClassName} mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-24`}
       >
+        <div className="mb-6 sm:mb-8">
+          <Breadcrumb />
+        </div>
         {children}
       </div>
 

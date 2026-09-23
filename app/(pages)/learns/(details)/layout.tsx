@@ -1,8 +1,7 @@
 import type { ReactNode } from "react";
 import LearnPageShell from "../_components/learn-page-shell";
-import TopicNav from "../_components/topic-nav";
 
-/** Kerangka halaman detail topik: shell + tombol kembali ke daftar topik. */
+/** Kerangka halaman detail topik: shell + konten topik. */
 export default function LearnDetailsLayout({
   children,
 }: {
@@ -11,7 +10,6 @@ export default function LearnDetailsLayout({
   return (
     <LearnPageShell>
       <div className="space-y-8">
-        <TopicNav />
         {children}
       </div>
     </LearnPageShell>
