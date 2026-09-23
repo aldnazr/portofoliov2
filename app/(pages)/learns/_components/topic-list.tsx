@@ -27,7 +27,7 @@ const topicCards: TopicCard[] = [
       "Encapsulation",
       "Polymorphism",
     ],
-    href: "/learns?topic=paradigms",
+    href: "/learns/paradigms",
   },
   {
     id: "methods",
@@ -46,7 +46,7 @@ const topicCards: TopicCard[] = [
       "split",
       "join",
     ],
-    href: "/learns?topic=methods",
+    href: "/learns/methods",
   },
 ];
 

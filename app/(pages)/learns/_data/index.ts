@@ -1,4 +1,4 @@
-import type { LearnConcept, LearnTopic, MethodFilter, Paradigm } from "./types";
+import type { LearnConcept, MethodFilter, Paradigm } from "./types";
 import { functionalConcepts } from "./functional";
 import { oopConcepts } from "./oop";
 import { methodsConcepts } from "./methods";
@@ -36,19 +36,3 @@ export const methodFilterLabels: Record<MethodFilter, string> = {
   array: "Array",
   string: "String",
 };
-
-/** Validasi jenis method dari URL search param agar tetap aman. */
-export function parseMethodFilter(value: string | undefined): MethodFilter {
-  return value === "string" ? "string" : "array";
-}
-
-/** Validasi nilai dari URL search param agar tetap aman. */
-export function parseParadigm(value: string | undefined): Paradigm {
-  return value === "oop" ? "oop" : "functional";
-}
-
-/** Validasi nilai topik pembelajaran dari URL search param. */
-export function parseTopic(value: string | undefined): LearnTopic | null {
-  if (value === "paradigms" || value === "methods") return value;
-  return null;
-}

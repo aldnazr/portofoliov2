@@ -1,9 +1,7 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import type { LearnConcept, MethodFilter } from "../_data/types";
-import { parseMethodFilter } from "../_data";
 import CodeBlock from "./code-block";
 import MethodSwitcher from "./method-switcher";
 
@@ -11,41 +9,17 @@ type MethodsExplorerProps = {
   /** Seluruh snippet method sudah di-highlight di server dengan Shiki */
   highlighted: Record<string, string>;
   concepts: LearnConcept[];
-  /** Jenis method awal dari server (berdasarkan URL search param). */
-  initialKind: MethodFilter;
 };
 
 /**
  * Menampilkan materi methods dengan filter Array vs String:
- * state filter instan di client (highlight sudah tersedia), URL tetap
- * diperbarui supaya tautan bisa dibagikan — pola sama dengan LearnExplorer.
+ * state filter instan di client (highlight sudah tersedia), tanpa menyentuh URL.
  */
 export default function MethodsExplorer({
   highlighted,
   concepts,
-  initialKind,
 }: MethodsExplorerProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [kind, setKind] = useState<MethodFilter>(initialKind);
-
-  const selectKind = useCallback(
-    (next: MethodFilter) => {
-      if (next === kind) return;
-      setKind(next);
-      // Sinkronkan ke URL tanpa reload agar bisa di-share.
-      router.replace(`${pathname}?topic=methods&kind=${next}`, {
-        scroll: false,
-      });
-    },
-    [kind, pathname, router],
-  );
-
-  // Tangani navigasi browser (back/forward) atau perubahan URL dari luar.
-  useEffect(() => {
-    setKind(parseMethodFilter(searchParams.get("kind") ?? undefined));
-  }, [searchParams]);
+  const [kind, setKind] = useState<MethodFilter>("array");
 
   const visible = concepts.filter(
     (concept) => concept.kind === kind || concept.kind === "both",
@@ -59,7 +33,7 @@ export default function MethodsExplorer({
         className="hidden lg:block lg:w-56 lg:shrink-0"
       >
         <div className="sticky top-28 space-y-4">
-          <MethodSwitcher kind={kind} onChange={selectKind} />
+          <MethodSwitcher kind={kind} onChange={setKind} />
 
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong px-3">
             Daftar Method
@@ -91,7 +65,7 @@ export default function MethodsExplorer({
         className="flex-1 space-y-10 sm:space-y-12 min-w-0"
       >
         <header className="lg:hidden">
-          <MethodSwitcher kind={kind} onChange={selectKind} />
+          <MethodSwitcher kind={kind} onChange={setKind} />
         </header>
 
         {/* Navigasi horizontal di layar kecil/mobile */}

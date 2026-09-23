@@ -1,49 +1,24 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import type { LearnConcept, Paradigm } from "../_data/types";
-import { learnContent, parseParadigm } from "../_data";
+import { learnContent } from "../_data";
 import ParadigmSwitcher from "./paradigm-switcher";
 import CodeBlock from "./code-block";
 
 type HighlightedParadigm = Record<Paradigm, Record<string, string>>;
 
 type LearnExplorerProps = {
-  /** Paradigma awal dari server (berdasarkan URL search param). */
-  initialParadigm: Paradigm;
   /** Semua snippet sudah di-highlight di server, dikelompokkan per paradigma. */
   highlighted: HighlightedParadigm;
 };
 
 /**
  * Mengelola state paradigma di client: perpindahan antar tab instan karena
- * HTML highlight sudah disediakan dari server, sementara URL tetap diperbarui
- * supaya tautan bisa dibagikan.
+ * HTML highlight sudah disediakan dari server, tanpa menyentuh URL.
  */
-export default function LearnExplorer({
-  initialParadigm,
-  highlighted,
-}: LearnExplorerProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const [paradigm, setParadigm] = useState<Paradigm>(initialParadigm);
-
-  const selectParadigm = useCallback(
-    (next: Paradigm) => {
-      if (next === paradigm) return;
-      setParadigm(next);
-      // Sinkronkan ke URL tanpa reload agar bisa di-share.
-      router.replace(`${pathname}?topic=paradigms&paradigm=${next}`, { scroll: false });
-    },
-    [paradigm, pathname, router],
-  );
-
-  // Tangani navigasi browser (back/forward) atau perubahan URL dari luar.
-  useEffect(() => {
-    setParadigm(parseParadigm(searchParams.get("paradigm") ?? undefined));
-  }, [searchParams]);
+export default function LearnExplorer({ highlighted }: LearnExplorerProps) {
+  const [paradigm, setParadigm] = useState<Paradigm>("functional");
 
   const { label, tagline, concepts } = learnContent[paradigm];
 
@@ -55,7 +30,7 @@ export default function LearnExplorer({
         className="hidden lg:block lg:w-56 lg:shrink-0"
       >
         <div className="sticky top-28 space-y-4">
-          <ParadigmSwitcher paradigm={paradigm} onChange={selectParadigm} />
+          <ParadigmSwitcher paradigm={paradigm} onChange={setParadigm} />
 
           <div className="space-y-1">
             {concepts.map((concept) => (
@@ -73,7 +48,7 @@ export default function LearnExplorer({
         className="flex-1 space-y-8 min-w-0"
       >
         <header className="space-y-4 lg:hidden">
-          <ParadigmSwitcher paradigm={paradigm} onChange={selectParadigm} />
+          <ParadigmSwitcher paradigm={paradigm} onChange={setParadigm} />
         </header>
 
         <div className="space-y-3">
