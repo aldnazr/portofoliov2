@@ -5,9 +5,9 @@ export const profile = {
   location: "Bogor, Indonesia",
   availability: "Open to works",
   email: "alauddinazhary05@gmail.com",
-  hero: "Saya mengembangkan aplikasi web dan mobile dengan fokus pada fitur yang fungsional, responsif, dan mudah digunakan.",
+  hero: "Saya mengembangkan aplikasi web dan mobile dengan fokus pada fitur yang fungsional, responsif, dan kemudahan pengguna.",
   about:
-    "Saya seorang Frontend Developer yang berpengalaman membangun aplikasi web dan mobile. Saya senang menerjemahkan kebutuhan bisnis dan pengguna menjadi solusi digital yang sederhana, efisien, dan mudah digunakan. Dalam pengembangan, saya juga memperhatikan struktur kode yang rapi, performa aplikasi, serta kemudahan dalam pengembangan dan pemeliharaan.",
+    "Saya seorang Frontend & Mobile Developer yang berpengalaman menerjemahkan kebutuhan bisnis dan pengguna menjadi solusi digital yang sederhana dan mudah digunakan. Dalam pengembangan, saya juga memperhatikan struktur kode yang rapi, performa aplikasi, serta kemudahan dalam pengembangan dan pemeliharaan serta mengikiti best practice.",
   // skills: ["Mobile Development", "Frontend Development"],
   socialLinks: [
     { label: "GitHub", href: "https://github.com/aldnazr" },

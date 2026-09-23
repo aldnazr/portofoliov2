@@ -35,7 +35,7 @@ export default function HeroSection() {
             {profile.name}
           </span>
         </h1>
-        <p className="text-lg sm:text-xl text-muted font-normal leading-relaxed">
+        <p className="text-base sm:text-lg tracking-tight text-muted font-normal leading-relaxed">
           {profile.hero}
         </p>
       </div>
