@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Muhammad Alauddin Azhary — Software Engineer",
+  title: "Muhammad Alauddin Azhary — Frontend Dev",
   description:
-    "Portofolio Muhammad Alauddin Azhary, Software Engineer yang berfokus pada pengembangan aplikasi web maupun mobile end-to-end.",
+    "Portofolio Muhammad Alauddin Azhary, Frontend Dev yang berpengalaman membangun aplikasi web maupun mobile.",
 };
 
 export const viewport: Viewport = {
