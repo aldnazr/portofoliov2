@@ -67,7 +67,6 @@ export default async function LearnTopicPage({ params }: LearnTopicPageProps) {
     <>
       <BackLink href="/learns" label="Kembali ke Daftar Topik" />
       <TopicHeader title={topic.title} description={topic.description} />
-      {/* Highlight Shiki berjalan di server; shell tampil lebih dulu. */}
       <Suspense fallback={<ContentSkeleton />}>
         <TopicContent slug={slug} />
       </Suspense>
@@ -79,7 +78,9 @@ export default async function LearnTopicPage({ params }: LearnTopicPageProps) {
 async function TopicContent({ slug }: { slug: string }) {
   if (slug === "methods") {
     const highlighted = await highlightConcepts(methodsConcepts);
-    return <MethodsExplorer concepts={methodsConcepts} highlighted={highlighted} />;
+    return (
+      <MethodsExplorer concepts={methodsConcepts} highlighted={highlighted} />
+    );
   }
 
   const highlighted = Object.fromEntries(

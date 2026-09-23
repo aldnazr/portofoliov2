@@ -80,13 +80,13 @@ export default async function ProjectDetailPage({
 
       {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
-        <div className="mb-6 mt-2 sm:mt-8 space-y-10">
+        <div className="mt-2 sm:mt-8 space-y-8 sm:space-y-10">
           <Breadcrumb currentLabel={project.name} />
           <BackLink href="/#project" label="Kembali ke Portofolio" />
         </div>
 
         {/* Masthead */}
-        <header className="relative mt-6 sm:mt-16">
+        <header className="relative mt-6 sm:mt-14">
           <span
             aria-hidden="true"
             className="pointer-events-none absolute -top-4 right-0 select-none bg-linear-to-b from-overlay-strong via-overlay to-transparent bg-clip-text font-mono text-6xl sm:-top-12 sm:text-[10rem] font-bold leading-none text-transparent"
