@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { LearnConcept, Paradigm } from "../_data/types";
 import { learnContent } from "../_data";
 import ParadigmSwitcher from "./paradigm-switcher";
@@ -13,12 +13,17 @@ type LearnExplorerProps = {
   highlighted: HighlightedParadigm;
 };
 
-/**
- * Mengelola state paradigma di client: perpindahan antar tab instan karena
- * HTML highlight sudah disediakan dari server, tanpa menyentuh URL.
- */
+/** HTML highlight tersedia dari server, sehingga switch cukup memperbarui URL tanpa fetch ulang. */
 export default function LearnExplorer({ highlighted }: LearnExplorerProps) {
-  const [paradigm, setParadigm] = useState<Paradigm>("functional");
+  const searchParams = useSearchParams();
+  const paradigm: Paradigm =
+    searchParams.get("paradigm") === "oop" ? "oop" : "functional";
+
+  function handleParadigmChange(nextParadigm: Paradigm) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("paradigm", nextParadigm);
+    window.history.replaceState(null, "", url);
+  }
 
   const { label, tagline, concepts } = learnContent[paradigm];
 
@@ -30,7 +35,10 @@ export default function LearnExplorer({ highlighted }: LearnExplorerProps) {
         className="hidden lg:block lg:w-56 lg:shrink-0"
       >
         <div className="sticky top-28 space-y-4">
-          <ParadigmSwitcher paradigm={paradigm} onChange={setParadigm} />
+          <ParadigmSwitcher
+            paradigm={paradigm}
+            onChange={handleParadigmChange}
+          />
 
           <div className="space-y-1">
             {concepts.map((concept) => (
@@ -48,7 +56,10 @@ export default function LearnExplorer({ highlighted }: LearnExplorerProps) {
         className="flex-1 space-y-8 min-w-0"
       >
         <header className="space-y-4 lg:hidden">
-          <ParadigmSwitcher paradigm={paradigm} onChange={setParadigm} />
+          <ParadigmSwitcher
+            paradigm={paradigm}
+            onChange={handleParadigmChange}
+          />
         </header>
 
         <div className="space-y-3">

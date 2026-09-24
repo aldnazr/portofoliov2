@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { LearnConcept, MethodFilter } from "../_data/types";
 import CodeBlock from "./code-block";
 import MethodSwitcher from "./method-switcher";
@@ -14,7 +14,15 @@ export default function MethodsExplorer({
   highlighted,
   concepts,
 }: MethodsExplorerProps) {
-  const [kind, setKind] = useState<MethodFilter>("array");
+  const searchParams = useSearchParams();
+  const kind: MethodFilter =
+    searchParams.get("kind") === "string" ? "string" : "array";
+
+  function handleKindChange(nextKind: MethodFilter) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("kind", nextKind);
+    window.history.replaceState(null, "", url);
+  }
 
   const visible = concepts.filter(
     (concept) => concept.kind === kind || concept.kind === "both",
@@ -27,7 +35,7 @@ export default function MethodsExplorer({
         className="hidden lg:block lg:w-56 lg:shrink-0"
       >
         <div className="sticky top-28 space-y-4">
-          <MethodSwitcher kind={kind} onChange={setKind} />
+          <MethodSwitcher kind={kind} onChange={handleKindChange} />
 
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong px-3">
             Daftar Method
@@ -59,7 +67,7 @@ export default function MethodsExplorer({
         className="flex-1 space-y-10 sm:space-y-12 min-w-0"
       >
         <header className="lg:hidden">
-          <MethodSwitcher kind={kind} onChange={setKind} />
+          <MethodSwitcher kind={kind} onChange={handleKindChange} />
         </header>
 
         {/* Navigasi horizontal di layar kecil/mobile */}
