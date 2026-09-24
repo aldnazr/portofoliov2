@@ -6,7 +6,7 @@ export const methodsConcepts: LearnConcept[] = [
     kind: "array",
     title: "forEach",
     description:
-      "Mengeksekusi fungsi callback pada setiap elemen array secara berurutan. Method ini selalu mengembalikan undefined dan tidak dapat di-break atau di-continue. Gunakan forEach hanya untuk side-effect (seperti logging, menyimpan data, atau mutasi state luar), bukan untuk mentransformasi data.",
+      "Menjalankan perintah untuk setiap item di array secara berurutan. Method ini tidak menghasilkan array baru (hasil kembaliannya selalu undefined) dan tidak bisa dihentikan di tengah jalan. Cocok untuk aksi seperti mencetak log, kirim data ke API, atau mengubah data di luar array.",
     filename: "foreach.ts",
     code: `interface User {
   id: number;
@@ -38,7 +38,7 @@ console.log(result); // undefined
     kind: "array",
     title: "map",
     description:
-      "Mentransformasi setiap elemen array dengan memanggil callback function, lalu mengembalikan array baru dengan panjang yang sama persis tanpa memutasi array asli (immutable). Sangat ideal untuk ekstraksi field objek, formatting data, atau konversi tipe data.",
+      "Mengubah setiap item di dalam array menjadi format baru, lalu mengembalikannya sebagai array baru dengan jumlah item yang sama tanpa merusak array aslinya. Sangat pas untuk mengambil properti tertentu dari objek atau memformat tampilan data.",
     filename: "map.ts",
     code: `interface Product {
   id: string;
@@ -69,7 +69,7 @@ const viewModels = products.map((product) => ({
     kind: "array",
     title: "filter",
     description:
-      "Menyaring elemen array berdasarkan kondisi boolean (predicate function). Mengembalikan array baru yang hanya memuat elemen yang menghasilkan nilai true tanpa mengubah array sumber. Panjang array hasil bisa sama, lebih sedikit, atau kosong.",
+      "Menyaring item dalam array berdasarkan syarat tertentu. Hanya item yang lolos seleksi (bernilai benar/true) yang akan dimasukkan ke array baru, tanpa mengubah array aslinya.",
     filename: "filter.ts",
     code: `interface Task {
   id: number;
@@ -102,7 +102,7 @@ const truthyValues = rawValues.filter(Boolean);
     kind: "array",
     title: "reduce",
     description:
-      "Mengakumulasi seluruh elemen array menjadi satu nilai tunggal (angka, string, objek, atau array baru). Menerima fungsi (accumulator, current) => nextAccumulator dan nilai awal (initialValue). Sangat fleksibel untuk perhitungan total, pengelompokan data (grouping), atau flattening kustom.",
+      "Menggabungkan atau mengolah semua item dalam array menjadi satu nilai akhir (bisa berupa angka total, teks, objek kelompok, atau array lain). Menerima nilai awal dan rumus perhitungan untuk setiap langkahnya.",
     filename: "reduce.ts",
     code: `// 1. Menghitung total nominal belanja dari array objek
 const cart = [
@@ -145,7 +145,7 @@ const totalByCategory = expenses.reduce<Record<string, number>>(
     kind: "array",
     title: "flat",
     description:
-      "Meratakan (flatten) sub-array bersarang menjadi array baru satu dimensi hingga kedalaman tertentu (depth, default bernilai 1). Gunakan argumen Infinity untuk meratakan array berapapun dalamnya tingkat sarangnya, sekaligus menghapus celah kosong (sparse array).",
+      "Meratakan array bertingkat (array di dalam array) menjadi satu array datar. Secara bawaan hanya membuka 1 tingkat kedalaman, namun kamu bisa menentukan tingkat kedalaman atau memakai Infinity agar diratakan sampai tuntas. Sekaligus membersihkan slot kosong.",
     filename: "flat.ts",
     code: `// 1. Meratakan 1 level (default depth = 1)
 const matrix = [[1, 2], [3, 4], [5, 6]];
@@ -172,7 +172,7 @@ const cleaned = sparse.flat();
     kind: "array",
     title: "flatMap",
     description:
-      "Kombinasi efisien dari memanggil map() yang langsung dilanjutkan dengan flat(1). Memetakan setiap elemen lalu otomatis meratakan hasilnya satu level tanpa membuat array perantara di memori. Sangat berguna untuk mengekstrak array anak dari kumpulan objek atau melakukan filter + map dalam 1 langkah.",
+      "Gabungan langsung dari map() dan flat(1). Berguna saat kamu mengubah setiap item menjadi array kecil, lalu ingin langsung meratakannya jadi satu array tanpa perlu memanggil dua fungsi terpisah.",
     filename: "flatmap.ts",
     code: `interface Author {
   name: string;
@@ -201,7 +201,7 @@ const words = sentences.flatMap((s) => (s ? s.split(" ") : []));
     kind: "string",
     title: "split",
     description:
-      "Method milik String (String.prototype.split) yang membagi sebuah string menjadi array potongan kata/teks berdasarkan separator karakter atau Regular Expression yang ditentukan, dengan opsi limit jumlah item yang diambil.",
+      "Memotong teks (string) menjadi kumpulan potongan yang disimpan di dalam array, berdasarkan tanda pemisah seperti koma, spasi, atau karakter lainnya.",
     filename: "split.ts",
     code: `// 1. Memecah string data CSV dengan koma
 const csv = "TypeScript,React,Tailwind,Next.js";
@@ -229,7 +229,7 @@ const [root, ...rest] = path.split("/", 2);
     kind: "array",
     title: "join",
     description:
-      "Method milik Array (Array.prototype.join) yang menggabungkan seluruh elemen array menjadi sebuah string tunggal, disisipkan oleh separator pemisah yang ditentukan (default tanda koma ','). Merupakan kebalikan (inverse) dari split.",
+      "Kebalikan dari split. Menggabungkan seluruh isi array menjadi satu teks panjang dengan karakter penyambung yang bisa kamu tentukan sendiri (seperti tanda hubung, koma, atau spasi).",
     filename: "join.ts",
     code: `// 1. Menggabungkan array segmen path menjadi URL
 const pathSegments = ["users", "dewi", "settings"];
@@ -259,7 +259,7 @@ const slug = slugify("Panduan Praktis Belajar TypeScript Modern");
     kind: "both",
     title: "slice",
     description:
-      "Di TypeScript, slice memotong string atau array tanpa memutasi sumber, dengan index awal inklusif dan akhir eksklusif. Mendukung index negatif (dihitung dari akhir). Di Dart, gunakan List.sublist untuk mengambil bagian list sebagai list baru (salinan dangkal). Berbeda dari slice, sublist mensyaratkan 0 ≤ start ≤ end ≤ length; index negatif atau di luar batas menyebabkan RangeError.",
+      "Mengambil potongan dari teks atau array tanpa mengubah aslinya. Cukup tentukan indeks awal (ikut terambil) dan batas akhir (tidak ikut terambil). Di TypeScript, method ini juga mendukung indeks minus untuk menghitung posisi dari belakang.",
     filename: "slice.ts",
     code: `// === String.prototype.slice ===
 
@@ -290,11 +290,16 @@ const partial = colors.slice(1, 3);
 const copy = colors.slice();
 // ["red", "green", "blue", "yellow"]
 `,
-    examples: [
-      {
-        filename: "sublist.dart",
-        language: "dart",
-        code: `void main() {
+  },
+  {
+    id: "sublist",
+    kind: "array",
+    title: "sublist",
+    description:
+      "Di Dart, digunakan untuk mengambil potongan list menjadi list baru. Cukup tentukan indeks awal dan batas akhir (opsional, jika tidak diisi maka diambil sampai habis). Catatan: Dart tidak mendukung indeks minus, jadi nilai indeks harus valid agar tidak memicu error.",
+    filename: "sublist.dart",
+    language: "dart",
+    code: `void main() {
   final colors = <String>['red', 'green', 'blue', 'yellow'];
 
   // Index end tidak ikut diambil, sama seperti slice(1, 3).
@@ -319,15 +324,13 @@ const copy = colors.slice();
   // colors.sublist(0, 5); // RangeError: end > length.
 }
 `,
-      },
-    ],
   },
   {
     id: "substring",
     kind: "string",
     title: "substring",
     description:
-      "Di Dart, String.substring mengambil bagian string dengan index awal inklusif dan akhir eksklusif. Jika end tidak diberikan, potongan berlanjut sampai akhir string. Index wajib memenuhi 0 ≤ start ≤ end ≤ length; index negatif, di luar batas, atau start > end menyebabkan RangeError, bukan disesuaikan atau ditukar otomatis. Untuk contoh TypeScript, utamakan slice yang juga mendukung index negatif.",
+      "Di Dart, digunakan untuk mengambil sebagian potongan teks (string) dari indeks awal hingga batas akhir yang diinginkan. Mirip seperti sublist, indeks harus berada di dalam batas teks dan tidak mendukung angka minus.",
     filename: "substring.dart",
     language: "dart",
     code: `void main() {
