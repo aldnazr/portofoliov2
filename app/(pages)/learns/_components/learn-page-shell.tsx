@@ -3,7 +3,6 @@ import BackgroundMesh from "@/components/background-mesh";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import Breadcrumb from "@/components/breadcrumb";
-import ScrollToTop from "./scroll-to-top";
 
 type LearnPageShellProps = {
   children: ReactNode;
@@ -16,7 +15,7 @@ type LearnPageShellProps = {
 
 /**
  * Kerangka halaman learns: BackgroundMesh + Header + container +
- * ScrollToTop + Footer. Satu tempat untuk mengubah layout seluruh
+ * Footer. Satu tempat untuk mengubah layout seluruh
  * halaman di grup learns.
  */
 export default function LearnPageShell({
@@ -37,8 +36,8 @@ export default function LearnPageShell({
         {children}
       </div>
 
-      <ScrollToTop />
       <Footer />
     </div>
   );
 }
+

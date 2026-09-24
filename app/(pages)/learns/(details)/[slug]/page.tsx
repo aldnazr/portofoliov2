@@ -7,6 +7,7 @@ import ConceptExplorer, {
 } from "../../_components/concept-explorer";
 import { ContentSkeleton } from "../../_components/learn-skeleton";
 import NextTopicLink from "../../_components/next-topic-link";
+import ScrollToTop from "../../_components/scroll-to-top";
 import TopicHeader from "../../_components/topic-header";
 import {
   learnContent,
@@ -78,6 +79,7 @@ export default async function LearnTopicPage({ params }: LearnTopicPageProps) {
         <TopicContent slug={slug} />
       </Suspense>
       <NextTopicLink href={topic.next.href} title={topic.next.title} />
+      <ScrollToTop />
     </>
   );
 }
