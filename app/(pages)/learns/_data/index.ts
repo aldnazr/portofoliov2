@@ -29,10 +29,24 @@ export const learnContent: Record<
 
 export const paradigmIds = Object.keys(learnContent) as Paradigm[];
 
-/** Urutan tab filter method di topik methods. */
-export const methodFilterIds: MethodFilter[] = ["array", "string"];
+/** Opsi tab filter method di topik methods. */
+export const methodFilterOptions: { id: MethodFilter; label: string }[] = [
+  { id: "array", label: "Array" },
+  { id: "string", label: "String" },
+];
 
-export const methodFilterLabels: Record<MethodFilter, string> = {
-  array: "Array",
-  string: "String",
-};
+/** Label chip meta tiap konsep method (mis. `Array.prototype`, `String (Dart)`). */
+export function methodTypeLabel(concept: LearnConcept): string {
+  if (concept.language === "dart") {
+    return concept.kind === "string"
+      ? "String (Dart)"
+      : concept.kind === "both"
+        ? "String & List (Dart)"
+        : "List (Dart)";
+  }
+  return concept.kind === "string"
+    ? "String.prototype"
+    : concept.kind === "both"
+      ? "String & Array"
+      : "Array.prototype";
+}

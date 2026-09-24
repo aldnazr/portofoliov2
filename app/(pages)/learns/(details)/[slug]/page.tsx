@@ -2,14 +2,21 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import BackLink from "@/components/back-link";
-import LearnExplorer from "../../_components/learn-explorer";
-import MethodsExplorer from "../../_components/methods-explorer";
+import ConceptExplorer, {
+  type ExplorerGroup,
+} from "../../_components/concept-explorer";
 import { ContentSkeleton } from "../../_components/learn-skeleton";
 import NextTopicLink from "../../_components/next-topic-link";
 import TopicHeader from "../../_components/topic-header";
-import { learnContent, methodsConcepts, paradigmIds } from "../../_data";
+import {
+  learnContent,
+  methodFilterOptions,
+  methodTypeLabel,
+  methodsConcepts,
+  paradigmIds,
+} from "../../_data";
 import { highlightConcepts } from "../../_data/highlight";
-import type { LearnTopic, Paradigm } from "../../_data/types";
+import type { LearnTopic, MethodFilter, Paradigm } from "../../_data/types";
 
 type TopicMeta = {
   /** `h1` + description di bawah header. */
@@ -78,8 +85,29 @@ export default async function LearnTopicPage({ params }: LearnTopicPageProps) {
 async function TopicContent({ slug }: { slug: string }) {
   if (slug === "methods") {
     const highlighted = await highlightConcepts(methodsConcepts);
+    const filterConcepts = (kind: MethodFilter) =>
+      methodsConcepts.filter(
+        (concept) => concept.kind === kind || concept.kind === "both",
+      );
+    const groups: Record<MethodFilter, ExplorerGroup> = {
+      array: { concepts: filterConcepts("array"), highlighted },
+      string: { concepts: filterConcepts("string"), highlighted },
+    };
+
     return (
-      <MethodsExplorer concepts={methodsConcepts} highlighted={highlighted} />
+      <ConceptExplorer
+        idPrefix="method"
+        param="kind"
+        options={methodFilterOptions}
+        groups={groups}
+        titleWrap={{ prefix: ".", suffix: "()" }}
+        metaByConcept={Object.fromEntries(
+          methodsConcepts.map((concept) => [
+            concept.id,
+            methodTypeLabel(concept),
+          ]),
+        )}
+      />
     );
   }
 
@@ -92,5 +120,25 @@ async function TopicContent({ slug }: { slug: string }) {
     ),
   ) as Record<Paradigm, Record<string, string>>;
 
-  return <LearnExplorer highlighted={highlighted} />;
+  const groups = Object.fromEntries(
+    paradigmIds.map((paradigm) => [
+      paradigm,
+      {
+        eyebrow: `Paradigma ${learnContent[paradigm].label}`,
+        tagline: learnContent[paradigm].tagline,
+        concepts: learnContent[paradigm].concepts,
+        highlighted: highlighted[paradigm],
+        defaultLang: paradigm === "oop" ? "dart" : "ts",
+      },
+    ]),
+  ) as Record<Paradigm, ExplorerGroup>;
+
+  return (
+    <ConceptExplorer
+      idPrefix="paradigm"
+      param="paradigm"
+      options={paradigmIds.map((id) => ({ id, label: learnContent[id].label }))}
+      groups={groups}
+    />
+  );
 }
