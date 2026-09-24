@@ -57,7 +57,7 @@ export default function Footer() {
               {siteDescription}
             </p>
 
-            <ul className="mt-5 flex items-center gap-3">
+            <ul className="mt-5 flex items-center gap-2 md:gap-2.5">
               {profile.socialLinks.map((link) => (
                 <li key={link.label}>
                   <a

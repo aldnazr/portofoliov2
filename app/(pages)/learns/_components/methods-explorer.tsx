@@ -6,15 +6,10 @@ import CodeBlock from "./code-block";
 import MethodSwitcher from "./method-switcher";
 
 type MethodsExplorerProps = {
-  /** Seluruh snippet method sudah di-highlight di server dengan Shiki */
   highlighted: Record<string, string>;
   concepts: LearnConcept[];
 };
 
-/**
- * Menampilkan materi methods dengan filter Array vs String:
- * state filter instan di client (highlight sudah tersedia), tanpa menyentuh URL.
- */
 export default function MethodsExplorer({
   highlighted,
   concepts,
@@ -27,7 +22,6 @@ export default function MethodsExplorer({
 
   return (
     <div className="flex flex-col gap-10 lg:flex-row lg:gap-12">
-      {/* Sidebar navigasi anchor di desktop */}
       <nav
         aria-label="Daftar method manipulasi data"
         className="hidden lg:block lg:w-56 lg:shrink-0"
@@ -86,11 +80,13 @@ export default function MethodsExplorer({
 
         {visible.map((concept, index) => {
           const methodType =
-            concept.kind === "string"
-              ? "String.prototype"
-              : concept.kind === "both"
-                ? "String & Array"
-                : "Array.prototype";
+            concept.language === "dart" ?
+              concept.kind === "string" ? "String (Dart)"
+              : concept.kind === "both" ? "String & List (Dart)"
+              : "List (Dart)"
+            : concept.kind === "string" ? "String.prototype"
+            : concept.kind === "both" ? "String & Array"
+            : "Array.prototype";
 
           return (
             <section
@@ -122,8 +118,19 @@ export default function MethodsExplorer({
                 highlightedHtml={highlighted[concept.id]}
                 code={concept.code}
                 filename={concept.filename}
-                lang="ts"
+                lang={concept.language ?? "ts"}
               />
+              {concept.examples?.map((example, index) => (
+                <CodeBlock
+                  key={`${concept.id}-example-${index + 1}`}
+                  highlightedHtml={
+                    highlighted[`${concept.id}-example-${index + 1}`]
+                  }
+                  code={example.code}
+                  filename={example.filename}
+                  lang={example.language ?? "ts"}
+                />
+              ))}
             </section>
           );
         })}

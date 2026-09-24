@@ -259,7 +259,7 @@ const slug = slugify("Panduan Praktis Belajar TypeScript Modern");
     kind: "both",
     title: "slice",
     description:
-      "Memotong bagian dari string atau array berdasarkan index awal dan akhir (end eksklusif) tanpa memutasi sumber. Mendukung index negatif (dihitung dari akhir). Mengembalikan string baru untuk String.prototype.slice dan array baru untuk Array.prototype.slice.",
+      "Di TypeScript, slice memotong string atau array tanpa memutasi sumber, dengan index awal inklusif dan akhir eksklusif. Mendukung index negatif (dihitung dari akhir). Di Dart, gunakan List.sublist untuk mengambil bagian list sebagai list baru (salinan dangkal). Berbeda dari slice, sublist mensyaratkan 0 ≤ start ≤ end ≤ length; index negatif atau di luar batas menyebabkan RangeError.",
     filename: "slice.ts",
     code: `// === String.prototype.slice ===
 
@@ -276,7 +276,7 @@ const lastWord = fullName.slice(-7);
 // 3. Potong teks panjang untuk preview UI
 const excerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 const short = excerpt.slice(0, 30) + "...";
-// "Lorem ipsum dolor sit amet, conse..."
+// "Lorem ipsum dolor sit amet, con..."
 
 // === Array.prototype.slice ===
 
@@ -290,35 +290,72 @@ const partial = colors.slice(1, 3);
 const copy = colors.slice();
 // ["red", "green", "blue", "yellow"]
 `,
+    examples: [
+      {
+        filename: "sublist.dart",
+        language: "dart",
+        code: `void main() {
+  final colors = <String>['red', 'green', 'blue', 'yellow'];
+
+  // Index end tidak ikut diambil, sama seperti slice(1, 3).
+  final partial = colors.sublist(1, 3);
+  print(partial); // [green, blue]
+
+  // Tanpa end, potongan mencakup sisa list.
+  print(colors.sublist(2)); // [blue, yellow]
+
+  // Dart tidak mendukung index negatif; hitung dari length.
+  print(colors.sublist(colors.length - 2)); // [blue, yellow]
+
+  // sublist(0) menyalin seluruh list, tetapi bukan deep copy.
+  final copy = colors.sublist(0);
+  copy[0] = 'purple';
+  print(copy); // [purple, green, blue, yellow]
+  print(colors); // [red, green, blue, yellow]
+
+  print(colors.sublist(2, 2)); // []
+  // colors.sublist(-2); // RangeError: start negatif.
+  // colors.sublist(3, 1); // RangeError: start > end.
+  // colors.sublist(0, 5); // RangeError: end > length.
+}
+`,
+      },
+    ],
   },
   {
     id: "substring",
     kind: "string",
     title: "substring",
     description:
-      "Method milik String (String.prototype.substring) yang memotong substring berdasarkan index awal dan akhir (end eksklusif). Tidak mendukung index negatif (dianggap 0) dan otomatis menukar argumen jika start > end. Gunakan slice jika butuh index negatif.",
-    filename: "substring.ts",
-    code: `const email = "rizky@example.com";
+      "Di Dart, String.substring mengambil bagian string dengan index awal inklusif dan akhir eksklusif. Jika end tidak diberikan, potongan berlanjut sampai akhir string. Index wajib memenuhi 0 ≤ start ≤ end ≤ length; index negatif, di luar batas, atau start > end menyebabkan RangeError, bukan disesuaikan atau ditukar otomatis. Untuk contoh TypeScript, utamakan slice yang juga mendukung index negatif.",
+    filename: "substring.dart",
+    language: "dart",
+    code: `void main() {
+  const email = 'rizky@example.com';
+  final atIndex = email.indexOf('@');
 
-// 1. Ambil nama pengguna (bagian sebelum @)
-const username = email.substring(0, email.indexOf("@"));
-// "rizky"
+  // Index @ menjadi batas akhir sehingga tidak ikut diambil.
+  final username = email.substring(0, atIndex);
+  print(username); // rizky
 
-// 2. Ambil domain (bagian setelah @)
-const domain = email.substring(email.indexOf("@") + 1);
-// "example.com"
+  // Tanpa end, potongan berlanjut sampai akhir string.
+  final domain = email.substring(atIndex + 1);
+  print(domain); // example.com
 
-// 3. Argumen end boleh dilepas (sisa string sampai akhir)
-const fileType = "laporan-2026.pdf";
-const extension = fileType.substring(fileType.lastIndexOf("."));
-// ".pdf"
+  const fileName = 'laporan-2026.pdf';
+  final extension = fileName.substring(fileName.lastIndexOf('.'));
+  print(extension); // .pdf
 
-// 4. start > end otomatis ditukar (tidak error)
-console.log("TypeScript".substring(4, 0)); // "Type"
+  const text = 'Dart';
+  print(text.substring(0, 2)); // Da
+  print(text.substring(text.length - 2)); // rt
+  print(text.substring(2, 2)); // String kosong.
 
-// 5. Index negatif dianggap 0, berbeda dgn slice
-console.log("TypeScript".substring(-3)); // "TypeScript" (utuh)
-console.log("TypeScript".slice(-3));     // "ipt"
+  // Dart menolak batas tidak valid, bukan menyesuaikan argumennya.
+  // text.substring(-1); // RangeError: start negatif.
+  // text.substring(3, 1); // RangeError: start > end.
+  // text.substring(0, 5); // RangeError: end > length.
+}
 `,
   },
 ];

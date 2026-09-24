@@ -19,13 +19,15 @@ export async function highlightConcepts(
   const highlighter = await highlighterPromise;
 
   return Object.fromEntries(
-    concepts.map((concept) => [
-      concept.id,
-      highlighter.codeToHtml(concept.code.trim(), {
-        lang: concept.language ?? (paradigm === "oop" ? "dart" : "typescript"),
-        themes: { light: "github-light", dark: "github-dark" },
-        defaultColor: "light-dark()",
-      }),
-    ]),
+    concepts.flatMap((concept) =>
+      [concept, ...(concept.examples ?? [])].map((example, index) => [
+        index === 0 ? concept.id : `${concept.id}-example-${index}`,
+        highlighter.codeToHtml(example.code.trim(), {
+          lang: example.language ?? (paradigm === "oop" ? "dart" : "typescript"),
+          themes: { light: "github-light", dark: "github-dark" },
+          defaultColor: "light-dark()",
+        }),
+      ]),
+    ),
   );
 }
