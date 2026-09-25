@@ -1,6 +1,6 @@
 export const experience = [
   {
-    period: "Oktober 2025 — Agustus 2026",
+    period: "Oktober 2025 — September 2026",
     title: "Fullstack & Mobile Developer",
     company: "PT. Shidiq Membangun Indonesia",
     description:
