@@ -98,6 +98,46 @@ const truthyValues = rawValues.filter(Boolean);
 `,
   },
   {
+    id: "find",
+    kind: "array",
+    title: "find",
+    description:
+      "Mencari satu item pertama dalam array yang cocok dengan syarat yang kamu tentukan. Hasilnya langsung berupa item tersebut (bukan array baru), atau undefined jika tidak ada yang cocok. Cocok untuk mengambil satu data spesifik, misalnya mencari user berdasarkan id.",
+    filename: "find.ts",
+    code: `interface User {
+  id: number;
+  name: string;
+  isActive: boolean;
+}
+
+const users: User[] = [
+  { id: 1, name: "Andi", isActive: true },
+  { id: 2, name: "Budi", isActive: false },
+  { id: 3, name: "Citra", isActive: true },
+];
+
+// 1. Cari satu user berdasarkan id
+const target = users.find((user) => user.id === 2);
+// { id: 2, name: "Budi", isActive: false }
+
+// 2. Hasilnya bisa undefined, jadi selalu periksa sebelum dipakai
+if (target) {
+  console.log(\`Ketemu: \${target.name}\`);
+} else {
+  console.log("Data tidak ditemukan");
+}
+
+// 3. Pola umum: cari + pakai optional chaining (?.)
+const nameById = users.find((user) => user.id === 99)?.name;
+// undefined (id 99 tidak ada)
+
+// 4. Beda dengan filter: find berhenti di item pertama yang cocok
+//    filter mengumpulkan SEMUA yang cocok ke array baru
+const firstActive = users.find((user) => user.isActive); // 1 objek User
+const allActive = users.filter((user) => user.isActive); // array berisi 2 User
+`,
+  },
+  {
     id: "reduce",
     kind: "array",
     title: "reduce",
