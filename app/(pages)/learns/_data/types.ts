@@ -2,8 +2,8 @@ export type Paradigm = "functional" | "oop";
 export type LearnTopic = "paradigms" | "methods";
 
 /** Jenis method untuk filter di topik methods. */
-export type MethodFilter = "array" | "string";
-/** Kepemilikan method: Array/List, String, atau keduanya. */
+export type MethodFilter = "array" | "string" | "set";
+/** Kepemilikan method: Array/List, String, Set, atau keduanya. */
 export type MethodKind = MethodFilter | "both";
 
 export type LearnCodeExample = {

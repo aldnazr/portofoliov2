@@ -33,6 +33,7 @@ export const paradigmIds = Object.keys(learnContent) as Paradigm[];
 export const methodFilterOptions: { id: MethodFilter; label: string }[] = [
   { id: "array", label: "Array" },
   { id: "string", label: "String" },
+  { id: "set", label: "Set" },
 ];
 
 /** Label chip meta tiap konsep method (mis. `Array.prototype`, `String (Dart)`). */
@@ -46,7 +47,9 @@ export function methodTypeLabel(concept: LearnConcept): string {
   }
   return concept.kind === "string"
     ? "String.prototype"
-    : concept.kind === "both"
-      ? "String & Array"
-      : "Array.prototype";
+    : concept.kind === "set"
+      ? "Set.prototype"
+      : concept.kind === "both"
+        ? "String & Array"
+        : "Array.prototype";
 }

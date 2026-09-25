@@ -94,6 +94,7 @@ async function TopicContent({ slug }: { slug: string }) {
     const groups: Record<MethodFilter, ExplorerGroup> = {
       array: { concepts: filterConcepts("array"), highlighted },
       string: { concepts: filterConcepts("string"), highlighted },
+      set: { concepts: filterConcepts("set"), highlighted },
     };
 
     return (

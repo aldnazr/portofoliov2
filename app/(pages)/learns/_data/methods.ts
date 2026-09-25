@@ -401,4 +401,40 @@ const copy = colors.slice();
 }
 `,
   },
+  {
+    id: "has",
+    kind: "set",
+    title: "has",
+    description:
+      "Mengecek apakah sebuah nilai sudah ada di dalam Set. Hasilnya berupa true jika ketemu, atau false jika tidak. Pencariannya sangat cepat dan tidak peduli seberapa besar Set-nya, jadi cocok untuk memeriksa duplikat atau keanggotaan data tanpa harus menelusuri satu per satu seperti pada array.",
+    filename: "has.ts",
+    code: `const tags = new Set(["typescript", "react", "nextjs"]);
+
+// 1. Cek apakah nilai ada di dalam Set
+console.log(tags.has("react")); // true
+console.log(tags.has("vue"));   // false
+
+// 2. Praktis untuk mencegah duplikat saat menambah data
+function addTag(tag: string) {
+  if (tags.has(tag)) {
+    console.log(\`"\${tag}" sudah ada, dilewati\`);
+    return;
+  }
+  tags.add(tag);
+}
+
+addTag("react"); // "react" sudah ada, dilewati
+addTag("vue");   // ditambahkan
+
+// 3. Pengecekan pakai aturan SameValueZero:
+//    NaN dianggap sama dengan NaN (berbeda dari ===)
+const numbers = new Set([NaN, 0]);
+console.log(numbers.has(NaN)); // true
+
+// 4. Untuk objek/array, pengecekan berdasarkan REFERENSI, bukan isi
+const users = new Set([{ id: 1 }]);
+const user = { id: 1 };
+console.log(users.has(user)); // false (beda referensi objek)
+`,
+  },
 ];
