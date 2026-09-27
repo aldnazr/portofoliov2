@@ -237,6 +237,66 @@ const words = sentences.flatMap((s) => (s ? s.split(" ") : []));
 `,
   },
   {
+    id: "sort",
+    kind: "array",
+    title: "sort",
+    description:
+      "Mengurutkan isi array dari yang terkecil ke yang terbesar, atau sebaliknya. Cara kerjanya: dua item dibandingkan satu per satu, lalu kamu tentukan mana yang harus muncul lebih dulu. Untuk angka selalu tulis selisihnya (a - b), sedangkan teks cukup ditulis apa adanya. Perhatian: sort mengubah array aslinya, jadi pakai [...array] lebih dulu bila array lama harus tetap aman.",
+    filename: "sort.ts",
+    code: `const nilai = [72, 95, 40, 88];
+
+// 1. Urut dari yang paling kecil
+const kecil = [...nilai].sort((a, b) => a - b);
+// [40, 72, 88, 95]
+
+// 2. Urut dari yang paling besar, cukup tuker a dan b
+const besar = [...nilai].sort((a, b) => b - a);
+// [95, 88, 72, 40]
+
+// 3. Mengurutkan teks: huruf pertama jadi patokan otomatis
+const buah = ["mangga", "apel", "jeruk"];
+const buahAwal = [...buah].sort();
+// ["apel", "jeruk", "mangga"]
+
+// 4. PENTING: sort mengubah array aslinya.
+//    Tanpa [...nilai], isi nilai ikut berubah dan ikut terurut.
+nilai.sort();
+console.log(nilai); // [40, 72, 88, 95]  <- array asli ikut berubah
+console.log(kecil);  // [40, 72, 88, 95]  <- salinan aman, tidak terpengaruh
+
+// 5. Tanpa fungsi pembanding, angka dibaca sebagai teks
+//    sehingga 10 dianggap lebih kecil dari 9.
+console.log([9, 10].sort());                // [10, 9]
+console.log([9, 10].sort((a, b) => a - b)); // [9, 10]
+
+// 6. Mengurutkan objek: sort biasa tidak bisa dipakai,
+//    jadi pembanding menulis property mana yang dipakai.
+const nilaiSiswa = [
+  { nama: "Andi", nilai: 72 },
+  { nama: "Budi", nilai: 95 },
+  { nama: "Citra", nilai: 40 },
+  { nama: "Dewi", nilai: 88 },
+];
+
+const urutNilai = [...nilaiSiswa].sort((a, b) => b.nilai - a.nilai);
+// urut nama: Budi, Dewi, Andi, Citra (nilai 95, 88, 72, 40)
+
+// 7. Mengurutkan teks dengan benar: pakai localeCompare, bukan > atau <.
+//    Huruf besar-kecil dan tanda baca diabaikan, aturan bahasa ikut dipakai.
+const negara = [
+  { key: "Nusantara", value: "id-ID" },
+  { key: "Eire", value: "ga-IE" },
+  { key: "amerika", value: "en-US" },
+  { key: "Brasil", value: "pt-BR" },
+];
+
+const urutNegara = [...negara].sort((first, second) =>
+  first.key.localeCompare(second.key)
+);
+// key: amerika, Brasil, Eire, Nusantara
+`,
+  },
+  {
     id: "split",
     kind: "string",
     title: "split",
