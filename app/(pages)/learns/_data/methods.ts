@@ -296,16 +296,13 @@ const slug = slugify("Panduan Praktis Belajar TypeScript Modern");
   },
   {
     id: "slice",
-    kind: "both",
+    kind: "string",
     title: "slice",
     description:
-      "Mengambil potongan dari teks atau array tanpa mengubah aslinya. Cukup tentukan indeks awal (ikut terambil) dan batas akhir (tidak ikut terambil). Di TypeScript, method ini juga mendukung indeks minus untuk menghitung posisi dari belakang.",
+      "Mengambil potongan teks tanpa mengubah aslinya. Cukup tentukan indeks awal (ikut terambil) dan batas akhir (tidak ikut terambil). Indeks minus dihitung dari belakang, jadi slice(-7) mengambil 7 karakter terakhir. Pola yang paling sering dipakai adalah memisahkan teks sebelum dan sesudah suatu tanda, misalnya titik.",
     filename: "slice.ts",
-    code: `// === String.prototype.slice ===
-
+    code: `// 1. Potongan berdasarkan index [start, end)
 const fullName = "Rizky Pratama";
-
-// 1. Potongan berdasarkan index [start, end)
 const first = fullName.slice(0, 5);
 // "Rizky"
 
@@ -315,20 +312,50 @@ const lastWord = fullName.slice(-7);
 
 // 3. Potong teks panjang untuk preview UI
 const excerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-const short = excerpt.slice(0, 30) + "...";
+const short = excerpt.slice(0, 31) + "...";
 // "Lorem ipsum dolor sit amet, con..."
 
-// === Array.prototype.slice ===
+// 4. Mengambil SESUDAH tanda titik: mulai dari posisi tanda + 1 sampai akhir string
+const roomName = "ruang-kelas.dev";
+const domain = roomName.slice(roomName.indexOf(".") + 1);
+// "dev"
 
-const colors = ["red", "green", "blue", "yellow"];
+// 5. Mengambil SEBELUM tanda titik: ujung string dibatasi pada posisi tanda
+const result = roomName.slice(0, roomName.indexOf("."));
+// "ruang-kelas"
 
-// 4. Salin sebagian array tanpa memutasi asli (immutable)
+// 6. Extension file: pakai lastIndexOf karena titik bisa muncul lebih dari satu
+const fileName = "laporan-2026.v2.pdf";
+const ext = fileName.slice(fileName.lastIndexOf("."));
+// ".pdf"
+
+// 7. PENTING: indexOf() mengembalikan -1 kalau tanda tidak ditemukan,
+//    sehingga slice(0, -1) justru membuang 1 karakter terakhir.
+const noDot = "ruangkelas";
+const safe = noDot.slice(0, noDot.indexOf("."));
+// "ruangkela" -- bukan "ruangkelas"!
+`,
+  },
+  {
+    id: "slice-array",
+    kind: "array",
+    title: "slice",
+    description:
+      "Menyalin sebagian array menjadi array baru tanpa memutasi aslinya, jadi aman untuk immutable update. Indeks awal ikut terambil, indeks akhir tidak ikut. Batas yang melebihi panjang array tidak memicu error, potongannya berhenti di akhir.",
+    filename: "slice-array.ts",
+    code: `const colors = ["red", "green", "blue", "yellow"];
+
+// 1. Salin sebagian array tanpa memutasi asli (immutable)
 const partial = colors.slice(1, 3);
 // ["green", "blue"]
 
-// 5. Salin penuh array (kloning dangkal)
+// 2. Salin penuh array (kloning dangkal)
 const copy = colors.slice();
 // ["red", "green", "blue", "yellow"]
+
+// 3. Batas melebihi panjang array tetap aman, tidak error
+const tail = colors.slice(2, 99);
+// ["blue", "yellow"]
 `,
   },
   {
@@ -388,6 +415,11 @@ const copy = colors.slice();
   const fileName = 'laporan-2026.pdf';
   final extension = fileName.substring(fileName.lastIndexOf('.'));
   print(extension); // .pdf
+
+  // Mengambil teks sebelum dan sesudah tanda titik.
+  const roomName = 'ruang-kelas.dev';
+  print(roomName.substring(0, roomName.indexOf('.')));  // ruang-kelas
+  print(roomName.substring(roomName.indexOf('.') + 1)); // dev
 
   const text = 'Dart';
   print(text.substring(0, 2)); // Da

@@ -39,17 +39,11 @@ export const methodFilterOptions: { id: MethodFilter; label: string }[] = [
 /** Label chip meta tiap konsep method (mis. `Array.prototype`, `String (Dart)`). */
 export function methodTypeLabel(concept: LearnConcept): string {
   if (concept.language === "dart") {
-    return concept.kind === "string"
-      ? "String (Dart)"
-      : concept.kind === "both"
-        ? "String & List (Dart)"
-        : "List (Dart)";
+    return concept.kind === "string" ? "String (Dart)" : "List (Dart)";
   }
   return concept.kind === "string"
     ? "String.prototype"
     : concept.kind === "set"
       ? "Set.prototype"
-      : concept.kind === "both"
-        ? "String & Array"
-        : "Array.prototype";
+      : "Array.prototype";
 }

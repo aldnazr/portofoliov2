@@ -88,9 +88,7 @@ async function TopicContent({ slug }: { slug: string }) {
   if (slug === "methods") {
     const highlighted = await highlightConcepts(methodsConcepts);
     const filterConcepts = (kind: MethodFilter) =>
-      methodsConcepts.filter(
-        (concept) => concept.kind === kind || concept.kind === "both",
-      );
+      methodsConcepts.filter((concept) => concept.kind === kind);
     const groups: Record<MethodFilter, ExplorerGroup> = {
       array: { concepts: filterConcepts("array"), highlighted },
       string: { concepts: filterConcepts("string"), highlighted },
