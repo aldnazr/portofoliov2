@@ -116,22 +116,15 @@ const users: User[] = [
   { id: 3, name: "Citra", isActive: true },
 ];
 
-// 1. Cari satu user berdasarkan id
+// 1. Cari satu item pertama yang cocok (hasilnya objek, bukan array)
 const target = users.find((user) => user.id === 2);
 // { id: 2, name: "Budi", isActive: false }
 
-// 2. Hasilnya bisa undefined, jadi selalu periksa sebelum dipakai
-if (target) {
-  console.log(\`Ketemu: \${target.name}\`);
-} else {
-  console.log("Data tidak ditemukan");
-}
-
-// 3. Pola umum: cari + pakai optional chaining (?.)
+// 2. Hasil bisa undefined; cek dulu atau pakai optional chaining (?.)
 const nameById = users.find((user) => user.id === 99)?.name;
 // undefined (id 99 tidak ada)
 
-// 4. Beda dengan filter: find berhenti di item pertama yang cocok
+// 3. Beda dengan filter: find berhenti di item pertama yang cocok,
 //    filter mengumpulkan SEMUA yang cocok ke array baru
 const firstActive = users.find((user) => user.isActive); // 1 objek User
 const allActive = users.filter((user) => user.isActive); // array berisi 2 User
@@ -192,12 +185,8 @@ const matrix = [[1, 2], [3, 4], [5, 6]];
 const flattened = matrix.flat();
 // [1, 2, 3, 4, 5, 6]
 
-// 2. Meratakan array bersarang banyak level (multi-level nesting)
+// 2. Meratakan sampai tuntas, berapapun kedalamannya
 const nestedNumbers = [1, [2, [3, [4, [5]]]]];
-
-const depthTwo = nestedNumbers.flat(2);
-// [1, 2, 3, [4, [5]]]
-
 const completelyFlat = nestedNumbers.flat(Infinity);
 // [1, 2, 3, 4, 5]
 
@@ -245,55 +234,24 @@ const words = sentences.flatMap((s) => (s ? s.split(" ") : []));
     filename: "sort.ts",
     code: `const nilai = [72, 95, 40, 88];
 
-// 1. Urut dari yang paling kecil
+// 1. Urut kecil ke besar: angka WAJIB pakai selisih (a - b)
 const kecil = [...nilai].sort((a, b) => a - b);
 // [40, 72, 88, 95]
 
-// 2. Urut dari yang paling besar, cukup tuker a dan b
+// 2. Urut besar ke kecil: cukup tukar jadi (b - a)
 const besar = [...nilai].sort((a, b) => b - a);
 // [95, 88, 72, 40]
 
-// 3. Mengurutkan teks: huruf pertama jadi patokan otomatis
-const buah = ["mangga", "apel", "jeruk"];
-const buahAwal = [...buah].sort();
-// ["apel", "jeruk", "mangga"]
-
-// 4. PENTING: sort mengubah array aslinya.
-//    Tanpa [...nilai], isi nilai ikut berubah dan ikut terurut.
-nilai.sort();
-console.log(nilai); // [40, 72, 88, 95]  <- array asli ikut berubah
-console.log(kecil);  // [40, 72, 88, 95]  <- salinan aman, tidak terpengaruh
-
-// 5. Tanpa fungsi pembanding, angka dibaca sebagai teks
-//    sehingga 10 dianggap lebih kecil dari 9.
-console.log([9, 10].sort());                // [10, 9]
-console.log([9, 10].sort((a, b) => a - b)); // [9, 10]
-
-// 6. Mengurutkan objek: sort biasa tidak bisa dipakai,
-//    jadi pembanding menulis property mana yang dipakai.
+// 3. PENTING: sort mengubah array asli, salin dulu dengan [...array].
+//    Untuk objek, tentukan property yang dipakai sebagai pembanding.
 const nilaiSiswa = [
   { nama: "Andi", nilai: 72 },
   { nama: "Budi", nilai: 95 },
   { nama: "Citra", nilai: 40 },
-  { nama: "Dewi", nilai: 88 },
 ];
 
 const urutNilai = [...nilaiSiswa].sort((a, b) => b.nilai - a.nilai);
-// urut nama: Budi, Dewi, Andi, Citra (nilai 95, 88, 72, 40)
-
-// 7. Mengurutkan teks dengan benar: pakai localeCompare, bukan > atau <.
-//    Huruf besar-kecil dan tanda baca diabaikan, aturan bahasa ikut dipakai.
-const negara = [
-  { key: "Nusantara", value: "id-ID" },
-  { key: "Eire", value: "ga-IE" },
-  { key: "amerika", value: "en-US" },
-  { key: "Brasil", value: "pt-BR" },
-];
-
-const urutNegara = [...negara].sort((first, second) =>
-  first.key.localeCompare(second.key)
-);
-// key: amerika, Brasil, Eire, Nusantara
+// Budi (95), Andi (72), Citra (40)
 `,
   },
   {
@@ -304,24 +262,19 @@ const urutNegara = [...negara].sort((first, second) =>
       "Memotong teks (string) menjadi kumpulan potongan yang disimpan di dalam array, berdasarkan tanda pemisah seperti koma, spasi, atau karakter lainnya.",
     filename: "split.ts",
     code: `// 1. Memecah string data CSV dengan koma
-const csv = "TypeScript,React,Tailwind,Next.js";
+const csv = "TypeScript,React,Tailwind";
 const stack = csv.split(",");
-// ["TypeScript", "React", "Tailwind", "Next.js"]
+// ["TypeScript", "React", "Tailwind"]
 
 // 2. Memecah kalimat menjadi array kata dengan spasi
 const phrase = "Stay hungry stay foolish";
 const words = phrase.split(" ");
 // ["Stay", "hungry", "stay", "foolish"]
 
-// 3. Memecah string menggunakan Regular Expression
+// 3. Memecah string sesuai pemisah yang dipakai datanya (query string)
 const query = "tag=frontend&sort=recent&limit=10";
 const pairs = query.split("&");
 // ["tag=frontend", "sort=recent", "limit=10"]
-
-// 4. Memecah dengan batas limit jumlah elemen
-const path = "blog/frontend/2026/artikel-baru";
-const [root, ...rest] = path.split("/", 2);
-// root: "blog", rest: ["frontend"]
 `,
   },
   {
@@ -361,8 +314,9 @@ const slug = slugify("Panduan Praktis Belajar TypeScript Modern");
     description:
       "Mengambil potongan teks tanpa mengubah aslinya. Cukup tentukan indeks awal (ikut terambil) dan batas akhir (tidak ikut terambil). Indeks minus dihitung dari belakang, jadi slice(-7) mengambil 7 karakter terakhir. Pola yang paling sering dipakai adalah memisahkan teks sebelum dan sesudah suatu tanda, misalnya titik.",
     filename: "slice.ts",
-    code: `// 1. Potongan berdasarkan index [start, end)
-const fullName = "Rizky Pratama";
+    code: `const fullName = "Rizky Pratama";
+
+// 1. Potongan berdasarkan index [start, end)
 const first = fullName.slice(0, 5);
 // "Rizky"
 
@@ -370,30 +324,11 @@ const first = fullName.slice(0, 5);
 const lastWord = fullName.slice(-7);
 // "Pratama"
 
-// 3. Potong teks panjang untuk preview UI
-const excerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
-const short = excerpt.slice(0, 31) + "...";
-// "Lorem ipsum dolor sit amet, con..."
-
-// 4. Mengambil SESUDAH tanda titik: mulai dari posisi tanda + 1 sampai akhir string
+// 3. Pola paling umum: ambil teks sebelum & sesudah suatu tanda
 const roomName = "ruang-kelas.dev";
-const domain = roomName.slice(roomName.indexOf(".") + 1);
-// "dev"
-
-// 5. Mengambil SEBELUM tanda titik: ujung string dibatasi pada posisi tanda
-const result = roomName.slice(0, roomName.indexOf("."));
-// "ruang-kelas"
-
-// 6. Extension file: pakai lastIndexOf karena titik bisa muncul lebih dari satu
-const fileName = "laporan-2026.v2.pdf";
-const ext = fileName.slice(fileName.lastIndexOf("."));
-// ".pdf"
-
-// 7. PENTING: indexOf() mengembalikan -1 kalau tanda tidak ditemukan,
-//    sehingga slice(0, -1) justru membuang 1 karakter terakhir.
-const noDot = "ruangkelas";
-const safe = noDot.slice(0, noDot.indexOf("."));
-// "ruangkela" -- bukan "ruangkelas"!
+const before = roomName.slice(0, roomName.indexOf("."));
+const after = roomName.slice(roomName.indexOf(".") + 1);
+// before: "ruang-kelas", after: "dev"
 `,
   },
   {
@@ -429,26 +364,14 @@ const tail = colors.slice(2, 99);
     code: `void main() {
   final colors = <String>['red', 'green', 'blue', 'yellow'];
 
-  // Index end tidak ikut diambil, sama seperti slice(1, 3).
-  final partial = colors.sublist(1, 3);
-  print(partial); // [green, blue]
+  // 1. Index end tidak ikut diambil, sama seperti slice(1, 3).
+  print(colors.sublist(1, 3)); // [green, blue]
 
-  // Tanpa end, potongan mencakup sisa list.
+  // 2. Tanpa end, potongan mencakup sisa list.
   print(colors.sublist(2)); // [blue, yellow]
 
-  // Dart tidak mendukung index negatif; hitung dari length.
+  // 3. Dart tidak mendukung index negatif; hitung dari length.
   print(colors.sublist(colors.length - 2)); // [blue, yellow]
-
-  // sublist(0) menyalin seluruh list, tetapi bukan deep copy.
-  final copy = colors.sublist(0);
-  copy[0] = 'purple';
-  print(copy); // [purple, green, blue, yellow]
-  print(colors); // [red, green, blue, yellow]
-
-  print(colors.sublist(2, 2)); // []
-  // colors.sublist(-2); // RangeError: start negatif.
-  // colors.sublist(3, 1); // RangeError: start > end.
-  // colors.sublist(0, 5); // RangeError: end > length.
 }
 `,
   },
@@ -464,32 +387,16 @@ const tail = colors.slice(2, 99);
   const email = 'rizky@example.com';
   final atIndex = email.indexOf('@');
 
-  // Index @ menjadi batas akhir sehingga tidak ikut diambil.
-  final username = email.substring(0, atIndex);
-  print(username); // rizky
+  // 1. Sebelum tanda: index @ jadi batas akhir sehingga tidak ikut diambil.
+  print(email.substring(0, atIndex)); // rizky
 
-  // Tanpa end, potongan berlanjut sampai akhir string.
-  final domain = email.substring(atIndex + 1);
-  print(domain); // example.com
+  // 2. Sesudah tanda: mulai dari posisi tanda + 1 sampai akhir string.
+  print(email.substring(atIndex + 1)); // example.com
 
-  const fileName = 'laporan-2026.pdf';
-  final extension = fileName.substring(fileName.lastIndexOf('.'));
-  print(extension); // .pdf
-
-  // Mengambil teks sebelum dan sesudah tanda titik.
-  const roomName = 'ruang-kelas.dev';
-  print(roomName.substring(0, roomName.indexOf('.')));  // ruang-kelas
-  print(roomName.substring(roomName.indexOf('.') + 1)); // dev
-
-  const text = 'Dart';
-  print(text.substring(0, 2)); // Da
-  print(text.substring(text.length - 2)); // rt
-  print(text.substring(2, 2)); // String kosong.
-
-  // Dart menolak batas tidak valid, bukan menyesuaikan argumennya.
-  // text.substring(-1); // RangeError: start negatif.
-  // text.substring(3, 1); // RangeError: start > end.
-  // text.substring(0, 5); // RangeError: end > length.
+  // 3. Dart menolak batas tidak valid, bukan menyesuaikan argumennya.
+  // email.substring(-1);    // RangeError: start negatif.
+  // email.substring(3, 1);  // RangeError: start > end.
+  // email.substring(0, 99); // RangeError: end > length.
 }
 `,
   },
@@ -507,23 +414,11 @@ console.log(tags.has("react")); // true
 console.log(tags.has("vue"));   // false
 
 // 2. Praktis untuk mencegah duplikat saat menambah data
-function addTag(tag: string) {
-  if (tags.has(tag)) {
-    console.log(\`"\${tag}" sudah ada, dilewati\`);
-    return;
-  }
-  tags.add(tag);
+if (!tags.has("vue")) {
+  tags.add("vue");
 }
 
-addTag("react"); // "react" sudah ada, dilewati
-addTag("vue");   // ditambahkan
-
-// 3. Pengecekan pakai aturan SameValueZero:
-//    NaN dianggap sama dengan NaN (berbeda dari ===)
-const numbers = new Set([NaN, 0]);
-console.log(numbers.has(NaN)); // true
-
-// 4. Untuk objek/array, pengecekan berdasarkan REFERENSI, bukan isi
+// 3. Untuk objek/array, pengecekan berdasarkan REFERENSI, bukan isi
 const users = new Set([{ id: 1 }]);
 const user = { id: 1 };
 console.log(users.has(user)); // false (beda referensi objek)
