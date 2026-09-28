@@ -129,6 +129,36 @@ html {
   scroll-behavior: smooth;
 }
 
+/* High-End Minimal Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--shade) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--shade);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--muted);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
