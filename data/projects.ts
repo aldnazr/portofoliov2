@@ -1,4 +1,4 @@
-import { PlayStoreInfo, type Project } from "@/data/types";
+import { type Project } from "@/data/types";
 
 export const projects: Project[] = [
   {
@@ -24,6 +24,18 @@ export const projects: Project[] = [
       src: "/projects/driver.webp",
       alt: "Ahsan Brand",
     },
+  },
+  {
+    name: "Roomly",
+    category: "Hotel Booking & Operations System",
+    role: ["Fullstack"],
+    description:
+      "Sistem reservasi dan operasional hotel untuk properti tunggal (single-property) berbasis monorepo.",
+    technologies: ["Next.js", "NextAuth", "Zustand", "TypeScript"],
+    contributions:
+      "Saya membangun sistem reservasi dan operasional hotel monorepo dengan Next.js 16, Express 5, dan Turborepo: merancang API backend dengan Bun dan LibSQL, mengimplementasikan autentikasi JWT dan RBAC, serta membangun antarmuka web reaktif dengan TanStack Query dan NextAuth.",
+    sourceUrl: "https://github.com/aldnazr/Roomly",
+    demoUrl: "https://roomly-green.vercel.app/",
   },
   {
     name: "Web SmartVet",
