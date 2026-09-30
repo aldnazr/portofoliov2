@@ -81,7 +81,7 @@ export default function ProjectCard({
                 <span>{ps.title}</span>
               </a>
             ))}
-            {item.sourceUrl && (
+            {!item.demoUrl && item.sourceUrl && (
               <a
                 href={item.sourceUrl}
                 target="_blank"

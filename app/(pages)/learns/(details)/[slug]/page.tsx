@@ -2,22 +2,26 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import BackLink from "@/components/back-link";
+import {
+  LearnTopic,
+  MethodFilter,
+  Paradigm,
+} from "@/features/learns/data/types";
 import ConceptExplorer, {
-  type ExplorerGroup,
-} from "../../_components/concept-explorer";
-import { ContentSkeleton } from "../../_components/learn-skeleton";
-import NextTopicLink from "../../_components/next-topic-link";
-import ScrollToTop from "../../_components/scroll-to-top";
-import TopicHeader from "../../_components/topic-header";
+  ExplorerGroup,
+} from "@/features/learns/components/concept-explorer";
+import { ContentSkeleton } from "@/features/learns/components/learn-skeleton";
+import NextTopicLink from "@/features/learns/components/next-topic-link";
+import ScrollToTop from "@/features/learns/components/scroll-to-top";
+import TopicHeader from "@/features/learns/components/topic-header";
 import {
   learnContent,
   methodFilterOptions,
   methodTypeLabel,
   methodsConcepts,
   paradigmIds,
-} from "../../_data";
-import { highlightConcepts } from "../../_data/highlight";
-import type { LearnTopic, MethodFilter, Paradigm } from "../../_data/types";
+} from "@/features/learns/data";
+import { highlightConcepts } from "@/features/learns/data/highlight";
 
 type TopicMeta = {
   /** `h1` + description di bawah header. */

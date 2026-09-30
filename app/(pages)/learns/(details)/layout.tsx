@@ -1,5 +1,5 @@
+import LearnPageShell from "@/features/learns/components/learn-page-shell";
 import type { ReactNode } from "react";
-import LearnPageShell from "../_components/learn-page-shell";
 
 /** Kerangka halaman detail topik: shell + konten topik. */
 export default function LearnDetailsLayout({
@@ -9,9 +9,7 @@ export default function LearnDetailsLayout({
 }) {
   return (
     <LearnPageShell>
-      <div className="space-y-8">
-        {children}
-      </div>
+      <div className="space-y-8">{children}</div>
     </LearnPageShell>
   );
 }

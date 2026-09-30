@@ -1,6 +1,6 @@
+import LearnPageShell from "@/features/learns/components/learn-page-shell";
+import TopicList from "@/features/learns/components/topic-list";
 import type { Metadata } from "next";
-import LearnPageShell from "./_components/learn-page-shell";
-import TopicList from "./_components/topic-list";
 
 export const metadata: Metadata = {
   title: "Learn | Interactive Learning Lab",
