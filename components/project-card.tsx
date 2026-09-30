@@ -3,6 +3,8 @@ import Image from "next/image";
 import type { Project } from "@/data/types";
 import { slugifyProject } from "@/data/projects";
 import ProjectVisual from "@/components/project-visual";
+import { ArrowIcon, BrowserIcon, GithubIcon, PlayStoreIcon } from "./icons";
+import ProjectActionLink from "./project-action-link";
 
 export default function ProjectCard({
   item,
@@ -57,57 +59,26 @@ export default function ProjectCard({
 
           <div className="relative pt-2 sm:pt-3 flex flex-wrap items-center gap-3">
             {item.playStoreUrl?.map((ps, i) => (
-              <a
-                key={i}
-                href={ps.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative z-20 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-accent-wash border border-accent-wash-border text-accent-strong text-xs font-medium hover:bg-accent-wash-strong transition-colors"
-              >
-                <svg
-                  className="size-3.5 shrink-0 stroke-current"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="m25.0274,24.0519l-16.2624,15.8333h0c.5191,1.765,2.1803,3.1148,4.153,3.1148.8306,0,1.5574-.2077,2.1803-.6229h0l18.1694-10.2787-8.2403-8.0464Z" />
-                  <path d="m40.9508,20.2623h0l-7.7869-4.4645-8.1365,8.2541,8.2403,8.0464,7.7869-4.3607c1.3497-.7268,2.2842-2.1803,2.2842-3.7377-.1038-1.5574-1.0383-3.0109-2.388-3.7377Z" />
-                  <path d="m8.765,8.1148c-.1038.3115-.1038.7268-.1038,1.1421v29.5902c0,.4153,0,.7268.1038,1.1421l16.2624-15.9372L8.765,8.1148Z" />
-                  <path d="m25.0274,24.0519l8.1365-8.2541L15.2022,5.623c-.623-.4153-1.4536-.623-2.2842-.623-1.9727,0-3.7377,1.3497-4.153,3.1148h0l16.2624,15.9372Z" />
-                </svg>
+              <ProjectActionLink key={i} href={ps.url}>
+                <PlayStoreIcon className="size-4 shrink-0" />
                 <span>{ps.title}</span>
-              </a>
+              </ProjectActionLink>
             ))}
             {!item.demoUrl && item.sourceUrl && (
-              <a
-                href={item.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-foreground-soft text-xs font-medium hover:bg-overlay-strong hover:text-foreground transition-colors"
-              >
+              <ProjectActionLink href={item.sourceUrl}>
+                <GithubIcon className="size-4 shrink-0" />
                 <span>Repository GitHub</span>
-                <span className="text-xs">↗</span>
-              </a>
+              </ProjectActionLink>
             )}
             {item.demoUrl && (
-              <a
-                href={item.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative z-20 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-foreground-soft text-xs font-medium hover:bg-overlay-strong hover:text-foreground transition-colors"
-              >
+              <ProjectActionLink href={item.demoUrl}>
+                <BrowserIcon className="size-4 shrink-0" />
                 <span>Demo App</span>
-                <span className="text-xs">↗</span>
-              </a>
+              </ProjectActionLink>
             )}
             <button className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-muted text-xs font-medium group-hover:text-accent-strong group-hover:border-accent-wash-border transition-colors">
               <span>Lihat Detail</span>
-              <span className="text-xs group-hover:translate-x-0.5 transition-transform">
-                →
-              </span>
+              <ArrowIcon direction="right" className="size-4" />
             </button>
           </div>
         </div>
