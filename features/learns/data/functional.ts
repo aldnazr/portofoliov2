@@ -5,156 +5,169 @@ export const functionalConcepts: LearnConcept[] = [
     id: "pure-function",
     title: "Pure Function",
     description:
-      "Pure function tidak menimbulkan side effect dan outputnya hanya bergantung pada input. Karena itu ia mudah diuji, diprediksi, dan aman dipanggil berulang kali tanpa mengubah state di luar fungsinya.",
+      "Pure function adalah function yang memenuhi dua syarat: (1) input yang sama selalu menghasilkan output yang sama, dan (2) tidak punya side effect, yaitu tidak mengubah apa pun di luar dirinya (misalnya mengubah variabel global, memutasi argumen, menulis ke database, atau console.log). Bayangkan seperti rumus matematika: f(2) hasilnya selalu sama, kapan pun dan di mana pun dipanggil. Manfaatnya: mudah dites, mudah dilacak saat ada bug, dan aman dipanggil berulang kali. Ingat: Date.now() dan Math.random() membuat function jadi impure karena hasilnya bisa beda setiap kali dipanggil.",
     filename: "pure-function.ts",
-    code: `// IMPURE: mengandalkan dan memutasi state di luar fungsi
-let discount = 0.1;
-function priceImpure(price: number): number {
-  return price - price * discount; // tergantung variabel global
+    code: `// 1) Bergantung pada variabel di luar function = IMPURE
+let taxRate = 0.1;
+const priceWithTaxImpure = (price: number) => price + price * taxRate;
+
+// Semua data lewat parameter = PURE
+const priceWithTax = (price: number, rate: number) => price + price * rate;
+priceWithTax(100_000, 0.1); // 110000, selalu sama untuk input yang sama
+
+// 2) Mengubah (mutasi) argumen = IMPURE
+function addItemImpure(cart: string[], item: string) {
+  cart.push(item); // array asli ikut berubah (side effect)
+  return cart;
 }
 
-// PURE: hanya bergantung pada argumen yang diterima
-function priceOf(price: number, discount: number): number {
-  return price - price * discount;
-}
+// Kembalikan array baru = PURE
+const addItem = (cart: readonly string[], item: string) => [...cart, item];
 
-// PURE: tidak menyentuh data asli, hanya membacanya
-function totalOf(items: ReadonlyArray<number>): number {
-  return items.reduce((sum, item) => sum + item, 0);
-}
+// 3) Bergantung pada waktu = IMPURE
+const isExpiredImpure = (expiredAt: number) => Date.now() > expiredAt;
 
-priceOf(100_000, 0.1); // 90000 — selalu sama untuk input yang sama
-totalOf([10, 20, 30]); // 60 — tidak ada data luar yang berubah
+// Waktu dikirim lewat parameter = PURE (jadi mudah dites)
+const isExpired = (expiredAt: number, now: number) => now > expiredAt;
+isExpired(1000, 2000); // true
 `,
   },
   {
     id: "immutability",
     title: "Immutability",
     description:
-      "Data tidak pernah dimutasi; setiap perubahan membuat struktur baru. Memakai const, spread operator, method map/filter/reduce, dan Object.freeze membantu mencegah mutasi tak terduga.",
+      "Immutability berarti data tidak diubah setelah dibuat. Kalau butuh perubahan, kita buat salinan baru dengan nilai yang sudah diperbarui, sedangkan data lama dibiarkan utuh. Manfaatnya: tidak ada perubahan diam-diam yang bikin bug sulit dilacak, dan perubahan mudah dideteksi (React, misalnya, cukup membandingkan referensi lama dan baru untuk memutuskan perlu re-render atau tidak). Ingat: const hanya melarang variabel di-assign ulang, isi object atau array tetap bisa berubah. Spread operator dan Object.freeze juga hanya bekerja di level pertama (shallow).",
     filename: "immutability.ts",
-    code: `// MUTABLE (hindari): push mengubah array asli secara langsung
-function addBad(items: string[], value: string): string[] {
-  items.push(value);
-  return items;
-}
+    code: `// 1) const BUKAN immutable: isi object tetap bisa diubah
+const user = { name: "Raka", city: "Jakarta" };
+user.city = "Bandung"; // jalan, const hanya melarang: user = {...}
 
-// IMMUTABLE: array baru dibuat, array asli tetap utuh
-function add(items: readonly string[], value: string): string[] {
-  return [...items, value];
-}
+// Object.freeze mencegah perubahan, tapi hanya di level pertama (shallow)
+const config = Object.freeze({ mode: "dark", db: { port: 5432 } });
+// config.mode = "light"; // ditolak (error di TypeScript / strict mode)
+config.db.port = 3306; // tetap jalan, object nested tidak ikut beku
 
-// IMMUTABLE: Object.freeze mencegah mutasi pada objek hasil
-function freezePoint(x: number, y: number) {
-  return Object.freeze({ x, y });
-}
+// 2) Array: buat array baru, jangan mutasi yang lama
+const nums = [1, 2, 3];
+const added = [...nums, 4]; // [1, 2, 3, 4]
+const removed = nums.filter((n) => n !== 2); // [1, 3]
+const doubled = nums.map((n) => n * 2); // [2, 4, 6]
+// nums tetap [1, 2, 3]. Hindari push, splice, sort, reverse karena memutasi array asli
 
-const point = freezePoint(1, 2);
-// point.x = 5; // TypeError: cannot assign to read-only property
-
-add(["react", "vue"], "svelte"); // ["react", "vue", "svelte"]
+// 3) Object: salin dengan spread. Kalau bersarang, spread di SETIAP level yang berubah
+const state = { profile: { name: "Raka", city: "Jakarta" }, theme: "dark" };
+const themeChanged = { ...state, theme: "light" };
+const cityChanged = { ...state, profile: { ...state.profile, city: "Bandung" } };
+// state asli tidak berubah. Untuk deep copy penuh: structuredClone(state)
 `,
   },
   {
     id: "higher-order-function",
     title: "Higher-Order Function",
     description:
-      "Higher-order function (HOF) adalah function yang menerima function sebagai argumen atau mengembalikan function. Pola ini membuat logika menjadi composable dan reusable.",
+      "Higher-order function (HOF) adalah function yang menerima function lain sebagai parameter, mengembalikan function, atau keduanya. Ini bisa terjadi karena di JavaScript function adalah first-class citizen: bisa disimpan di variabel, dikirim sebagai argumen, dan di-return seperti nilai biasa. HOF bawaan yang paling sering dipakai: map (ubah tiap elemen), filter (saring elemen), dan reduce (gabungkan jadi satu nilai). Manfaatnya: kita cukup menulis apa yang ingin dilakukan tanpa loop manual, dan logikanya mudah dipakai ulang.",
     filename: "higher-order-function.ts",
-    code: `type User = { name: string; role: string; active: boolean };
-
-const users: User[] = [
-  { name: "Raka", role: "engineer", active: true },
-  { name: "Sari", role: "designer", active: false },
-  { name: "Budi", role: "engineer", active: true },
+    code: `const products = [
+  { name: "Kopi", price: 20_000, stock: 5 },
+  { name: "Teh", price: 10_000, stock: 0 },
+  { name: "Roti", price: 15_000, stock: 8 },
 ];
 
-// map: mengubah setiap elemen menjadi nilai baru
-const names: string[] = users.map((user) => user.name);
+// 1) HOF bawaan: map, filter, reduce
+products.map((p) => p.name); // ["Kopi", "Teh", "Roti"]
+products.filter((p) => p.stock > 0); // Kopi & Roti
+products.reduce((total, p) => total + p.price * p.stock, 0); // 220000
 
-// filter: mengambil elemen yang memenuhi kondisi
-const activeEngineers: User[] = users.filter(
-  (user) => user.active && user.role === "engineer",
-);
-
-// reduce: menggabungkan seluruh elemen menjadi satu nilai
-const activeCount: number = users.reduce(
-  (count, user) => count + (user.active ? 1 : 0),
-  0,
-);
-
-// HOF custom: menerima predicate, mengembalikan function yang siap dipakai
-function byActiveRole(role: string) {
-  return (user: User): boolean => user.active && user.role === role;
+// 2) HOF buatan sendiri: menerima function (beginilah cara kerja map)
+function myMap(nums: number[], fn: (n: number) => number): number[] {
+  const result: number[] = [];
+  for (const n of nums) result.push(fn(n));
+  return result;
 }
+myMap([1, 2, 3], (n) => n * 10); // [10, 20, 30]
 
-users.filter(byActiveRole("designer")); // [Sari? cek active!]
+// 3) HOF yang menerima DAN mengembalikan function (pola middleware / decorator)
+function withLog(fn: (n: number) => number) {
+  return (n: number) => {
+    console.log("input:", n);
+    return fn(n);
+  };
+}
+const doubleWithLog = withLog((n) => n * 2);
+doubleWithLog(5); // log "input: 5", hasilnya 10
 `,
   },
   {
     id: "closure",
     title: "Closure",
     description:
-      "Closure adalah function yang tetap mengingat lexical scope tempat ia didefinisikan, meskipun dipanggil di luar scope tersebut. Cocok untuk private state dan function factory.",
+      "Closure adalah function yang tetap mengingat variabel dari tempat ia dibuat (lexical scope), walaupun function tersebut dipanggil di tempat lain atau setelah function induknya selesai. Bayangkan function membawa ransel berisi variabel di sekitarnya. Kegunaan utamanya: menyimpan private state (data yang tidak bisa diubah sembarangan dari luar), membuat function factory, dan menyimpan konfigurasi. Ingat: closure membuat variabel tetap tersimpan di memori, jadi hati-hati kalau menahan data besar terlalu lama (bisa jadi memory leak).",
     filename: "closure.ts",
-    code: `// Counter: variabel 'count' tidak bisa diakses dari luar
-function createCounter(start = 0) {
-  let count = start;
+    code: `// 1) Private state: count tersembunyi, hanya bisa diakses lewat function
+function createCounter() {
+  let count = 0;
   return {
     increment: () => ++count,
-    decrement: () => --count,
-    value: () => count,
+    getCount: () => count,
   };
 }
-
 const counter = createCounter();
 counter.increment(); // 1
 counter.increment(); // 2
-counter.decrement(); // 1
-// counter.count; // Error: hanya bisa diakses melalui method
+// counter.count -> tidak ada, tidak bisa diubah sembarangan dari luar
 
-// Function factory: membuat function sesuai pengali
+// 2) Function factory: factor "diingat" oleh function yang dikembalikan
 function multiplier(factor: number) {
-  return (value: number): number => value * factor;
+  return (n: number) => n * factor;
 }
-
 const double = multiplier(2);
 const triple = multiplier(3);
 double(5); // 10
 triple(5); // 15
+
+// 3) Pertanyaan interview klasik: var vs let di dalam loop
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0); // 3, 3, 3 (semua closure berbagi satu i)
+}
+for (let j = 0; j < 3; j++) {
+  setTimeout(() => console.log(j), 0); // 0, 1, 2 (tiap iterasi punya j sendiri)
+}
 `,
   },
   {
     id: "recursion",
     title: "Recursion",
     description:
-      "Recursion terjadi ketika function memanggil dirinya sendiri. Setiap solusi recursive wajib punya base case (kapan berhenti) dan recursive case (panggilan diri sendiri menuju base case).",
+      "Recursion adalah teknik ketika sebuah function memanggil dirinya sendiri untuk menyelesaikan masalah yang bisa dipecah menjadi versi yang lebih kecil dari masalah yang sama. Setiap recursion wajib punya dua bagian: base case (kondisi berhenti) dan recursive case (memanggil diri sendiri dengan input yang makin mendekati base case). Tanpa base case, function akan terus memanggil dirinya sampai muncul error Maximum call stack size exceeded (stack overflow). Cocok untuk struktur bersarang seperti tree, folder, atau menu bertingkat.",
     filename: "recursion.ts",
-    code: `// Base case: n <= 1, recursive case: n * (n-1)!
+    code: `// 1) Factorial: 4! = 4 x 3 x 2 x 1
 function factorial(n: number): number {
-  if (n <= 1) return 1; // base case
-  return n * factorial(n - 1); // recursive case
+  if (n <= 1) return 1; // base case: berhenti di sini
+  return n * factorial(n - 1); // recursive case: masalah makin kecil
 }
+factorial(4); // 24 (alurnya: 4 * 3 * 2 * 1)
 
-// Fibonacci: penjumlahan dua angka sebelumnya
+// 2) Fibonacci: 0, 1, 1, 2, 3, 5, 8, ...
 function fibonacci(n: number): number {
-  if (n <= 0) return 0; // base case
-  if (n === 1) return 1; // base case
-  return fibonacci(n - 1) + fibonacci(n - 2);
+  if (n <= 1) return n; // base case: fib(0) = 0, fib(1) = 1
+  return fibonacci(n - 1) + fibonacci(n - 2); // dua panggilan sekaligus
 }
+fibonacci(6); // 8
+// Catatan: lambat untuk n besar (O(2^n)) karena menghitung ulang berkali-kali.
+// Solusinya memoization atau loop biasa.
 
+// 3) Struktur bersarang (tree): kedalaman tidak diketahui, cocok pakai recursion
 type Category = { name: string; children?: Category[] };
 
-// Traversal struktur pohon secara recursive
-function listCategories(categories: Category[]): string[] {
-  return categories.flatMap((category) => [
-    category.name,
-    ...listCategories(category.children ?? []),
-  ]);
+function listNames(categories: Category[]): string[] {
+  // base case: array kosong -> flatMap tidak memproses apa pun -> hasil []
+  return categories.flatMap((c) => [c.name, ...listNames(c.children ?? [])]);
 }
 
-factorial(5); // 120
-fibonacci(8); // 21
+listNames([
+  { name: "Makanan", children: [{ name: "Nasi" }, { name: "Mie" }] },
+  { name: "Minuman" },
+]); // ["Makanan", "Nasi", "Mie", "Minuman"]
 `,
   },
 ];
