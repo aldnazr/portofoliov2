@@ -1,7 +1,7 @@
-import Link from "next/link";
 import BackLink from "@/components/back-link";
-import type { LearnTopic } from "../_data/types";
 import { ArrowIcon } from "@/components/icons";
+import Link from "next/link";
+import { LearnTopic } from "../data/types";
 
 type TopicCard = {
   id: LearnTopic;

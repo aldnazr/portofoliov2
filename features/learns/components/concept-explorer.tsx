@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import type { LearnConcept } from "../_data/types";
+import { LearnConcept } from "../data/types";
 import CodeBlock from "./code-block";
 import SegmentedSwitcher from "./segmented-switcher";
 
@@ -45,9 +45,8 @@ export default function ConceptExplorer<T extends string>({
 }: ConceptExplorerProps<T>) {
   const searchParams = useSearchParams();
   const raw = searchParams.get(param);
-  const active = options.some((option) => option.id === raw)
-    ? (raw as T)
-    : options[0].id;
+  const active =
+    options.some((option) => option.id === raw) ? (raw as T) : options[0].id;
   const group = groups[active];
 
   function handleChange(next: T) {
