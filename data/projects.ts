@@ -50,16 +50,16 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/aldnazr/Roomly",
     demoUrl: "https://roomly-green.vercel.app/",
   },
-  {
-    name: "Web SmartVet",
-    category: "Petshop Management SaaS",
-    role: ["Fullstack"],
-    description:
-      "Klinik petshop untuk manajemen data pasien hewan, pemeriksaan, pengobatan, hingga penjadwalan appointment.",
-    technologies: ["Laravel", "PHP", "PostgreSQL", "Livewire"],
-    contributions:
-      "Saya membangun SmartVet secara end-to-end dengan Laravel, Livewire, dan PostgreSQL: merancang skema database untuk data pasien hewan, rekam medis, dan penjadwalan appointment, lalu mengembangkan antarmuka reaktif dengan Livewire agar pemeriksaan dan pengobatan dapat dicatat tanpa reload halaman.",
-  },
+  // {
+  //   name: "Web SmartVet",
+  //   category: "Petshop Management SaaS",
+  //   role: ["Fullstack"],
+  //   description:
+  //     "Klinik petshop untuk manajemen data pasien hewan, pemeriksaan, pengobatan, hingga penjadwalan appointment.",
+  //   technologies: ["Laravel", "PHP", "PostgreSQL", "Livewire"],
+  //   contributions:
+  //     "Saya membangun SmartVet secara end-to-end dengan Laravel, Livewire, dan PostgreSQL: merancang skema database untuk data pasien hewan, rekam medis, dan penjadwalan appointment, lalu mengembangkan antarmuka reaktif dengan Livewire agar pemeriksaan dan pengobatan dapat dicatat tanpa reload halaman.",
+  // },
   {
     name: "Inventory SCP",
     category: "Inventory Management System",
@@ -85,15 +85,6 @@ export const projects: Project[] = [
       alt: "Bitcoin Banner",
     },
   },
-  // {
-  //   name: "Backend - TokoHP",
-  //   category: "Phone Store Transaction",
-  //   role: ["Backend"],
-  //   description: "Rest API untuk kebutuhan frontend",
-  //   technologies: ["Laravel", "REST API", "PHP", "MySQL"],
-  //   contributions:
-  //     "Saya merancang dan membangun REST API dengan Laravel untuk kebutuhan frontend: dari perancangan endpoint, autentikasi, relasi antar tabel di MySQL, hingga response yang konsisten agar mudah dikonsumsi oleh aplikasi client.",
-  // },
   {
     name: "PPTA - Layanan Akademik",
     category: "Academic Final Project Service Center Website",
