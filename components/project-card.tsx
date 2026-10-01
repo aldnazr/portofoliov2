@@ -88,6 +88,7 @@ export default function ProjectCard({
               <Image
                 src={item.image.src}
                 alt={item.image.alt || item.name}
+                loading="eager"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"

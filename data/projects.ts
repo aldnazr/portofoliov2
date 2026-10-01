@@ -7,7 +7,19 @@ export const projects: Project[] = [
     role: ["Mobile", "Frontend"],
     description:
       "Memperbarui ekosistem mulai dari mobile apps (customer & driver), dan juga web admin.",
-    technologies: ["Flutter", "Dart", "Riverpod", "Next.js", "Typescript"],
+    technologies: [
+      "Flutter",
+      "Dart",
+      "Riverpod",
+      "Dio",
+      "GoRouter",
+      "Next.js",
+      "Typescript",
+      "NextAuth",
+      "Zustand",
+      "React Query",
+      "Zod",
+    ],
     contributions:
       "Berkolaborasi dengan tim untuk membangun ulang aplikasi customer dan driver dengan Flutter serta Riverpod untuk state management yang reaktif, sambil mengembangkan ulang web admin berbasis Next.js dan TypeScript. Pekerjaan saya mencakup perancangan arsitektur fitur baru, integrasi API logistik untuk order, tracking, dan penugasan driver, sampai memastikan pengalaman pengguna di kedua platform tetap konsisten.",
     playStoreUrl: [
@@ -27,13 +39,14 @@ export const projects: Project[] = [
   },
   {
     name: "Roomly",
+    image: { src: "/projects/roomly.webp", alt: "roomly" },
     category: "Hotel Booking & Operations System",
-    role: ["Fullstack"],
+    role: ["Frontend"],
     description:
       "Sistem reservasi dan operasional hotel untuk properti tunggal (single-property) berbasis monorepo.",
     technologies: ["Next.js", "NextAuth", "Zustand", "TypeScript"],
     contributions:
-      "Saya membangun sistem reservasi dan operasional hotel monorepo dengan Next.js 16, Express 5, dan Turborepo: merancang API backend dengan Bun dan LibSQL, mengimplementasikan autentikasi JWT dan RBAC, serta membangun antarmuka web reaktif dengan TanStack Query dan NextAuth.",
+      "Saya membangun sistem reservasi dan operasional hotel monorepo dengan Next.js 16: merancang API backend dengan Bun dan LibSQL, mengimplementasikan autentikasi JWT dan RBAC, serta membangun antarmuka web reaktif dengan TanStack Query dan NextAuth.",
     sourceUrl: "https://github.com/aldnazr/Roomly",
     demoUrl: "https://roomly-green.vercel.app/",
   },
@@ -57,13 +70,6 @@ export const projects: Project[] = [
     contributions:
       "Saya mengembangkan sistem inventory SCP dengan Laravel dan Livewire: membangun modul manajemen barang dan supplier, alur pembelian serta penjualan, dan laporan stok yang mencerminkan kebutuhan operasional perusahaan persediaan material.",
   },
-  // {
-  //   name: "Web CatatPro",
-  //   category: "Fullstack - Accounting Software",
-  //   description:
-  //     "Software untuk kebutuhan pencatatan pengeluaran dan pemasukan, dilengkapi dengan dashboard, laporan, dan grafik untuk memudahkan pengguna dalam mengelola keuangan mereka.",
-  //   technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
-  // },
   {
     name: "Vault Chain",
     category: "Crypto APP",
