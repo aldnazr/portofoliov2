@@ -50,6 +50,7 @@ export function LinkedinIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
 const ARROW_PATH = {
   left: "M5 12H19M5 12L11 6M5 12L11 18",
   right: "M5 12H19M19 12L13 6M19 12L13 18",
+  down: "M12 5V19M12 19L6 13M12 19L18 13",
   upright: "M7 17L17 7M17 7H8M17 7V16",
 } as const;
 

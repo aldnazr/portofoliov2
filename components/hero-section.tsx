@@ -1,6 +1,6 @@
 import { profile } from "@/data/profile";
 import { ButtonLink } from "./button";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { ArrowIcon, GithubIcon, LinkedinIcon } from "./icons";
 
 export default function HeroSection() {
   return (
@@ -44,7 +44,7 @@ export default function HeroSection() {
         <ButtonLink href="#project">
           <span>Lihat Proyek</span>
           <span className="w-6 h-6 rounded-full bg-on-primary-wash flex items-center justify-center group-hover:scale-105 transition-transform">
-            ↓
+            <ArrowIcon direction="down" className="size-3.5 shrink-0" />
           </span>
         </ButtonLink>
 
