@@ -80,7 +80,7 @@ export default async function ProjectDetailPage({
       <BackgroundMesh />
 
       {/* Main Content */}
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
+      <div className="relative z-10 px-4 sm:px-6 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
         <div className="mt-2 sm:mt-8 space-y-8 sm:space-y-10">
           <Breadcrumb currentLabel={project.name} />
           <BackLink href="/#project" label="Kembali ke Portofolio" />

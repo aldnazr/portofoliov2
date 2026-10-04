@@ -12,9 +12,9 @@ export default function ProjectsSection() {
     "carousel",
   );
 
-return (
+  return (
     <section id="project" className="space-y-10 scroll-mt-28">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mx-auto max-w-6xl">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 px-4 sm:px-6 mx-auto max-w-6xl">
         <SectionHeader badge="Portofolio Karya" title="Proyek Pilihan" />
         <div
           role="group"
@@ -56,4 +56,3 @@ return (
     </section>
   );
 }
-

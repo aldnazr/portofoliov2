@@ -24,7 +24,7 @@ export default function ProjectsList() {
   );
 
   return (
-    <div className="mx-auto max-w-6xl">
+    <div className="px-4 sm:px-6 mx-auto max-w-6xl">
       <div className="grid grid-cols-1 gap-7 sm:gap-8">
         {currentProjects.map((item, idx) => (
           <ProjectCard
@@ -48,21 +48,19 @@ export default function ProjectsList() {
           </button>
 
           <div className="flex items-center gap-1.5 px-2">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-              (page) => (
-                <button
-                  key={page}
-                  onClick={() => handlePageChange(page)}
-                  className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${
-                    currentPage === page ?
-                      "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-bold"
-                    : "bg-overlay text-muted border border-hairline hover:bg-overlay-strong hover:text-foreground"
-                  }`}
-                >
-                  {page}
-                </button>
-              ),
-            )}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${
+                  currentPage === page ?
+                    "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-bold"
+                  : "bg-overlay text-muted border border-hairline hover:bg-overlay-strong hover:text-foreground"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
           </div>
 
           <button

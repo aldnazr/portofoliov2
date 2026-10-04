@@ -83,7 +83,7 @@ export function CarouselPagination({
         })}
       </ul>
 
-      <p className="mx-2 min-w-10 text-center font-medium text-sm text-neutral-500 tabular-nums dark:text-neutral-400">
+      <p className="mx-2 min-w-10 text-center font-medium text-sm text-neutral-500 dark:text-neutral-400">
         <span className="font-bold text-[#0f0f10] dark:text-white">
           {pad(active + 1)}
         </span>{" "}

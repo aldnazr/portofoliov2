@@ -4,7 +4,7 @@ import { ArrowIcon, GithubIcon, LinkedinIcon } from "./icons";
 
 export default function HeroSection() {
   return (
-    <section className="space-y-10 mx-auto max-w-6xl">
+    <section className="space-y-10 px-4 sm:px-6 mx-auto max-w-6xl">
       <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-overlay text-xs text-muted tracking-wide font-mono">
         <svg
           className="w-3.5 h-3.5 text-accent"

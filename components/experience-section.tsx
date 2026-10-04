@@ -5,7 +5,7 @@ export default function ExperienceSection() {
   return (
     <section
       id="experience"
-      className="space-y-10 scroll-mt-28 mx-auto max-w-6xl"
+      className="space-y-10 scroll-mt-28 px-4 sm:px-6 mx-auto max-w-6xl"
     >
       <SectionHeader badge="Riwayat Karir" title="Pengalaman Profesional" />
 

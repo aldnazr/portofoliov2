@@ -72,11 +72,55 @@ function getOffset(
 }
 
 function getSlot(offset: number): Slot {
-  return SLOTS[Math.min(Math.abs(offset), SLOTS.length - 1)];
+  const distance = Math.min(Math.abs(offset), SLOTS.length - 1);
+  const from = SLOTS[Math.floor(distance)];
+  const to = SLOTS[Math.ceil(distance)];
+  const t = distance - Math.floor(distance);
+  const mix = (a: number, b: number) => a + (b - a) * t;
+
+  return {
+    x: mix(from.x, to.x),
+    y: mix(from.y, to.y),
+    z: mix(from.z, to.z),
+    rotate: mix(from.rotate, to.rotate),
+    scale: mix(from.scale, to.scale),
+    opacity: mix(from.opacity, to.opacity),
+    dim: mix(from.dim, to.dim),
+  };
 }
 
-function getSlideStyle(offset: number): CSSProperties {
-  const slot = getSlot(offset);
+/** Interpolasi antar-slot, termasuk saat kartu loop melewati slot tersembunyi. */
+function getDragOffset(
+  index: number,
+  active: number,
+  progress: number,
+  total: number,
+  loop: boolean,
+): number {
+  const from = getOffset(index, active, total, loop);
+  if (progress === 0) return from;
+  const direction = Math.sign(progress);
+  const t = Math.abs(progress);
+  // Pada dua kartu, tetangga bisa masuk dari kedua sisi tergantung arah drag.
+  const start = loop && total === 2 && from !== 0 ? direction : from;
+  const end =
+    loop && total === 2 && from === 0 ?
+      -direction
+    : getOffset(index, active + direction, total, loop);
+
+  // Kartu yang berpindah sisi harus menghilang di belakang, bukan melintas depan.
+  if (loop && start * end < 0 && Math.abs(start - end) > 1) {
+    const hidden = SLOTS.length - 1;
+    // Kedua sisi bertemu di slot tersembunyi pada titik tengah.
+    return t < 0.5 ?
+        start + (Math.sign(start) * hidden - start) * (t * 2)
+      : Math.sign(end) * hidden +
+          (end - Math.sign(end) * hidden) * ((t - 0.5) * 2);
+  }
+  return start + (end - start) * t;
+}
+
+function getSlideStyle(offset: number, slot: Slot): CSSProperties {
   const dir = Math.sign(offset);
 
   return {
@@ -86,19 +130,21 @@ function getSlideStyle(offset: number): CSSProperties {
         `translate3d(calc(${CARD_W} * ${dir * slot.x}), calc(${CARD_W} * ${slot.y}), calc(${CARD_W} * ${slot.z})) rotateY(${dir * slot.rotate}deg) scale(${slot.scale})`
       ),
     opacity: slot.opacity,
-    zIndex: Math.max(0, 10 - Math.abs(offset)),
+    zIndex: Math.max(0, Math.round(10 - Math.abs(offset))),
     pointerEvents: slot.opacity === 0 ? "none" : undefined,
   };
 }
 
 const DRAG_START_PX = 10;
 const SWIPE_PX = 48;
+const DRAG_STEP = SLOTS[1].x; // jarak pusat kartu aktif ke slot tetangga
 
 type DragState = {
-  tracking: boolean;
+  pointerId: number | null;
   moved: boolean;
   startX: number;
   startY: number;
+  width: number;
 };
 
 export type ProjectCarouselProps = {
@@ -121,11 +167,13 @@ export function ProjectCarousel({
   const total = projects.length;
   const initialIndex = clamp(defaultIndex, 0, Math.max(total - 1, 0));
   const [active, setActive] = useState(initialIndex);
+  const [dragProgress, setDragProgress] = useState<number | null>(null);
   const drag = useRef<DragState>({
-    tracking: false,
+    pointerId: null,
     moved: false,
     startX: 0,
     startY: 0,
+    width: 0,
   });
 
   if (total === 0) return null;
@@ -158,43 +206,55 @@ export function ProjectCarousel({
     }
   };
 
-  // Swipe / drag: geser > SWIPE_PX pindah satu kartu. Pointer baru "ditangkap"
-  // setelah benar-benar menggeser, supaya klik biasa pada tombol tetap jalan.
+  // Kartu mengikuti pointer secara langsung; transisi CSS hanya dipakai saat
+  // melepas pointer agar posisi akhirnya menganimasi ke slot terdekat.
+  const getProgress = (dx: number, width: number) => {
+    const progress = clamp(-dx / (width * DRAG_STEP), -1, 1);
+    return loop ? progress : clamp(progress, -current, total - 1 - current);
+  };
+
   const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === "mouse" && e.button !== 0) return;
+    if (!e.isPrimary || (e.pointerType === "mouse" && e.button !== 0) || total < 2) return;
     drag.current = {
-      tracking: true,
+      pointerId: e.pointerId,
       moved: false,
       startX: e.clientX,
       startY: e.clientY,
+      width: (e.currentTarget.firstElementChild as HTMLElement).offsetWidth,
     };
   };
 
   const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
     const d = drag.current;
-    if (!d.tracking || d.moved) return;
+    if (d.pointerId !== e.pointerId) return;
     const dx = e.clientX - d.startX;
     const dy = e.clientY - d.startY;
-    if (Math.abs(dx) > DRAG_START_PX && Math.abs(dx) > Math.abs(dy)) {
+    if (!d.moved) {
+      if (Math.abs(dx) <= DRAG_START_PX || Math.abs(dx) <= Math.abs(dy)) return;
       d.moved = true;
       e.currentTarget.setPointerCapture(e.pointerId);
     }
+    setDragProgress(getProgress(dx, d.width));
   };
 
   const handlePointerUp = (e: PointerEvent<HTMLDivElement>) => {
     const d = drag.current;
-    if (!d.tracking) return;
-    d.tracking = false;
+    if (d.pointerId !== e.pointerId) return;
+    d.pointerId = null;
     const dx = e.clientX - d.startX;
-    if (d.moved && Math.abs(dx) > SWIPE_PX) {
-      if (dx < 0) next();
-      else prev();
+    const progress = getProgress(dx, d.width);
+    // Pointer bisa dilepas tanpa event move terakhir: hitung ulang dari koordinat up.
+    setDragProgress(null);
+    if (d.moved && Math.abs(dx) > SWIPE_PX && progress !== 0) {
+      goTo(current + Math.sign(progress));
     }
   };
 
-  const handlePointerCancel = () => {
-    drag.current.tracking = false;
+  const handlePointerCancel = (e: PointerEvent<HTMLDivElement>) => {
+    if (drag.current.pointerId !== e.pointerId) return;
+    drag.current.pointerId = null;
     drag.current.moved = false;
+    setDragProgress(null);
   };
 
   // Setelah drag, buang event click yang menyusul supaya tidak memicu klik kartu/tombol.
@@ -218,12 +278,13 @@ export function ProjectCarousel({
       )}
     >
       <div
-        className="relative mx-auto h-115 w-full touch-pan-y select-none sm:h-100"
+        className="relative mx-auto h-100 w-full touch-pan-y select-none"
         style={{
           perspective: "calc(var(--card-w) * 1.875)",
           // Titik hilang sedikit di bawah tengah kartu, seperti di referensi.
           perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
         }}
+        onDragStart={(e) => e.preventDefault()}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
@@ -231,8 +292,12 @@ export function ProjectCarousel({
         onClickCapture={handleClickCapture}
       >
         {projects.map((project, i) => {
-          const offset = getOffset(i, current, total, loop);
-          const isActive = offset === 0;
+          const isActive = i === current;
+          const offset =
+            dragProgress === null ?
+              getOffset(i, current, total, loop)
+            : getDragOffset(i, current, dragProgress, total, loop);
+          const slot = getSlot(offset);
 
           return (
             <div
@@ -243,10 +308,11 @@ export function ProjectCarousel({
               aria-hidden={isActive ? undefined : true}
               onClick={isActive ? undefined : () => goTo(i)}
               className={cn(
-                "absolute inset-x-0 top-0 mx-auto h-full w-(--card-w) transition-[transform,opacity] duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                "absolute inset-x-0 top-0 mx-auto h-full w-(--card-w) ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                dragProgress === null && "transition-[transform,opacity] duration-650",
                 !isActive && "cursor-pointer",
               )}
-              style={getSlideStyle(offset)}
+              style={getSlideStyle(offset, slot)}
             >
               <ProjectCard
                 project={project}
@@ -257,10 +323,11 @@ export function ProjectCarousel({
               />
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-4xl transition-colors duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
-                style={{
-                  backgroundColor: `rgba(0,0,0,${getSlot(offset).dim})`,
-                }}
+                className={cn(
+                  "pointer-events-none absolute inset-0 rounded-4xl ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                  dragProgress === null && "transition-colors duration-650",
+                )}
+                style={{ backgroundColor: `rgba(0,0,0,${slot.dim})` }}
               />
             </div>
           );
@@ -268,7 +335,7 @@ export function ProjectCarousel({
       </div>
 
       <CarouselPagination
-        className="mt-6 sm:mt-8"
+        className="mt-10 sm:mt-12"
         total={total}
         active={current}
         onSelect={goTo}
