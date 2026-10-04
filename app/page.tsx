@@ -17,7 +17,7 @@ export default function Home() {
       <Header />
 
       {/* Main Content Container */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-24 space-y-28 sm:space-y-36">
+      <main className="relative px-4 sm:px-6 pt-16 sm:pt-24 pb-24 space-y-28 sm:space-y-36">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />

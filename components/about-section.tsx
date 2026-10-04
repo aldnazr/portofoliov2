@@ -1,14 +1,24 @@
 import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
 import SectionHeader from "@/components/section-header";
-
-const allTechnologies = Array.from(
-  new Set(projects.flatMap((p) => p.technologies)),
-).sort((a, b) => a.localeCompare(b));
+import { ProjectsCarousel } from "./carouse";
+import { useMemo } from "react";
+import {
+  ProjectCarousel,
+  type Project,
+} from "./project-carousel/project-carousel";
+import { projects } from "@/data/projects";
 
 export default function AboutSection() {
+  const allTechnologies = useMemo(
+    () =>
+      Array.from(new Set(projects.flatMap((p) => p.technologies))).sort(
+        (a, b) => a.localeCompare(b),
+      ),
+    [],
+  );
+
   return (
-    <section id="about" className="space-y-8 scroll-mt-28">
+    <section id="about" className="space-y-8 scroll-mt-28 mx-auto max-w-6xl">
       <SectionHeader badge="Tentang Saya" title="Kemampuan" />
 
       <div className="p-1.5 rounded-4xl border border-hairline bg-overlay-faint">

@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { projects } from "@/data/projects";
 import SectionHeader from "@/components/section-header";
-import ProjectCard from "@/components/project-card";
+import { projects } from "@/data/projects";
+import { useState } from "react";
+import {
+  type Project,
+  ProjectCarousel,
+} from "./project-carousel/project-carousel";
 
 const ITEMS_PER_PAGE = 3;
 
@@ -22,11 +25,69 @@ export default function ProjectsSection() {
     currentPage * ITEMS_PER_PAGE,
   );
 
+  const projectCarousels: Project[] = [
+    {
+      id: 1,
+      title: "Indonesian Tweet Emotion Classification",
+      description: "Comparing six models on Indonesian tweet emotion...",
+      tag: "NLP",
+      status: { label: "Accepted", tone: "success" }, // opsional: success | warning | neutral
+      image: "/projects/roomly.webp", // disarankan rasio 8:5
+      role: "Class Assignment",
+      stack: "Python, scikit-learn, Transformers",
+      year: 2026,
+      href: "/projects/emotion",
+      github: "https://github.com/...", // opsional
+    },
+    {
+      id: 2,
+      title: "Indonesian Tweet Emotion Classification",
+      description: "Comparing six models on Indonesian tweet emotion...",
+      tag: "NLP",
+      status: { label: "Accepted", tone: "success" }, // opsional: success | warning | neutral
+      image: "/projects/driver.webp", // disarankan rasio 8:5
+      role: "Class Assignment",
+      stack: "Python, scikit-learn, Transformers",
+      year: 2026,
+      href: "/projects/emotion",
+      github: "https://github.com/...", // opsional
+    },
+    {
+      id: 3,
+      title: "Indonesian Tweet Emotion Classification",
+      description: "Comparing six models on Indonesian tweet emotion...",
+      tag: "NLP",
+      status: { label: "Accepted", tone: "success" }, // opsional: success | warning | neutral
+      image: "/projects/roomly.webp", // disarankan rasio 8:5
+      role: "Class Assignment",
+      stack: "Python, scikit-learn, Transformers",
+      year: 2026,
+      href: "/projects/emotion",
+      github: "https://github.com/...", // opsional
+    },
+    {
+      id: 4,
+      title: "Indonesian Tweet Emotion Classification",
+      description: "Comparing six models on Indonesian tweet emotion...",
+      tag: "NLP",
+      status: { label: "Accepted", tone: "success" }, // opsional: success | warning | neutral
+      image: "/projects/driver.webp", // disarankan rasio 8:5
+      role: "Class Assignment",
+      stack: "Python, scikit-learn, Transformers",
+      year: 2026,
+      href: "/projects/emotion",
+      github: "https://github.com/...", // opsional
+    },
+  ];
+
   return (
     <section id="project" className="space-y-10 scroll-mt-28">
-      <SectionHeader badge="Portofolio Karya" title="Proyek Pilihan" />
+      <div className=" mx-auto max-w-6xl">
+        <SectionHeader badge="Portofolio Karya" title="Proyek Pilihan" />
+      </div>
 
-      <div className="grid grid-cols-1 gap-7 sm:gap-8">
+      <ProjectCarousel loop projects={projectCarousels} />
+      {/* <div className="grid grid-cols-1 gap-7 sm:gap-8">
         {currentProjects.map((item, idx) => (
           <ProjectCard
             key={item.name}
@@ -72,7 +133,7 @@ export default function ProjectsSection() {
             Next &rarr;
           </button>
         </div>
-      )}
+      )} */}
     </section>
   );
 }

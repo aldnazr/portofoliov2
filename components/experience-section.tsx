@@ -3,7 +3,10 @@ import SectionHeader from "@/components/section-header";
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="space-y-10 scroll-mt-28">
+    <section
+      id="experience"
+      className="space-y-10 scroll-mt-28 mx-auto max-w-6xl"
+    >
       <SectionHeader badge="Riwayat Karir" title="Pengalaman Profesional" />
 
       <div className="p-1.5 rounded-[2.25rem] border border-hairline bg-overlay-faint">

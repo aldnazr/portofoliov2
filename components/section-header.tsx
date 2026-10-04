@@ -1,17 +1,30 @@
 interface SectionHeaderProps {
-  badge: string;
   title: string;
+  description?: string;
+  badge?: string;
+  className?: string;
 }
 
-export default function SectionHeader({ badge, title }: SectionHeaderProps) {
+export default function SectionHeader({
+  title,
+  description,
+  badge,
+  className = "",
+}: SectionHeaderProps) {
+  // ponytail: badge retained for back-compat; migrate callers to description
+  const subtitle = description ?? badge;
+
   return (
-    <div className="space-y-1.5 md:space-y-2.5">
-      <p className="px-3 py-1 max-w-fit rounded-lg text-[10px] uppercase tracking-[0.2em] font-mono text-accent-strong border border-accent-wash-border bg-accent-wash">
-        {badge}
-      </p>
-      <h2 className="text-2xl sm:text-3xl font-semibold text-foreground tracking-tight">
+    <div className={`space-y-2 md:space-y-2.5 ${className}`}>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
         {title}
       </h2>
+      {subtitle && (
+        <p className="text-base sm:text-lg text-muted leading-relaxed max-w-2xl">
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }
+

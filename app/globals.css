@@ -1,4 +1,15 @@
 @import "tailwindcss";
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where([data-theme="system"], [data-theme="system"] *, :not([data-theme]), :not([data-theme]) *) {
+      @slot;
+    }
+  }
+}
+
 
 html {
   font-family: var(--font-google-sans-flex), sans-serif;
