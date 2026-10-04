@@ -18,9 +18,6 @@ export default function Header() {
           <div className="size-9 rounded-full bg-accent-wash border border-accent-wash-border flex items-center justify-center text-xs font-mono font-bold text-accent-strong transition-transform">
             {profile.initials}
           </div>
-          {/* <span className="text-sm font-medium tracking-tight text-foreground-soft group-hover:text-foreground transition-colors hidden sm:inline">
-            {profile.name}
-          </span> */}
         </a>
 
         {/* Desktop Navigation */}
