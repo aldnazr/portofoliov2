@@ -61,7 +61,7 @@ export default function Footer() {
             <p className="text-xl font-semibold tracking-tight text-foreground">
               {siteTitle}
             </p>
-            <p className="mt-3 max-w-sm text-sm leading-snug text-muted">
+            <p className="mt-3 max-w-sm text-sm font-light leading-snug text-muted">
               {siteDescription}
             </p>
 
