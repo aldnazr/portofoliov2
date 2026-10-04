@@ -8,6 +8,7 @@ import { siteDescription, siteTitle } from "@/data/site";
 const googleSansFlex = Google_Sans_Flex({
   subsets: ["latin"],
   display: "swap",
+  adjustFontFallback: false,
   variable: "--font-google-sans-flex",
 });
 

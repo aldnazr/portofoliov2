@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @custom-variant dark {
-  &:where([data-theme="dark"], [data-theme="dark"] *) {
+  &:where(:root[data-theme="dark"], :root[data-theme="dark"] *) {
     @slot;
   }
   @media (prefers-color-scheme: dark) {
-    &:where([data-theme="system"], [data-theme="system"] *, :not([data-theme]), :not([data-theme]) *) {
+    &:where(:root[data-theme="system"], :root[data-theme="system"] *, :root:not([data-theme]), :root:not([data-theme]) *) {
       @slot;
     }
   }
