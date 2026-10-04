@@ -10,6 +10,7 @@ export type Project = {
   technologies: string[];
   contributions?: string;
   role: string[];
+  year?: string | number;
   result?: string;
   demoUrl?: string;
   sourceUrl?: string;

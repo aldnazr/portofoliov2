@@ -1,4 +1,5 @@
 import { type Project } from "@/data/types";
+import type { Project as CarouselProject } from "@/components/project-carousel/project-card";
 
 export const projects: Project[] = [
   {
@@ -138,3 +139,22 @@ export function slugifyProject(name: string): string {
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => slugifyProject(project.name) === slug);
 }
+
+// Only projects with an actual image can use the image-based carousel card.
+export const carouselProjects: CarouselProject[] = projects.flatMap((project) =>
+  project.image ?
+    [{
+      id: slugifyProject(project.name),
+      title: project.name,
+      description: project.description,
+      tag: project.role[0] ?? project.category,
+      image: project.image.src,
+      imageAlt: project.image.alt,
+      role: project.role.join(", "),
+      stack: project.technologies.join(", "),
+      year: project.year ?? "—",
+      href: `/projects/${slugifyProject(project.name)}`,
+      github: project.sourceUrl,
+    }]
+  : [],
+);

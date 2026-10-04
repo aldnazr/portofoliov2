@@ -1,12 +1,17 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import type { CSSProperties, KeyboardEvent, MouseEvent, PointerEvent } from 'react';
-import { CarouselPagination } from './carousel-pagination';
-import { ProjectCard, type Project } from './project-card';
-import { clamp, cn } from './utils';
+import { useRef, useState } from "react";
+import type {
+  CSSProperties,
+  KeyboardEvent,
+  MouseEvent,
+  PointerEvent,
+} from "react";
+import { CarouselPagination } from "./carousel-pagination";
+import { ProjectCard, type Project } from "./project-card";
+import { clamp, cn } from "./utils";
 
-export type { Project, ProjectStatusTone } from './project-card';
+export type { Project, ProjectStatusTone } from "./project-card";
 
 /**
  * Posisi tiap kartu berdasarkan jaraknya ke kartu aktif (index 0 = aktif,
@@ -27,17 +32,38 @@ type Slot = {
 // Nilai di bawah dikalibrasi terhadap screenshot referensi (kartu 800x500, perspective 1.875x).
 const SLOTS: readonly Slot[] = [
   { x: 0, y: 0, z: 0, rotate: 0, scale: 1, opacity: 1, dim: 0 },
-  { x: 0.669, y: 0.007, z: -0.111, rotate: 12.5, scale: 0.906, opacity: 1, dim: 0.4 },
-  { x: 0.945, y: 0.004, z: -0.212, rotate: 10.3, scale: 0.808, opacity: 0.4, dim: 0.4 },
+  {
+    x: 0.669,
+    y: 0.007,
+    z: -0.111,
+    rotate: 12.5,
+    scale: 0.906,
+    opacity: 1,
+    dim: 0.4,
+  },
+  {
+    x: 0.945,
+    y: 0.004,
+    z: -0.212,
+    rotate: 10.3,
+    scale: 0.808,
+    opacity: 0.4,
+    dim: 0.4,
+  },
   // Slot tersembunyi: kartu diparkir di belakang kartu aktif, jadi masuk/keluarnya
   // simetris kiri-kanan dan tidak ada kartu yang "menyeberang" saat carousel berputar.
   { x: 0, y: 0, z: -0.35, rotate: 0, scale: 0.7, opacity: 0, dim: 0.4 },
 ];
 
-const CARD_W = 'var(--card-w)';
+const CARD_W = "var(--card-w)";
 
 /** Jarak bertanda kartu `index` ke kartu aktif. Kalau loop, dihitung secara melingkar. */
-function getOffset(index: number, active: number, total: number, loop: boolean): number {
+function getOffset(
+  index: number,
+  active: number,
+  total: number,
+  loop: boolean,
+): number {
   const diff = index - active;
   if (!loop) return diff;
   let offset = ((diff % total) + total) % total; // 0..total-1
@@ -56,26 +82,29 @@ function getSlideStyle(offset: number): CSSProperties {
   return {
     // Kartu aktif tanpa transform supaya teksnya tetap tajam.
     transform:
-      offset === 0
-        ? 'none'
-        : `translate3d(calc(${CARD_W} * ${dir * slot.x}), calc(${CARD_W} * ${slot.y}), calc(${CARD_W} * ${slot.z})) rotateY(${dir * slot.rotate}deg) scale(${slot.scale})`,
+      offset === 0 ? "none" : (
+        `translate3d(calc(${CARD_W} * ${dir * slot.x}), calc(${CARD_W} * ${slot.y}), calc(${CARD_W} * ${slot.z})) rotateY(${dir * slot.rotate}deg) scale(${slot.scale})`
+      ),
     opacity: slot.opacity,
     zIndex: Math.max(0, 10 - Math.abs(offset)),
-    pointerEvents: slot.opacity === 0 ? 'none' : undefined,
+    pointerEvents: slot.opacity === 0 ? "none" : undefined,
   };
 }
 
 const DRAG_START_PX = 10;
 const SWIPE_PX = 48;
 
-type DragState = { tracking: boolean; moved: boolean; startX: number; startY: number };
+type DragState = {
+  tracking: boolean;
+  moved: boolean;
+  startX: number;
+  startY: number;
+};
 
 export type ProjectCarouselProps = {
   projects: Project[];
-  /** Label aksesibilitas untuk region carousel */
   label?: string;
   defaultIndex?: number;
-  /** true = carousel berputar (kartu tetangga tetap muncul di ujung). Default: berhenti di kartu pertama/terakhir */
   loop?: boolean;
   onActiveChange?: (index: number) => void;
   className?: string;
@@ -83,7 +112,7 @@ export type ProjectCarouselProps = {
 
 export function ProjectCarousel({
   projects,
-  label = 'Featured projects',
+  label = "Featured projects",
   defaultIndex = 0,
   loop = false,
   onActiveChange,
@@ -92,7 +121,12 @@ export function ProjectCarousel({
   const total = projects.length;
   const initialIndex = clamp(defaultIndex, 0, Math.max(total - 1, 0));
   const [active, setActive] = useState(initialIndex);
-  const drag = useRef<DragState>({ tracking: false, moved: false, startX: 0, startY: 0 });
+  const drag = useRef<DragState>({
+    tracking: false,
+    moved: false,
+    startX: 0,
+    startY: 0,
+  });
 
   if (total === 0) return null;
 
@@ -109,16 +143,16 @@ export function ProjectCarousel({
 
   const handleKeyDown = (e: KeyboardEvent<HTMLElement>) => {
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-    if (e.key === 'ArrowLeft') {
+    if (e.key === "ArrowLeft") {
       e.preventDefault();
       prev();
-    } else if (e.key === 'ArrowRight') {
+    } else if (e.key === "ArrowRight") {
       e.preventDefault();
       next();
-    } else if (e.key === 'Home') {
+    } else if (e.key === "Home") {
       e.preventDefault();
       goTo(0);
-    } else if (e.key === 'End') {
+    } else if (e.key === "End") {
       e.preventDefault();
       goTo(total - 1);
     }
@@ -127,8 +161,13 @@ export function ProjectCarousel({
   // Swipe / drag: geser > SWIPE_PX pindah satu kartu. Pointer baru "ditangkap"
   // setelah benar-benar menggeser, supaya klik biasa pada tombol tetap jalan.
   const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
-    drag.current = { tracking: true, moved: false, startX: e.clientX, startY: e.clientY };
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    drag.current = {
+      tracking: true,
+      moved: false,
+      startX: e.clientX,
+      startY: e.clientY,
+    };
   };
 
   const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
@@ -173,14 +212,17 @@ export function ProjectCarousel({
       aria-label={label}
       tabIndex={-1}
       onKeyDown={handleKeyDown}
-      className={cn('relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,84vw)]', className)}
+      className={cn(
+        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,84vw)]",
+        className,
+      )}
     >
       <div
-        className="relative mx-auto h-[460px] w-full touch-pan-y select-none sm:h-[420px]"
+        className="relative mx-auto h-115 w-full touch-pan-y select-none sm:h-100"
         style={{
-          perspective: 'calc(var(--card-w) * 1.875)',
+          perspective: "calc(var(--card-w) * 1.875)",
           // Titik hilang sedikit di bawah tengah kartu, seperti di referensi.
-          perspectiveOrigin: '50% calc(var(--card-w) * 0.375)',
+          perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
         }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -201,8 +243,8 @@ export function ProjectCarousel({
               aria-hidden={isActive ? undefined : true}
               onClick={isActive ? undefined : () => goTo(i)}
               className={cn(
-                'absolute inset-x-0 top-0 mx-auto h-full w-[var(--card-w)] transition-[transform,opacity] duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none',
-                !isActive && 'cursor-pointer',
+                "absolute inset-x-0 top-0 mx-auto h-full w-(--card-w) transition-[transform,opacity] duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                !isActive && "cursor-pointer",
               )}
               style={getSlideStyle(offset)}
             >
@@ -215,8 +257,10 @@ export function ProjectCarousel({
               />
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 rounded-[2rem] transition-colors duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
-                style={{ backgroundColor: `rgba(0,0,0,${getSlot(offset).dim})` }}
+                className="pointer-events-none absolute inset-0 rounded-4xl transition-colors duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
+                style={{
+                  backgroundColor: `rgba(0,0,0,${getSlot(offset).dim})`,
+                }}
               />
             </div>
           );
