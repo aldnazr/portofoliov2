@@ -36,9 +36,9 @@ export default function FooterProjects() {
             aria-expanded={expanded}
             className="mt-2 inline-flex min-h-11 items-center rounded text-xs font-medium text-accent-strong transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            {expanded
-              ? "Tampilkan lebih sedikit"
-              : `Tampilkan semua project (${projects.length})`}
+            {expanded ?
+              "Tampilkan lebih sedikit"
+            : `Tampilkan semua project (${projects.length})`}
           </button>
         </li>
       )}

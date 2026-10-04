@@ -3,9 +3,20 @@ import { profile } from "@/data/profile";
 import { siteDescription, siteTitle } from "@/data/site";
 import { experience } from "@/data/experience";
 import FooterProjects from "@/components/footer-projects";
-import { GithubIcon, LinkedinIcon } from "@/components/icons";
+import { ArrowIcon, GithubIcon, LinkedinIcon } from "@/components/icons";
+import { topicCards } from "@/features/learns/data/topics";
 
-const columns = [
+const learningLabLinkClass =
+  "block py-1 text-sm leading-relaxed text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+// ponytail: static columns array without external schema validation; extract to config when dynamic
+type FooterColumn = {
+  title: string;
+  href?: string;
+  node: React.ReactNode;
+};
+
+const columns: FooterColumn[] = [
   { title: "Proyek", node: <FooterProjects /> },
   {
     title: "Pengalaman",
@@ -25,23 +36,20 @@ const columns = [
   },
   {
     title: "Learning Lab",
+    href: "/learns",
     node: (
       <ul>
-        <li>
-          <Link
-            href="/learns"
-            className="block py-1 text-sm leading-relaxed text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          >
-            Eksplorasi topik
-          </Link>
-        </li>
-        <li className="py-1 text-sm leading-relaxed text-subtle">
-          Catatan &amp; eksperimen web, mobile, dan kode.
-        </li>
+        {topicCards.map((topic) => (
+          <li key={topic.id}>
+            <Link href={topic.href} className={learningLabLinkClass}>
+              {topic.title}
+            </Link>
+          </li>
+        ))}
       </ul>
     ),
   },
-] as const;
+];
 
 export default function Footer() {
   return (
@@ -81,9 +89,23 @@ export default function Footer() {
 
           {columns.map((column) => (
             <div key={column.title}>
-              <p className="text-sm font-semibold leading-none text-foreground">
-                {column.title}
-              </p>
+              <div className="flex h-5 items-center">
+                {column.href ?
+                  <Link
+                    href={column.href}
+                    className="group inline-flex items-center gap-1 text-sm font-semibold text-foreground transition-colors duration-200 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
+                  >
+                    <span>{column.title}</span>
+                    <ArrowIcon
+                      direction="right"
+                      className="size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+                    />
+                  </Link>
+                : <p className="text-sm font-semibold text-foreground">
+                    {column.title}
+                  </p>
+                }
+              </div>
               <div className="mt-4">{column.node}</div>
             </div>
           ))}
