@@ -121,7 +121,6 @@ export default function ContactSection() {
               <Button
                 type="submit"
                 disabled={isSending}
-                size="lg"
                 className="w-full sm:w-auto"
               >
                 <span>
