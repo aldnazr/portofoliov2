@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Google_Sans_Flex } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteDescription, siteTitle } from "@/data/site";
 
-const inter = Inter({
+const googleSansFlex = Google_Sans_Flex({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-google-sans-flex",
 });
 
 export const metadata: Metadata = {
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="system"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${inter.variable} h-full antialiased`}
+      className={`${googleSansFlex.variable} h-full antialiased`}
     >
       <head>
         <script
