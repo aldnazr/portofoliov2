@@ -2,7 +2,6 @@ import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
-  ArrowUpRightIcon,
   CalendarIcon,
   GithubIcon,
   LayersIcon,
@@ -10,6 +9,7 @@ import {
   UserIcon,
 } from "./icons";
 import { cn, pad } from "./utils";
+import { ArrowIcon } from "../icons";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
 
@@ -199,7 +199,7 @@ export function ProjectCard({
             className="group/cta flex h-12 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-white text-base font-semibold text-neutral-950 transition-colors hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-12 sm:text-base"
           >
             View project
-            <ArrowUpRightIcon className="size-4 transition-transform duration-200 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+            <ArrowIcon direction="upright" />
           </Link>
         </div>
       </div>

@@ -121,3 +121,31 @@ export function BrowserIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function IconCarousel({ className, ...props }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className ?? "size-5 shrink-0"}
+      {...props}
+    >
+      <path d="M4 19h2c0 1.103.897 2 2 2h8c1.103 0 2-.897 2-2h2c1.103 0 2-.897 2-2V7c0-1.103-.897-2-2-2h-2c0-1.103-.897-2-2-2H8c-1.103 0-2 .897-2 2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2zM20 7v10h-2V7h2zM8 5h8l.001 14H8V5zM4 7h2v10H4V7z" />
+    </svg>
+  );
+}
+
+export function IconList({ className, ...props }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={className ?? "size-5 shrink-0"}
+      {...props}
+    >
+      <path d="M4 6h2v2H4zm0 5h2v2H4zm0 5h2v2H4zm16-8V6H8.023v2H18.8zM8 11h12v2H8zm0 5h12v2H8z" />
+    </svg>
+  );
+}

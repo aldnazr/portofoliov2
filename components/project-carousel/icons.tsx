@@ -1,4 +1,4 @@
-import type { SVGProps } from 'react';
+import type { SVGProps } from "react";
 
 type IconProps = SVGProps<SVGSVGElement>;
 
@@ -32,15 +32,6 @@ export function ChevronRightIcon(props: IconProps) {
   return (
     <StrokeIcon strokeWidth={2.5} {...props}>
       <path d="m9 18 6-6-6-6" />
-    </StrokeIcon>
-  );
-}
-
-export function ArrowUpRightIcon(props: IconProps) {
-  return (
-    <StrokeIcon strokeWidth={2.25} {...props}>
-      <path d="M7 17 17 7" />
-      <path d="M8 7h9v9" />
     </StrokeIcon>
   );
 }

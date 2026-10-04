@@ -1,6 +1,5 @@
 import { profile } from "@/data/profile";
 import SectionHeader from "@/components/section-header";
-import { ProjectsCarousel } from "./carouse";
 import { useMemo } from "react";
 import {
   ProjectCarousel,

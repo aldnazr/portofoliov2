@@ -11,7 +11,6 @@ export default function SectionHeader({
   badge,
   className = "",
 }: SectionHeaderProps) {
-  // ponytail: badge retained for back-compat; migrate callers to description
   const subtitle = description ?? badge;
 
   return (
@@ -27,4 +26,3 @@ export default function SectionHeader({
     </div>
   );
 }
-
