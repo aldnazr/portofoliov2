@@ -1,9 +1,22 @@
-import type { LearnConcept, MethodFilter, Paradigm } from "./types";
+import type {
+  LearnConcept,
+  MethodFilter,
+  Paradigm,
+  StateLibrary,
+} from "./types";
 import { functionalConcepts } from "./functional";
 import { oopConcepts } from "./oop";
 import { methodsConcepts } from "./methods";
+import { zustandConcepts } from "./zustand";
+import { riverpodConcepts } from "./riverpod";
 
-export { functionalConcepts, oopConcepts, methodsConcepts };
+export {
+  functionalConcepts,
+  oopConcepts,
+  methodsConcepts,
+  zustandConcepts,
+  riverpodConcepts,
+};
 
 /**
  * Metadata setiap paradigma: label untuk tab, ringkasan singkat,
@@ -47,3 +60,29 @@ export function methodTypeLabel(concept: LearnConcept): string {
       ? "Set.prototype"
       : "Array.prototype";
 }
+
+/**
+ * Metadata tiap sisi topik state-management: label tab, eyebrow,
+ * ringkasan singkat, dan daftar konsep pembelajarannya.
+ */
+export const stateContent: Record<
+  StateLibrary,
+  { label: string; eyebrow: string; tagline: string; concepts: LearnConcept[] }
+> = {
+  zustand: {
+    label: "Zustand",
+    eyebrow: "React · Zustand",
+    tagline:
+      "State React dipegang satu store global: subscribe pakai selector, baca atau ubah sekali pakai getState() dan setState(), side effect tanpa re-render pakai subscribe().",
+    concepts: zustandConcepts,
+  },
+  riverpod: {
+    label: "Riverpod",
+    eyebrow: "Flutter · Riverpod",
+    tagline:
+      "State Flutter dipegang provider hasil build_runner: subscribe pakai ref.watch, baca atau panggil sekali pakai ref.read, side effect tanpa rebuild pakai ref.listen.",
+    concepts: riverpodConcepts,
+  },
+};
+
+export const stateLibraryIds = Object.keys(stateContent) as StateLibrary[];

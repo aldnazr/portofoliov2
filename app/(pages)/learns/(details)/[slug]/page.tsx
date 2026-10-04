@@ -3,9 +3,11 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import BackLink from "@/components/back-link";
 import {
+  LearnConcept,
   LearnTopic,
   MethodFilter,
   Paradigm,
+  StateLibrary,
 } from "@/features/learns/data/types";
 import ConceptExplorer, {
   ExplorerGroup,
@@ -20,6 +22,8 @@ import {
   methodTypeLabel,
   methodsConcepts,
   paradigmIds,
+  stateContent,
+  stateLibraryIds,
 } from "@/features/learns/data";
 import { highlightConcepts } from "@/features/learns/data/highlight";
 
@@ -46,6 +50,16 @@ const topics: Record<LearnTopic, TopicMeta> = {
     metaTitle: "Array & String Methods | Interactive Learning Lab",
     description:
       "Keterangan dan contoh penggunaan dari method transformasi data esensial: forEach, map, filter, reduce, flat, flatMap, split, dan join.",
+    next: {
+      href: "/learns/state-management",
+      title: "Global State Management",
+    },
+  },
+  "state-management": {
+    title: "Global State Management",
+    metaTitle: "Global State Management | Interactive Learning Lab",
+    description:
+      "Kapan UI harus subscribe saat state berubah dan kapan cukup membaca atau mengubahnya sekali, dibandingkan antara React (Zustand) dan Flutter (Riverpod) lewat contoh kode nyata.",
     next: { href: "/learns/paradigms", title: "Functional & OOP" },
   },
 };
@@ -111,6 +125,49 @@ async function TopicContent({ slug }: { slug: string }) {
             concept.id,
             methodTypeLabel(concept),
           ]),
+        )}
+      />
+    );
+  }
+
+  if (slug === "state-management") {
+    const highlighted = Object.fromEntries(
+      await Promise.all(
+        stateLibraryIds.map(async (lib) => [
+          lib,
+          await highlightConcepts(stateContent[lib].concepts),
+        ]),
+      ),
+    ) as Record<StateLibrary, Record<string, string>>;
+
+    const groups = Object.fromEntries(
+      stateLibraryIds.map((lib) => [
+        lib,
+        {
+          eyebrow: stateContent[lib].eyebrow,
+          tagline: stateContent[lib].tagline,
+          concepts: stateContent[lib].concepts,
+          highlighted: highlighted[lib],
+          defaultLang: lib === "zustand" ? "ts" : "dart",
+        },
+      ]),
+    ) as Record<StateLibrary, ExplorerGroup>;
+
+    return (
+      <ConceptExplorer
+        idPrefix="state"
+        param="library"
+        options={stateLibraryIds.map((id) => ({
+          id,
+          label: stateContent[id].label,
+        }))}
+        groups={groups}
+        metaByConcept={Object.fromEntries(
+          stateLibraryIds
+            .flatMap((lib) => stateContent[lib].concepts)
+            .flatMap((concept) =>
+              concept.meta ? [[concept.id, concept.meta]] : [],
+            ),
         )}
       />
     );

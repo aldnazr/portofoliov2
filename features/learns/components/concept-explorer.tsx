@@ -32,8 +32,9 @@ type ConceptExplorerProps<T extends string> = {
 
 /**
  * Explorer materi learns: segmented control + anchor nav + section per konsep.
- * Dipakai topik paradigms & methods; state filter tersimpan di search param URL,
- * jadi highlight dari server cukup disiapkan sekali untuk semua grup.
+ * Dipakai topik paradigms, methods, dan state-management; state filter tersimpan
+ * di search param URL, jadi highlight dari server cukup disiapkan sekali
+ * untuk semua grup.
  */
 export default function ConceptExplorer<T extends string>({
   idPrefix,

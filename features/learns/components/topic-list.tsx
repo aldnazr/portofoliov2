@@ -50,6 +50,23 @@ const topicCards: TopicCard[] = [
     ],
     href: "/learns/methods",
   },
+  {
+    id: "state-management",
+    index: "03",
+    category: "Manajemen State",
+    title: "Global State Management",
+    description:
+      "Kapan UI harus ikut update saat state berubah dan kapan cukup baca atau ubah sekali, dibandingkan antara React (Zustand) dan Flutter (Riverpod) lewat contoh kode nyata.",
+    tags: [
+      "Zustand",
+      "Riverpod",
+      "useStore",
+      "ref.watch",
+      "getState",
+      "ref.listen",
+    ],
+    href: "/learns/state-management",
+  },
 ];
 
 export default function TopicList() {

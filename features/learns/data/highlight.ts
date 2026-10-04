@@ -1,10 +1,10 @@
 import { createHighlighter } from "shiki";
 import type { LearnConcept, Paradigm } from "./types";
 
-// ponytail: satu highlighter per proses server; cukup karena ketiga bahasa
-// selalu dibutuhkan gabungan — buat lazy-load per bahasa kalau init terasa berat.
+// ponytail: satu highlighter per proses server; cukup karena kelima bahasa
+// selalu dibutuhkan gabungan; buat lazy-load per bahasa kalau init terasa berat.
 const highlighterPromise = createHighlighter({
-  langs: ["typescript", "dart", "kotlin"],
+  langs: ["typescript", "tsx", "dart", "kotlin", "bash"],
   themes: ["github-light", "github-dark"],
 });
 

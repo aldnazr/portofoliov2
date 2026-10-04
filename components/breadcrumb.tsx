@@ -8,6 +8,7 @@ const SEGMENT_META: Record<string, { label: string; href?: string }> = {
   learns: { label: "Learns" },
   methods: { label: "Array & String Methods" },
   paradigms: { label: "Functional & OOP" },
+  "state-management": { label: "Global State Management" },
   projects: { label: "Project", href: "/#project" },
 };
 
