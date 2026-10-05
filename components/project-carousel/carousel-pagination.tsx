@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 import { cn, pad } from "./utils";
+import { useIsDesktop } from "@/hooks/use-desktop";
 
 type CarouselPaginationProps = {
   total: number;
@@ -47,6 +48,19 @@ export function CarouselPagination({
   canNext = true,
   className,
 }: CarouselPaginationProps) {
+  const isDesktop = useIsDesktop();
+  const maxVisible = isDesktop ? 7 : 5;
+  const count = Math.min(total, maxVisible);
+  // ponytail: sliding window, no ellipsis markers; add dots/ellipsis when a
+  // project count above 7 ships
+  const start =
+    total > maxVisible ?
+      Math.min(
+        Math.max(active - Math.floor(maxVisible / 2), 0),
+        total - maxVisible,
+      )
+    : 0;
+
   return (
     <nav
       aria-label="Project pagination"
@@ -58,7 +72,8 @@ export function CarouselPagination({
       <ArrowButton direction="prev" onClick={onPrev} disabled={!canPrev} />
 
       <ul className="flex items-center gap-2">
-        {Array.from({ length: total }, (_, i) => {
+        {Array.from({ length: count }, (_, k) => {
+          const i = start + k;
           const isActive = i === active;
           return (
             <li key={i} className="w-max min-w-8">
@@ -72,9 +87,9 @@ export function CarouselPagination({
                 <span
                   className={cn(
                     "block h-1.75 rounded-full transition-all duration-300 ease-out motion-reduce:transition-none",
-                    isActive ?
-                      "w-5 h-2 bg-accent"
-                    : "w-1.75 bg-shade group-hover:bg-accent/60",
+                    isActive ? "w-5 h-2 bg-accent" : (
+                      "w-1.75 bg-shade group-hover:bg-accent/60"
+                    ),
                   )}
                 />
               </button>
@@ -83,11 +98,9 @@ export function CarouselPagination({
         })}
       </ul>
 
-      <p className="mx-2 min-w-10 text-center font-medium text-sm text-muted">
-        <span className="font-bold text-foreground">
-          {pad(active + 1)}
-        </span>{" "}
-        / {pad(total)}
+      <p className="shrink-0 mx-2 min-w-10 text-center font-medium text-sm text-muted">
+        <span className="font-bold text-foreground">{pad(active + 1)}</span> /{" "}
+        {pad(total)}
       </p>
 
       <ArrowButton direction="next" onClick={onNext} disabled={!canNext} />
