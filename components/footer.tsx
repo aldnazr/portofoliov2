@@ -78,7 +78,7 @@ export default function Footer() {
                       <GithubIcon className="size-5 shrink-0" />
                     )}
                     {link.label === "LinkedIn" && (
-                      <LinkedinIcon className="size-5 shrink-0" />
+                      <LinkedinIcon className="size-5.25 shrink-0" />
                     )}
                     <span className="sr-only">{link.label}</span>
                   </a>

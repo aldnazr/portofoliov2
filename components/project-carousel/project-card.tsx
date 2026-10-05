@@ -144,7 +144,7 @@ export function ProjectCard({
           <span
             className={cn(
               pill,
-              "text-xs sm:text-sm min-w-0 max-w-full bg-white text-neutral-950",
+              "bg-white/90 shadow text-xs sm:text-sm min-w-0 max-w-full text-neutral-950",
             )}
           >
             <span className="truncate">{tag}</span>
