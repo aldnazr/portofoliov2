@@ -57,9 +57,9 @@ export default function ProjectVisual({
 
       {/* Project identity */}
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 sm:gap-3 p-8 text-center">
-        <span className="px-2.5 py-1 rounded-md font-mono text-[10px] font-bold tracking-widest text-accent-strong bg-accent-wash border border-accent-wash-border">
+        {/* <span className="px-2.5 py-1 rounded-md font-mono text-[10px] font-bold tracking-widest text-accent-strong bg-accent-wash border border-accent-wash-border">
           {number}
-        </span>
+        </span> */}
         <span
           className={`font-mono font-bold tracking-tight text-transparent bg-clip-text bg-linear-to-br from-foreground via-foreground to-accent ${
             isHero ? "text-6xl sm:text-7xl" : "text-5xl"

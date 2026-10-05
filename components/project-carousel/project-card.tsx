@@ -10,6 +10,7 @@ import {
 } from "./icons";
 import { cn, pad } from "./utils";
 import { ArrowIcon } from "../icons";
+import ProjectVisual from "@/components/project-visual";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
 
@@ -21,8 +22,10 @@ export type Project = {
   tag: string;
   /** Pill status opsional di samping tag, mis. "Accepted" / "Ongoing" */
   status?: { label: string; tone?: ProjectStatusTone };
-  image: string | StaticImageData;
+  image?: string | StaticImageData;
   imageAlt?: string;
+  /** Dipakai ProjectVisual saat image tidak ada */
+  category: string;
   role: string;
   stack: string;
   year: string | number;
@@ -93,6 +96,7 @@ export function ProjectCard({
     status,
     image,
     imageAlt,
+    category,
     role,
     stack,
     year,
@@ -112,15 +116,28 @@ export function ProjectCard({
         interactive && "ring ring-accent-strong/40",
       )}
     >
-      <Image
-        src={image}
-        alt={imageAlt ?? ""}
-        fill
-        sizes="(min-width: 912px) 800px, 88vw"
-        preload={preload}
-        draggable={false}
-        className="object-cover bg-neutral-900"
-      />
+      {image ?
+        <Image
+          src={image}
+          alt={imageAlt ?? ""}
+          fill
+          sizes="(min-width: 912px) 800px, 88vw"
+          preload={preload}
+          draggable={false}
+          className="object-cover bg-neutral-900"
+        />
+      :
+        /* Kartu selalu gelap; paksa token light-dark() ProjectVisual tetap dark di tema terang. */
+        <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
+          <ProjectVisual
+            number={pad(index + 1)}
+            name={title}
+            category={category}
+            variant="hero"
+            className="h-full rounded-none border-0 -translate-y-8 sm:-translate-y-10"
+          />
+        </div>
+      }
 
       {/* Baris atas: tag + status (kiri), counter (kanan) */}
       <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-3 sm:inset-x-5 sm:top-5">

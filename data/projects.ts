@@ -140,24 +140,18 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => slugifyProject(project.name) === slug);
 }
 
-// Only projects with an actual image can use the image-based carousel card.
-export const carouselProjects: CarouselProject[] = projects.flatMap(
-  (project) =>
-    project.image ?
-      [
-        {
-          id: slugifyProject(project.name),
-          title: project.name,
-          description: project.description,
-          tag: project.role[0] ?? project.category,
-          image: project.image.src,
-          imageAlt: project.image.alt,
-          role: project.role.join(", "),
-          stack: project.technologies.join(", "),
-          year: project.year ?? "—",
-          href: `/projects/${slugifyProject(project.name)}`,
-          github: project.sourceUrl,
-        },
-      ]
-    : [],
-);
+// Tanpa gambar tetap masuk; kartu carousel memakai ProjectVisual sebagai fallback.
+export const carouselProjects: CarouselProject[] = projects.map((project) => ({
+  id: slugifyProject(project.name),
+  title: project.name,
+  description: project.description,
+  tag: project.role[0] ?? project.category,
+  image: project.image?.src,
+  imageAlt: project.image?.alt,
+  category: project.category,
+  role: project.role.join(", "),
+  stack: project.technologies.join(", "),
+  year: project.year ?? "—",
+  href: `/projects/${slugifyProject(project.name)}`,
+  github: project.sourceUrl,
+}));
