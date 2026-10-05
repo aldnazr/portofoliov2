@@ -40,7 +40,7 @@ export const projects: Project[] = [
   },
   {
     name: "Roomly",
-    image: { src: "/projects/roomly.webp", alt: "roomly" },
+    image: { src: "/projects/roomly2.webp", alt: "roomly" },
     category: "Hotel Booking & Operations System",
     role: ["Frontend"],
     description:
@@ -141,20 +141,23 @@ export function getProjectBySlug(slug: string): Project | undefined {
 }
 
 // Only projects with an actual image can use the image-based carousel card.
-export const carouselProjects: CarouselProject[] = projects.flatMap((project) =>
-  project.image ?
-    [{
-      id: slugifyProject(project.name),
-      title: project.name,
-      description: project.description,
-      tag: project.role[0] ?? project.category,
-      image: project.image.src,
-      imageAlt: project.image.alt,
-      role: project.role.join(", "),
-      stack: project.technologies.join(", "),
-      year: project.year ?? "—",
-      href: `/projects/${slugifyProject(project.name)}`,
-      github: project.sourceUrl,
-    }]
-  : [],
+export const carouselProjects: CarouselProject[] = projects.flatMap(
+  (project) =>
+    project.image ?
+      [
+        {
+          id: slugifyProject(project.name),
+          title: project.name,
+          description: project.description,
+          tag: project.role[0] ?? project.category,
+          image: project.image.src,
+          imageAlt: project.image.alt,
+          role: project.role.join(", "),
+          stack: project.technologies.join(", "),
+          year: project.year ?? "—",
+          href: `/projects/${slugifyProject(project.name)}`,
+          github: project.sourceUrl,
+        },
+      ]
+    : [],
 );

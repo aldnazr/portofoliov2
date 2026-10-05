@@ -1,11 +1,32 @@
+"use client";
+
 import { profile } from "@/data/profile";
+import { motion, useReducedMotion } from "motion/react";
 import { ButtonLink } from "./button";
 import { ArrowIcon, GithubIcon, LinkedinIcon } from "./icons";
 
+const entrance = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function HeroSection() {
+  const reduceMotion = useReducedMotion();
+  const reveal = (delay: number) => ({
+    initial: reduceMotion ? false : "hidden" as const,
+    animate: "visible" as const,
+    variants: entrance,
+    transition: { duration: 0.65, delay, ease },
+  });
+
   return (
     <section className="space-y-10 px-4 sm:px-6 mx-auto max-w-6xl">
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-overlay text-xs text-muted tracking-wide font-mono">
+      <motion.div
+        {...reveal(0)}
+        className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-overlay text-xs text-muted tracking-wide font-mono"
+      >
         <svg
           className="w-3.5 h-3.5 text-accent"
           fill="none"
@@ -26,21 +47,30 @@ export default function HeroSection() {
           />
         </svg>
         {profile.location}
-      </div>
+      </motion.div>
 
       <div className="space-y-6 max-w-3xl">
-        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight text-foreground leading-[1.15]">
+        <motion.h1
+          {...reveal(0.12)}
+          className="text-4xl sm:text-6xl font-semibold tracking-tight text-foreground leading-[1.15]"
+        >
           Halo, Saya{" "}
           <span className="text-transparent bg-clip-text bg-linear-to-r from-foreground via-foreground to-accent">
             {profile.name}
           </span>
-        </h1>
-        <p className="text-base sm:text-lg tracking-tight text-muted font-normal leading-relaxed">
+        </motion.h1>
+        <motion.p
+          {...reveal(0.24)}
+          className="text-base sm:text-lg tracking-tight text-muted font-normal leading-relaxed"
+        >
           {profile.hero}
-        </p>
+        </motion.p>
       </div>
 
-      <div className="flex flex-wrap items-center gap-4 pt-2">
+      <motion.div
+        {...reveal(0.36)}
+        className="flex flex-wrap items-center gap-4 pt-2"
+      >
         <ButtonLink href="#project">
           <span>Lihat Proyek</span>
           <span className="w-6 h-6 rounded-full bg-on-primary-wash flex items-center justify-center group-hover:scale-105 transition-transform">
@@ -63,7 +93,7 @@ export default function HeroSection() {
             </a>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -119,14 +119,13 @@ export function ProjectCard({
         sizes="(min-width: 912px) 800px, 88vw"
         preload={preload}
         draggable={false}
-        className="object-cover"
+        className="object-cover bg-neutral-900"
       />
 
       {/* Baris atas: tag + status (kiri), counter (kanan) */}
       <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-3 sm:inset-x-5 sm:top-5">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
           <span className={cn(pill, "gap-1.5 bg-white text-neutral-950")}>
-            <SparkleIcon className="size-3 sm:size-3.5" />
             {tag}
           </span>
           {status && (
