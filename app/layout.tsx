@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Google_Sans_Flex } from "next/font/google";
+import { Geist_Mono, Google_Sans_Flex } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -10,6 +10,11 @@ const googleSansFlex = Google_Sans_Flex({
   display: "swap",
   adjustFontFallback: false,
   variable: "--font-google-sans-flex",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="system"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${googleSansFlex.variable} h-full antialiased`}
+      className={`${googleSansFlex.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <script

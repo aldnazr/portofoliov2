@@ -101,13 +101,13 @@ export function ProjectCard({
   } = project;
 
   const pill =
-    "inline-flex h-7 items-center rounded-full px-3 text-sm font-medium";
+    "inline-flex h-6 sm:h-7 items-center rounded-full px-3 text-sm font-medium";
 
   return (
     <article
       inert={!interactive}
       className={cn(
-        "relative isolate flex h-full w-full flex-col justify-end overflow-hidden rounded-4xl bg-neutral-950 text-white transition-shadow duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+        "relative isolate flex h-full w-full flex-col justify-end overflow-hidden rounded-3xl sm:rounded-4xl bg-neutral-950 text-white transition-shadow duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
         interactive ? SHADOW_ACTIVE : SHADOW_SIDE,
         interactive && "ring ring-white/40",
       )}
@@ -141,7 +141,7 @@ export function ProjectCard({
             </span>
           )}
         </div>
-        <span className="inline-flex h-7 shrink-0 items-center rounded-full bg-black/45 px-3 text-sm font-semibold text-white tabular-nums backdrop-blur-md">
+        <span className="inline-flex px-2.5 h-6 shrink-0 items-center rounded-full bg-black/45 text-xs font-semibold text-white tabular-nums backdrop-blur-md sm:px-3 sm:h-7 sm:text-sm">
           {pad(index + 1)}
           <span className="ml-1 font-medium text-white/60">/ {pad(total)}</span>
         </span>
@@ -180,7 +180,7 @@ export function ProjectCard({
           />
         </dl>
 
-        <div className="mt-3.5 flex items-center gap-3 sm:mt-4">
+        <div className="mt-3.5 sm:mt-4 flex items-center gap-3">
           {github && (
             <a
               href={github}
@@ -188,19 +188,19 @@ export function ProjectCard({
               rel="noopener noreferrer"
               draggable={false}
               aria-label={`${title} on GitHub`}
-              className="grid size-12 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-colors hover:bg-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-12"
+              className="grid size-10 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-colors hover:bg-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-12"
             >
-              <GithubIcon className="size-5" />
+              <GithubIcon className="size-4.5 sm:size-5" />
             </a>
           )}
           <Link
             href={href}
             draggable={false}
             aria-label={`View project: ${title}`}
-            className="group/cta flex h-12 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-white text-base font-semibold text-neutral-950 transition-colors hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-12 sm:text-base"
+            className="group/cta flex h-10 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-white text-sm font-semibold text-neutral-950 transition-colors hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-12 sm:text-base"
           >
             View project
-            <ArrowIcon direction="upright" />
+            <ArrowIcon direction="upright" className="size-4" />
           </Link>
         </div>
       </div>

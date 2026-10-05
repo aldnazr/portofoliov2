@@ -214,7 +214,12 @@ export function ProjectCarousel({
   };
 
   const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
-    if (!e.isPrimary || (e.pointerType === "mouse" && e.button !== 0) || total < 2) return;
+    if (
+      !e.isPrimary ||
+      (e.pointerType === "mouse" && e.button !== 0) ||
+      total < 2
+    )
+      return;
     drag.current = {
       pointerId: e.pointerId,
       moved: false,
@@ -273,15 +278,14 @@ export function ProjectCarousel({
       tabIndex={-1}
       onKeyDown={handleKeyDown}
       className={cn(
-        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,84vw)]",
+        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,76vw)] md:[--card-w:min(640px,84vw)]",
         className,
       )}
     >
       <div
-        className="relative mx-auto h-100 w-full touch-pan-y select-none"
+        className="relative mx-auto h-120 md:h-100 w-full touch-pan-y select-none"
         style={{
           perspective: "calc(var(--card-w) * 1.875)",
-          // Titik hilang sedikit di bawah tengah kartu, seperti di referensi.
           perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
         }}
         onDragStart={(e) => e.preventDefault()}
@@ -309,7 +313,8 @@ export function ProjectCarousel({
               onClick={isActive ? undefined : () => goTo(i)}
               className={cn(
                 "absolute inset-x-0 top-0 mx-auto h-full w-(--card-w) ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-                dragProgress === null && "transition-[transform,opacity] duration-650",
+                dragProgress === null &&
+                  "transition-[transform,opacity] duration-650",
                 !isActive && "cursor-pointer",
               )}
               style={getSlideStyle(offset, slot)}
@@ -324,7 +329,7 @@ export function ProjectCarousel({
               <div
                 aria-hidden="true"
                 className={cn(
-                  "pointer-events-none absolute inset-0 rounded-4xl ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                  "pointer-events-none absolute inset-0 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
                   dragProgress === null && "transition-colors duration-650",
                 )}
                 style={{ backgroundColor: `rgba(0,0,0,${slot.dim})` }}

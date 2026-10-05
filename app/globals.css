@@ -1,8 +1,10 @@
 @import "tailwindcss";
+
 @custom-variant dark {
   &:where(:root[data-theme="dark"], :root[data-theme="dark"] *) {
     @slot;
   }
+
   @media (prefers-color-scheme: dark) {
     &:where(:root[data-theme="system"], :root[data-theme="system"] *, :root:not([data-theme]), :root:not([data-theme]) *) {
       @slot;
@@ -272,7 +274,7 @@ pre.shiki {
   padding: 4px 14px 6px !important;
   margin: 0 !important;
   font-family: var(--font-mono) !important;
-  font-size: 0.8125rem;
+  font-size: 0.85rem;
   line-height: 1.75;
   overflow-x: auto;
 }
