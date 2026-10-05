@@ -1,10 +1,6 @@
 import { profile } from "@/data/profile";
 import SectionHeader from "@/components/section-header";
 import { useMemo } from "react";
-import {
-  ProjectCarousel,
-  type Project,
-} from "./project-carousel/project-carousel";
 import { projects } from "@/data/projects";
 
 export default function AboutSection() {
