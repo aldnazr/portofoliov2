@@ -8,10 +8,10 @@ import type {
   PointerEvent,
 } from "react";
 import { CarouselPagination } from "./carousel-pagination";
-import { ProjectCard, type Project } from "./project-card";
+import { ProjectCard, CarouselProject } from "./project-card";
 import { clamp, cn } from "./utils";
 
-export type { Project, ProjectStatusTone } from "./project-card";
+export type { CarouselProject, ProjectStatusTone } from "./project-card";
 
 /**
  * Posisi tiap kartu berdasarkan jaraknya ke kartu aktif (index 0 = aktif,
@@ -148,7 +148,7 @@ type DragState = {
 };
 
 export type ProjectCarouselProps = {
-  projects: Project[];
+  projects: CarouselProject[];
   label?: string;
   defaultIndex?: number;
   loop?: boolean;

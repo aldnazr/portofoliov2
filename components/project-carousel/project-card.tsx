@@ -14,7 +14,7 @@ import ProjectVisual from "@/components/project-visual";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
 
-export type Project = {
+export type CarouselProject = {
   id: string | number;
   title: string;
   description: string;
@@ -36,7 +36,7 @@ export type Project = {
 };
 
 type ProjectCardProps = {
-  project: Project;
+  project: CarouselProject;
   /** Index 0-based, ditampilkan sebagai "02 / 06" */
   index: number;
   total: number;
@@ -126,8 +126,7 @@ export function ProjectCard({
           draggable={false}
           className="object-cover bg-neutral-900"
         />
-      :
-        /* Kartu selalu gelap; paksa token light-dark() ProjectVisual tetap dark di tema terang. */
+      : /* Kartu selalu gelap; paksa token light-dark() ProjectVisual tetap dark di tema terang. */
         <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
           <ProjectVisual
             number={pad(index + 1)}
@@ -142,8 +141,13 @@ export function ProjectCard({
       {/* Baris atas: tag + status (kiri), counter (kanan) */}
       <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-3 sm:inset-x-5 sm:top-5">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
-          <span className={cn(pill, "gap-1.5 bg-white text-neutral-950")}>
-            {tag}
+          <span
+            className={cn(
+              pill,
+              "text-xs sm:text-sm min-w-0 max-w-full bg-white text-neutral-950",
+            )}
+          >
+            <span className="truncate">{tag}</span>
           </span>
           {status && (
             <span

@@ -1,5 +1,5 @@
 import { type Project } from "@/data/types";
-import type { Project as CarouselProject } from "@/components/project-carousel/project-card";
+import type { CarouselProject } from "@/components/project-carousel/project-card";
 
 export const projects: Project[] = [
   {
@@ -140,12 +140,11 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((project) => slugifyProject(project.name) === slug);
 }
 
-// Tanpa gambar tetap masuk; kartu carousel memakai ProjectVisual sebagai fallback.
 export const carouselProjects: CarouselProject[] = projects.map((project) => ({
   id: slugifyProject(project.name),
   title: project.name,
   description: project.description,
-  tag: project.role[0] ?? project.category,
+  tag: project.category,
   image: project.image?.src,
   imageAlt: project.image?.alt,
   category: project.category,
