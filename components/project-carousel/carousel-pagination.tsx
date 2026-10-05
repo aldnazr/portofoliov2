@@ -30,7 +30,7 @@ function ArrowButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={direction === "prev" ? "Previous project" : "Next project"}
-      className="grid size-9 shrink-0 place-items-center rounded-full bg-[#eff1f4] text-[#0f0f10] transition-[background-color,transform,opacity] duration-200 hover:bg-[#e4e7ec] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-40 sm:size-11 dark:bg-[#1e2025] dark:text-white dark:hover:bg-[#282a32] dark:focus-visible:outline-white"
+      className="grid size-9 shrink-0 place-items-center rounded-full bg-surface-muted text-foreground transition-[background-color,color,transform,opacity] duration-200 hover:bg-accent-wash hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong active:scale-95 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none sm:size-11"
     >
       <Icon className="size-4 sm:size-5" />
     </button>
@@ -51,7 +51,7 @@ export function CarouselPagination({
     <nav
       aria-label="Project pagination"
       className={cn(
-        "relative mx-auto flex w-fit max-w-full items-center gap-1.5 rounded-full border border-black/5 bg-white p-1.5 shadow-[0_18px_40px_-18px_rgba(15,23,42,0.25)] sm:gap-3.5 dark:border-white/10 dark:bg-[#151619] dark:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)]",
+        "relative mx-auto flex w-fit max-w-full items-center gap-1.5 rounded-full border border-hairline bg-surface p-1.5 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.25)] sm:gap-3.5 dark:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)]",
         className,
       )}
     >
@@ -67,14 +67,14 @@ export function CarouselPagination({
                 onClick={() => onSelect(i)}
                 aria-label={`Go to project ${i + 1}`}
                 aria-current={isActive ? "true" : undefined}
-                className="group grid h-8 w-full place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-neutral-900 dark:focus-visible:outline-white"
+                className="group grid h-8 w-full place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong"
               >
                 <span
                   className={cn(
-                    "block h-1.75 rounded-full transition-all duration-300 ease-out",
+                    "block h-1.75 rounded-full transition-all duration-300 ease-out motion-reduce:transition-none",
                     isActive ?
-                      "w-5 h-2 bg-[#0f0f10] dark:bg-white"
-                    : "w-1.75 bg-neutral-300 group-hover:bg-neutral-400 dark:bg-neutral-700 dark:group-hover:bg-neutral-600",
+                      "w-5 h-2 bg-accent"
+                    : "w-1.75 bg-shade group-hover:bg-accent/60",
                   )}
                 />
               </button>
@@ -83,8 +83,8 @@ export function CarouselPagination({
         })}
       </ul>
 
-      <p className="mx-2 min-w-10 text-center font-medium text-sm text-neutral-500 dark:text-neutral-400">
-        <span className="font-bold text-[#0f0f10] dark:text-white">
+      <p className="mx-2 min-w-10 text-center font-medium text-sm text-muted">
+        <span className="font-bold text-foreground">
           {pad(active + 1)}
         </span>{" "}
         / {pad(total)}

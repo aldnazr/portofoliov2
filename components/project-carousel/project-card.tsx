@@ -109,7 +109,7 @@ export function ProjectCard({
       className={cn(
         "relative isolate flex h-full w-full flex-col justify-end overflow-hidden rounded-3xl sm:rounded-4xl bg-neutral-950 text-white transition-shadow duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
         interactive ? SHADOW_ACTIVE : SHADOW_SIDE,
-        interactive && "ring ring-white/40",
+        interactive && "ring ring-accent-strong/40",
       )}
     >
       <Image
