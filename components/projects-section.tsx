@@ -4,7 +4,7 @@ import SectionHeader from "@/components/section-header";
 import { carouselProjects } from "@/data/projects";
 import { useState } from "react";
 import { ProjectCarousel } from "./project-carousel/project-carousel";
-import ProjectsList from "./projects-list";
+import ProjectsList from "./project-list/projects-list";
 import { IconCarousel, IconList } from "./icons";
 
 export default function ProjectsSection() {

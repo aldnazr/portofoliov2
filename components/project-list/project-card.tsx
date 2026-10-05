@@ -3,8 +3,8 @@ import Image from "next/image";
 import type { Project } from "@/data/types";
 import { slugifyProject } from "@/data/projects";
 import ProjectVisual from "@/components/project-visual";
-import { ArrowIcon, BrowserIcon, GithubIcon, PlayStoreIcon } from "./icons";
-import ProjectActionLink from "./project-action-link";
+import { ArrowIcon, BrowserIcon, GithubIcon, PlayStoreIcon } from "../icons";
+import ProjectActionLink from "../project-action-link";
 
 export default function ProjectCard({
   item,
@@ -47,7 +47,7 @@ export default function ProjectCard({
           </p>
 
           <div className="flex flex-wrap gap-2 pt-1">
-            {item.technologies.map((tech, i) => (
+            {item.technologies.slice(0, 5).map((tech, i) => (
               <span
                 key={i}
                 className="px-3 py-1 rounded-lg bg-surface-muted border border-hairline text-xs font-mono text-foreground-soft"
@@ -55,6 +55,11 @@ export default function ProjectCard({
                 {tech}
               </span>
             ))}
+            {item.technologies.length > 5 && (
+              <span className="px-3 py-1 rounded-lg bg-surface-muted border border-hairline text-xs font-mono text-foreground-soft">
+                +{item.technologies.length - 5} More
+              </span>
+            )}
           </div>
 
           <div className="relative pt-2 sm:pt-3 flex flex-wrap items-center gap-3">

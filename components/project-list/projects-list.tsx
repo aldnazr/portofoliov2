@@ -2,8 +2,8 @@
 
 import { projects } from "@/data/projects";
 import { useState } from "react";
-import ProjectCard from "./project-card";
-import { ArrowIcon } from "./icons";
+import ProjectCard from "../project-list/project-card";
+import { ArrowIcon } from "../icons";
 
 const ITEMS_PER_PAGE = 3;
 

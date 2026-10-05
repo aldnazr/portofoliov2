@@ -139,7 +139,7 @@ export function ProjectCard({
       }
 
       {/* Baris atas: tag + status (kiri), counter (kanan) */}
-      <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-3 sm:inset-x-5 sm:top-5">
+      <div className="absolute inset-x-4.5 top-4.5 flex items-start justify-between gap-3 sm:inset-x-6.5 sm:top-6">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
           <span
             className={cn(
@@ -161,9 +161,9 @@ export function ProjectCard({
             </span>
           )}
         </div>
-        <span className="inline-flex px-2.5 h-6 shrink-0 items-center rounded-full bg-black/45 text-xs font-semibold text-white tabular-nums backdrop-blur-md sm:px-3 sm:h-7 sm:text-sm">
+        <span className="inline-flex px-2.5 h-6 shrink-0 items-center rounded-full bg-black/45 text-xs font-medium text-white tabular-nums backdrop-blur-md sm:px-3 sm:h-7 sm:text-sm">
           {pad(index + 1)}
-          <span className="ml-1 font-medium text-white/60">/ {pad(total)}</span>
+          <span className="ml-1 font-light text-white/60">/ {pad(total)}</span>
         </span>
       </div>
 
