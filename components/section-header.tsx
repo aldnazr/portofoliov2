@@ -15,11 +15,11 @@ export default function SectionHeader({
 
   return (
     <div className={`space-y-2 md:space-y-2.5 ${className}`}>
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+      <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-base sm:text-lg text-muted leading-relaxed max-w-2xl">
+        <p className="text-base sm:text-base text-muted leading-relaxed max-w-2xl">
           {subtitle}
         </p>
       )}
