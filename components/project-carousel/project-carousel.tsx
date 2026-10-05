@@ -191,18 +191,23 @@ export function ProjectCarousel({
 
   const handleKeyDown = (e: KeyboardEvent<HTMLElement>) => {
     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
-    if (e.key === "ArrowLeft") {
-      e.preventDefault();
-      prev();
-    } else if (e.key === "ArrowRight") {
-      e.preventDefault();
-      next();
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      goTo(0);
-    } else if (e.key === "End") {
-      e.preventDefault();
-      goTo(total - 1);
+    switch (e.key) {
+      case "ArrowLeft":
+        e.preventDefault();
+        prev();
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        next();
+        break;
+      case "Home":
+        e.preventDefault();
+        goTo(0);
+        break;
+      case "End":
+        e.preventDefault();
+        goTo(total - 1);
+        break;
     }
   };
 
@@ -278,12 +283,12 @@ export function ProjectCarousel({
       tabIndex={-1}
       onKeyDown={handleKeyDown}
       className={cn(
-        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,76vw)] md:[--card-w:min(640px,84vw)]",
+        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,68vw)] md:[--card-w:min(640px,84vw)]",
         className,
       )}
     >
       <div
-        className="relative mx-auto h-120 md:h-100 w-full touch-pan-y select-none"
+        className="relative mx-auto h-110 md:h-100 w-full touch-pan-y select-none"
         style={{
           perspective: "calc(var(--card-w) * 1.875)",
           perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
