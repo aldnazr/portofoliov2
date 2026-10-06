@@ -1,6 +1,6 @@
+import { useLayoutEffect, useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "./icons";
 import { cn, pad } from "./utils";
-import { useIsDesktop } from "@/hooks/use-desktop";
 
 type CarouselPaginationProps = {
   total: number;
@@ -48,35 +48,54 @@ export function CarouselPagination({
   canNext = true,
   className,
 }: CarouselPaginationProps) {
-  const isDesktop = useIsDesktop();
-  const maxVisible = isDesktop ? 7 : 5;
-  const count = Math.min(total, maxVisible);
-  // ponytail: sliding window, no ellipsis markers; add dots/ellipsis when a
-  // project count above 7 ships
-  const start =
-    total > maxVisible ?
-      Math.min(
-        Math.max(active - Math.floor(maxVisible / 2), 0),
-        total - maxVisible,
-      )
-    : 0;
+  const dotsRef = useRef<HTMLUListElement>(null);
+  const activeDotRef = useRef<HTMLLIElement>(null);
+
+  useLayoutEffect(() => {
+    const list = dotsRef.current;
+    if (!list) return;
+
+    const keepActiveVisible = () => {
+      const dot = activeDotRef.current;
+      if (!dot) return;
+
+      const left = dot.offsetLeft - list.offsetLeft;
+      const right = left + dot.offsetWidth;
+      if (left < list.scrollLeft) {
+        list.scrollTo({ left });
+      } else if (right > list.scrollLeft + list.clientWidth) {
+        list.scrollTo({ left: right - list.clientWidth });
+      }
+    };
+
+    keepActiveVisible();
+    const observer = new ResizeObserver(keepActiveVisible);
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, [active, total]);
 
   return (
     <nav
       aria-label="Project pagination"
       className={cn(
-        "relative mx-auto flex w-fit max-w-full items-center gap-1.5 rounded-full border border-hairline bg-surface p-1.5 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.25)] sm:gap-3.5 dark:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)]",
+        "relative mx-3 flex w-fit max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full border border-hairline bg-surface p-1.5 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.25)] sm:mx-auto sm:max-w-full sm:gap-3.5 dark:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)]",
         className,
       )}
     >
       <ArrowButton direction="prev" onClick={onPrev} disabled={!canPrev} />
 
-      <ul className="flex items-center gap-2">
-        {Array.from({ length: count }, (_, k) => {
-          const i = start + k;
+      <ul
+        ref={dotsRef}
+        className="flex min-w-0 items-center gap-2 overflow-x-hidden"
+      >
+        {Array.from({ length: total }, (_, i) => {
           const isActive = i === active;
           return (
-            <li key={i} className="w-max min-w-8">
+            <li
+              key={i}
+              ref={isActive ? activeDotRef : undefined}
+              className="w-max min-w-8 shrink-0"
+            >
               <button
                 type="button"
                 onClick={() => onSelect(i)}
