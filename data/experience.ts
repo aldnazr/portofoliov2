@@ -1,7 +1,7 @@
 export const experience = [
   {
     period: "Oktober 2025 — September 2026",
-    title: "Fullstack & Mobile Developer",
+    title: "Frontend & Mobile Developer",
     company: "PT. Shidiq Membangun Indonesia",
     description:
       "Berpartisipasi dalam berbagai proyek aplikasi mobile dan web dari beragam klien, juga berkolaborasi dengan tim backend untuk merancang, membangun, hingga meluncurkan produk digital yang sesuai kebutuhan masing-masing pengguna dan bisnis klien.",
