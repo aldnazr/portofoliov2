@@ -81,7 +81,7 @@ export default function ConceptExplorer<T extends string>({
         <div className="sticky top-28 space-y-4">
           {switcher}
 
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong px-3">
+          <p className="font-mono font-medium text-xs uppercase tracking-widest text-accent-strong px-3">
             Daftar Materi
           </p>
           <div className="space-y-1">
@@ -130,7 +130,7 @@ export default function ConceptExplorer<T extends string>({
         {(group.eyebrow || group.tagline) && (
           <div className="space-y-3">
             {group.eyebrow && (
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
+              <p className="font-mono font-semibold uppercase tracking-widest text-accent-strong">
                 {group.eyebrow}
               </p>
             )}
@@ -169,7 +169,7 @@ export default function ConceptExplorer<T extends string>({
                 )}
               </div>
 
-              <p className="text-sm sm:text-base text-foreground-soft leading-relaxed">
+              <p className="text-foreground-soft leading-relaxed">
                 {concept.description}
               </p>
 

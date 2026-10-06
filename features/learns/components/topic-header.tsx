@@ -10,9 +10,7 @@ export default function TopicHeader({ title, description }: TopicHeaderProps) {
       <h1 className="text-2xl sm:text-3xl font-semibold text-foreground tracking-tight">
         {title}
       </h1>
-      <p className="text-sm sm:text-base text-muted leading-relaxed max-w-2xl">
-        {description}
-      </p>
+      <p className="text-muted max-w-2xl">{description}</p>
     </header>
   );
 }
