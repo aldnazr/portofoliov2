@@ -274,8 +274,9 @@ pre.shiki {
   padding: 4px 14px 6px !important;
   margin: 0 !important;
   font-family: var(--font-mono) !important;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   line-height: 1.75;
+  letter-spacing: 0.25;
   overflow-x: auto;
 }
 
@@ -283,6 +284,8 @@ pre.shiki {
 
   .shiki-wrapper>.shiki,
   pre.shiki {
+    font-size: 0.8rem;
+    line-height: 1.6;
     padding: 1px 4px 2px !important;
   }
 }
