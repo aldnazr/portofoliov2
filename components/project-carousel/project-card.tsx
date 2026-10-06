@@ -162,10 +162,10 @@ export function ProjectCard({
             </span>
           )}
         </div>
-        <span className="inline-flex px-2.5 h-6 shrink-0 items-center rounded-full bg-black/45 text-xs font-medium text-white tabular-nums backdrop-blur-md sm:px-3 sm:h-7 sm:text-sm">
+        {/* <span className="inline-flex px-2.5 h-6 shrink-0 items-center rounded-full bg-black/45 text-xs font-medium text-white tabular-nums backdrop-blur-md sm:px-3 sm:h-7 sm:text-sm">
           {pad(index + 1)}
           <span className="ml-1 font-light text-white/60">/ {pad(total)}</span>
-        </span>
+        </span> */}
       </div>
 
       {/* Konten bawah */}

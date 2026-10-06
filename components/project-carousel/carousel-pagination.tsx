@@ -98,9 +98,9 @@ export function CarouselPagination({
         })}
       </ul>
 
-      <p className="shrink-0 mx-2 min-w-10 text-center font-medium text-sm text-muted">
-        <span className="font-bold text-foreground">{pad(active + 1)}</span> /{" "}
-        {pad(total)}
+      <p className="mx-2 min-w-10 shrink-0 text-center text-sm font-medium tabular-nums text-muted-foreground">
+        <span className="text-foreground">{pad(active + 1)}</span>
+        <span className="text-muted-foreground/40"> / {pad(total)}</span>
       </p>
 
       <ArrowButton direction="next" onClick={onNext} disabled={!canNext} />
