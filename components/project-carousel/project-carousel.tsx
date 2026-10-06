@@ -9,7 +9,7 @@ import type {
 } from "react";
 import { CarouselPagination } from "./carousel-pagination";
 import { ProjectCard, CarouselProject } from "./project-card";
-import { clamp, cn } from "./utils";
+import { CARD_RADIUS, clamp, cn } from "./utils";
 
 export type { CarouselProject, ProjectStatusTone } from "./project-card";
 
@@ -335,6 +335,7 @@ export function ProjectCarousel({
                 aria-hidden="true"
                 className={cn(
                   "pointer-events-none absolute inset-0 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                  CARD_RADIUS,
                   dragProgress === null && "transition-colors duration-650",
                 )}
                 style={{ backgroundColor: `rgba(0,0,0,${slot.dim})` }}
