@@ -40,7 +40,7 @@ export const projects: Project[] = [
   },
   {
     name: "Roomly",
-    image: { src: "/projects/roomly2.webp", alt: "roomly" },
+    image: { src: "/projects/roomly.webp", alt: "roomly" },
     category: "Hotel Booking & Operations System",
     role: ["Frontend"],
     description:
