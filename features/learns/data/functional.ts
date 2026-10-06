@@ -5,7 +5,7 @@ export const functionalConcepts: LearnConcept[] = [
     id: "pure-function",
     title: "Pure Function",
     description:
-      "Pure function adalah function yang memenuhi dua syarat: (1) input yang sama selalu menghasilkan output yang sama, dan (2) tidak punya side effect, yaitu tidak mengubah apa pun di luar dirinya (misalnya mengubah variabel global, memutasi argumen, menulis ke database, atau console.log). Bayangkan seperti rumus matematika: f(2) hasilnya selalu sama, kapan pun dan di mana pun dipanggil. Manfaatnya: mudah dites, mudah dilacak saat ada bug, dan aman dipanggil berulang kali. Ingat: Date.now() dan Math.random() membuat function jadi impure karena hasilnya bisa beda setiap kali dipanggil.",
+      "Pure function adalah function yang memenuhi dua syarat: (1) input yang sama selalu menghasilkan output yang sama, dan (2) tidak punya side effect, yaitu tidak mengubah apa pun di luar dirinya (misalnya mengubah variabel global, memutasi argumen, menulis ke database, atau console.log). Manfaatnya: mudah dites, mudah dilacak saat ada bug, dan aman dipanggil berulang kali.",
     filename: "pure-function.ts",
     code: `// 1) Bergantung pada variabel di luar function = IMPURE
 let taxRate = 0.1;
@@ -36,16 +36,12 @@ isExpired(1000, 2000); // true
     id: "immutability",
     title: "Immutability",
     description:
-      "Immutability berarti data tidak diubah setelah dibuat. Kalau butuh perubahan, kita buat salinan baru dengan nilai yang sudah diperbarui, sedangkan data lama dibiarkan utuh. Manfaatnya: tidak ada perubahan diam-diam yang bikin bug sulit dilacak, dan perubahan mudah dideteksi (React, misalnya, cukup membandingkan referensi lama dan baru untuk memutuskan perlu re-render atau tidak). Ingat: const hanya melarang variabel di-assign ulang, isi object atau array tetap bisa berubah. Spread operator dan Object.freeze juga hanya bekerja di level pertama (shallow).",
+      "Immutability berarti data tidak diubah setelah dibuat. Kalau butuh perubahan, kita buat salinan baru dengan nilai yang sudah diperbarui, sedangkan data lama dibiarkan utuh. Manfaatnya: tidak ada perubahan diam-diam yang bikin bug sulit dilacak, dan perubahan mudah dideteksi (misalnya React cukup membandingkan referensi lama dan baru untuk memutuskan re-render).",
+
     filename: "immutability.ts",
     code: `// 1) const BUKAN immutable: isi object tetap bisa diubah
 const user = { name: "Raka", city: "Jakarta" };
 user.city = "Bandung"; // jalan, const hanya melarang: user = {...}
-
-// Object.freeze mencegah perubahan, tapi hanya di level pertama (shallow)
-const config = Object.freeze({ mode: "dark", db: { port: 5432 } });
-// config.mode = "light"; // ditolak (error di TypeScript / strict mode)
-config.db.port = 3306; // tetap jalan, object nested tidak ikut beku
 
 // 2) Array: buat array baru, jangan mutasi yang lama
 const nums = [1, 2, 3];
@@ -65,7 +61,7 @@ const cityChanged = { ...state, profile: { ...state.profile, city: "Bandung" } }
     id: "higher-order-function",
     title: "Higher-Order Function",
     description:
-      "Higher-order function (HOF) adalah function yang menerima function lain sebagai parameter, mengembalikan function, atau keduanya. Ini bisa terjadi karena di JavaScript function adalah first-class citizen: bisa disimpan di variabel, dikirim sebagai argumen, dan di-return seperti nilai biasa. HOF bawaan yang paling sering dipakai: map (ubah tiap elemen), filter (saring elemen), dan reduce (gabungkan jadi satu nilai). Manfaatnya: kita cukup menulis apa yang ingin dilakukan tanpa loop manual, dan logikanya mudah dipakai ulang.",
+      "Higher-order function (HOF) adalah function yang menerima function lain sebagai parameter, mengembalikan function, atau keduanya (contoh bawaan JavaScript: map, filter, dan reduce). Manfaatnya: tidak perlu menulis loop manual, dan logikanya mudah dipakai ulang.",
     filename: "higher-order-function.ts",
     code: `const products = [
   { name: "Kopi", price: 20_000, stock: 5 },
@@ -101,7 +97,7 @@ doubleWithLog(5); // log "input: 5", hasilnya 10
     id: "closure",
     title: "Closure",
     description:
-      "Closure adalah function yang tetap mengingat variabel dari tempat ia dibuat (lexical scope), walaupun function tersebut dipanggil di tempat lain atau setelah function induknya selesai. Bayangkan function membawa ransel berisi variabel di sekitarnya. Kegunaan utamanya: menyimpan private state (data yang tidak bisa diubah sembarangan dari luar), membuat function factory, dan menyimpan konfigurasi. Ingat: closure membuat variabel tetap tersimpan di memori, jadi hati-hati kalau menahan data besar terlalu lama (bisa jadi memory leak).",
+      "Closure adalah function yang tetap mengingat variabel dari tempat ia dibuat (lexical scope), walaupun dipanggil di tempat lain atau setelah function induknya selesai. Manfaatnya: bisa menyimpan private state yang tidak bisa diubah sembarangan dari luar, serta membuat function factory.",
     filename: "closure.ts",
     code: `// 1) Private state: count tersembunyi, hanya bisa diakses lewat function
 function createCounter() {
@@ -138,7 +134,7 @@ for (let j = 0; j < 3; j++) {
     id: "recursion",
     title: "Recursion",
     description:
-      "Recursion adalah teknik ketika sebuah function memanggil dirinya sendiri untuk menyelesaikan masalah yang bisa dipecah menjadi versi yang lebih kecil dari masalah yang sama. Setiap recursion wajib punya dua bagian: base case (kondisi berhenti) dan recursive case (memanggil diri sendiri dengan input yang makin mendekati base case). Tanpa base case, function akan terus memanggil dirinya sampai muncul error Maximum call stack size exceeded (stack overflow). Cocok untuk struktur bersarang seperti tree, folder, atau menu bertingkat.",
+      "Recursion adalah teknik ketika sebuah function memanggil dirinya sendiri untuk menyelesaikan masalah yang bisa dipecah menjadi versi yang lebih kecil. Setiap recursion wajib punya base case (kondisi berhenti) dan recursive case (memanggil diri sendiri dengan input yang makin kecil); tanpa base case akan muncul error stack overflow. Manfaatnya: kode lebih ringkas untuk struktur bersarang seperti tree, folder, atau menu bertingkat.",
     filename: "recursion.ts",
     code: `// 1) Factorial: 4! = 4 x 3 x 2 x 1
 function factorial(n: number): number {
