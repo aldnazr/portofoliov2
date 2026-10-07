@@ -96,21 +96,21 @@ export const projects: Project[] = [
     contributions:
       "Saya membangun ulang website PPTA Universitas Dinamika dengan Laravel: memperbarui alur pendaftaran dan pengelolaan tugas akhir, meningkatkan aksesibilitas antarmuka, serta memastikan data akademik terkelola terstruktur.",
   },
-  {
-    name: "Asclepius",
-    category: "Cancer Detector App",
-    role: ["Mobile"],
-    description:
-      "Asclepius adalah aplikasi Android untuk deteksi kanker berbasis AI on-device menggunakan TensorFlow Lite.",
-    technologies: ["Android", "Kotlin", "Tensorflow Lite"],
-    contributions:
-      "Saya mengembangkan aplikasi Android native dengan Kotlin dan mengintegrasikan model klasifikasi gambar TensorFlow Lite agar inferensi berjalan sepenuhnya on-device, termasuk preprocessing gambar dari kamera dan galeri serta menampilkan hasil prediksi beserta tingkat keyakinannya.",
-    sourceUrl: "https://github.com/aldnazr/android-tensorflow",
-    image: {
-      src: "/projects/asclepius.webp",
-      alt: "Asclepius Banner",
-    },
-  },
+  // {
+  //   name: "Asclepius",
+  //   category: "Cancer Detector App",
+  //   role: ["Mobile"],
+  //   description:
+  //     "Asclepius adalah aplikasi Android untuk deteksi kanker berbasis AI on-device menggunakan TensorFlow Lite.",
+  //   technologies: ["Android", "Kotlin", "Tensorflow Lite"],
+  //   contributions:
+  //     "Saya mengembangkan aplikasi Android native dengan Kotlin dan mengintegrasikan model klasifikasi gambar TensorFlow Lite agar inferensi berjalan sepenuhnya on-device, termasuk preprocessing gambar dari kamera dan galeri serta menampilkan hasil prediksi beserta tingkat keyakinannya.",
+  //   sourceUrl: "https://github.com/aldnazr/android-tensorflow",
+  //   image: {
+  //     src: "/projects/asclepius.webp",
+  //     alt: "Asclepius Banner",
+  //   },
+  // },
   {
     name: "Blendit",
     category: "Face Recognition for Makeup Recommendation",
@@ -124,6 +124,21 @@ export const projects: Project[] = [
     image: {
       src: "/projects/blendit.webp",
       alt: "Blendit Banner",
+    },
+  },
+  {
+    name: "EcoSort",
+    category: "Smart Waste Detector",
+    role: ["Mobile"],
+    description:
+      "Aplikasi Flutter untuk klasifikasi sampah lewat kamera atau foto galeri, berjalan luring (offline) di perangkat. Model deteksi object YOLO dijalankan dengan TFLite melalui flutter_litert.",
+    technologies: ["Android", "Flutter", "LiteRT"],
+    contributions:
+      "Saya mengembangkan aplikasi Flutter untuk klasifikasi sampah melalui kamera atau foto galeri, mengintegrasikan model deteksi objek YOLO dengan TFLite melalui flutter_litert agar seluruh inferensi berjalan on-device tanpa server, sehingga aplikasi tetap berfungsi penuh saat luring.",
+    sourceUrl: "https://github.com/aldnazr/ecosort",
+    image: {
+      src: "/projects/ecosort.webp",
+      alt: "Ecosort Banner",
     },
   },
 ];

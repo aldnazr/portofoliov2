@@ -18,20 +18,15 @@ export type CarouselProject = {
   id: string | number;
   title: string;
   description: string;
-  /** Pill putih di kiri atas, mis. "NLP" */
   tag: string;
-  /** Pill status opsional di samping tag, mis. "Accepted" / "Ongoing" */
   status?: { label: string; tone?: ProjectStatusTone };
   image?: string | StaticImageData;
   imageAlt?: string;
-  /** Dipakai ProjectVisual saat image tidak ada */
   category: string;
   role: string;
   stack: string;
   year: string | number;
-  /** Tujuan tombol "View project" */
   href: string;
-  /** Opsional: kalau diisi, tombol GitHub bulat muncul di kiri tombol utama */
   github?: string;
 };
 
@@ -51,14 +46,10 @@ const STATUS_TONES: Record<ProjectStatusTone, string> = {
   neutral: "bg-black/40 text-white/85 ring-white/20",
 };
 
-// Bayangan hasil fit dari referensi: kartu aktif punya glow sempit di bawah (hampir
-// tidak ada di sisi kiri/kanan), kartu samping hanya bayangan tipis.
 const SHADOW_ACTIVE =
   "shadow-[0_29px_35px_-33px_rgba(0,0,0,0.44),0_94px_108px_-89px_rgba(0,0,0,0.88)]";
 const SHADOW_SIDE = "shadow-[0_8px_30px_-8px_rgba(0,0,0,0.25)]";
 
-// Scrim gelap di bawah gambar. Stop-nya pakai satuan rem (bukan %) supaya
-// judul tetap terbaca berapa pun tinggi kontennya.
 const SCRIM =
   "linear-gradient(to bottom, rgba(10,10,12,0) 0, rgba(10,10,12,0.55) 3.5rem, rgba(10,10,12,0.86) 8.5rem, rgba(10,10,12,0.98) 100%)";
 
@@ -105,7 +96,7 @@ export function ProjectCard({
   } = project;
 
   const pill =
-    "inline-flex h-6 sm:h-7 items-center rounded-full px-3 text-sm font-medium";
+    "inline-flex h-6 sm:h-6.5 items-center rounded-full px-3 text-sm font-medium";
 
   return (
     <article
@@ -140,12 +131,12 @@ export function ProjectCard({
       }
 
       {/* Baris atas: tag + status (kiri), counter (kanan) */}
-      <div className="absolute inset-x-4.5 top-4.5 flex items-start justify-between gap-3 sm:inset-x-6.5 sm:top-6">
-        <div className="flex min-w-0 flex-wrap items-center gap-2">
+      <div className="absolute inset-x-4.5 top-4.5 flex items-start justify-between gap-3 sm:inset-x-6.5 sm:top-5.5">
+        <div className="flex flex-wrap items-center gap-2">
           <span
             className={cn(
               pill,
-              "bg-white/90 shadow text-xs sm:text-sm min-w-0 max-w-full text-neutral-950",
+              "bg-white/75 shadow text-xs sm:text-sm w-fit text-neutral-950",
             )}
           >
             <span className="truncate">{tag}</span>
@@ -170,7 +161,7 @@ export function ProjectCard({
 
       {/* Konten bawah */}
       <div
-        className="relative px-5 pt-14 pb-5 sm:px-7 sm:pb-6.5"
+        className="relative px-5 pt-14 pb-4.5 sm:px-7 sm:pb-5.5"
         style={{ backgroundImage: SCRIM }}
       >
         <h3 className="text-[26px]/[1.1] font-bold tracking-[-0.045em]">
