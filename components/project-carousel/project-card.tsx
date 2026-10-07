@@ -136,7 +136,7 @@ export function ProjectCard({
           <span
             className={cn(
               pill,
-              "bg-white/75 shadow text-xs sm:text-sm w-fit text-neutral-950",
+              "bg-white/85 shadow text-xs sm:text-sm w-fit text-neutral-950",
             )}
           >
             <span className="truncate">{tag}</span>
