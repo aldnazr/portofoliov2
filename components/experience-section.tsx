@@ -27,7 +27,7 @@ export default function ExperienceSection() {
                       @ {exp.company}
                     </span>
                   </h3>
-                  <p className="text-sm text-muted leading-relaxed max-w-2xl">
+                  <p className="text-sm text-muted leading-relaxed tracking-wide max-w-2xl">
                     {exp.description}
                   </p>
                 </div>
