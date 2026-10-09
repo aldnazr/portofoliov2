@@ -1,10 +1,30 @@
 export default function BackgroundMesh() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-250 h-125 bg-linear-to-b from-emerald-500/10 via-teal-500/5 to-transparent blur-[120px] rounded-full" />
-      <div className="absolute top-1/3 -left-40 w-125 h-125 bg-emerald-600/5 blur-[140px] rounded-full" />
-      <div className="absolute bottom-10 right-0 w-150 h-150 bg-emerald-500/5 blur-[160px] rounded-full" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--grid-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--grid-line)_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_90%_5%,var(--accent-wash-strong),transparent_75%)]" />
+      {/* <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_50%_at_0%_90%,var(--accent-wash),transparent_20%)]" /> */}
+      <svg
+        className="absolute -right-64 -top-48 h-200 w-225 max-w-none opacity-70 mask-[linear-gradient(to_bottom,black_30%,transparent_95%)] sm:-right-32"
+        viewBox="0 0 900 800"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M176 -80C126 151 221 245 414 329C608 414 711 510 751 800"
+          stroke="var(--hairline)"
+        />
+        <path
+          d="M316 -80C262 134 337 232 498 310C677 397 793 528 813 800"
+          stroke="var(--hairline)"
+        />
+        <path
+          d="M456 -80C404 133 457 211 579 292C755 409 844 548 874 800"
+          stroke="var(--accent-wash-border)"
+        />
+      </svg>
     </div>
   );
 }
