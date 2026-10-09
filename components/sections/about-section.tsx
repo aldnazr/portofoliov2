@@ -15,7 +15,7 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="space-y-8 my-52 scroll-mt-30 sm:scroll-mt-40 px-4 sm:px-6 mx-auto max-w-6xl"
+      className="space-y-8 my-52 scroll-mt-30 sm:scroll-mt-42 px-4 sm:px-6 mx-auto max-w-6xl"
     >
       <SectionHeader badge="Tentang Saya" title="Kemampuan" />
 

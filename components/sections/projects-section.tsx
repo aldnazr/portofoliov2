@@ -13,7 +13,7 @@ export default function ProjectsSection() {
   );
 
   return (
-    <section id="project" className="space-y-12 scroll-mt-30 sm:scroll-mt-38">
+    <section id="project" className="space-y-12 scroll-mt-30 sm:scroll-mt-36">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 px-4 sm:px-6 mx-auto max-w-6xl">
         <SectionHeader badge="Portofolio Karya" title="Proyek Pilihan" />
         <div
