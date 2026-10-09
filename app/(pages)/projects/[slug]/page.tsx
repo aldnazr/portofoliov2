@@ -2,10 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Footer from "@/components/footer";
-import BackLink from "@/components/back-link";
-import BackgroundMesh from "@/components/background-mesh";
-import Breadcrumb from "@/components/breadcrumb";
+import PageShell from "@/components/page-shell";
 import ProjectVisual from "@/components/project-visual";
 import ProjectActionLink from "@/components/project-action-link";
 import { projects, getProjectBySlug, slugifyProject } from "@/data/projects";
@@ -59,16 +56,8 @@ export default async function ProjectDetailPage({
     projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null;
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
-      <BackgroundMesh />
-
-      <main className="relative z-10 mx-auto max-w-6xl px-4 pb-14 pt-8 sm:px-6 sm:pb-20 sm:pt-12">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
-          <Breadcrumb currentLabel={project.name} />
-          <BackLink href="/#project" label="Kembali ke Portofolio" />
-        </div>
-
-        <article className="mt-6 overflow-hidden rounded-3xl border border-hairline bg-surface shadow-elevated sm:mt-8 sm:rounded-4xl">
+    <PageShell currentLabel={project.name} backHref="/#project">
+      <article className="overflow-hidden rounded-3xl border border-hairline bg-surface shadow-elevated sm:rounded-4xl">
           <div className="grid lg:grid-cols-12">
             <div className="relative aspect-16/10 overflow-hidden bg-neutral-950 lg:order-2 lg:col-span-5 lg:aspect-auto lg:min-h-96">
               {project.image ?
@@ -80,7 +69,10 @@ export default async function ProjectDetailPage({
                   sizes="(min-width: 1024px) 40vw, (min-width: 640px) 90vw, 100vw"
                   className="object-cover"
                 />
-              : <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
+              : <div
+                  className="absolute inset-0"
+                  style={{ colorScheme: "dark" }}
+                >
                   <ProjectVisual
                     number={formattedNumber}
                     name={project.name}
@@ -128,7 +120,9 @@ export default async function ProjectDetailPage({
                 )}
               </dl>
 
-              {(project.playStoreUrl?.length || project.sourceUrl || project.demoUrl) && (
+              {(project.playStoreUrl?.length ||
+                project.sourceUrl ||
+                project.demoUrl) && (
                 <div className="mt-6 flex flex-wrap gap-2">
                   {project.playStoreUrl?.map((store) => (
                     <ProjectActionLink key={store.url} href={store.url}>
@@ -218,9 +212,6 @@ export default async function ProjectDetailPage({
             </span>
           </Link>
         )}
-      </main>
-
-      <Footer />
-    </div>
+    </PageShell>
   );
 }

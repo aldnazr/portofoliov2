@@ -1,4 +1,4 @@
-import LearnPageShell from "./learn-page-shell";
+import PageShell from "@/components/page-shell";
 
 /**
  * Baris kode skeleton dengan lebar bervariasi supaya menyerupai
@@ -69,11 +69,12 @@ export function ContentSkeleton() {
  */
 export default function LearnSkeleton() {
   return (
-    <LearnPageShell containerClassName="max-w-6xl">
+    <PageShell
+      containerClassName="max-w-6xl"
+      backHref="/learns"
+      backLabel="Kembali ke Daftar Topik"
+    >
       <div className="space-y-8" aria-busy="true" aria-live="polite">
-        {/* Pill kembali */}
-        <div className="skeleton h-8 w-48 rounded-full" aria-hidden="true" />
-
         {/* Header topik */}
         <header className="space-y-3" aria-hidden="true">
           <div className="skeleton h-8 w-72 max-w-full rounded-lg" />
@@ -85,6 +86,6 @@ export default function LearnSkeleton() {
 
         <ContentSkeleton />
       </div>
-    </LearnPageShell>
+    </PageShell>
   );
 }

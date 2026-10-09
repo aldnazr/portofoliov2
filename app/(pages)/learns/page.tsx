@@ -1,4 +1,4 @@
-import LearnPageShell from "@/features/learns/components/learn-page-shell";
+import PageShell from "@/components/page-shell";
 import TopicList from "@/features/learns/components/topic-list";
 import type { Metadata } from "next";
 
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function LearnPage() {
   return (
-    <LearnPageShell containerClassName="max-w-5xl">
+    <PageShell containerClassName="max-w-5xl">
       <TopicList />
-    </LearnPageShell>
+    </PageShell>
   );
 }

@@ -1,4 +1,3 @@
-import BackLink from "@/components/back-link";
 import { ArrowIcon } from "@/components/icons";
 import Link from "next/link";
 import { topicCards } from "../data/topics";
@@ -6,8 +5,6 @@ import { topicCards } from "../data/topics";
 export default function TopicList() {
   return (
     <div className="mt-2 sm:mt-8 space-y-10">
-      <BackLink href="/" label="Kembali ke Portofolio" />
-
       <header className="space-y-3">
         <h1 className="text-3xl sm:text-4xl font-semibold text-foreground tracking-tight">
           Pilih Topik Pembelajaran

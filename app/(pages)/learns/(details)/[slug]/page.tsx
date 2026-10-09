@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import BackLink from "@/components/back-link";
 import {
   LearnConcept,
   LearnTopic,
@@ -91,7 +90,6 @@ export default async function LearnTopicPage({ params }: LearnTopicPageProps) {
 
   return (
     <>
-      <BackLink href="/learns" label="Kembali ke Daftar Topik" />
       <TopicHeader title={topic.title} description={topic.description} />
       <Suspense fallback={<ContentSkeleton />}>
         <TopicContent slug={slug} />
