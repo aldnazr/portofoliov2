@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/footer";
 import BackLink from "@/components/back-link";
-import Reveal from "@/components/reveal";
 import BackgroundMesh from "@/components/background-mesh";
 import Breadcrumb from "@/components/breadcrumb";
+import ProjectVisual from "@/components/project-visual";
+import ProjectActionLink from "@/components/project-action-link";
 import { projects, getProjectBySlug, slugifyProject } from "@/data/projects";
-import { ArrowIcon } from "@/components/icons";
+import {
+  ArrowIcon,
+  BrowserIcon,
+  GithubIcon,
+  PlayStoreIcon,
+} from "@/components/icons";
 
 type ProjectDetailPageProps = {
   params: Promise<{ slug: string }>;
@@ -51,247 +58,168 @@ export default async function ProjectDetailPage({
   const nextProject =
     projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null;
 
-  const links = [
-    ...(project.playStoreUrl?.map((ps) => ({
-      label: ps.title,
-      href: ps.url,
-      type: "playstore" as const,
-    })) ?? []),
-    project.sourceUrl ?
-      {
-        label: "Repository GitHub",
-        href: project.sourceUrl,
-        type: "default" as const,
-      }
-    : null,
-    project.demoUrl ?
-      { label: "Demo App", href: project.demoUrl, type: "default" as const }
-    : null,
-  ].filter(
-    (
-      link,
-    ): link is { label: string; href: string; type: "playstore" | "default" } =>
-      link !== null,
-  );
-
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      {/* Background Glow Mesh */}
       <BackgroundMesh />
 
-      {/* Main Content */}
-      <div className="relative z-10 px-4 sm:px-6 mx-auto max-w-6xl px-4 sm:px-6 pt-8 sm:pt-24 pb-16 sm:pb-24">
-        <div className="mt-2 sm:mt-8 space-y-8 sm:space-y-10">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 pb-14 pt-8 sm:px-6 sm:pb-20 sm:pt-12">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
           <Breadcrumb currentLabel={project.name} />
           <BackLink href="/#project" label="Kembali ke Portofolio" />
         </div>
 
-        {/* Masthead */}
-        <header className="relative mt-6 sm:mt-14">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-4 right-0 select-none bg-linear-to-b from-overlay-strong via-overlay to-transparent bg-clip-text font-mono text-6xl sm:-top-12 sm:text-[10rem] font-bold leading-none text-transparent"
-          >
-            {formattedNumber}
-          </span>
+        <article className="mt-6 overflow-hidden rounded-3xl border border-hairline bg-surface shadow-elevated sm:mt-8 sm:rounded-4xl">
+          <div className="grid lg:grid-cols-12">
+            <div className="relative aspect-16/10 overflow-hidden bg-neutral-950 lg:order-2 lg:col-span-5 lg:aspect-auto lg:min-h-96">
+              {project.image ?
+                <Image
+                  src={project.image.src}
+                  alt={project.image.alt || project.name}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 40vw, (min-width: 640px) 90vw, 100vw"
+                  className="object-cover"
+                />
+              : <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
+                  <ProjectVisual
+                    number={formattedNumber}
+                    name={project.name}
+                    category={project.category}
+                    variant="hero"
+                    className="h-full rounded-none border-0"
+                  />
+                </div>
+              }
+            </div>
 
-          <div className="animate-rise flex items-baseline gap-3">
-            <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-accent-strong">
-              Proyek
-            </span>
-            <span className="font-mono text-[11px] tracking-[0.2em] text-subtle">
-              {formattedNumber} / {totalCount}
-            </span>
-          </div>
+            <div className="flex flex-col justify-center p-6 sm:p-8 lg:col-span-7 lg:p-10">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-accent-wash-border bg-accent-wash px-3 py-1 text-xs font-medium text-accent-strong">
+                  {project.category}
+                </span>
+                <span className="rounded-full border border-hairline bg-overlay px-3 py-1 font-mono text-xs text-muted tabular-nums">
+                  {formattedNumber} / {totalCount}
+                </span>
+              </div>
 
-          <h1
-            className="animate-rise mt-4 sm:mt-6 max-w-3xl text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground"
-            style={{ animationDelay: "90ms" }}
-          >
-            {project.name}
-          </h1>
-
-          <p
-            className="animate-rise mt-3 sm:mt-6 max-w-2xl text-sm sm:text-lg leading-relaxed text-muted"
-            style={{ animationDelay: "180ms" }}
-          >
-            {project.description}
-          </p>
-        </header>
-
-        {/* Spec Sheet */}
-        <dl
-          className="animate-rise mt-8 sm:mt-16 grid grid-cols-1 gap-x-10 gap-y-4 border-y border-hairline-soft py-4 sm:grid-cols-3 sm:py-8"
-          style={{ animationDelay: "270ms" }}
-        >
-          <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
-              Kategori
-            </dt>
-            <dd className="mt-1.5 sm:mt-2.5 text-sm leading-relaxed text-foreground-soft">
-              {project.category}
-            </dd>
-          </div>
-          <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
-              Peran
-            </dt>
-            <dd className="mt-1.5 sm:mt-2.5 text-sm leading-relaxed text-foreground-soft">
-              {project.role.length > 0 ? project.role.join(", ") : "—"}{" "}
-              {"Developer"}
-            </dd>
-          </div>
-          <div>
-            <dt className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
-              Teknologi
-            </dt>
-            <dd className="mt-1.5 sm:mt-2.5 text-sm leading-relaxed text-foreground-soft">
-              {project.technologies.length} tools dalam stack
-            </dd>
-          </div>
-        </dl>
-
-        {/* Body: sticky meta rail + longform */}
-        <div className="mt-10 sm:mt-24 grid grid-cols-1 lg:grid-cols-12 lg:gap-16">
-          <aside className="lg:col-span-4">
-            <div className="space-y-8 lg:space-y-12 lg:sticky lg:top-32">
-              <Reveal>
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
-                  Teknologi
+              <header>
+                <h1 className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  {project.name}
+                </h1>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+                  {project.description}
                 </p>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <li
-                      key={tech}
-                      className="px-3 py-1 rounded-lg bg-surface-muted border border-hairline text-xs font-mono text-foreground-soft"
-                    >
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+              </header>
 
-              {links.length > 0 && (
-                <Reveal delay={120}>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
-                    Tautan
-                  </p>
-                  <div className="mt-2 border-t border-hairline-soft">
-                    {links.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative flex items-center justify-between gap-4 border-b border-hairline-soft py-3 sm:py-4"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          {link.type === "playstore" && (
-                            <svg
-                              className="size-4 shrink-0 stroke-current text-subtle transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover"
-                              viewBox="0 0 48 48"
-                              fill="none"
-                              strokeWidth="3.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              aria-hidden="true"
-                            >
-                              <path d="m25.0274,24.0519l-16.2624,15.8333h0c.5191,1.765,2.1803,3.1148,4.153,3.1148.8306,0,1.5574-.2077,2.1803-.6229h0l18.1694-10.2787-8.2403-8.0464Z" />
-                              <path d="m40.9508,20.2623h0l-7.7869-4.4645-8.1365,8.2541,8.2403,8.0464,7.7869-4.3607c1.3497-.7268,2.2842-2.1803,2.2842-3.7377-.1038-1.5574-1.0383-3.0109-2.388-3.7377Z" />
-                              <path d="m8.765,8.1148c-.1038.3115-.1038.7268-.1038,1.1421v29.5902c0,.4153,0,.7268.1038,1.1421l16.2624-15.9372L8.765,8.1148Z" />
-                              <path d="m25.0274,24.0519l8.1365-8.2541L15.2022,5.623c-.623-.4153-1.4536-.623-2.2842-.623-1.9727,0-3.7377,1.3497-4.153,3.1148h0l16.2624,15.9372Z" />
-                            </svg>
-                          )}
-                          <span className="text-sm font-medium text-foreground-soft transition-colors duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-accent-hover">
-                            {link.label}
-                          </span>
-                        </div>
-                        {link.type !== "playstore" && (
-                          <span
-                            aria-hidden="true"
-                            className="font-mono text-xs text-subtle transition-[color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-0.5 group-hover:translate-x-1 group-hover:text-accent-strong"
-                          >
-                            ↗
-                          </span>
-                        )}
-                        <span
-                          aria-hidden="true"
-                          className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-accent/60 to-transparent transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100"
-                        />
-                      </a>
-                    ))}
+              <dl className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-hairline pt-4 text-sm">
+                <div className="flex gap-2">
+                  <dt className="text-muted">Peran:</dt>
+                  <dd className="font-medium text-foreground-soft">
+                    {project.role.length > 0 ? project.role.join(", ") : "—"}
+                  </dd>
+                </div>
+                {project.year && (
+                  <div className="flex gap-2">
+                    <dt className="text-muted">Tahun:</dt>
+                    <dd className="font-medium text-foreground-soft">
+                      {project.year}
+                    </dd>
                   </div>
-                </Reveal>
+                )}
+              </dl>
+
+              {(project.playStoreUrl?.length || project.sourceUrl || project.demoUrl) && (
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {project.playStoreUrl?.map((store) => (
+                    <ProjectActionLink key={store.url} href={store.url}>
+                      <PlayStoreIcon className="size-4 shrink-0" />
+                      {store.title}
+                    </ProjectActionLink>
+                  ))}
+                  {project.sourceUrl && (
+                    <ProjectActionLink href={project.sourceUrl}>
+                      <GithubIcon className="size-4 shrink-0" />
+                      Repository GitHub
+                    </ProjectActionLink>
+                  )}
+                  {project.demoUrl && (
+                    <ProjectActionLink href={project.demoUrl}>
+                      <BrowserIcon className="size-4 shrink-0" />
+                      Demo App
+                    </ProjectActionLink>
+                  )}
+                </div>
               )}
             </div>
-          </aside>
+          </div>
+        </article>
 
-          <div className="mt-10 space-y-10 sm:space-y-24 lg:col-span-8 lg:mt-0">
-            {project.contributions && (
-              <section className="space-y-4 sm:space-y-6">
-                <Reveal>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
-                    Kontribusi
-                  </p>
-                  <h2 className="mt-4 sm:mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+        <div className="mt-5 grid gap-5 sm:mt-6 sm:gap-6 lg:grid-cols-12">
+          <section className="rounded-3xl border border-hairline bg-surface p-6 sm:p-8 lg:col-span-4">
+            <h2 className="text-xl font-semibold tracking-tight text-foreground">
+              Teknologi
+            </h2>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <li
+                  key={tech}
+                  className="rounded-lg border border-hairline bg-surface-muted px-3 py-1 text-xs font-mono text-foreground-soft"
+                >
+                  {tech}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {(project.contributions || project.result) && (
+            <div className="space-y-5 sm:space-y-6 lg:col-span-8">
+              {project.contributions && (
+                <section className="rounded-3xl border border-hairline bg-surface p-6 sm:p-8">
+                  <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
                     Apa yang Saya Kerjakan
                   </h2>
-                </Reveal>
-                <Reveal delay={120}>
-                  <p className="border-l-2 border-accent-wash-border pl-4 sm:pl-6 text-sm sm:text-base leading-relaxed sm:leading-loose text-foreground-soft">
+                  <p className="mt-3 text-sm leading-relaxed text-foreground-soft sm:text-base">
                     {project.contributions}
                   </p>
-                </Reveal>
-              </section>
-            )}
-
-            {project.result && (
-              <section className="space-y-4 sm:space-y-6">
-                <Reveal>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
-                    Hasil
-                  </p>
-                  <h2 className="mt-4 sm:mt-5 text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+                </section>
+              )}
+              {project.result && (
+                <section className="rounded-3xl border border-hairline bg-surface p-6 sm:p-8">
+                  <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
                     Dampak & Pencapaian
                   </h2>
-                </Reveal>
-                <Reveal delay={120}>
-                  <p className="text-sm sm:text-base leading-relaxed text-foreground-soft">
+                  <p className="mt-3 text-sm leading-relaxed text-foreground-soft sm:text-base">
                     {project.result}
                   </p>
-                </Reveal>
-              </section>
-            )}
-          </div>
+                </section>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Next Project */}
         {nextProject && (
-          <Reveal className="mt-14 sm:mt-32">
-            <div className="border-t border-hairline-soft pt-8 sm:pt-14">
-              <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-subtle">
+          <Link
+            href={`/projects/${slugifyProject(nextProject.name)}`}
+            className="group mt-5 flex items-center justify-between gap-4 rounded-3xl border border-hairline bg-overlay-faint p-5 transition-colors hover:border-accent-wash-border hover:bg-overlay focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:mt-6 sm:p-6"
+          >
+            <span className="min-w-0">
+              <span className="block text-xs font-medium text-muted">
                 Proyek Berikutnya
-              </p>
-              <Link
-                href={`/projects/${slugifyProject(nextProject.name)}`}
-                className="group mt-5 flex items-center justify-between gap-6"
-              >
-                <span className="text-2xl sm:text-4xl font-semibold tracking-tight text-subtle transition-[color,translate] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-2 group-hover:text-foreground">
-                  {nextProject.name}
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-hairline text-subtle transition-[color,border-color,translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:border-accent-wash-border group-hover:text-accent-hover group-hover:translate-x-1"
-                >
-                  <ArrowIcon direction="right" />
-                </span>
-              </Link>
-            </div>
-          </Reveal>
+              </span>
+              <span className="mt-1 block text-lg font-semibold tracking-tight text-foreground transition-colors group-hover:text-accent-hover sm:text-xl">
+                {nextProject.name}
+              </span>
+            </span>
+            <span
+              aria-hidden="true"
+              className="flex size-10 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface text-foreground-soft transition-colors group-hover:border-accent-wash-border group-hover:text-accent-hover"
+            >
+              <ArrowIcon direction="right" />
+            </span>
+          </Link>
         )}
-      </div>
+      </main>
 
-      {/* Minimal Footer */}
       <Footer />
     </div>
   );
