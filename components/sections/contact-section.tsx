@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { profile } from "@/data/profile";
-import { Button } from "./button";
+import { Button } from "../button";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);

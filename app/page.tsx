@@ -1,9 +1,9 @@
 import Header from "@/components/header";
-import HeroSection from "@/components/hero-section";
-import AboutSection from "@/components/about-section";
-import ProjectsSection from "@/components/projects-section";
-import ExperienceSection from "@/components/experience-section";
-import ContactSection from "@/components/contact-section";
+import HeroSection from "@/components/sections/hero-section";
+import AboutSection from "@/components/sections/about-section";
+import ProjectsSection from "@/components/sections/projects-section";
+import ExperienceSection from "@/components/sections/experience-section";
+import ContactSection from "@/components/sections/contact-section";
 import Footer from "@/components/footer";
 import BackgroundMesh from "@/components/background-mesh";
 

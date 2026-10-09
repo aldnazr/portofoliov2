@@ -2,8 +2,8 @@
 
 import { profile } from "@/data/profile";
 import { motion, useReducedMotion } from "motion/react";
-import { ButtonLink } from "./button";
-import { ArrowIcon, GithubIcon, LinkedinIcon } from "./icons";
+import { ButtonLink } from "../button";
+import { ArrowIcon, GithubIcon, LinkedinIcon } from "../icons";
 
 const entrance = {
   hidden: { opacity: 0, y: 16 },
@@ -15,7 +15,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function HeroSection() {
   const reduceMotion = useReducedMotion();
   const reveal = (delay: number) => ({
-    initial: reduceMotion ? false : "hidden" as const,
+    initial: reduceMotion ? false : ("hidden" as const),
     animate: "visible" as const,
     variants: entrance,
     transition: { duration: 0.65, delay, ease },
