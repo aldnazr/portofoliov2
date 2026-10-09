@@ -1,15 +1,9 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import {
-  CalendarIcon,
-  GithubIcon,
-  LayersIcon,
-  SparkleIcon,
-  UserIcon,
-} from "./icons";
+import { CalendarIcon, LayersIcon, UserIcon } from "./icons";
 import { CARD_RADIUS, cn, pad } from "./utils";
-import { ArrowIcon } from "../icons";
+import { ArrowIcon, GithubIcon } from "../icons";
 import ProjectVisual from "@/components/project-visual";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
@@ -200,16 +194,16 @@ export function ProjectCard({
               rel="noopener noreferrer"
               draggable={false}
               aria-label={`${title} on GitHub`}
-              className="grid size-10 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-colors hover:bg-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-12"
+              className="grid size-9 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-colors hover:bg-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-11"
             >
-              <GithubIcon className="size-4.5 sm:size-5" />
+              <GithubIcon className="size-4 sm:size-5" />
             </a>
           )}
           <Link
             href={href}
             draggable={false}
             aria-label={`View project: ${title}`}
-            className="group/cta flex h-10 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-white text-sm font-semibold text-neutral-950 transition-colors hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-12 sm:text-base"
+            className="group/cta flex h-9 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-white text-sm font-semibold text-neutral-950 transition-colors hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-11 sm:text-base"
           >
             View project
             <ArrowIcon direction="upright" className="size-4" />
