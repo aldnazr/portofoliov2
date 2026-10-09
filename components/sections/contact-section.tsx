@@ -56,7 +56,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-28 px-4 sm:px-6 mx-auto max-w-6xl"
+      className="px-4 sm:px-6 mx-auto max-w-6xl scroll-mt-30 sm:scroll-mt-38"
     >
       <div className="p-1.5 rounded-[2.5rem] border border-accent-wash-border bg-linear-to-b from-accent-wash via-overlay-faint to-transparent">
         <div className="p-8 sm:p-14 rounded-[2.125rem] bg-surface border border-hairline-soft text-center space-y-8">
