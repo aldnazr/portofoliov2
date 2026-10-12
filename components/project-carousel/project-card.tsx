@@ -1,7 +1,7 @@
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CalendarIcon, LayersIcon, UserIcon } from "./icons";
+import { LayersIcon, UserIcon } from "./icons";
 import { CARD_RADIUS, cn, pad } from "./utils";
 import { ArrowIcon, GithubIcon } from "../icons";
 import ProjectVisual from "@/components/project-visual";
@@ -19,7 +19,6 @@ export type CarouselProject = {
   category: string;
   role: string;
   stack: string;
-  year: string | number;
   href: string;
   github?: string;
 };
@@ -84,7 +83,6 @@ export function ProjectCard({
     category,
     role,
     stack,
-    year,
     href,
     github,
   } = project;
@@ -177,12 +175,6 @@ export function ProjectCard({
             label="Stack"
             value={stack}
             className="order-3 basis-full sm:order-2 sm:flex-1 sm:basis-0 sm:border-l sm:border-white/15 sm:pl-4"
-          />
-          <MetaItem
-            icon={<CalendarIcon className="size-3" />}
-            label="Year"
-            value={year}
-            className="order-2 shrink-0 sm:order-3 sm:border-l sm:border-white/15 sm:pr-5 sm:pl-4"
           />
         </dl>
 

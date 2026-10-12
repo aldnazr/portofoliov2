@@ -165,7 +165,6 @@ export const carouselProjects: CarouselProject[] = projects.map((project) => ({
   category: project.category,
   role: project.role.join(", "),
   stack: project.technologies.join(", "),
-  year: project.year ?? "—",
   href: `/projects/${slugifyProject(project.name)}`,
   github: project.sourceUrl,
 }));
