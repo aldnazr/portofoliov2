@@ -110,8 +110,7 @@ export function ProjectCard({
           draggable={false}
           className="object-cover bg-neutral-900"
         />
-      : /* Kartu selalu gelap; paksa token light-dark() ProjectVisual tetap dark di tema terang. */
-        <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
+      : <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
           <ProjectVisual
             number={pad(index + 1)}
             name={title}
@@ -145,25 +144,22 @@ export function ProjectCard({
             </span>
           )}
         </div>
-        {/* <span className="inline-flex px-2.5 h-6 shrink-0 items-center rounded-full bg-black/45 text-xs font-medium text-white tabular-nums backdrop-blur-md sm:px-3 sm:h-7 sm:text-sm">
-          {pad(index + 1)}
-          <span className="ml-1 font-light text-white/60">/ {pad(total)}</span>
-        </span> */}
       </div>
 
       {/* Konten bawah */}
       <div
-        className="relative px-5 pt-14 pb-4.5 sm:px-7 sm:pb-5.5"
+        className="relative px-5 pb-4.5 sm:px-7 sm:pb-5.5"
         style={{ backgroundImage: SCRIM }}
       >
-        <h3 className="text-[26px]/[1.1] font-bold tracking-[-0.045em]">
+        <h3 className="text-xl sm:text-[26px]/[1.1] font-bold tracking-[-0.045em]">
           {title}
         </h3>
-        <p className="mt-2.5 line-clamp-3 text-sm/5 text-white/80">
+
+        <p className="text-white/80 mt-1 sm:mt-2.5 line-clamp-3 tracking-tight text-xs sm:tracking-normal sm:text-sm/5">
           {description}
         </p>
 
-        <dl className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-white/15 pt-3.5 text-[15px] sm:mt-[17.5px] sm:flex-nowrap sm:pt-3.75 sm:text-[17px]">
+        <dl className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-white/15 pt-2.25 text-[15px] sm:mt-[17.5px] sm:flex-nowrap sm:pt-3.75 sm:text-[17px]">
           <MetaItem
             icon={<UserIcon className="size-3" />}
             label="Role"
