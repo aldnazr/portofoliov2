@@ -41,7 +41,7 @@ export default function ExperienceSection() {
               </p>
 
               {exp.highlights && exp.highlights.length > 0 && (
-                <ul className="max-w-2xl list-disc space-y-2 pl-5 text-muted leading-snug tracking-wide text-sm marker:text-subtle">
+                <ul className="max-w-2xl list-disc space-y-2 pl-5 text-muted leading-snug tracking-wide text-sm marker:text-foreground">
                   {exp.highlights.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
