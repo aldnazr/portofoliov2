@@ -6,11 +6,11 @@ import { useState } from "react";
 import { ProjectCarousel } from "../project-carousel/project-carousel";
 import ProjectsList from "../project-list/projects-list";
 import { IconCarousel, IconList } from "../icons";
+import { useProjectViewMode } from "@/lib/use-project-view-mode";
 
 export default function ProjectsSection() {
-  const [projectView, setProjectView] = useState<"carousel" | "list">(
-    "carousel",
-  );
+  const viewMode = useProjectViewMode((s) => s.viewMode);
+  const setViewMode = useProjectViewMode((s) => s.setViewMode);
 
   return (
     <section id="project" className="space-y-12 scroll-mt-30 sm:scroll-mt-26">
@@ -23,10 +23,10 @@ export default function ProjectsSection() {
         >
           <button
             type="button"
-            onClick={() => setProjectView("carousel")}
-            aria-pressed={projectView === "carousel"}
+            onClick={() => setViewMode("carousel")}
+            aria-pressed={viewMode === "carousel"}
             className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              projectView === "carousel" ?
+              viewMode === "carousel" ?
                 "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
               : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
             }`}
@@ -36,10 +36,10 @@ export default function ProjectsSection() {
           </button>
           <button
             type="button"
-            onClick={() => setProjectView("list")}
-            aria-pressed={projectView === "list"}
+            onClick={() => setViewMode("list")}
+            aria-pressed={viewMode === "list"}
             className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              projectView === "list" ?
+              viewMode === "list" ?
                 "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
               : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
             }`}
@@ -50,7 +50,7 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {projectView === "carousel" ?
+      {viewMode === "carousel" ?
         <ProjectCarousel loop projects={carouselProjects} />
       : <ProjectsList />}
     </section>
