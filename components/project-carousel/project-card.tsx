@@ -60,8 +60,12 @@ function MetaItem({
   return (
     <div className={cn("flex min-w-0 items-center gap-2", className)}>
       <span className="shrink-0 text-white/55">{icon}</span>
-      <dt className="shrink-0 text-white/60 font-medium text-sm">{label}:</dt>
-      <dd className="min-w-0 truncate font-semibold text-sm">{value}</dd>
+      <dt className="shrink-0 text-white/60 font-normal sm:font-medium text-sm">
+        {label}:
+      </dt>
+      <dd className="min-w-0 truncate font-medium sm:font-semibold text-sm">
+        {value}
+      </dd>
     </div>
   );
 }
@@ -151,11 +155,11 @@ export function ProjectCard({
         className="relative px-5 pb-4.5 sm:px-7 sm:pb-5.5"
         style={{ backgroundImage: SCRIM }}
       >
-        <h3 className="text-xl sm:text-[26px]/[1.1] font-bold tracking-[-0.045em]">
+        <h3 className="text-2xl sm:text-[26px]/[1.1] font-bold tracking-[-0.045em]">
           {title}
         </h3>
 
-        <p className="text-white/80 mt-1 sm:mt-2.5 line-clamp-3 tracking-tight text-xs sm:tracking-normal sm:text-sm/5">
+        <p className="text-white/80 mt-1 sm:mt-2.5 line-clamp-3 tracking-tight text-[0.85rem]/4.5 sm:tracking-normal sm:text-sm/5">
           {description}
         </p>
 
