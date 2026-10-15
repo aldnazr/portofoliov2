@@ -86,8 +86,8 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "PPTA - Layanan Akademik",
-    category: "Academic Final Project Service Center",
+    name: "PPTA",
+    category: "Layanan Akademik",
     role: ["Fullstack"],
     description:
       "Rebuild website pusat pelayanan tugas akhir untuk kebutuhan akademik Universitas Dinamika",
