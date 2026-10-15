@@ -173,7 +173,7 @@ export function ProjectCard({
               rel="noopener noreferrer"
               draggable={false}
               aria-label={demoUrl ? `${title} demo` : `${title} on GitHub`}
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-colors hover:bg-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-11"
+              className="grid size-9 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-[background-color,color,box-shadow] duration-200 motion-reduce:transition-none hover:bg-white/25 hover:ring-accent-hover hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-11"
             >
               {demoUrl ?
                 <BrowserIcon className="size-4 sm:size-5" />
