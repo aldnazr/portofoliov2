@@ -32,7 +32,7 @@ export default function ExperienceSection() {
                   <span className="font-medium text-foreground">
                     {exp.company}
                   </span>
-                  {exp.location && <span>- {exp.location}</span>}
+                  {exp.location && <span>&ndash; {exp.location}</span>}
                 </div>
               </div>
 
@@ -41,7 +41,7 @@ export default function ExperienceSection() {
               </p>
 
               {exp.highlights && exp.highlights.length > 0 && (
-                <ul className="max-w-2xl list-disc space-y-2 pl-5 text-muted leading-snug tracking-wide text-sm marker:text-foreground">
+                <ul className="max-w-2xl list-disc space-y-2 pl-5 text-muted tracking-wide marker:text-foreground">
                   {exp.highlights.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}

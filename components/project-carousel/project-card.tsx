@@ -146,7 +146,7 @@ export function ProjectCard({
           {title}
         </h3>
 
-        <p className="text-white/80 mt-1 sm:mt-2.5 line-clamp-3 tracking-tight text-[0.85rem]/4.5 sm:tracking-[-0.01em] sm:text-[0.9rem]/5">
+        <p className="text-white/80 text-ellipsis line-clamp-2 mt-1 sm:mt-2.5 tracking-tight text-[0.85rem]/4.5 sm:tracking-[-0.01em] sm:text-base/6">
           {description}
         </p>
 

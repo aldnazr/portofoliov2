@@ -1,6 +1,6 @@
 export const experience = [
   {
-    period: "Oktober 2025 — September 2026",
+    period: "Oktober 2025 \u2013 September 2026",
     title: "Frontend & Mobile Developer",
     company: "PT. Shidiq Membangun Indonesia",
     location: "Bogor, Indonesia",
@@ -15,7 +15,7 @@ export const experience = [
     ],
   },
   {
-    period: "Agustus 2024 — Februari 2025",
+    period: "Agustus 2024 \u2013 Februari 2025",
     title: "Fullstack Web Developer",
     company: "PPTA Universitas Dinamika",
     location: "Surabaya, Indonesia",
@@ -29,10 +29,10 @@ export const experience = [
     ],
   },
   {
-    period: "Februari 2024 — Juni 2024",
+    period: "Februari 2024 \u2013 Juni 2024",
     title: "Mobile Development Learning Path",
     company: "Bangkit Academy",
-    location: "Jakarta, Indonesia",
+    location: "WFA",
     description:
       "Program akademi talenta teknologi dari Google, GoTo, dan Traveloka (Kampus Merdeka/MSIB).",
     highlights: [
@@ -42,7 +42,7 @@ export const experience = [
     ],
   },
   {
-    period: "Februari 2023 — Juni 2023",
+    period: "Februari 2023 \u2013 Juni 2023",
     title: "UI/UX Designer",
     company: "CV. Aikari Harvest",
     location: "Madiun, Indonesia",
