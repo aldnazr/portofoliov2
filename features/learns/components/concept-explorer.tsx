@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+
 import { LearnConcept } from "../data/types";
 import CodeBlock from "./code-block";
 import SegmentedSwitcher from "./segmented-switcher";
@@ -30,12 +31,6 @@ type ConceptExplorerProps<T extends string> = {
   metaByConcept?: Record<string, string>;
 };
 
-/**
- * Explorer materi learns: segmented control + anchor nav + section per konsep.
- * Dipakai topik paradigms, methods, dan state-management; state filter tersimpan
- * di search param URL, jadi highlight dari server cukup disiapkan sekali
- * untuk semua grup.
- */
 export default function ConceptExplorer<T extends string>({
   idPrefix,
   param,

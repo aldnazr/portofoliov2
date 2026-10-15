@@ -3,18 +3,12 @@
 import { useCallback, useState } from "react";
 
 type CodeBlockProps = {
-  /** HTML hasil highlight Shiki dari server component. */
   highlightedHtml: string;
-  /** Source mentah untuk tombol copy. */
   code: string;
   filename?: string;
   lang?: string;
 };
 
-/**
- * Menampilkan code block yang sudah di-highlight Shiki di server.
- * Komponen ini hanya mengelola tombol copy, sehingga tetap ringan.
- */
 export default function CodeBlock({
   highlightedHtml,
   code,
