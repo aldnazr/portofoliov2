@@ -1,34 +1,24 @@
 "use client";
 
-import { useRef, useState } from "react";
-import type {
-  CSSProperties,
-  KeyboardEvent,
-  MouseEvent,
-  PointerEvent,
-} from "react";
-import { CarouselPagination } from "./carousel-pagination";
-import { ProjectCard } from "./project-card";
-import { CARD_RADIUS, clamp, cn } from "./utils";
-import { CarouselProject } from "@/data/types";
+import { useLayoutEffect, useRef, useState } from "react";
+import type { KeyboardEvent, MouseEvent, PointerEvent } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import type { Transition } from "motion/react";
+import { CarouselPagination } from "./carousel-pagination.tsx";
+import { ProjectCard } from "./project-card.tsx";
+import { CarouselProject } from "../../data/types.ts";
+import { CARD_RADIUS, clamp, cn } from "../../lib/utils.ts";
 
-/**
- * Posisi tiap kartu berdasarkan jaraknya ke kartu aktif (index 0 = aktif,
- * 1 = tetangga, dst). Semua jarak dinyatakan dalam kelipatan lebar kartu
- * (--card-w), jadi layout ikut mengecil di layar kecil. Ini satu-satunya
- * tempat yang perlu diubah untuk menyetel tampilan.
- */
 type Slot = {
-  x: number; // geser horizontal
-  y: number; // geser vertikal
-  z: number; // kedalaman (negatif = menjauh dari layar)
-  rotate: number; // derajat sumbu Y; kartu kiri negatif, kanan positif
+  x: number;
+  y: number;
+  z: number;
+  rotate: number;
   scale: number;
   opacity: number;
-  dim: number; // 0..1, lapisan hitam di atas kartu
+  dim: number;
 };
 
-// Nilai di bawah dikalibrasi terhadap screenshot referensi (kartu 800x500, perspective 1.875x).
 const SLOTS: readonly Slot[] = [
   { x: 0, y: 0, z: 0, rotate: 0, scale: 1, opacity: 1, dim: 0 },
   {
@@ -49,14 +39,9 @@ const SLOTS: readonly Slot[] = [
     opacity: 0.4,
     dim: 0.4,
   },
-  // Slot tersembunyi: kartu diparkir di belakang kartu aktif, jadi masuk/keluarnya
-  // simetris kiri-kanan dan tidak ada kartu yang "menyeberang" saat carousel berputar.
   { x: 0, y: 0, z: -0.35, rotate: 0, scale: 0.7, opacity: 0, dim: 0.4 },
 ];
 
-const CARD_W = "var(--card-w)";
-
-/** Jarak bertanda kartu `index` ke kartu aktif. Kalau loop, dihitung secara melingkar. */
 function getOffset(
   index: number,
   active: number,
@@ -65,7 +50,7 @@ function getOffset(
 ): number {
   const diff = index - active;
   if (!loop) return diff;
-  let offset = ((diff % total) + total) % total; // 0..total-1
+  let offset = ((diff % total) + total) % total;
   if (offset > total / 2) offset -= total;
   return offset;
 }
@@ -88,7 +73,6 @@ function getSlot(offset: number): Slot {
   };
 }
 
-/** Interpolasi antar-slot, termasuk saat kartu loop melewati slot tersembunyi. */
 function getDragOffset(
   index: number,
   active: number,
@@ -100,17 +84,14 @@ function getDragOffset(
   if (progress === 0) return from;
   const direction = Math.sign(progress);
   const t = Math.abs(progress);
-  // Pada dua kartu, tetangga bisa masuk dari kedua sisi tergantung arah drag.
   const start = loop && total === 2 && from !== 0 ? direction : from;
   const end =
     loop && total === 2 && from === 0 ?
       -direction
     : getOffset(index, active + direction, total, loop);
 
-  // Kartu yang berpindah sisi harus menghilang di belakang, bukan melintas depan.
   if (loop && start * end < 0 && Math.abs(start - end) > 1) {
     const hidden = SLOTS.length - 1;
-    // Kedua sisi bertemu di slot tersembunyi pada titik tengah.
     return t < 0.5 ?
         start + (Math.sign(start) * hidden - start) * (t * 2)
       : Math.sign(end) * hidden +
@@ -119,31 +100,32 @@ function getDragOffset(
   return start + (end - start) * t;
 }
 
-function getSlideStyle(offset: number, slot: Slot): CSSProperties {
+function getTarget(offset: number, width: number) {
   const dir = Math.sign(offset);
-
+  const slot = getSlot(offset);
   return {
-    // Kartu aktif tanpa transform supaya teksnya tetap tajam.
-    transform:
-      offset === 0 ? "none" : (
-        `translate3d(calc(${CARD_W} * ${dir * slot.x}), calc(${CARD_W} * ${slot.y}), calc(${CARD_W} * ${slot.z})) rotateY(${dir * slot.rotate}deg) scale(${slot.scale})`
-      ),
+    x: dir * slot.x * width,
+    y: slot.y * width,
+    z: slot.z * width,
+    rotateY: dir * slot.rotate,
+    scale: slot.scale,
     opacity: slot.opacity,
+    dim: slot.dim,
     zIndex: Math.max(0, Math.round(10 - Math.abs(offset))),
-    pointerEvents: slot.opacity === 0 ? "none" : undefined,
   };
 }
 
 const DRAG_START_PX = 10;
 const SWIPE_PX = 48;
-const DRAG_STEP = SLOTS[1].x; // jarak pusat kartu aktif ke slot tetangga
+const DRAG_STEP = SLOTS[1].x;
+const SLIDE: Transition = { duration: 0.65, ease: [0.22, 1, 0.36, 1] };
+const INSTANT: Transition = { duration: 0 };
 
 type DragState = {
   pointerId: number | null;
   moved: boolean;
   startX: number;
   startY: number;
-  width: number;
 };
 
 export type ProjectCarouselProps = {
@@ -167,17 +149,33 @@ export function ProjectCarousel({
   const initialIndex = clamp(defaultIndex, 0, Math.max(total - 1, 0));
   const [active, setActive] = useState(initialIndex);
   const [dragProgress, setDragProgress] = useState<number | null>(null);
+  const [cardWidth, setCardWidth] = useState(0);
+  const stageRef = useRef<HTMLDivElement>(null);
   const drag = useRef<DragState>({
     pointerId: null,
     moved: false,
     startX: 0,
     startY: 0,
-    width: 0,
   });
+  const reduceMotion = useReducedMotion();
+
+  useLayoutEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const measure = () =>
+      setCardWidth(
+        (stage.firstElementChild as HTMLElement | null)?.offsetWidth ?? 0,
+      );
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, []);
 
   if (total === 0) return null;
 
   const current = Math.min(active, total - 1);
+  const transition = dragProgress !== null || reduceMotion ? INSTANT : SLIDE;
 
   const goTo = (index: number) => {
     const target = loop ? (index + total) % total : clamp(index, 0, total - 1);
@@ -210,10 +208,8 @@ export function ProjectCarousel({
     }
   };
 
-  // Kartu mengikuti pointer secara langsung; transisi CSS hanya dipakai saat
-  // melepas pointer agar posisi akhirnya menganimasi ke slot terdekat.
-  const getProgress = (dx: number, width: number) => {
-    const progress = clamp(-dx / (width * DRAG_STEP), -1, 1);
+  const getProgress = (dx: number) => {
+    const progress = clamp(-dx / (cardWidth * DRAG_STEP), -1, 1);
     return loop ? progress : clamp(progress, -current, total - 1 - current);
   };
 
@@ -229,7 +225,6 @@ export function ProjectCarousel({
       moved: false,
       startX: e.clientX,
       startY: e.clientY,
-      width: (e.currentTarget.firstElementChild as HTMLElement).offsetWidth,
     };
   };
 
@@ -243,7 +238,7 @@ export function ProjectCarousel({
       d.moved = true;
       e.currentTarget.setPointerCapture(e.pointerId);
     }
-    setDragProgress(getProgress(dx, d.width));
+    setDragProgress(getProgress(dx));
   };
 
   const handlePointerUp = (e: PointerEvent<HTMLDivElement>) => {
@@ -251,8 +246,7 @@ export function ProjectCarousel({
     if (d.pointerId !== e.pointerId) return;
     d.pointerId = null;
     const dx = e.clientX - d.startX;
-    const progress = getProgress(dx, d.width);
-    // Pointer bisa dilepas tanpa event move terakhir: hitung ulang dari koordinat up.
+    const progress = getProgress(dx);
     setDragProgress(null);
     if (d.moved && Math.abs(dx) > SWIPE_PX && progress !== 0) {
       goTo(current + Math.sign(progress));
@@ -266,7 +260,6 @@ export function ProjectCarousel({
     setDragProgress(null);
   };
 
-  // Setelah drag, buang event click yang menyusul supaya tidak memicu klik kartu/tombol.
   const handleClickCapture = (e: MouseEvent<HTMLDivElement>) => {
     if (drag.current.moved) {
       e.preventDefault();
@@ -287,10 +280,11 @@ export function ProjectCarousel({
       )}
     >
       <div
+        ref={stageRef}
         className="relative mx-auto h-110 md:h-100 w-full touch-pan-y select-none"
         style={{
-          perspective: "calc(var(--card-w) * 1.875)",
-          perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
+          perspective: cardWidth * 1.875,
+          perspectiveOrigin: `50% ${cardWidth * 0.375}px`,
         }}
         onDragStart={(e) => e.preventDefault()}
         onPointerDown={handlePointerDown}
@@ -305,10 +299,10 @@ export function ProjectCarousel({
             dragProgress === null ?
               getOffset(i, current, total, loop)
             : getDragOffset(i, current, dragProgress, total, loop);
-          const slot = getSlot(offset);
+          const target = getTarget(offset, cardWidth);
 
           return (
-            <div
+            <motion.div
               key={project.id}
               role="group"
               aria-roledescription="slide"
@@ -316,12 +310,24 @@ export function ProjectCarousel({
               aria-hidden={isActive ? undefined : true}
               onClick={isActive ? undefined : () => goTo(i)}
               className={cn(
-                "absolute inset-x-0 top-0 mx-auto h-full w-(--card-w) ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-                dragProgress === null &&
-                  "transition-[transform,opacity] duration-650",
+                "absolute inset-x-0 top-0 mx-auto h-full w-(--card-w)",
                 !isActive && "cursor-pointer",
               )}
-              style={getSlideStyle(offset, slot)}
+              initial={false}
+              animate={{
+                x: target.x,
+                y: target.y,
+                z: target.z,
+                rotateY: target.rotateY,
+                scale: target.scale,
+                opacity: target.opacity,
+              }}
+              transition={transition}
+              style={{
+                zIndex: target.zIndex,
+                pointerEvents: target.opacity === 0 ? "none" : undefined,
+                transformStyle: "preserve-3d",
+              }}
             >
               <ProjectCard
                 project={project}
@@ -330,16 +336,17 @@ export function ProjectCarousel({
                 interactive={isActive}
                 preload={i === initialIndex}
               />
-              <div
+              <motion.div
                 aria-hidden="true"
                 className={cn(
-                  "pointer-events-none absolute inset-0 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                  "pointer-events-none absolute inset-0 bg-black",
                   CARD_RADIUS,
-                  dragProgress === null && "transition-colors duration-650",
                 )}
-                style={{ backgroundColor: `rgba(0,0,0,${slot.dim})` }}
+                initial={false}
+                animate={{ opacity: target.dim }}
+                transition={transition}
               />
-            </div>
+            </motion.div>
           );
         })}
       </div>

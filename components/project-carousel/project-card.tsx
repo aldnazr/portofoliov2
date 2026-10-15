@@ -1,11 +1,11 @@
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { LayersIcon, UserIcon } from "./icons";
-import { CARD_RADIUS, cn, pad } from "./utils";
-import { ArrowIcon, BrowserIcon, GithubIcon } from "../icons";
-import ProjectVisual from "@/components/project-visual";
-import { CarouselProject } from "@/data/types";
+import { LayersIcon, UserIcon } from "./icons.tsx";
+import { ArrowIcon, BrowserIcon, GithubIcon } from "../icons.tsx";
+import ProjectVisual from "../project-visual.tsx";
+import { CarouselProject } from "../../data/types.ts";
+import { CARD_RADIUS, cn, pad } from "../../lib/utils.ts";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
 
@@ -59,7 +59,6 @@ function MetaItem({
 export function ProjectCard({
   project,
   index,
-  total,
   interactive = true,
   preload = false,
 }: ProjectCardProps) {
