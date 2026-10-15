@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portofolio Muhammad Alauddin Azhary
 
-## Getting Started
+Situs portofolio pribadi untuk menampilkan profil, proyek, pengalaman kerja, dan materi belajar pengembangan perangkat lunak. Dibangun dengan Next.js App Router, React, TypeScript, dan Tailwind CSS.
 
-First, run the development server:
+## Fitur
+
+- Beranda dengan bagian profil, tentang, proyek, pengalaman, dan kontak.
+- Proyek ditampilkan dalam carousel atau daftar, dengan halaman detail untuk setiap proyek.
+- Halaman belajar berisi topik paradigma pemrograman, metode array/string, dan manajemen state. Materi dilengkapi filter dan contoh kode yang dapat disalin; contoh kode tidak dijalankan di browser.
+- Tema terang, gelap, dan sistem, serta tampilan responsif.
+
+## Teknologi
+
+Next.js 16, React 19, TypeScript, Tailwind CSS 4, Motion, Zustand, dan Shiki. Integrasi Vercel Analytics dan Speed Insights dipasang di layout aplikasi.
+
+## Menjalankan secara lokal
+
+Gunakan [Bun](https://bun.sh/) sebagai package manager (versi yang tercantum di `package.json`: 1.3.14).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000). Untuk membuat dan menjalankan build produksi:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun run build
+bun start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Pemeriksaan lint tersedia melalui `bun run lint`. Saat ini belum ada skrip pengujian otomatis di `package.json`.
 
-## Learn More
+## Halaman
 
-To learn more about Next.js, take a look at the following resources:
+| URL | Isi |
+| --- | --- |
+| `/` | Beranda; bagian `#about`, `#project`, `#experience`, dan `#contact` |
+| `/projects/[slug]` | Detail proyek dari `data/projects.ts`; slug dibuat dari nama proyek |
+| `/learns` | Daftar topik belajar |
+| `/learns/paradigms` | Functional Programming dan OOP |
+| `/learns/methods` | Array & String Methods |
+| `/learns/state-management` | Zustand dan Riverpod |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Mengubah konten
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| File/direktori | Kegunaan |
+| --- | --- |
+| `data/profile.ts` | Nama, deskripsi diri, email, dan tautan sosial |
+| `data/projects.ts` | Daftar proyek, detail, tautan, gambar, dan slug halaman detail |
+| `data/experience.ts` | Riwayat pengalaman |
+| `data/navigation.ts` | Tautan navigasi |
+| `data/site.ts` | Judul dan deskripsi metadata situs |
+| `features/learns/data/` | Kartu topik dan materi belajar |
+| `components/sections/` | Bagian-bagian beranda |
+| `app/globals.css` | Gaya global, warna, dan tema |
+| `public/projects/` | Aset gambar proyek yang dirujuk dari `data/projects.ts` |
 
-## Deploy on Vercel
+Rute beranda disusun di `app/page.tsx`; halaman detail proyek dan belajar berada di `app/(pages)/`. Saat menambah proyek, nama proyek digunakan untuk membuat slug URL melalui `slugifyProject` di `data/projects.ts`. Proyek tanpa gambar menggunakan visual bawaan.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Catatan formulir kontak
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Tombol salin email menggunakan alamat di `data/profile.ts`. Formulir kontak mengirim permintaan ke `/api/send`, tetapi **pengiriman pesan belum berfungsi pada struktur proyek saat ini**: handler Resend ada di `api/send/route.ts`, sedangkan Next.js App Router memerlukan `app/api/send/route.ts` untuk rute tersebut.
+
+Untuk mengaktifkannya, pindahkan handler ke `app/api/send/route.ts`, sediakan `RESEND_API_KEY` melalui environment lokal/deployment (misalnya `.env.local` untuk pengembangan), dan periksa konfigurasi pengirim serta penerima email di handler. Jangan commit kunci API atau berkas `.env*`. Tanpa perbaikan rute tersebut, konfigurasi kunci API saja tidak akan mengaktifkan formulir.

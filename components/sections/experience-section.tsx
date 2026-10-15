@@ -17,7 +17,7 @@ export default function ExperienceSection() {
             className="grid gap-3 md:grid-cols-4 md:gap-8"
           >
             {/* Kolom kiri: periode */}
-            <div className="uppercase tracking-wide font-medium text-sm text-primary md:pt-2">
+            <div className="uppercase tracking-wide font-medium text-sm text-accent md:pt-2">
               {exp.period}
             </div>
 
