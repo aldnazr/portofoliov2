@@ -8,10 +8,9 @@ import type {
   PointerEvent,
 } from "react";
 import { CarouselPagination } from "./carousel-pagination";
-import { ProjectCard, CarouselProject } from "./project-card";
+import { ProjectCard } from "./project-card";
 import { CARD_RADIUS, clamp, cn } from "./utils";
-
-export type { CarouselProject, ProjectStatusTone } from "./project-card";
+import { CarouselProject } from "@/data/types";
 
 /**
  * Posisi tiap kartu berdasarkan jaraknya ke kartu aktif (index 0 = aktif,

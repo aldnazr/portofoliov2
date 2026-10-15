@@ -1,5 +1,4 @@
-import { type Project } from "@/data/types";
-import type { CarouselProject } from "@/components/project-carousel/project-card";
+import { CarouselProject, type Project } from "@/data/types";
 
 export const projects: Project[] = [
   {
@@ -166,5 +165,6 @@ export const carouselProjects: CarouselProject[] = projects.map((project) => ({
   role: project.role.join(", "),
   stack: project.technologies.join(", "),
   href: `/projects/${slugifyProject(project.name)}`,
+  demoUrl: project.demoUrl,
   github: project.sourceUrl,
 }));

@@ -3,25 +3,11 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { LayersIcon, UserIcon } from "./icons";
 import { CARD_RADIUS, cn, pad } from "./utils";
-import { ArrowIcon, GithubIcon } from "../icons";
+import { ArrowIcon, BrowserIcon, GithubIcon } from "../icons";
 import ProjectVisual from "@/components/project-visual";
+import { CarouselProject } from "@/data/types";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
-
-export type CarouselProject = {
-  id: string | number;
-  title: string;
-  description: string;
-  tag: string;
-  status?: { label: string; tone?: ProjectStatusTone };
-  image?: string | StaticImageData;
-  imageAlt?: string;
-  category: string;
-  role: string;
-  stack: string;
-  href: string;
-  github?: string;
-};
 
 type ProjectCardProps = {
   project: CarouselProject;
@@ -88,6 +74,7 @@ export function ProjectCard({
     role,
     stack,
     href,
+    demoUrl,
     github,
   } = project;
 
@@ -179,16 +166,18 @@ export function ProjectCard({
         </dl>
 
         <div className="mt-3.5 sm:mt-4 flex items-center gap-3">
-          {github && (
+          {(demoUrl ?? github) && (
             <a
-              href={github}
+              href={demoUrl ?? github}
               target="_blank"
               rel="noopener noreferrer"
               draggable={false}
-              aria-label={`${title} on GitHub`}
+              aria-label={demoUrl ? `${title} demo` : `${title} on GitHub`}
               className="grid size-9 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-colors hover:bg-white/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-11"
             >
-              <GithubIcon className="size-4 sm:size-5" />
+              {demoUrl ?
+                <BrowserIcon className="size-4 sm:size-5" />
+              : <GithubIcon className="size-4 sm:size-5" />}
             </a>
           )}
           <Link
