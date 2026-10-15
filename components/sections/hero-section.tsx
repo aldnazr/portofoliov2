@@ -2,8 +2,8 @@
 
 import { profile } from "@/data/profile";
 import { motion, useReducedMotion } from "motion/react";
-import { ButtonLink } from "../button";
-import { ArrowIcon, GithubIcon, LinkedinIcon } from "../icons";
+import HeroButton from "../hero-button";
+import { GithubIcon, LinkedinIcon } from "../icons";
 
 const entrance = {
   hidden: { opacity: 0, y: 16 },
@@ -71,12 +71,7 @@ export default function HeroSection() {
         {...reveal(0.36)}
         className="flex flex-wrap items-center gap-4 pt-2"
       >
-        <ButtonLink href="#project">
-          <span>Lihat Proyek</span>
-          <span className="w-6 h-6 rounded-full bg-on-primary-wash flex items-center justify-center group-hover:scale-105 transition-transform">
-            <ArrowIcon direction="down" className="size-3.5 shrink-0" />
-          </span>
-        </ButtonLink>
+        <HeroButton href="#project">Lihat Proyek</HeroButton>
 
         <div className="flex items-center gap-2">
           {profile.socialLinks.map((link, i) => (
