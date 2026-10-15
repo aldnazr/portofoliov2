@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "./icons.tsx";
-import { cn, pad } from "../../lib/utils.ts";
+import { cn, pad } from "@/lib/utils.ts";
 
 type CarouselPaginationProps = {
   total: number;

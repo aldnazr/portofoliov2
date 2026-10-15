@@ -1,7 +1,7 @@
-import { profile } from "@/data/profile";
-import SectionHeader from "@/components/section-header";
 import { useMemo } from "react";
-import { projects } from "@/data/projects";
+import { profile } from "@/data/profile.ts";
+import { projects } from "@/data/projects.ts";
+import SectionHeader from "@/components/section-header.tsx";
 
 export default function AboutSection() {
   const allTechnologies = useMemo(

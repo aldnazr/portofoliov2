@@ -9,16 +9,24 @@ export default function ThemeToggle() {
 
   const syncPressed = (mode: string | undefined) => {
     if (!containerRef.current) return;
-    const buttons = containerRef.current.querySelectorAll<HTMLButtonElement>("button[data-mode]");
+    const buttons =
+      containerRef.current.querySelectorAll<HTMLButtonElement>(
+        "button[data-mode]",
+      );
     buttons.forEach((btn) => {
-      btn.setAttribute("aria-pressed", btn.dataset.mode === mode ? "true" : "false");
+      btn.setAttribute(
+        "aria-pressed",
+        btn.dataset.mode === mode ? "true" : "false",
+      );
     });
   };
 
   const setTheme = (mode: ThemeMode) => {
     try {
       localStorage.setItem("theme", mode);
-    } catch {}
+    } catch {
+      //
+    }
     document.documentElement.setAttribute("data-theme", mode);
     syncPressed(mode);
   };
@@ -27,7 +35,9 @@ export default function ThemeToggle() {
     let mode: string | null = null;
     try {
       mode = localStorage.getItem("theme");
-    } catch {}
+    } catch {
+      //
+    }
     if (mode === "light" || mode === "dark" || mode === "system") {
       document.documentElement.setAttribute("data-theme", mode);
     } else {
@@ -36,13 +46,18 @@ export default function ThemeToggle() {
     syncPressed(mode);
 
     const onStorage = (e: StorageEvent) => {
-      if (e.key === "theme" && (e.newValue === "light" || e.newValue === "dark" || e.newValue === "system")) {
+      if (
+        e.key === "theme" &&
+        (e.newValue === "light" ||
+          e.newValue === "dark" ||
+          e.newValue === "system")
+      ) {
         document.documentElement.setAttribute("data-theme", e.newValue);
         syncPressed(e.newValue);
       }
     };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    globalThis.addEventListener("storage", onStorage);
+    return () => globalThis.removeEventListener("storage", onStorage);
   }, []);
 
   return (

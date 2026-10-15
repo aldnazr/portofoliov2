@@ -1,9 +1,9 @@
 "use client";
 
-import { projects } from "@/data/projects";
 import { useState } from "react";
-import ProjectCard from "../project-list/project-card";
-import { ArrowIcon } from "../icons";
+import { projects } from "@/data/projects.ts";
+import { ArrowIcon } from "@/components/icons.tsx";
+import ProjectCard from "@/components/project-list/project-card.tsx";
 
 const ITEMS_PER_PAGE = 3;
 
@@ -40,6 +40,7 @@ export default function ProjectsList() {
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
+            type="button"
             className="flex items-center gap-2 px-3.5 py-2 rounded-full border border-hairline bg-overlay text-xs font-medium text-foreground-soft hover:bg-overlay-strong hover:text-foreground disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
             aria-label="Halaman sebelumnya"
           >
@@ -52,6 +53,7 @@ export default function ProjectsList() {
               <button
                 key={page}
                 onClick={() => handlePageChange(page)}
+                type="button"
                 className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${
                   currentPage === page ?
                     "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-bold"
@@ -66,6 +68,7 @@ export default function ProjectsList() {
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
+            type="button"
             className="flex items-center gap-2 px-3.5 py-2 rounded-full border border-hairline bg-overlay text-xs font-medium text-foreground-soft hover:bg-overlay-strong hover:text-foreground disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed transition-all"
             aria-label="Halaman berikutnya"
           >

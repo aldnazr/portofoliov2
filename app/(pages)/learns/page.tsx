@@ -1,5 +1,5 @@
-import PageShell from "@/components/page-shell";
-import TopicList from "@/features/learns/components/topic-list";
+import PageShell from "@/components/page-shell.tsx";
+import TopicList from "@/features/learns/components/topic-list.tsx";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

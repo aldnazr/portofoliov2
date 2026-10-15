@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { profile } from "@/data/profile";
-import { Button } from "../button";
+import { profile } from "@/data/profile.ts";
+import { Button } from "@/components/button.tsx";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);

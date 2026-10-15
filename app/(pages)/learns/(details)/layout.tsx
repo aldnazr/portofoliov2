@@ -1,4 +1,4 @@
-import PageShell from "@/components/page-shell";
+import PageShell from "@/components/page-shell.tsx";
 import type { ReactNode } from "react";
 
 /** Kerangka halaman detail topik: shell + konten topik. */

@@ -1,12 +1,11 @@
 "use client";
 
-import SectionHeader from "@/components/section-header";
-import { carouselProjects } from "@/data/projects";
-import { useState } from "react";
-import { ProjectCarousel } from "../project-carousel/project-carousel";
-import ProjectsList from "../project-list/projects-list";
-import { IconCarousel, IconList } from "../icons";
-import { useProjectViewMode } from "@/lib/use-project-view-mode";
+import { carouselProjects } from "@/data/projects.ts";
+import { useProjectViewMode } from "@/lib/use-project-view-mode.ts";
+import { IconCarousel, IconList } from "@/components/icons.tsx";
+import { ProjectCarousel } from "@/components/project-carousel/project-carousel.tsx";
+import ProjectsList from "@/components/project-list/projects-list.tsx";
+import SectionHeader from "@/components/section-header.tsx";
 
 export default function ProjectsSection() {
   const viewMode = useProjectViewMode((s) => s.viewMode);

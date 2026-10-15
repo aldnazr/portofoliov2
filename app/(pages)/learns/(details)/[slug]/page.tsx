@@ -1,30 +1,29 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import {
-  LearnConcept,
-  LearnTopic,
-  MethodFilter,
-  Paradigm,
-  StateLibrary,
-} from "@/features/learns/data/types";
 import ConceptExplorer, {
   ExplorerGroup,
-} from "@/features/learns/components/concept-explorer";
-import { ContentSkeleton } from "@/features/learns/components/learn-skeleton";
-import NextTopicLink from "@/features/learns/components/next-topic-link";
-import ScrollToTop from "@/features/learns/components/scroll-to-top";
-import TopicHeader from "@/features/learns/components/topic-header";
+} from "@/features/learns/components/concept-explorer.tsx";
+import { ContentSkeleton } from "@/features/learns/components/learn-skeleton.tsx";
+import NextTopicLink from "@/features/learns/components/next-topic-link.tsx";
+import ScrollToTop from "@/features/learns/components/scroll-to-top.tsx";
+import TopicHeader from "@/features/learns/components/topic-header.tsx";
+import { highlightConcepts } from "@/features/learns/data/highlight.ts";
 import {
-  learnContent,
   methodFilterOptions,
   methodTypeLabel,
-  methodsConcepts,
-  paradigmIds,
-  stateContent,
   stateLibraryIds,
-} from "@/features/learns/data";
-import { highlightConcepts } from "@/features/learns/data/highlight";
+  stateContent,
+  paradigmIds,
+  learnContent,
+} from "@/features/learns/data/index.ts";
+import { methodsConcepts } from "@/features/learns/data/methods.ts";
+import {
+  LearnTopic,
+  MethodFilter,
+  StateLibrary,
+  Paradigm,
+} from "@/features/learns/data/types.ts";
 
 type TopicMeta = {
   /** `h1` + description di bawah header. */

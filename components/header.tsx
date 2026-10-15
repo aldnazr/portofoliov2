@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { profile } from "@/data/profile";
-import { navigation } from "@/data/navigation";
-import ThemeToggle from "@/components/theme-toggle";
+import { profile } from "@/data/profile.ts";
+import { navigation } from "@/data/navigation.ts";
+import ThemeToggle from "@/components/theme-toggle.tsx";
 import { usePathname } from "next/navigation";
 
 export default function Header() {

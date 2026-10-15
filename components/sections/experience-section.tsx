@@ -1,6 +1,5 @@
-import Image from "next/image";
-import { experience } from "@/data/experience";
-import SectionHeader from "@/components/section-header";
+import { experience } from "@/data/experience.ts";
+import SectionHeader from "@/components/section-header.tsx";
 
 export default function ExperienceSection() {
   return (

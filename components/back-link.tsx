@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowIcon } from "./icons";
+import { ArrowIcon } from "./icons.tsx";
 
 type BackLinkProps = {
   /** Tujuan navigasi back. Default `/` (halaman utama portofolio). */

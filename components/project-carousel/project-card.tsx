@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { LayersIcon, UserIcon } from "./icons.tsx";
-import { ArrowIcon, BrowserIcon, GithubIcon } from "../icons.tsx";
-import ProjectVisual from "../project-visual.tsx";
-import { CarouselProject } from "../../data/types.ts";
-import { CARD_RADIUS, cn, pad } from "../../lib/utils.ts";
+import { CarouselProject } from "@/data/types.ts";
+import { cn, CARD_RADIUS, pad } from "@/lib/utils.ts";
+import { BrowserIcon, GithubIcon, ArrowIcon } from "@/components/icons.tsx";
+import ProjectVisual from "@/components/project-visual.tsx";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
 

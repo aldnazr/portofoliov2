@@ -1,9 +1,9 @@
 "use client";
 
-import { profile } from "@/data/profile";
-import { motion, useReducedMotion } from "motion/react";
-import HeroButton from "../hero-button";
-import { GithubIcon, LinkedinIcon } from "../icons";
+import { useReducedMotion, motion } from "motion/react";
+import { profile } from "@/data/profile.ts";
+import HeroButton from "@/components/hero-button.tsx";
+import { GithubIcon, LinkedinIcon } from "@/components/icons.tsx";
 
 const entrance = {
   hidden: { opacity: 0, y: 16 },

@@ -1,4 +1,7 @@
 {
   "allowScripts": ["npm:unrs-resolver@1.12.2"],
-  "nodeModulesDir": "auto"
+  "nodeModulesDir": "auto",
+  "imports": {
+    "@/": "./"
+  }
 }

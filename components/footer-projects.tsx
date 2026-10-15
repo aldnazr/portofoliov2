@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { projects, slugifyProject } from "@/data/projects";
+import { projects, slugifyProject } from "@/data/projects.ts";
 
 const INITIAL_VISIBLE = 5;
 

@@ -3,7 +3,7 @@ import { Geist_Mono, Google_Sans_Flex } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { siteDescription, siteTitle } from "@/data/site";
+import { siteDescription, siteTitle } from "@/data/site.ts";
 
 const googleSansFlex = Google_Sans_Flex({
   subsets: ["latin"],

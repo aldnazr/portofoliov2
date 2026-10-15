@@ -2,12 +2,12 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import type { KeyboardEvent, MouseEvent, PointerEvent } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { clamp, motion, useReducedMotion } from "motion/react";
 import type { Transition } from "motion/react";
 import { CarouselPagination } from "./carousel-pagination.tsx";
 import { ProjectCard } from "./project-card.tsx";
-import { CarouselProject } from "../../data/types.ts";
-import { CARD_RADIUS, clamp, cn } from "../../lib/utils.ts";
+import { CarouselProject } from "@/data/types.ts";
+import { cn, CARD_RADIUS } from "@/lib/utils.ts";
 
 type Slot = {
   x: number;

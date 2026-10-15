@@ -1,20 +1,15 @@
-import PageShell from "@/components/page-shell";
+import PageShell from "@/components/page-shell.tsx";
 
-/**
- * Baris kode skeleton dengan lebar bervariasi supaya menyerupai
- * panjang baris kode asli (cegah layout shift saat konten masuk).
- */
 function CodeLine({ width }: { width: string }) {
   return <div className="skeleton h-3 rounded-full" style={{ width }} />;
 }
 
-/**
- * Fallback Suspense untuk area konten materi: tampil selama Shiki
- * meng-highlight snippet di server. Cermin layout explorer asli.
- */
 export function ContentSkeleton() {
   return (
-    <div className="flex flex-col gap-10 lg:flex-row lg:gap-12" aria-busy="true">
+    <div
+      className="flex flex-col gap-10 lg:flex-row lg:gap-12"
+      aria-busy="true"
+    >
       <p role="status" aria-live="polite">
         <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent-strong">
           Menyiapkan contoh kode
@@ -22,20 +17,26 @@ export function ContentSkeleton() {
         <span className="sr-only"> — memuat materi pembelajaran</span>
       </p>
 
-      {/* Skeleton anchor navigation (desktop) */}
       <div className="hidden lg:block lg:w-56 lg:shrink-0" aria-hidden="true">
         <div className="sticky top-28 space-y-4">
           <div className="skeleton h-3 w-24 rounded-full" />
           <div className="space-y-1">
             {["60%", "48%", "55%", "42%", "50%"].map((width) => (
-              <div key={width} className="skeleton h-8 rounded-lg" style={{ width }} />
+              <div
+                key={width}
+                className="skeleton h-8 rounded-lg"
+                style={{ width }}
+              />
             ))}
           </div>
         </div>
       </div>
 
       {/* Skeleton kartu kode */}
-      <div className="flex-1 space-y-10 sm:space-y-12 min-w-0" aria-hidden="true">
+      <div
+        className="flex-1 space-y-10 sm:space-y-12 min-w-0"
+        aria-hidden="true"
+      >
         {[0, 1].map((card) => (
           <section key={card} className="space-y-5">
             <div className="flex items-center gap-3">
@@ -63,10 +64,6 @@ export function ContentSkeleton() {
   );
 }
 
-/**
- * Loading UI server-side untuk seluruh segment `/learns`.
- * Dipakai `loading.tsx`; cermin layout halaman topik.
- */
 export default function LearnSkeleton() {
   return (
     <PageShell

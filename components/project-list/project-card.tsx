@@ -1,10 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Project } from "@/data/types";
-import { slugifyProject } from "@/data/projects";
-import ProjectVisual from "@/components/project-visual";
-import { ArrowIcon, BrowserIcon, GithubIcon, PlayStoreIcon } from "../icons";
-import ProjectActionLink from "../project-action-link";
+import { slugifyProject } from "@/data/projects.ts";
+import { Project } from "@/data/types.ts";
+import {
+  PlayStoreIcon,
+  GithubIcon,
+  BrowserIcon,
+  ArrowIcon,
+} from "@/components/icons.tsx";
+import ProjectActionLink from "@/components/project-action-link.tsx";
+import ProjectVisual from "@/components/project-visual.tsx";
 
 export default function ProjectCard({
   item,
@@ -81,7 +86,10 @@ export default function ProjectCard({
                 <span>Demo App</span>
               </ProjectActionLink>
             )}
-            <button className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-muted text-xs font-medium group-hover:text-accent-strong group-hover:border-accent-wash-border transition-colors">
+            <button
+              className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-overlay border border-hairline text-muted text-xs font-medium group-hover:text-accent-strong group-hover:border-accent-wash-border transition-colors"
+              type="button"
+            >
               <span>Lihat Detail</span>
               <ArrowIcon direction="right" className="size-4" />
             </button>

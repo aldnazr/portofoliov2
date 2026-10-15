@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { profile } from "@/data/profile";
-import { siteDescription, siteTitle } from "@/data/site";
-import { experience } from "@/data/experience";
-import FooterProjects from "@/components/footer-projects";
-import { ArrowIcon, GithubIcon, LinkedinIcon } from "@/components/icons";
-import { topicCards } from "@/features/learns/data/topics";
+import { experience } from "@/data/experience.ts";
+import { profile } from "@/data/profile.ts";
+import { siteTitle, siteDescription } from "@/data/site.ts";
+import { topicCards } from "@/features/learns/data/topics.ts";
+import FooterProjects from "@/components/footer-projects.tsx";
+import { GithubIcon, LinkedinIcon, ArrowIcon } from "@/components/icons.tsx";
 
 const learningLabLinkClass =
   "block py-1 text-sm leading-relaxed text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background";
