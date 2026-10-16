@@ -230,7 +230,7 @@ const words = sentences.flatMap((s) => (s ? s.split(" ") : []));
     kind: "array",
     title: "sort",
     description:
-      "Mengurutkan isi array dari yang terkecil ke yang terbesar, atau sebaliknya. Cara kerjanya: dua item dibandingkan satu per satu, lalu kamu tentukan mana yang harus muncul lebih dulu. Untuk angka selalu tulis selisihnya (a - b), sedangkan teks cukup ditulis apa adanya. Perhatian: sort mengubah array aslinya, jadi pakai [...array] lebih dulu bila array lama harus tetap aman.",
+      "Mengurutkan isi array dari yang terkecil ke yang terbesar, atau sebaliknya dengan mengubah array asli (Mutable). Cara kerjanya: dua item dibandingkan satu per satu, lalu kamu tentukan mana yang harus muncul lebih dulu. Untuk angka selalu tulis selisihnya (a - b), sedangkan teks cukup ditulis apa adanya.",
     filename: "sort.ts",
     code: `const nilai = [72, 95, 40, 88];
 
@@ -242,7 +242,7 @@ const kecil = [...nilai].sort((a, b) => a - b);
 const besar = [...nilai].sort((a, b) => b - a);
 // [95, 88, 72, 40]
 
-// 3. PENTING: sort mengubah array asli, salin dulu dengan [...array].
+// 3. PENTING: sort mengubah array asli (Mutable), salin dulu dengan [...array].
 //    Untuk objek, tentukan property yang dipakai sebagai pembanding.
 const nilaiSiswa = [
   { nama: "Andi", nilai: 72 },
