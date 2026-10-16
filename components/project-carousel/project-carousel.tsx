@@ -119,6 +119,12 @@ const DRAG_START_PX = 10;
 const SWIPE_PX = 48;
 const DRAG_STEP = SLOTS[1].x;
 const SLIDE: Transition = { duration: 0.65, ease: [0.22, 1, 0.36, 1] };
+const DRAG: Transition = {
+  type: "spring",
+  stiffness: 600,
+  damping: 45,
+  mass: 0.5,
+};
 const INSTANT: Transition = { duration: 0 };
 
 type DragState = {
@@ -146,7 +152,7 @@ export function ProjectCarousel({
   className,
 }: ProjectCarouselProps) {
   const total = projects.length;
-  const initialIndex = clamp(defaultIndex, 0, Math.max(total - 1, 0));
+  const initialIndex = clamp(0, Math.max(total - 1, 0), defaultIndex);
   const [active, setActive] = useState(initialIndex);
   const [dragProgress, setDragProgress] = useState<number | null>(null);
   const [cardWidth, setCardWidth] = useState(0);
@@ -175,10 +181,13 @@ export function ProjectCarousel({
   if (total === 0) return null;
 
   const current = Math.min(active, total - 1);
-  const transition = dragProgress !== null || reduceMotion ? INSTANT : SLIDE;
+  const transition: Transition =
+    reduceMotion ? INSTANT
+    : dragProgress !== null ? DRAG
+    : SLIDE;
 
   const goTo = (index: number) => {
-    const target = loop ? (index + total) % total : clamp(index, 0, total - 1);
+    const target = loop ? (index + total) % total : clamp(0, total - 1, index);
     if (target === current) return;
     setActive(target);
     onActiveChange?.(target);
@@ -209,8 +218,8 @@ export function ProjectCarousel({
   };
 
   const getProgress = (dx: number) => {
-    const progress = clamp(-dx / (cardWidth * DRAG_STEP), -1, 1);
-    return loop ? progress : clamp(progress, -current, total - 1 - current);
+    const progress = clamp(-1, 1, -dx / (cardWidth * DRAG_STEP));
+    return loop ? progress : clamp(-current, total - 1 - current, progress);
   };
 
   const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
