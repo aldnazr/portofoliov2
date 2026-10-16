@@ -14,11 +14,11 @@ export const projects: Project[] = [
       "Dio",
       "GoRouter",
       "Next.js",
-      "Typescript",
+      "TypeScript",
       "NextAuth",
       "Zustand",
-      "React Query",
       "Zod",
+      "React Hook Form",
     ],
     contributions:
       "Berkolaborasi dengan tim untuk membangun ulang aplikasi customer dan driver dengan Flutter serta Riverpod untuk state management yang reaktif, sambil mengembangkan ulang web admin berbasis Next.js dan TypeScript. Pekerjaan saya mencakup perancangan arsitektur fitur baru, integrasi API logistik untuk order, tracking, dan penugasan driver, sampai memastikan pengalaman pengguna di kedua platform tetap konsisten.",
@@ -44,7 +44,14 @@ export const projects: Project[] = [
     role: ["Frontend"],
     description:
       "Sistem reservasi dan operasional hotel untuk properti tunggal (single-property) berbasis monorepo.",
-    technologies: ["Next.js", "NextAuth", "Zustand", "TypeScript"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "NextAuth",
+      "Zustand",
+      "Zod",
+      "React Hook Form",
+    ],
     contributions:
       "Saya membangun sistem reservasi dan operasional hotel monorepo dengan Next.js 16: merancang API backend dengan Bun dan LibSQL, mengimplementasikan autentikasi JWT dan RBAC, serta membangun antarmuka web reaktif dengan TanStack Query dan NextAuth.",
     sourceUrl: "https://github.com/aldnazr/Roomly",
