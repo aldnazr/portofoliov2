@@ -119,12 +119,6 @@ const DRAG_START_PX = 10;
 const SWIPE_PX = 48;
 const DRAG_STEP = SLOTS[1].x;
 const SLIDE: Transition = { duration: 0.65, ease: [0.22, 1, 0.36, 1] };
-const DRAG: Transition = {
-  type: "spring",
-  stiffness: 600,
-  damping: 45,
-  mass: 0.5,
-};
 const INSTANT: Transition = { duration: 0 };
 
 type DragState = {
@@ -182,9 +176,7 @@ export function ProjectCarousel({
 
   const current = Math.min(active, total - 1);
   const transition: Transition =
-    reduceMotion ? INSTANT
-    : dragProgress !== null ? DRAG
-    : SLIDE;
+    reduceMotion || dragProgress !== null ? INSTANT : SLIDE;
 
   const goTo = (index: number) => {
     const target = loop ? (index + total) % total : clamp(0, total - 1, index);
