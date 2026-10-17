@@ -276,7 +276,6 @@ pre.shiki {
   font-family: var(--font-mono) !important;
   font-size: 0.84rem;
   line-height: 1.75;
-  letter-spacing: 0.25;
   overflow-x: auto;
 }
 
