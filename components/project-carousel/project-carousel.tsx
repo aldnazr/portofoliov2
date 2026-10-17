@@ -150,6 +150,7 @@ export function ProjectCarousel({
   const [active, setActive] = useState(initialIndex);
   const [dragProgress, setDragProgress] = useState<number | null>(null);
   const [cardWidth, setCardWidth] = useState(0);
+  const [settled, setSettled] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const drag = useRef<DragState>({
     pointerId: null,
@@ -167,16 +168,20 @@ export function ProjectCarousel({
         (stage.firstElementChild as HTMLElement | null)?.offsetWidth ?? 0,
       );
     measure();
+    const raf = requestAnimationFrame(() => setSettled(true));
     const observer = new ResizeObserver(measure);
     observer.observe(stage);
-    return () => observer.disconnect();
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+    };
   }, []);
 
   if (total === 0) return null;
 
   const current = Math.min(active, total - 1);
   const transition: Transition =
-    reduceMotion || dragProgress !== null ? INSTANT : SLIDE;
+    reduceMotion || dragProgress !== null || !settled ? INSTANT : SLIDE;
 
   const goTo = (index: number) => {
     const target = loop ? (index + total) % total : clamp(0, total - 1, index);
@@ -284,8 +289,8 @@ export function ProjectCarousel({
         ref={stageRef}
         className="relative mx-auto h-110 md:h-100 w-full touch-pan-y select-none"
         style={{
-          perspective: cardWidth * 1.875,
-          perspectiveOrigin: `50% ${cardWidth * 0.375}px`,
+          perspective: "calc(var(--card-w) * 1.875)",
+          perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
         }}
         onDragStart={(e) => e.preventDefault()}
         onPointerDown={handlePointerDown}
