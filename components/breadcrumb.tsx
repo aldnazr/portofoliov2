@@ -9,6 +9,11 @@ const SEGMENT_META: Record<string, { label: string; href?: string }> = {
   methods: { label: "Array & String Methods" },
   paradigms: { label: "Functional & OOP" },
   "state-management": { label: "Global State Management" },
+  rendering: { label: "Rendering Strategies" },
+  csr: { label: "CSR" },
+  ssr: { label: "SSR" },
+  ssg: { label: "SSG" },
+  isr: { label: "ISR" },
   projects: { label: "Project", href: "/#project" },
 };
 

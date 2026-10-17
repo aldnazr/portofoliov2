@@ -8,6 +8,18 @@ const highlighterPromise = createHighlighter({
   themes: ["github-light", "github-dark"],
 });
 
+export async function highlightCode(
+  code: string,
+  lang = "typescript",
+): Promise<string> {
+  const highlighter = await highlighterPromise;
+  return highlighter.codeToHtml(code.trim(), {
+    lang,
+    themes: { light: "github-light", dark: "github-dark" },
+    defaultColor: "light-dark()",
+  });
+}
+
 /**
  * Highlight semua snippet konsep dengan Shiki (dijalankan di server).
  * `paradigm` hanya menentukan bahasa fallback saat `concept.language` kosong.

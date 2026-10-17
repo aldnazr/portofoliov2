@@ -1,0 +1,60 @@
+import type { Metadata } from "next";
+import RenderingDemo from "@/features/learns/components/rendering-demo";
+import { highlightCode } from "@/features/learns/data/highlight";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "SSR - Server-Side Rendering | Interactive Learning Lab",
+  description:
+    "Halaman SSR Next.js: Server membuat HTML baru pada setiap request. Timestamp sudah ada di HTML yang diterima browser.",
+};
+
+const snippet = `export const dynamic = "force-dynamic";
+
+export default function Page() {
+  const timestamp = new Date().toISOString();
+  return <time dateTime={timestamp}>{timestamp}</time>;
+}`;
+
+export default async function SsrPage() {
+  const timestamp = new Date().toISOString();
+  const highlightedHtml = await highlightCode(snippet, "typescript");
+
+  return (
+    <RenderingDemo
+      label="Server-Side Rendering"
+      title="SSR"
+      description="Server membuat HTML baru pada setiap request. Timestamp sudah ada di HTML yang diterima browser."
+      usageDescription="Halaman yang harus selalu menampilkan data terbaru per request."
+      snippet={snippet}
+      highlightedHtml={highlightedHtml}
+    >
+      <section
+        aria-labelledby="result-heading"
+        className="space-y-4 rounded-2xl border border-hairline bg-surface-muted p-6 sm:p-8"
+      >
+        <h2
+          id="result-heading"
+          className="font-mono text-xs font-medium uppercase tracking-wider text-muted"
+        >
+          Waktu render
+        </h2>
+        <p className="text-foreground">
+          Timestamp:{" "}
+          <time
+            dateTime={timestamp}
+            data-demo-timestamp
+            className="rounded bg-accent-wash px-2 py-1 font-mono text-sm text-accent-strong"
+          >
+            {timestamp}
+          </time>
+        </p>
+        <div className="space-y-1 text-sm text-muted">
+          <p>Lokasi render: server Next.js, pada setiap request.</p>
+          <p>Perilaku refresh: setiap refresh menghasilkan timestamp baru.</p>
+        </div>
+      </section>
+    </RenderingDemo>
+  );
+}

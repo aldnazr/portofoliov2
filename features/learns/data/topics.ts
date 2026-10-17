@@ -1,7 +1,7 @@
 import { LearnTopic } from "./types";
 
 export type TopicCard = {
-  id: LearnTopic;
+  id: LearnTopic | "rendering";
   index: string;
   category: string;
   title: string;
@@ -63,5 +63,15 @@ export const topicCards: TopicCard[] = [
       "ref.listen",
     ],
     href: "/learns/state-management",
+  },
+  {
+    id: "rendering",
+    index: "04",
+    category: "Rendering Strategies",
+    title: "Rendering Strategies",
+    description:
+      "Perbandingan empat strategi rendering Next.js dengan demo timestamp: kapan HTML dibuat, dari mana timestamp berasal, dan bagaimana perilaku refresh tiap strategi (CSR, SSR, SSG, ISR).",
+    tags: ["CSR", "SSR", "SSG", "ISR", "Next.js", "Revalidation"],
+    href: "/learns/rendering",
   },
 ];
