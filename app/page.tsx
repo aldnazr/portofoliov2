@@ -17,7 +17,7 @@ export default function Home() {
       <Header />
 
       {/* Main Content Container */}
-      <main className="relative pt-16 sm:pt-24 pb-24 space-y-28 sm:space-y-36">
+      <main className="relative pb-24 space-y-28 sm:space-y-36 md:pb-32">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />

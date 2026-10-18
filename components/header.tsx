@@ -12,7 +12,7 @@ export default function Header() {
   const isHome = pathName === "/";
 
   return (
-    <header className="sticky top-6 z-50 px-4 md:px-6 max-w-3xl mx-auto">
+    <header className="fixed inset-x-0 top-6 z-50 mx-auto max-w-3xl px-4 md:px-6">
       <div className="rounded-full border border-hairline bg-surface/80 backdrop-blur-xl px-4 py-3 sm:px-6 flex items-center justify-between shadow-elevated">
         <a href={isHome ? "#" : "/"} className="group flex items-center gap-3">
           <div className="size-9 rounded-full bg-accent-wash border border-accent-wash-border flex items-center justify-center text-xs font-mono font-bold text-accent-strong transition-transform">
@@ -37,14 +37,6 @@ export default function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle />
 
-          {/* <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full border border-accent-wash-border bg-accent-wash text-accent-strong text-xs font-medium">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-            </span>
-            <span>{profile.availability}</span>
-          </div> */}
-
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -57,20 +49,21 @@ export default function Header() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              {mobileMenuOpen ?
+              {mobileMenuOpen ? (
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M6 18L18 6M6 6l12 12"
                 />
-              : <path
+              ) : (
+                <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M4 6h16M4 12h16M4 18h16"
                 />
-              }
+              )}
             </svg>
           </button>
         </div>

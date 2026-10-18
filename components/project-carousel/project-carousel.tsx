@@ -281,7 +281,7 @@ export function ProjectCarousel({
       tabIndex={-1}
       onKeyDown={handleKeyDown}
       className={cn(
-        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,80vw)] md:[--card-w:min(640px,84vw)]",
+        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,78vw)] md:[--card-w:min(640px,84vw)]",
         className,
       )}
     >
