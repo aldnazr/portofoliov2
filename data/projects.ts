@@ -54,7 +54,7 @@ export const projects: Project[] = [
     ],
     contributions:
       "Saya membangun sistem reservasi dan operasional hotel monorepo dengan Next.js 16: merancang API backend dengan Bun dan LibSQL, mengimplementasikan autentikasi JWT dan RBAC, serta membangun antarmuka web reaktif dengan TanStack Query dan NextAuth.",
-    sourceUrl: "https://github.com/aldnazr/Roomly",
+    // sourceUrl: "https://github.com/aldnazr/Roomly",
     demoUrl: "https://roomly-green.vercel.app/",
   },
   // {

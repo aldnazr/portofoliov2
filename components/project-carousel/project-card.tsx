@@ -11,10 +11,8 @@ export type ProjectStatusTone = "success" | "warning" | "neutral";
 
 type ProjectCardProps = {
   project: CarouselProject;
-  /** Index 0-based, ditampilkan sebagai "02 / 06" */
   index: number;
   total: number;
-  /** false untuk kartu di samping: isinya tidak bisa difokus atau diklik */
   interactive?: boolean;
   preload?: boolean;
 };
@@ -90,7 +88,7 @@ export function ProjectCard({
         interactive && "ring ring-accent-strong/40",
       )}
     >
-      {image ?
+      {image ? (
         <Image
           src={image}
           alt={imageAlt ?? ""}
@@ -100,7 +98,8 @@ export function ProjectCard({
           draggable={false}
           className="object-cover bg-neutral-900"
         />
-      : <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
+      ) : (
+        <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
           <ProjectVisual
             number={pad(index + 1)}
             name={title}
@@ -109,7 +108,7 @@ export function ProjectCard({
             className="h-full rounded-none border-0 -translate-y-8 sm:-translate-y-10"
           />
         </div>
-      }
+      )}
 
       {/* Baris atas: tag + status (kiri), counter (kanan) */}
       <div className="absolute inset-x-4.5 top-4.5 flex items-start justify-between gap-3 sm:inset-x-6.5 sm:top-5.5">
@@ -174,9 +173,11 @@ export function ProjectCard({
               aria-label={demoUrl ? `${title} demo` : `${title} on GitHub`}
               className="grid size-9 shrink-0 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/30 transition-[background-color,color,box-shadow] duration-200 motion-reduce:transition-none hover:bg-white/25 hover:ring-accent-hover hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:size-11"
             >
-              {demoUrl ?
+              {demoUrl ? (
                 <BrowserIcon className="size-4 sm:size-5" />
-              : <GithubIcon className="size-4 sm:size-5" />}
+              ) : (
+                <GithubIcon className="size-4 sm:size-5" />
+              )}
             </a>
           )}
           <Link

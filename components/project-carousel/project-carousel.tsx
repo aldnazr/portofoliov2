@@ -86,14 +86,14 @@ function getDragOffset(
   const t = Math.abs(progress);
   const start = loop && total === 2 && from !== 0 ? direction : from;
   const end =
-    loop && total === 2 && from === 0 ?
-      -direction
-    : getOffset(index, active + direction, total, loop);
+    loop && total === 2 && from === 0
+      ? -direction
+      : getOffset(index, active + direction, total, loop);
 
   if (loop && start * end < 0 && Math.abs(start - end) > 1) {
     const hidden = SLOTS.length - 1;
-    return t < 0.5 ?
-        start + (Math.sign(start) * hidden - start) * (t * 2)
+    return t < 0.5
+      ? start + (Math.sign(start) * hidden - start) * (t * 2)
       : Math.sign(end) * hidden +
           (end - Math.sign(end) * hidden) * ((t - 0.5) * 2);
   }
@@ -281,7 +281,7 @@ export function ProjectCarousel({
       tabIndex={-1}
       onKeyDown={handleKeyDown}
       className={cn(
-        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,68vw)] md:[--card-w:min(640px,84vw)]",
+        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,80vw)] md:[--card-w:min(640px,84vw)]",
         className,
       )}
     >
@@ -302,9 +302,9 @@ export function ProjectCarousel({
         {projects.map((project, i) => {
           const isActive = i === current;
           const offset =
-            dragProgress === null ?
-              getOffset(i, current, total, loop)
-            : getDragOffset(i, current, dragProgress, total, loop);
+            dragProgress === null
+              ? getOffset(i, current, total, loop)
+              : getDragOffset(i, current, dragProgress, total, loop);
           const target = getTarget(offset, cardWidth);
 
           return (
