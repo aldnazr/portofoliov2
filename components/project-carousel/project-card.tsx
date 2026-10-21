@@ -76,7 +76,7 @@ export function ProjectCard({
   } = project;
 
   const pill =
-    "inline-flex h-6 sm:h-6.5 items-center rounded-full px-3 text-sm font-medium";
+    "inline-flex h-6 sm:h-7 items-center rounded-full px-3 text-sm font-medium";
 
   return (
     <article
