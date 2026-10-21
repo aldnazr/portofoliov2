@@ -60,11 +60,7 @@ export default function ContactSection() {
     >
       <div className="p-1.5 rounded-[2.5rem] border border-accent-wash-border bg-linear-to-b from-accent-wash via-overlay-faint to-transparent">
         <div className="p-8 sm:p-14 rounded-[2.125rem] bg-surface border border-hairline-soft text-center space-y-8">
-          <span className="px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] font-mono text-accent-strong border border-accent-wash-border bg-accent-wash inline-block">
-            Mari Berkolaborasi
-          </span>
-
-          <h2 className="text-3xl sm:text-5xl font-semibold text-foreground tracking-tight max-w-2xl mx-auto leading-tight">
+          <h2 className="text-3xl mt-1 sm:text-5xl font-semibold text-foreground tracking-tight max-w-2xl mx-auto leading-tight">
             Punya ide proyek atau peluang kerja sama?
           </h2>
 
@@ -77,26 +73,24 @@ export default function ContactSection() {
             onSubmit={handleSendEmail}
             className="max-w-xl mx-auto text-left space-y-4 pt-4"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Nama Anda"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                className="w-full px-4 py-3 rounded-xl bg-overlay border border-hairline text-foreground placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors"
-              />
-              <input
-                type="email"
-                placeholder="Email Anda"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="w-full px-4 py-3 rounded-xl bg-overlay border border-hairline text-foreground placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors"
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Nama Anda"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              className="w-full px-4 py-3 rounded-xl bg-overlay border border-hairline text-foreground placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors"
+            />
+            <input
+              type="email"
+              placeholder="Email Anda"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className="w-full px-4 py-3 rounded-xl bg-overlay border border-hairline text-foreground placeholder:text-muted text-sm focus:outline-none focus:border-accent transition-colors"
+            />
             <textarea
               required
               rows={4}
@@ -120,7 +114,7 @@ export default function ContactSection() {
               </div>
             )}
 
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 pt-2">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 pt-6 pb-4">
               <Button
                 type="submit"
                 disabled={isSending}
