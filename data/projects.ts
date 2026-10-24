@@ -49,12 +49,12 @@ export const projects: Project[] = [
     sourceUrl: "https://github.com/aldnazr/foxbit.git",
     image: {
       src: "/projects/foxbit.webp",
-      alt: "Foxbit Banner",
+      alt: "Foxbit",
     },
   },
   {
     name: "Roomly",
-    image: { src: "/projects/roomly.webp", alt: "roomly" },
+    image: { src: "/projects/roomly.webp", alt: "Roomly" },
     category: "Hotel Booking & Operations System",
     role: ["Frontend"],
     description:

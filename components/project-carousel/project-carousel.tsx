@@ -281,13 +281,13 @@ export function ProjectCarousel({
       tabIndex={-1}
       onKeyDown={handleKeyDown}
       className={cn(
-        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,78vw)] md:[--card-w:min(610px,84vw)]",
+        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,78vw)] md:[--card-w:min(635px,84vw)]",
         className,
       )}
     >
       <div
         ref={stageRef}
-        className="relative mx-auto h-110 md:h-98 w-full touch-pan-y select-none"
+        className="relative mx-auto h-110 md:h-102 w-full touch-pan-y select-none"
         style={{
           perspective: "calc(var(--card-w) * 1.875)",
           perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
