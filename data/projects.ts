@@ -38,6 +38,21 @@ export const projects: Project[] = [
     },
   },
   {
+    name: "Vault Chain",
+    category: "Crypto APP",
+    role: ["Mobile"],
+    description:
+      "Aplikasi mobile untuk memantau harga dan trending cryptocurrency terkini.",
+    technologies: ["Flutter", "Dart", "Provider"],
+    contributions:
+      "Saya mengembangkan Vault Chain dengan Flutter dan Provider: mengintegrasikan public API untuk harga dan trending cryptocurrency, membangun state management untuk watchlist, serta merancang antarmuka yang informatif dan nyaman dipantau.",
+    sourceUrl: "https://github.com/aldnazr/vault-chain.git",
+    image: {
+      src: "/projects/foxbit.webp",
+      alt: "Bitcoin Banner",
+    },
+  },
+  {
     name: "Roomly",
     image: { src: "/projects/roomly.webp", alt: "roomly" },
     category: "Hotel Booking & Operations System",
@@ -76,21 +91,6 @@ export const projects: Project[] = [
     technologies: ["Laravel", "PHP", "MySQL", "Livewire"],
     contributions:
       "Saya mengembangkan sistem inventory SCP dengan Laravel dan Livewire: membangun modul manajemen barang dan supplier, alur pembelian serta penjualan, dan laporan stok yang mencerminkan kebutuhan operasional perusahaan persediaan material.",
-  },
-  {
-    name: "Vault Chain",
-    category: "Crypto APP",
-    role: ["Mobile"],
-    description:
-      "Aplikasi mobile untuk memantau harga dan trending cryptocurrency terkini.",
-    technologies: ["Flutter", "Dart", "Provider"],
-    contributions:
-      "Saya mengembangkan Vault Chain dengan Flutter dan Provider: mengintegrasikan public API untuk harga dan trending cryptocurrency, membangun state management untuk watchlist, serta merancang antarmuka yang informatif dan nyaman dipantau.",
-    sourceUrl: "https://github.com/aldnazr/vault-chain.git",
-    image: {
-      src: "/projects/foxbit.webp",
-      alt: "Bitcoin Banner",
-    },
   },
   {
     name: "PPTA",
