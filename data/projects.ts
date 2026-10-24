@@ -38,18 +38,18 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "Vault Chain",
+    name: "Foxbit",
     category: "Crypto APP",
     role: ["Mobile"],
     description:
       "Aplikasi mobile untuk memantau harga dan trending cryptocurrency terkini.",
-    technologies: ["Flutter", "Dart", "Provider"],
+    technologies: ["Flutter", "Dart", "Riverpod", "GoRouter"],
     contributions:
-      "Saya mengembangkan Vault Chain dengan Flutter dan Provider: mengintegrasikan public API untuk harga dan trending cryptocurrency, membangun state management untuk watchlist, serta merancang antarmuka yang informatif dan nyaman dipantau.",
-    sourceUrl: "https://github.com/aldnazr/vault-chain.git",
+      "Saya membuat aplikasi Foxbit dengan Flutter: mengintegrasikan public API untuk harga dan trending cryptocurrency, membangun state management untuk watchlist, serta merancang antarmuka yang informatif dan nyaman digunakan.",
+    sourceUrl: "https://github.com/aldnazr/foxbit.git",
     image: {
       src: "/projects/foxbit.webp",
-      alt: "Bitcoin Banner",
+      alt: "Foxbit Banner",
     },
   },
   {
