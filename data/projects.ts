@@ -88,7 +88,7 @@ export const projects: Project[] = [
       "Saya mengembangkan Vault Chain dengan Flutter dan Provider: mengintegrasikan public API untuk harga dan trending cryptocurrency, membangun state management untuk watchlist, serta merancang antarmuka yang informatif dan nyaman dipantau.",
     sourceUrl: "https://github.com/aldnazr/vault-chain.git",
     image: {
-      src: "/projects/bitcoin.webp",
+      src: "/projects/foxbit.webp",
       alt: "Bitcoin Banner",
     },
   },
