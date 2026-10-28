@@ -20,7 +20,7 @@ export default function AboutSection() {
       <SectionHeader badge="Tentang Saya" title="Kemampuan" />
 
       <div className="space-y-10">
-        <p className="max-w-4xl text-lg leading-relaxed tracking-tight text-foreground-soft">
+        <p className="max-w-4xl md:text-lg leading-relaxed tracking-tight text-foreground-soft">
           {profile.about}
         </p>
 

@@ -23,11 +23,11 @@ export default function ExperienceSection() {
             {/* Kolom kanan: konten */}
             <div className="space-y-2 md:col-span-3">
               <div className="space-y-1">
-                <h3 className="text-xl font-semibold text-foreground">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground">
                   {exp.title}
                 </h3>
 
-                <div className="flex flex-wrap items-center gap-1 text-muted">
+                <div className="flex flex-wrap items-center leading-relaxed tracking-tight gap-1 text-muted">
                   <span className="font-medium text-foreground">
                     {exp.company}
                   </span>
@@ -35,12 +35,12 @@ export default function ExperienceSection() {
                 </div>
               </div>
 
-              <p className="max-w-2xl text-muted leading-relaxed">
+              <p className="md:text-lg max-w-2xl text-muted leading-relaxed tracking-tight">
                 {exp.description}
               </p>
 
               {exp.highlights && exp.highlights.length > 0 && (
-                <ul className="max-w-2xl list-disc space-y-2 pl-5 text-muted tracking-wide marker:text-foreground">
+                <ul className="max-w-2xl list-disc space-y-2 pl-5 text-muted leading-relaxed tracking-tight md:tracking-wide marker:text-foreground">
                   {exp.highlights.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}

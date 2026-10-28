@@ -18,8 +18,8 @@ export default function SectionHeader({
   const highlight = restWords.join(" ");
 
   return (
-    <div className={`space-y-2 md:space-y-2.5 ${className}`}>
-      <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+    <div className={`space-y-1 md:space-y-1.5 ${className}`}>
+      <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
         {title}
         {/* {firstWord}
         {highlight && (
@@ -38,7 +38,7 @@ export default function SectionHeader({
         )} */}
       </h2>
       {subtitle && (
-        <p className="text-lg text-muted leading-relaxed max-w-2xl">
+        <p className="text-base sm:text-lg text-muted leading-relaxed max-w-2xl">
           {subtitle}
         </p>
       )}
