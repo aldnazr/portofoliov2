@@ -54,7 +54,7 @@ export default function HeroButton({
       animate={{ boxShadow: active ? GLOW_ON : GLOW_OFF }}
       transition={transition}
       className={cn(
-        "relative inline-flex h-15 items-center justify-center whitespace-nowrap rounded-full bg-[#232629] px-7.5 font-sans text-sm font-medium text-white select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background [-webkit-tap-highlight-color:transparent]",
+        "relative inline-flex h-13 sm:h-14 items-center justify-center whitespace-nowrap rounded-full bg-[#232629] px-6 sm:px-7.5 font-sans text-sm font-medium text-white select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background [-webkit-tap-highlight-color:transparent]",
         className,
       )}
     >
