@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type {
   AnchorHTMLAttributes,
   CSSProperties,
@@ -34,7 +35,6 @@ export default function GlassButton({
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
 
-    // Update CSS variables directly without React re-render.
     event.currentTarget.style.setProperty("--cursor-x", `${x}px`);
     event.currentTarget.style.setProperty("--cursor-y", `${y}px`);
 
@@ -49,7 +49,7 @@ export default function GlassButton({
   };
 
   return (
-    <a
+    <Link
       {...props}
       href={href}
       onPointerMove={handlePointerMove}
@@ -62,7 +62,7 @@ export default function GlassButton({
         } as CSSVars
       }
       className={`
-        group relative isolate inline-flex items-center gap-3
+        group relative isolate flex items-center gap-3
         overflow-hidden rounded-xl
         border border-white/10
         bg-neutral-950/30
@@ -102,7 +102,6 @@ export default function GlassButton({
           }}
         />
 
-        {/* Inner glass surface masks the center of the border glow */}
         <span
           className="
             absolute inset-px
@@ -134,8 +133,10 @@ export default function GlassButton({
         }}
       />
 
-      {/* Label */}
-      <span className="relative z-10">{children}</span>
-    </a>
+      {/* Content: supports text, icons, and other React components */}
+      <span className="relative z-10 inline-flex items-center gap-3">
+        {children}
+      </span>
+    </Link>
   );
 }

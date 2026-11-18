@@ -9,8 +9,8 @@ interface ArrowIconGlassProps extends HTMLAttributes<HTMLSpanElement> {
 const rotation: Record<ArrowDirection, string> = {
   down: "rotate-0",
   up: "rotate-180",
-  left: "-rotate-90",
-  right: "rotate-90",
+  right: "-rotate-90",
+  left: "rotate-90",
 };
 
 export default function ArrowIconGlass({

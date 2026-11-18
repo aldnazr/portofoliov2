@@ -10,6 +10,8 @@ import {
   ArrowIcon,
 } from "@/components/svg-icons/icons.tsx";
 import ProjectVisual from "@/components/project-visual.tsx";
+import ArrowIconGlass from "../svg-icons/arrow-icon-glass.tsx";
+import GlassButton from "../button/glass-button.tsx";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
 
@@ -184,15 +186,16 @@ export function ProjectCard({
               )}
             </a>
           )}
-          <Link
+
+          <GlassButton
             href={href}
             draggable={false}
             aria-label={`View project: ${title}`}
-            className="group/cta flex h-9 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-white text-sm font-semibold text-neutral-950 transition-colors hover:bg-neutral-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:h-11 sm:text-base"
+            className="w-full justify-center"
           >
             View project
-            <ArrowIcon direction="upright" className="size-4" />
-          </Link>
+            <ArrowIconGlass direction="right" />
+          </GlassButton>
         </div>
       </div>
     </article>
