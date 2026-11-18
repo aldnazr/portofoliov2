@@ -18,22 +18,22 @@ type HeroBadgeProps = {
 
 export default function HeroBadge({ lead, title, className }: HeroBadgeProps) {
   return (
-    <p
+    <div
       className={cn(
-        "inline-flex max-w-full rounded-2xl bg-overlay p-1 ring-1 ring-hairline",
+        "inline-flex max-w-full rounded-full bg-linear-to-r from-overlay to-accent-wash p-2",
         className,
       )}
     >
-      <span className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 rounded-xl bg-surface p-1 shadow-[inset_0_1px_0_var(--overlay-strong)]">
+      <div className="flex p-0.5 min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
         {lead && (
           <span className="min-w-0 pl-2.5 font-mono text-xs leading-snug tracking-wide text-muted sm:pl-3 sm:text-[0.8125rem]">
             {lead}
           </span>
         )}
-        <span className="rounded-lg bg-accent-wash px-2.5 py-1.5 font-mono text-xs font-semibold leading-none tracking-wide text-accent-strong ring-1 ring-inset ring-accent-wash-border sm:px-3 sm:text-[0.8125rem]">
+        <span className="rounded-full bg-linear-to-r from-accent-wash to-accent-wash-strong px-2.5 py-2.5 font-mono text-xs font-semibold leading-none tracking-wide text-foreground-soft sm:px-4 sm:text-[0.8125rem]">
           {title}
         </span>
-      </span>
-    </p>
+      </div>
+    </div>
   );
 }
