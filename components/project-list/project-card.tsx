@@ -7,7 +7,7 @@ import {
   GithubIcon,
   BrowserIcon,
   ArrowIcon,
-} from "@/components/icons.tsx";
+} from "@/components/svg-icons/icons";
 import ProjectActionLink from "@/components/project-action-link.tsx";
 import ProjectVisual from "@/components/project-visual.tsx";
 
@@ -96,7 +96,7 @@ export default function ProjectCard({
           </div>
         </div>
         <div className="lg:col-span-5">
-          {item.image ?
+          {item.image ? (
             <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-hairline bg-surface-muted">
               <Image
                 src={item.image.src}
@@ -107,13 +107,14 @@ export default function ProjectCard({
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]"
               />
             </div>
-          : <ProjectVisual
+          ) : (
+            <ProjectVisual
               number={formattedNumber}
               name={item.name}
               category={item.category}
               className="aspect-16/10"
             />
-          }
+          )}
         </div>
       </div>
     </div>

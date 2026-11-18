@@ -2,7 +2,7 @@
 
 import { carouselProjects } from "@/data/projects.ts";
 import { useProjectViewMode } from "@/lib/use-project-view-mode.ts";
-import { IconCarousel, IconList } from "@/components/icons.tsx";
+import { IconCarousel, IconList } from "@/components/svg-icons/icons";
 import { ProjectCarousel } from "@/components/project-carousel/project-carousel.tsx";
 import ProjectsList from "@/components/project-list/projects-list.tsx";
 import SectionHeader from "@/components/section-header.tsx";
@@ -25,9 +25,9 @@ export default function ProjectsSection() {
             onClick={() => setViewMode("carousel")}
             aria-pressed={viewMode === "carousel"}
             className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              viewMode === "carousel" ?
-                "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
-              : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
+              viewMode === "carousel"
+                ? "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
+                : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
             }`}
           >
             <IconCarousel className="size-3.5 shrink-0" />
@@ -38,9 +38,9 @@ export default function ProjectsSection() {
             onClick={() => setViewMode("list")}
             aria-pressed={viewMode === "list"}
             className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              viewMode === "list" ?
-                "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
-              : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
+              viewMode === "list"
+                ? "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
+                : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
             }`}
           >
             <IconList className="size-3.5 shrink-0" />
@@ -49,9 +49,11 @@ export default function ProjectsSection() {
         </div>
       </div>
 
-      {viewMode === "carousel" ?
+      {viewMode === "carousel" ? (
         <ProjectCarousel loop projects={carouselProjects} />
-      : <ProjectsList />}
+      ) : (
+        <ProjectsList />
+      )}
     </section>
   );
 }

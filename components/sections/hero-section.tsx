@@ -2,9 +2,11 @@
 
 import { useReducedMotion, motion } from "motion/react";
 import { profile } from "@/data/profile.ts";
-import HeroButton from "@/components/hero-button.tsx";
-import { GithubIcon, LinkedinIcon } from "@/components/icons.tsx";
+import { GithubIcon, LinkedinIcon } from "@/components/svg-icons/icons";
 import HeroBadge from "../hero-badge";
+import HeroButton from "../button/hero-button";
+import GlassButton from "../button/glass-button";
+import ArrowIconGlass from "../svg-icons/arrow-icon-glass";
 
 const entrance = {
   hidden: { opacity: 0, y: 16 },
@@ -51,7 +53,6 @@ export default function HeroSection() {
         className="flex flex-wrap items-center gap-4 pt-2"
       >
         <HeroButton href="#project">Lihat Proyek</HeroButton>
-
         <div className="flex items-center gap-2">
           {profile.socialLinks.map((link, i) => (
             <a

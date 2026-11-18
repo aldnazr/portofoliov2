@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowIcon } from "./icons.tsx";
+import { ArrowIcon } from "./svg-icons/icons.tsx";
 
 type BackLinkProps = {
   /** Tujuan navigasi back. Default `/` (halaman utama portofolio). */
@@ -18,7 +18,8 @@ type BackLinkProps = {
 export default function BackLink({ href = "/", label }: BackLinkProps) {
   const pathname = usePathname();
   const isRenderingDemo =
-    href === "/learns" && /^\/learns\/rendering\/(csr|isr|ssg|ssr)\/?$/.test(pathname);
+    href === "/learns" &&
+    /^\/learns\/rendering\/(csr|isr|ssg|ssr)\/?$/.test(pathname);
 
   return (
     <Link

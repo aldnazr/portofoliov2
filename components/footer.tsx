@@ -4,7 +4,11 @@ import { profile } from "@/data/profile.ts";
 import { siteTitle, siteDescription } from "@/data/site.ts";
 import { topicCards } from "@/features/learns/data/topics.ts";
 import FooterProjects from "@/components/footer-projects.tsx";
-import { GithubIcon, LinkedinIcon, ArrowIcon } from "@/components/icons.tsx";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  ArrowIcon,
+} from "@/components/svg-icons/icons";
 
 const learningLabLinkClass =
   "block py-1 text-sm leading-relaxed text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background";
@@ -90,7 +94,7 @@ export default function Footer() {
           {columns.map((column) => (
             <div key={column.title}>
               <div className="flex h-5 items-center">
-                {column.href ?
+                {column.href ? (
                   <Link
                     href={column.href}
                     className="group inline-flex items-center gap-1 text-sm font-semibold text-foreground transition-colors duration-200 hover:text-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded"
@@ -101,10 +105,11 @@ export default function Footer() {
                       className="size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
                     />
                   </Link>
-                : <p className="text-sm font-semibold text-foreground">
+                ) : (
+                  <p className="text-sm font-semibold text-foreground">
                     {column.title}
                   </p>
-                }
+                )}
               </div>
               <div className="mt-4">{column.node}</div>
             </div>

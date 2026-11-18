@@ -1,4 +1,4 @@
-import { ArrowIcon } from "@/components/icons";
+import { ArrowIcon } from "@/components/svg-icons/icons";
 import Link from "next/link";
 import { topicCards } from "../data/topics";
 

@@ -4,7 +4,11 @@ import type { ReactNode } from "react";
 import { LayersIcon, UserIcon } from "./icons.tsx";
 import { CarouselProject } from "@/data/types.ts";
 import { cn, CARD_RADIUS, pad } from "@/lib/utils.ts";
-import { BrowserIcon, GithubIcon, ArrowIcon } from "@/components/icons.tsx";
+import {
+  BrowserIcon,
+  GithubIcon,
+  ArrowIcon,
+} from "@/components/svg-icons/icons.tsx";
 import ProjectVisual from "@/components/project-visual.tsx";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";

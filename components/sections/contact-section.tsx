@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { profile } from "@/data/profile.ts";
-import { Button } from "@/components/button.tsx";
+import { Button } from "../button/button";
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);

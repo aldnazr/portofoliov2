@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowIcon } from "@/components/icons.tsx";
+import { ArrowIcon } from "@/components/svg-icons/icons";
 import { cn } from "@/lib/utils.ts";
 
 const STROKE = 2;

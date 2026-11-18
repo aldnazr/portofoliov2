@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { projects } from "@/data/projects.ts";
-import { ArrowIcon } from "@/components/icons.tsx";
+import { ArrowIcon } from "@/components/svg-icons/icons";
 import ProjectCard from "@/components/project-list/project-card.tsx";
 
 const ITEMS_PER_PAGE = 3;
@@ -55,9 +55,9 @@ export default function ProjectsList() {
                 onClick={() => handlePageChange(page)}
                 type="button"
                 className={`w-8 h-8 rounded-full text-xs font-mono font-medium transition-all cursor-pointer ${
-                  currentPage === page ?
-                    "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-bold"
-                  : "bg-overlay text-muted border border-hairline hover:bg-overlay-strong hover:text-foreground"
+                  currentPage === page
+                    ? "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-bold"
+                    : "bg-overlay text-muted border border-hairline hover:bg-overlay-strong hover:text-foreground"
                 }`}
               >
                 {page}

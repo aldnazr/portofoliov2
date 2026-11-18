@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/reveal";
-import { ArrowIcon } from "@/components/icons";
+import { ArrowIcon } from "@/components/svg-icons/icons";
 
 type NextTopicLinkProps = {
   href: string;
@@ -8,10 +8,7 @@ type NextTopicLinkProps = {
 };
 
 /** CTA "Topik Berikutnya" di bawah konten materi. */
-export default function NextTopicLink({
-  href,
-  title,
-}: NextTopicLinkProps) {
+export default function NextTopicLink({ href, title }: NextTopicLinkProps) {
   return (
     <Reveal className="mt-14 sm:mt-32">
       <div className="border-t border-hairline-soft pt-8 sm:pt-14">

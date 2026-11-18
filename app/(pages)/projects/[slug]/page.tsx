@@ -11,7 +11,7 @@ import {
   BrowserIcon,
   GithubIcon,
   PlayStoreIcon,
-} from "@/components/icons.tsx";
+} from "@/components/svg-icons/icons";
 import PageShell from "@/components/page-shell.tsx";
 
 type ProjectDetailPageProps = {
@@ -61,7 +61,7 @@ export default async function ProjectDetailPage({
       <article className="overflow-hidden rounded-3xl border border-hairline bg-surface shadow-elevated sm:rounded-4xl">
         <div className="grid lg:grid-cols-12">
           <div className="relative aspect-16/10 overflow-hidden bg-neutral-950 lg:order-2 lg:col-span-5 lg:aspect-auto lg:min-h-96">
-            {project.image ?
+            {project.image ? (
               <Image
                 src={project.image.src}
                 alt={project.image.alt || project.name}
@@ -70,7 +70,8 @@ export default async function ProjectDetailPage({
                 sizes="(min-width: 1024px) 40vw, (min-width: 640px) 90vw, 100vw"
                 className="object-cover"
               />
-            : <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
+            ) : (
+              <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
                 <ProjectVisual
                   number={formattedNumber}
                   name={project.name}
@@ -79,7 +80,7 @@ export default async function ProjectDetailPage({
                   className="h-full rounded-none border-0"
                 />
               </div>
-            }
+            )}
           </div>
 
           <div className="flex flex-col justify-center p-6 sm:p-8 lg:col-span-7 lg:p-10">
