@@ -4,6 +4,7 @@ import { useReducedMotion, motion } from "motion/react";
 import { profile } from "@/data/profile.ts";
 import HeroButton from "@/components/hero-button.tsx";
 import { GithubIcon, LinkedinIcon } from "@/components/icons.tsx";
+import HeroBadge from "../hero-badge";
 
 const entrance = {
   hidden: { opacity: 0, y: 16 },
@@ -23,30 +24,8 @@ export default function HeroSection() {
 
   return (
     <section className="min-h-screen flex flex-col justify-center space-y-10 px-4 sm:px-6 mx-auto max-w-6xl">
-      <motion.div
-        {...reveal(0)}
-        className="inline-flex max-w-fit items-center gap-2 px-3.5 py-1.5 rounded-full border border-hairline bg-overlay text-xs text-muted tracking-wide font-mono"
-      >
-        <svg
-          className="w-3.5 h-3.5 text-accent"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-          />
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-          />
-        </svg>
-        {profile.location}
+      <motion.div {...reveal(0)} className="max-w-fit">
+        <HeroBadge title={profile.location} />
       </motion.div>
 
       <div className="space-y-6 max-w-3xl">
