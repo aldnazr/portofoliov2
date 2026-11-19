@@ -9,10 +9,9 @@ import {
   useScroll,
   type Transition,
 } from "motion/react";
-import { profile } from "@/data/profile.ts";
 import { navigation } from "@/data/navigation.ts";
 import ThemeToggle from "@/components/theme-toggle.tsx";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const CONCEAL_AFTER = 96;
@@ -21,8 +20,6 @@ const ANCHOR_GRACE = 1200;
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [concealed, setConcealed] = useState(false);
-  const pathName = usePathname();
-  const isHome = pathName === "/";
   const reduceMotion = useReducedMotion();
   const { scrollY } = useScroll();
   const lastScrollY = useRef<number | null>(null);
@@ -68,48 +65,43 @@ export default function Header() {
       animate={{ y: hidden ? "-170%" : 0, opacity: hidden ? 0 : 1 }}
       transition={headerTransition}
       inert={hidden}
-      className="fixed inset-x-0 top-6 z-50 mx-auto max-w-3xl px-4 md:px-6"
+      className="fixed inset-x-0 top-6 z-50 w-auto md:mx-auto md:w-fit px-4 md:px-6"
     >
-      <div className="rounded-full border border-hairline bg-surface/80 backdrop-blur-xl px-4 py-3 sm:px-6 flex items-center justify-between shadow-elevated">
-        <a
-          href={isHome ? "#" : "/"}
-          className="group flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-        >
-          <div className="size-9 rounded-full bg-accent-wash border border-accent-wash-border flex items-center justify-center text-xs font-mono font-bold text-accent-strong transition-transform">
-            {profile.initials}
-          </div>
-        </a>
-
+      <div className="flex items-center justify-between md:justify-center rounded-2xl p-0 md:px-6 md:py-3 bg-transparent md:bg-surface/40 backdrop-blur-none md:backdrop-blur-sm shadow-none md:shadow-elevated">
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
           {navigation.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               onClick={keepVisibleDuringAnchorJump}
-              className="px-4 py-1.5 text-xs font-medium text-muted hover:text-foreground hover:bg-overlay rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:text-foreground"
+              className="px-4 py-1.5 text-sm tracking-tight font-medium text-foreground-soft hover:text-foreground hover:bg-overlay rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:text-foreground"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Right Action Area */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex flex-row-reverse md:flex-row w-full md:w-auto items-center justify-between gap-2 sm:gap-3">
+          <div
+            className="hidden md:block h-4.5 w-[0.3px] bg-foreground/60 mx-2.5"
+            aria-hidden="true"
+          />
           <ThemeToggle />
 
           {/* Mobile Hamburger Toggle */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}
-            className="md:hidden relative grid size-10 place-items-center rounded-full text-muted hover:text-foreground hover:bg-overlay transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent after:absolute after:-inset-1.5 after:content-['']"
+            className="md:hidden relative grid size-10 place-items-center rounded-full bg-surface/90 backdrop-blur-xl shadow-elevated text-foreground hover:opacity-80 hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent after:absolute after:-inset-1.5 after:content-['']"
             aria-label={mobileMenuOpen ? "Tutup navigasi" : "Buka navigasi"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav"
           >
             <span className="relative block size-5" aria-hidden="true">
               <motion.span
-                className="absolute left-0 top-[4px] h-0.5 w-5 rounded-full bg-current"
+                className="absolute left-0 top-1 h-0.5 w-5 rounded-full bg-current"
                 style={{ originX: 0.5, originY: 0.5 }}
                 animate={{
                   y: mobileMenuOpen ? 5 : 0,
@@ -118,7 +110,7 @@ export default function Header() {
                 transition={iconTransition}
               />
               <motion.span
-                className="absolute left-0 top-[9px] h-0.5 w-5 rounded-full bg-current"
+                className="absolute left-0 top-2.25 h-0.5 w-5 rounded-full bg-current"
                 style={{ originX: 0.5, originY: 0.5 }}
                 animate={{
                   opacity: mobileMenuOpen ? 0 : 1,
@@ -127,7 +119,7 @@ export default function Header() {
                 transition={iconTransition}
               />
               <motion.span
-                className="absolute left-0 top-[14px] h-0.5 w-5 rounded-full bg-current"
+                className="absolute left-0 top-3.5 h-0.5 w-5 rounded-full bg-current"
                 style={{ originX: 0.5, originY: 0.5 }}
                 animate={{
                   y: mobileMenuOpen ? -5 : 0,
