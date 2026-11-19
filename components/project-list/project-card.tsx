@@ -19,14 +19,14 @@ export default function ProjectCard({
   index: number;
 }) {
   const formattedNumber = String(index).padStart(2, "0");
-  const detailHref = `/projects/${slugifyProject(item.name)}`;
+  const detailHref = `/projects/${slugifyProject(item.title)}`;
 
   return (
     <div className="group relative p-1.5 rounded-[2.25rem] border border-hairline bg-overlay-faint hover:border-accent-wash-border transition-all duration-500">
       {/* Overlay link ke halaman detail proyek */}
       <Link
         href={detailHref}
-        aria-label={`Lihat detail proyek ${item.name}`}
+        aria-label={`Lihat detail proyek ${item.title}`}
         className="absolute inset-0 z-10 rounded-[2.25rem]"
       />
 
@@ -44,7 +44,7 @@ export default function ProjectCard({
           </div>
 
           <h3 className="text-xl sm:text-2xl font-semibold text-foreground group-hover:text-accent-hover transition-colors">
-            {item.name}
+            {item.title}
           </h3>
 
           <p className="text-sm sm:text-base text-muted tracking-tight leading-relaxed">
@@ -100,7 +100,7 @@ export default function ProjectCard({
             <div className="relative aspect-16/10 overflow-hidden rounded-2xl border border-hairline bg-surface-muted">
               <Image
                 src={item.image.src}
-                alt={item.image.alt || item.name}
+                alt={item.image.alt || item.title}
                 loading="eager"
                 fill
                 sizes="(max-width: 1024px) 100vw, 40vw"
@@ -110,7 +110,7 @@ export default function ProjectCard({
           ) : (
             <ProjectVisual
               number={formattedNumber}
-              name={item.name}
+              title={item.title}
               category={item.category}
               className="aspect-16/10"
             />

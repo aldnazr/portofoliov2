@@ -8,7 +8,6 @@ import ProjectCard from "@/components/project-list/project-card.tsx";
 const ITEMS_PER_PAGE = 3;
 
 export default function ProjectsList() {
-  // pagination state stays local; list view remounts fresh each switch
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
 
@@ -28,7 +27,7 @@ export default function ProjectsList() {
       <div className="grid grid-cols-1 gap-7 sm:gap-8">
         {currentProjects.map((item, idx) => (
           <ProjectCard
-            key={item.name}
+            key={item.title}
             item={item}
             index={(currentPage - 1) * ITEMS_PER_PAGE + idx + 1}
           />

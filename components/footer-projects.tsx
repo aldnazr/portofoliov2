@@ -18,12 +18,12 @@ export default function FooterProjects() {
   return (
     <ul>
       {visible.map((project) => (
-        <li key={project.name}>
+        <li key={project.title}>
           <Link
-            href={`/projects/${slugifyProject(project.name)}`}
+            href={`/projects/${slugifyProject(project.title)}`}
             className="block py-1 text-sm leading-relaxed text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            {project.name}
+            {project.title}
           </Link>
         </li>
       ))}

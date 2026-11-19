@@ -19,7 +19,7 @@ html {
 
 :root {
   color-scheme: dark;
-  --background: #08090d;
+  --background: #0A0A0A;
   --surface: #0c0e14;
   --surface-muted: #18181b;
   --shade: #3f3f46;
@@ -58,7 +58,7 @@ html {
 @supports (color: light-dark(#fff, #000)) {
   :root {
     color-scheme: light dark;
-    --background: light-dark(#fafafa, #08090d);
+    --background: light-dark(#fafafa, #0A0A0A);
     --surface: light-dark(#ffffff, #0c0e14);
     --surface-muted: light-dark(#f4f4f5, #18181b);
     --shade: light-dark(#d4d4d8, #3f3f46);

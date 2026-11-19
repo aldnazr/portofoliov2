@@ -1,11 +1,11 @@
 "use client";
 
-import { carouselProjects } from "@/data/projects.ts";
+import { carouselProjects, projects } from "@/data/projects.ts";
 import { useProjectViewMode } from "@/lib/use-project-view-mode.ts";
 import { IconCarousel, IconList } from "@/components/svg-icons/icons";
 import { ProjectCarousel } from "@/components/project-carousel/project-carousel.tsx";
-import ProjectsList from "@/components/project-list/projects-list.tsx";
 import SectionHeader from "@/components/section-header.tsx";
+import { ProjectList } from "../new-project-list/project-list";
 
 export default function ProjectsSection() {
   const viewMode = useProjectViewMode((s) => s.viewMode);
@@ -52,7 +52,7 @@ export default function ProjectsSection() {
       {viewMode === "carousel" ? (
         <ProjectCarousel loop projects={carouselProjects} />
       ) : (
-        <ProjectsList />
+        <ProjectList projects={projects} className="max-w-6xl mx-auto" />
       )}
     </section>
   );

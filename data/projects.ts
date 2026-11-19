@@ -2,7 +2,7 @@ import { CarouselProject, type Project } from "@/data/types";
 
 export const projects: Project[] = [
   {
-    name: "Ahsan Xpress",
+    title: "Ahsan Xpress",
     category: "Logistik dan Transportasi",
     role: ["Mobile", "Frontend"],
     description:
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "Foxbit",
+    title: "Foxbit",
     category: "Crypto APP",
     role: ["Mobile"],
     description:
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "Roomly",
+    title: "Roomly",
     image: { src: "/projects/roomly.webp", alt: "Roomly" },
     category: "Hotel Booking & Operations System",
     role: ["Frontend"],
@@ -73,7 +73,7 @@ export const projects: Project[] = [
     demoUrl: "https://roomly-green.vercel.app/",
   },
   // {
-  //   name: "Web SmartVet",
+  //   title: "Web SmartVet",
   //   category: "Petshop Management SaaS",
   //   role: ["Fullstack"],
   //   description:
@@ -83,7 +83,7 @@ export const projects: Project[] = [
   //     "Saya membangun SmartVet secara end-to-end dengan Laravel, Livewire, dan PostgreSQL: merancang skema database untuk data pasien hewan, rekam medis, dan penjadwalan appointment, lalu mengembangkan antarmuka reaktif dengan Livewire agar pemeriksaan dan pengobatan dapat dicatat tanpa reload halaman.",
   // },
   {
-    name: "Inventory SCP",
+    title: "Inventory SCP",
     category: "Inventory Management System",
     role: ["Fullstack"],
     description:
@@ -93,7 +93,7 @@ export const projects: Project[] = [
       "Saya mengembangkan sistem inventory SCP dengan Laravel dan Livewire: membangun modul manajemen barang dan supplier, alur pembelian serta penjualan, dan laporan stok yang mencerminkan kebutuhan operasional perusahaan persediaan material.",
   },
   {
-    name: "PPTA",
+    title: "PPTA",
     category: "Layanan Akademik",
     role: ["Fullstack"],
     description:
@@ -103,7 +103,7 @@ export const projects: Project[] = [
       "Saya membangun ulang website PPTA Universitas Dinamika dengan Laravel: memperbarui alur pendaftaran dan pengelolaan tugas akhir, meningkatkan aksesibilitas antarmuka, serta memastikan data akademik terkelola terstruktur.",
   },
   // {
-  //   name: "Asclepius",
+  //   title: "Asclepius",
   //   category: "Cancer Detector App",
   //   role: ["Mobile"],
   //   description:
@@ -118,7 +118,7 @@ export const projects: Project[] = [
   //   },
   // },
   {
-    name: "Blendit",
+    title: "Blendit",
     category: "Face Recognition for Makeup Recommendation",
     role: ["Mobile"],
     description:
@@ -133,7 +133,7 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "EcoSort",
+    title: "EcoSort",
     category: "Smart Waste Detector",
     role: ["Mobile"],
     description:
@@ -149,8 +149,8 @@ export const projects: Project[] = [
   },
 ];
 
-export function slugifyProject(name: string): string {
-  return name
+export function slugifyProject(title: string): string {
+  return title
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
@@ -158,12 +158,12 @@ export function slugifyProject(name: string): string {
 }
 
 export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((project) => slugifyProject(project.name) === slug);
+  return projects.find((project) => slugifyProject(project.title) === slug);
 }
 
 export const carouselProjects: CarouselProject[] = projects.map((project) => ({
-  id: slugifyProject(project.name),
-  title: project.name,
+  id: slugifyProject(project.title),
+  title: project.title,
   description: project.description,
   tag: project.category,
   image: project.image?.src,
@@ -171,7 +171,7 @@ export const carouselProjects: CarouselProject[] = projects.map((project) => ({
   category: project.category,
   role: project.role.join(", "),
   stack: project.technologies.join(", "),
-  href: `/projects/${slugifyProject(project.name)}`,
+  href: `/projects/${slugifyProject(project.title)}`,
   demoUrl: project.demoUrl,
   github: project.sourceUrl,
 }));

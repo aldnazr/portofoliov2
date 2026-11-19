@@ -7,7 +7,7 @@ export type PlayStoreInfo = {
 };
 
 export type Project = {
-  name: string;
+  title: string;
   category: string;
   description: string;
   technologies: string[];

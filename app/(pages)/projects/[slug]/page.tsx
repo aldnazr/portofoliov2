@@ -20,7 +20,7 @@ type ProjectDetailPageProps = {
 
 export function generateStaticParams() {
   return projects.map((project) => ({
-    slug: slugifyProject(project.name),
+    slug: slugifyProject(project.title),
   }));
 }
 
@@ -35,7 +35,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${project.name} — Muhammad Alauddin Azhary`,
+    title: `${project.title} — Muhammad Alauddin Azhary`,
     description: project.description,
   };
 }
@@ -49,7 +49,7 @@ export default async function ProjectDetailPage({
   if (!project) notFound();
 
   const projectIndex = projects.findIndex(
-    (item) => slugifyProject(item.name) === slug,
+    (item) => slugifyProject(item.title) === slug,
   );
   const formattedNumber = String(projectIndex + 1).padStart(2, "0");
   const totalCount = String(projects.length).padStart(2, "0");
@@ -57,14 +57,14 @@ export default async function ProjectDetailPage({
     projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null;
 
   return (
-    <PageShell currentLabel={project.name} backHref="/#project">
+    <PageShell currentLabel={project.title} backHref="/#project">
       <article className="overflow-hidden rounded-3xl border border-hairline bg-surface shadow-elevated sm:rounded-4xl">
         <div className="grid lg:grid-cols-12">
           <div className="relative aspect-16/10 overflow-hidden bg-neutral-950 lg:order-2 lg:col-span-5 lg:aspect-auto lg:min-h-96">
             {project.image ? (
               <Image
                 src={project.image.src}
-                alt={project.image.alt || project.name}
+                alt={project.image.alt || project.title}
                 fill
                 priority
                 sizes="(min-width: 1024px) 40vw, (min-width: 640px) 90vw, 100vw"
@@ -74,7 +74,7 @@ export default async function ProjectDetailPage({
               <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
                 <ProjectVisual
                   number={formattedNumber}
-                  name={project.name}
+                  title={project.title}
                   category={project.category}
                   variant="hero"
                   className="h-full rounded-none border-0"
@@ -95,7 +95,7 @@ export default async function ProjectDetailPage({
 
             <header>
               <h1 className="mt-5 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                {project.name}
+                {project.title}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
                 {project.description}
@@ -192,7 +192,7 @@ export default async function ProjectDetailPage({
 
       {nextProject && (
         <Link
-          href={`/projects/${slugifyProject(nextProject.name)}`}
+          href={`/projects/${slugifyProject(nextProject.title)}`}
           className="group mt-5 flex items-center justify-between gap-4 rounded-3xl border border-hairline bg-overlay-faint p-5 transition-colors hover:border-accent-wash-border hover:bg-overlay focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:mt-6 sm:p-6"
         >
           <span className="min-w-0">
@@ -200,7 +200,7 @@ export default async function ProjectDetailPage({
               Proyek Berikutnya
             </span>
             <span className="mt-1 block text-lg font-semibold tracking-tight text-foreground transition-colors group-hover:text-accent-hover sm:text-xl">
-              {nextProject.name}
+              {nextProject.title}
             </span>
           </span>
           <span

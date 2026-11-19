@@ -108,7 +108,7 @@ export function ProjectCard({
         <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
           <ProjectVisual
             number={pad(index + 1)}
-            name={title}
+            title={title}
             category={category}
             variant="hero"
             className="h-full rounded-none border-0 -translate-y-8 sm:-translate-y-10"

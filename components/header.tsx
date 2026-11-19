@@ -94,7 +94,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen((open) => !open)}
-            className="md:hidden relative grid size-10 place-items-center rounded-full bg-surface/90 backdrop-blur-xl shadow-elevated text-foreground hover:opacity-80 hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent after:absolute after:-inset-1.5 after:content-['']"
+            className="md:hidden relative grid size-9 place-items-center rounded-full bg-surface/90 backdrop-blur-xl shadow-elevated text-foreground hover:opacity-80 hover:bg-surface transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent after:absolute after:-inset-1.5 after:content-['']"
             aria-label={mobileMenuOpen ? "Tutup navigasi" : "Buka navigasi"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav"

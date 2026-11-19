@@ -1,6 +1,6 @@
 type ProjectVisualProps = {
   number: string;
-  name: string;
+  title: string;
   category: string;
   variant?: "card" | "hero";
   className?: string;
@@ -19,7 +19,7 @@ function getProjectInitials(name: string): string {
 
 export default function ProjectVisual({
   number,
-  name,
+  title,
   category,
   variant = "card",
   className = "",
@@ -65,7 +65,7 @@ export default function ProjectVisual({
             isHero ? "text-6xl sm:text-7xl" : "text-5xl"
           }`}
         >
-          {getProjectInitials(name)}
+          {getProjectInitials(title)}
         </span>
         <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-subtle max-w-[85%] leading-relaxed">
           {category}
