@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { LayersIcon, UserIcon } from "./icons.tsx";
 import { CarouselProject } from "@/data/types.ts";
-import { cn, CARD_RADIUS, pad } from "@/lib/utils.ts";
+import { CARD_CAROUSEL_RADIUS, cn, pad } from "@/lib/utils.ts";
 import {
   BrowserIcon,
   GithubIcon,
@@ -89,9 +89,9 @@ export function ProjectCard({
       inert={!interactive}
       className={cn(
         "relative isolate flex h-full w-full flex-col justify-end overflow-hidden bg-neutral-950 text-white transition-shadow duration-650 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-        CARD_RADIUS,
+        CARD_CAROUSEL_RADIUS,
         interactive ? SHADOW_ACTIVE : SHADOW_SIDE,
-        interactive && "ring ring-accent-strong/40",
+        interactive && "ring ring-white/30",
       )}
     >
       {image ? (

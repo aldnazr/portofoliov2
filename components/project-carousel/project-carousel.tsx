@@ -7,7 +7,7 @@ import type { Transition } from "motion/react";
 import { CarouselPagination } from "./carousel-pagination.tsx";
 import { ProjectCard } from "./project-card.tsx";
 import { CarouselProject } from "@/data/types.ts";
-import { cn, CARD_RADIUS } from "@/lib/utils.ts";
+import { CARD_CAROUSEL_RADIUS, cn } from "@/lib/utils.ts";
 
 type Slot = {
   x: number;
@@ -281,13 +281,13 @@ export function ProjectCarousel({
       tabIndex={-1}
       onKeyDown={handleKeyDown}
       className={cn(
-        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,78vw)] md:[--card-w:min(635px,84vw)]",
+        "relative w-full overflow-x-clip pb-6 outline-hidden [--card-w:min(640px,84vw)] md:[--card-w:min(635px,84vw)]",
         className,
       )}
     >
       <div
         ref={stageRef}
-        className="relative mx-auto h-110 md:h-102 w-full touch-pan-y select-none"
+        className="relative mx-auto h-100 w-full touch-pan-y select-none"
         style={{
           perspective: "calc(var(--card-w) * 1.875)",
           perspectiveOrigin: "50% calc(var(--card-w) * 0.375)",
@@ -346,7 +346,7 @@ export function ProjectCarousel({
                 aria-hidden="true"
                 className={cn(
                   "pointer-events-none absolute inset-0 bg-black",
-                  CARD_RADIUS,
+                  CARD_CAROUSEL_RADIUS,
                 )}
                 initial={false}
                 animate={{ opacity: target.dim }}
@@ -358,7 +358,7 @@ export function ProjectCarousel({
       </div>
 
       <CarouselPagination
-        className="mt-10 sm:mt-12"
+        className="mt-10 sm:mt-12 max-w-88"
         total={total}
         active={current}
         onSelect={goTo}

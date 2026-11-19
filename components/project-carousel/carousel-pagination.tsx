@@ -31,7 +31,7 @@ function ArrowButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={direction === "prev" ? "Previous project" : "Next project"}
-      className="grid size-9 shrink-0 place-items-center rounded-full bg-surface-muted text-foreground transition-[background-color,color,transform,opacity] duration-200 hover:bg-accent-wash hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong active:scale-95 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none sm:size-11"
+      className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-muted text-foreground transition-[background-color,color,transform,opacity] duration-200 hover:bg-accent-wash hover:text-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong active:scale-95 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none sm:size-11"
     >
       <Icon className="size-4 sm:size-5" />
     </button>
@@ -78,7 +78,7 @@ export function CarouselPagination({
     <nav
       aria-label="Project pagination"
       className={cn(
-        "relative mx-3 flex w-fit max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full border border-hairline bg-surface p-1.5 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.25)] sm:mx-auto sm:max-w-full sm:gap-3.5 dark:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)]",
+        "relative mx-auto flex w-fit max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-full bg-surface p-2 shadow-[0_18px_40px_-18px_rgba(0,0,0,0.25)] sm:mx-auto sm:max-w-full sm:gap-3.5 dark:shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)]",
         className,
       )}
     >
@@ -106,9 +106,9 @@ export function CarouselPagination({
                 <span
                   className={cn(
                     "block h-1.75 rounded-full transition-all duration-300 ease-out motion-reduce:transition-none",
-                    isActive ? "w-5 h-2 bg-accent" : (
-                      "w-1.75 bg-shade group-hover:bg-accent/60"
-                    ),
+                    isActive
+                      ? "w-5 h-2 bg-accent"
+                      : "w-1.75 bg-shade group-hover:bg-accent/60",
                   )}
                 />
               </button>
