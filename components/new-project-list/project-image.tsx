@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import { useState } from "react";
 
 type ProjectImageProps = {
   src: string;
   alt: string;
-  ratio: 'square' | 'video';
+  ratio: "square" | "video";
   sizes: string;
 };
 
@@ -17,30 +17,32 @@ type ProjectImageProps = {
  * - error   → gambar disembunyikan, placeholder tetap tampil (layout tidak rusak)
  */
 export function ProjectImage({ src, alt, ratio, sizes }: ProjectImageProps) {
-  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
+  const [status, setStatus] = useState<"loading" | "loaded" | "error">(
+    "loading",
+  );
 
   return (
     <div
       className={`relative w-full overflow-hidden rounded-[inherit] ${
-        ratio === 'square' ? 'aspect-square' : 'aspect-video'
+        ratio === "square" ? "aspect-square" : "aspect-video"
       }`}
     >
       <div
         aria-hidden="true"
         className={`absolute inset-0 z-0 isolate bg-linear-to-br from-neutral-900 to-neutral-950 ${
-          status === 'loading' ? 'animate-pulse motion-reduce:animate-none' : ''
+          status === "loading" ? "animate-pulse motion-reduce:animate-none" : ""
         }`}
       />
-      {status !== 'error' && (
+      {status !== "error" && (
         <Image
           fill
           src={src}
           alt={alt}
           sizes={sizes}
-          onLoad={() => setStatus('loaded')}
-          onError={() => setStatus('error')}
-          className={`z-[1] object-cover transition-opacity duration-500 motion-reduce:transition-none ${
-            status === 'loaded' ? 'opacity-100' : 'opacity-0'
+          onLoad={() => setStatus("loaded")}
+          onError={() => setStatus("error")}
+          className={`z-1 object-cover transition-opacity duration-500 motion-reduce:transition-none ${
+            status === "loaded" ? "opacity-100" : "opacity-0"
           }`}
         />
       )}
