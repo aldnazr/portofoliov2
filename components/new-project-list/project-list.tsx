@@ -1,9 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { LuGithub, LuLink } from "react-icons/lu";
 import { GlassLink } from "./glass-link";
 import { ProjectImage } from "./project-image";
 import { Project } from "@/data/types";
 import { slugifyProject } from "@/data/projects";
+import Pagination from "@/components/pagination.tsx";
 
 type ProjectListProps = {
   projects: Project[];
@@ -11,26 +15,49 @@ type ProjectListProps = {
   className?: string;
 };
 
+const ITEMS_PER_PAGE = 3;
+
 export function ProjectList({
   projects,
   fade = 4,
   className = "",
 }: ProjectListProps) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages || page === currentPage) return;
+    setCurrentPage(page);
+    document.getElementById("project")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const currentProjects = projects.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  );
+
   if (projects.length === 0) {
     return <p className="mt-6 text-neutral-400">No projects yet.</p>;
   }
 
   return (
-    <ul
-      data-fade={fade}
-      style={{ "--fade": fade } as CSSProperties}
-      className={`project-list mt-6 grid gap-8 ${className}`}
-    >
-      {/* kartu index genap (0, 2, 4…) → gambar di kanan, sisanya di kiri */}
-      {projects.map((project, i) => (
-        <ProjectCard key={i} project={project} reverse={i % 2 === 0} />
-      ))}
-    </ul>
+    <div className={`project-list-wrapper ${className}`}>
+      <ul
+        data-fade={fade}
+        style={{ "--fade": fade } as CSSProperties}
+        className={`project-list mt-6 grid gap-8`}
+      >
+        {currentProjects.map((project, i) => (
+          <ProjectCard key={i} project={project} reverse={i % 2 === 0} />
+        ))}
+      </ul>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </div>
   );
 }
 
@@ -70,16 +97,16 @@ function ProjectCard({
       )}
 
       <div className="grow rounded-xl rounded-t-none border border-dashed border-neutral-900 p-6 lg:rounded-t-xl lg:p-8">
-        <h3 className="text-2xl font-semibold tracking-tight text-neutral-50 lg:text-3xl">
+        <h3 className="text-4xl font-semibold tracking-tight text-neutral-50">
           {title}
         </h3>
-        <p className="mt-6 text-base leading-relaxed text-foreground-soft">
+        <p className="mt-6 text-sm font-medium text-foreground-soft">
           {description}
         </p>
 
-        <div className="mt-6 flex items-center gap-2">
-          <p className="text-sm text-foreground-soft">Tech Stack:</p>
-          <div className="flex flex-wrap items-center gap-1 text-xs font-medium text-neutral-300">
+        <div className="mt-6 flex text-sm font-medium items-start gap-2">
+          <p className="text-nowrap text-foreground-soft">Tech Stack:</p>
+          <div className="flex flex-wrap text-ellipsis items-center gap-1 text-neutral-300">
             {technologies.map((tech, i) => (
               <span key={tech} className="inline-flex items-center">
                 <span className="text-foreground-soft">{tech}</span>

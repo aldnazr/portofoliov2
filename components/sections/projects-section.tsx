@@ -52,7 +52,10 @@ export default function ProjectsSection() {
       {viewMode === "carousel" ? (
         <ProjectCarousel loop projects={carouselProjects} />
       ) : (
-        <ProjectList projects={projects} className="max-w-6xl mx-auto" />
+        <ProjectList
+          projects={projects}
+          className="max-w-278 mx-4.5 md:mx-auto"
+        />
       )}
     </section>
   );

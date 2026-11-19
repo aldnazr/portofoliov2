@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, type ComponentProps } from "react";
 import { LuChevronRight } from "react-icons/lu";
+import ArrowIconGlass from "../svg-icons/arrow-icon-glass";
 
 type GlassLinkProps = Omit<ComponentProps<typeof Link>, "ref">;
 
@@ -112,12 +113,13 @@ export function GlassLink({
 
       <span className="relative">{children}</span>
 
-      <span
+      {/* <span
         aria-hidden="true"
         className="glass-icon relative isolate flex size-6 items-center justify-center rounded-lg bg-white/5 backdrop-blur-xs"
       >
         <LuChevronRight className="size-[70%]" strokeWidth={1.3} />
-      </span>
+      </span> */}
+      <ArrowIconGlass direction="right" />
     </Link>
   );
 }
