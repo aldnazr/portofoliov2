@@ -1,4 +1,4 @@
-export function BackgroundMesh() {
+export default function BackgroundMesh() {
   return (
     <div
       aria-hidden

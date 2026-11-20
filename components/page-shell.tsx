@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 import BackLink from "@/components/back-link.tsx";
-import BackgroundMesh from "@/components/background-mesh.tsx";
+
 import Breadcrumb from "@/components/breadcrumb.tsx";
 import Footer from "@/components/footer.tsx";
+import BackgroundMesh from "./background-mesh";
 
 type PageShellProps = {
   children: ReactNode;

@@ -5,9 +5,7 @@ import { profile } from "@/data/profile.ts";
 import { GithubIcon, LinkedinIcon } from "@/components/svg-icons/icons";
 import HeroBadge from "../hero-badge";
 import HeroButton from "../button/hero-button";
-import GlassButton from "../button/glass-button";
-import ArrowIconGlass from "../svg-icons/arrow-icon-glass";
-import { BackgroundMesh } from "../background-mesh";
+import BackgroundMesh from "../background-mesh";
 
 const entrance = {
   hidden: { opacity: 0, y: 16 },
