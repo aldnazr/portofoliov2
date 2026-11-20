@@ -10,9 +10,6 @@ import ProjectsSection from "@/components/sections/projects-section.tsx";
 export default function Home() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
-      {/* Background Glow Mesh */}
-      <BackgroundMesh />
-
       {/* Floating Header */}
       <Header />
 

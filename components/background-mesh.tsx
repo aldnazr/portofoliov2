@@ -2,7 +2,7 @@ export default function BackgroundMesh() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_90%_5%,var(--accent-wash-strong),transparent_75%)]" />
       {/* <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_50%_at_0%_90%,var(--accent-wash),transparent_20%)]" /> */}
