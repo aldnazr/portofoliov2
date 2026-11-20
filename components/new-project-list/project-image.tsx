@@ -2,21 +2,23 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import OutlineTextBackground from "../background/OutlineTextBackground";
 
 type ProjectImageProps = {
   src: string;
   alt: string;
+  title?: string;
   ratio: "square" | "video";
   sizes: string;
 };
 
-/**
- * Gambar banner dengan placeholder di belakangnya.
- * - loading → placeholder berdenyut, gambar transparan
- * - loaded  → gambar fade-in menutupi placeholder
- * - error   → gambar disembunyikan, placeholder tetap tampil (layout tidak rusak)
- */
-export function ProjectImage({ src, alt, ratio, sizes }: ProjectImageProps) {
+export function ProjectImage({
+  src,
+  alt,
+  title,
+  ratio,
+  sizes,
+}: ProjectImageProps) {
   const [status, setStatus] = useState<"loading" | "loaded" | "error">(
     "loading",
   );
@@ -29,10 +31,12 @@ export function ProjectImage({ src, alt, ratio, sizes }: ProjectImageProps) {
     >
       <div
         aria-hidden="true"
-        className={`absolute inset-0 z-0 isolate bg-linear-to-br from-neutral-900 to-neutral-950 ${
+        className={`absolute inset-0 z-0 isolate ${
           status === "loading" ? "animate-pulse motion-reduce:animate-none" : ""
         }`}
-      />
+      >
+        <OutlineTextBackground text={title ? title.slice(0, 4) : alt} fill />
+      </div>
       {status !== "error" && (
         <Image
           fill

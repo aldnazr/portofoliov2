@@ -5,6 +5,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { LuGithub, LuLink } from "react-icons/lu";
 import { GlassLink } from "./glass-link";
 import { ProjectImage } from "./project-image";
+import OutlineTextBackground from "@/components/background/OutlineTextBackground";
 import { Project } from "@/data/types";
 import { slugifyProject } from "@/data/projects";
 import Pagination from "@/components/pagination.tsx";
@@ -74,27 +75,36 @@ function ProjectCard({
 
   return (
     <li className={`gap-8 lg:flex ${reverse ? "flex-row-reverse" : ""}`}>
-      {image && (
-        <div className="relative aspect-video shrink-0 lg:aspect-square lg:h-full">
-          <figure className="pointer-events-none isolate z-1 hidden h-full overflow-hidden rounded-xl border border-neutral-900 shadow-sm lg:block lg:aspect-square dark:shadow-none">
-            <ProjectImage
-              src={image?.src}
-              alt={image?.alt}
-              ratio="square"
-              sizes="(min-width: 1024px) 420px, 100vw"
-            />
-          </figure>
+      <div className="relative aspect-video shrink-0 lg:aspect-square lg:h-full">
+        {image ? (
+          <>
+            <figure className="pointer-events-none isolate z-1 hidden h-full overflow-hidden rounded-xl border border-neutral-900 shadow-sm lg:block lg:aspect-square dark:shadow-none">
+              <ProjectImage
+                src={image?.src}
+                alt={image?.alt}
+                title={title}
+                ratio="square"
+                sizes="(min-width: 1024px) 420px, 100vw"
+              />
+            </figure>
 
-          <figure className="pointer-events-none isolate z-1 aspect-video overflow-hidden rounded-xl rounded-b-none border border-b-0 border-dashed border-neutral-900 shadow-sm lg:hidden dark:shadow-none">
-            <ProjectImage
-              src={image?.src}
-              alt={image?.alt}
-              ratio="video"
-              sizes="100vw"
-            />
-          </figure>
-        </div>
-      )}
+            <figure className="pointer-events-none isolate z-1 aspect-video overflow-hidden rounded-xl rounded-b-none border border-b-0 border-dashed border-neutral-900 shadow-sm lg:hidden dark:shadow-none">
+              <ProjectImage
+                src={image?.src}
+                alt={image?.alt}
+                title={title}
+                ratio="video"
+                sizes="100vw"
+              />
+            </figure>
+          </>
+        ) : (
+          <OutlineTextBackground
+            text={title.slice(0, 4)}
+            className="aspect-video h-full w-full lg:aspect-square"
+          />
+        )}
+      </div>
 
       <div className="grow rounded-xl rounded-t-none border border-dashed border-neutral-900 p-6 lg:rounded-t-xl lg:p-8">
         <h3 className="text-4xl font-semibold tracking-tight text-neutral-50">

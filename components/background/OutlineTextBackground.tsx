@@ -1,6 +1,5 @@
 import { useId, type ReactNode } from "react";
 import { GLYPHS } from "./dm-sans-bold-glyphs";
-import { cn } from "@/lib/utils";
 
 // Satuan glyph: 1000 per em. Satuan layout: viewBox 352x352 (area dalam kartu).
 const TRACKING = -40; // -0.04em
@@ -41,13 +40,16 @@ function layoutText(text: string) {
 
 type OutlineTextBackgroundProps = {
   text: string;
+  // Isi penuh parent (rasio apa pun) tanpa border dan radius sendiri
+  fill?: boolean;
   className?: string;
   children?: ReactNode;
 };
 
 export default function OutlineTextBackground({
   text,
-  className,
+  fill = false,
+  className = "",
   children,
 }: OutlineTextBackgroundProps) {
   const gradientId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
@@ -55,14 +57,14 @@ export default function OutlineTextBackground({
 
   return (
     <div
-      className={cn(
-        "relative isolate aspect-square overflow-hidden rounded-xl border border-[#171717] bg-[#0d0d0d]",
-        className,
-      )}
+      className={`relative isolate overflow-hidden bg-[#0d0d0d] ${
+        fill ? "size-full" : "aspect-square rounded-xl border border-[#171717]"
+      } ${className}`}
     >
       <svg
         aria-hidden="true"
         viewBox="0 0 352 352"
+        preserveAspectRatio="xMinYMin slice"
         className="pointer-events-none absolute inset-0 size-full"
       >
         {layout ? (
