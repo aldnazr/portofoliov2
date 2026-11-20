@@ -1,30 +1,19 @@
-export default function BackgroundMesh() {
+export function BackgroundMesh() {
   return (
     <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      aria-hidden
+      className="pointer-events-none absolute inset-0 overflow-hidden opacity-65"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_55%_at_90%_5%,var(--accent-wash-strong),transparent_75%)]" />
-      {/* <div className="absolute inset-0 bg-[radial-gradient(ellipse_45%_50%_at_0%_90%,var(--accent-wash),transparent_20%)]" /> */}
-      <svg
-        className="absolute -right-64 -top-48 h-200 w-225 max-w-none opacity-70 mask-[linear-gradient(to_bottom,black_30%,transparent_95%)] sm:-right-32"
-        viewBox="0 0 900 800"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M176 -80C126 151 221 245 414 329C608 414 711 510 751 800"
-          stroke="var(--hairline)"
-        />
-        <path
-          d="M316 -80C262 134 337 232 498 310C677 397 793 528 813 800"
-          stroke="var(--hairline)"
-        />
-        <path
-          d="M456 -80C404 133 457 211 579 292C755 409 844 548 874 800"
-          stroke="var(--accent-wash-border)"
-        />
-      </svg>
+      {/* wash emerald yang sudah ada */}
+      {/* <div className="absolute inset-0 [background:radial-gradient(560px_340px_at_88%_-6%,var(--accent-wash),transparent_62%)]" /> */}
+
+      {/* glow di balik kaca */}
+      {/* <div className="absolute right-[-12%] top-[-16%] aspect-square w-[55%] rounded-full bg-emerald-500/50 blur-2xl" /> */}
+
+      {/* panel kaca — di mobile digeser ke tepi lewat posisi responsif */}
+      <div className="absolute right-[-22%] top-[6%] aspect-[1.25] w-[72%] -rotate-6 rounded-[26px] border border-white/20 bg-linear-to-br from-white/15 via-white/3 to-emerald-400/10 shadow-2xl backdrop-blur-[3px] md:right-[-7%] md:top-[9%] md:w-[47%]" />
+      <div className="absolute left-[-14%] bottom-[16%] aspect-[0.82] w-[44%] rotate-12 rounded-[22px] border border-white/20 bg-linear-to-br from-white/15 via-white/3 to-emerald-400/10 shadow-2xl backdrop-blur-[3px] md:left-auto md:right-[23%] md:top-[44%] md:bottom-auto md:w-[31%]" />
+      <div className="absolute bottom-[-9%] right-[3%] aspect-square w-[19%] rounded-full border border-white/20 bg-linear-to-br from-white/15 to-emerald-400/10 shadow-2xl backdrop-blur-[3px]" />
     </div>
   );
 }
