@@ -12,21 +12,27 @@
   }
 }
 
+/* Safari/WebKit: backdrop-filter bersarang (ikon di dalam tombol) tampil rusak.
+   Deteksinya heuristik; dipakai sebagai `supports-safari:` di GlassLink. */
+@custom-variant supports-safari (@supports (-webkit-hyphens: none));
 
 html {
-  font-family: var(--font-google-sans-flex), sans-serif;
+  font-family: var(--font-google-sans-flex),
+  sans-serif;
 }
 
+/* Semua token netral memakai skala Tailwind `neutral` (bukan `zinc`) supaya
+   selaras dengan --background #0A0A0A (= neutral-950) dan tidak ada tint biru. */
 :root {
   color-scheme: dark;
   --background: #0A0A0A;
-  --surface: #0c0e14;
-  --surface-muted: #18181b;
-  --shade: #3f3f46;
-  --foreground: #f3f4f6;
-  --foreground-soft: #d4d4d8;
-  --muted: #a1a1aa;
-  --subtle: #71717a;
+  --surface: #111111;
+  --surface-muted: #171717;
+  --shade: #404040;
+  --foreground: #f5f5f5;
+  --foreground-soft: #d4d4d4;
+  --muted: #a3a3a3;
+  --subtle: #737373;
   --hairline: rgba(255, 255, 255, 0.1);
   --hairline-soft: rgba(255, 255, 255, 0.05);
   --overlay-faint: rgba(255, 255, 255, 0.02);
@@ -41,37 +47,40 @@ html {
   --accent-wash-strong: rgba(16, 185, 129, 0.2);
   --primary: #10b981;
   --primary-hover: #34d399;
-  --on-primary: #09090b;
-  --on-primary-wash: rgba(9, 9, 11, 0.1);
+  --on-primary: #0a0a0a;
+  --on-primary-wash: rgba(10, 10, 10, 0.1);
   --danger: #f87171;
   --danger-wash: rgba(239, 68, 68, 0.1);
   --danger-border: rgba(239, 68, 68, 0.3);
   --grid-line: rgba(255, 255, 255, 0.05);
   --selection-bg: rgba(16, 185, 129, 0.25);
   --selection-fg: #34d399;
+  /* Ring gradient kotak ikon ProjectList (.glass-icon) */
+  --glass-edge: rgba(23, 23, 23, 0.7);
+  --glass-peak: #525252;
   --elevated-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.4),
-    0 4px 12px rgba(0, 0, 0, 0.35),
-    0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    0 1px 2px rgba(0, 0, 0, 0.55),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    0 25px 50px -12px rgba(0, 0, 0, 0.7);
 }
 
 @supports (color: light-dark(#fff, #000)) {
   :root {
     color-scheme: light dark;
     --background: light-dark(#fafafa, #0A0A0A);
-    --surface: light-dark(#ffffff, #0c0e14);
-    --surface-muted: light-dark(#f4f4f5, #18181b);
-    --shade: light-dark(#d4d4d8, #3f3f46);
-    --foreground: light-dark(#18181b, #f3f4f6);
-    --foreground-soft: light-dark(#3f3f46, #d4d4d8);
-    --muted: light-dark(#52525b, #a1a1aa);
-    --subtle: light-dark(#71717a, #71717a);
-    --hairline: light-dark(rgba(24, 24, 27, 0.1), rgba(255, 255, 255, 0.1));
-    --hairline-soft: light-dark(rgba(24, 24, 27, 0.06), rgba(255, 255, 255, 0.05));
-    --overlay-faint: light-dark(rgba(24, 24, 27, 0.03), rgba(255, 255, 255, 0.02));
-    --overlay: light-dark(rgba(24, 24, 27, 0.05), rgba(255, 255, 255, 0.05));
-    --overlay-strong: light-dark(rgba(24, 24, 27, 0.08), rgba(255, 255, 255, 0.1));
-    --ghost: light-dark(rgba(24, 24, 27, 0.06), rgba(255, 255, 255, 0.04));
+    --surface: light-dark(#ffffff, #111111);
+    --surface-muted: light-dark(#f5f5f5, #171717);
+    --shade: light-dark(#d4d4d4, #404040);
+    --foreground: light-dark(#171717, #f5f5f5);
+    --foreground-soft: light-dark(#404040, #d4d4d4);
+    --muted: light-dark(#525252, #a3a3a3);
+    --subtle: light-dark(#737373, #737373);
+    --hairline: light-dark(rgba(23, 23, 23, 0.1), rgba(255, 255, 255, 0.1));
+    --hairline-soft: light-dark(rgba(23, 23, 23, 0.06), rgba(255, 255, 255, 0.05));
+    --overlay-faint: light-dark(rgba(23, 23, 23, 0.03), rgba(255, 255, 255, 0.02));
+    --overlay: light-dark(rgba(23, 23, 23, 0.05), rgba(255, 255, 255, 0.05));
+    --overlay-strong: light-dark(rgba(23, 23, 23, 0.08), rgba(255, 255, 255, 0.1));
+    --ghost: light-dark(rgba(23, 23, 23, 0.06), rgba(255, 255, 255, 0.04));
     --accent: light-dark(#059669, #34d399);
     --accent-strong: light-dark(#047857, #34d399);
     --accent-hover: light-dark(#047857, #6ee7b7);
@@ -80,18 +89,20 @@ html {
     --accent-wash-strong: light-dark(rgba(5, 150, 105, 0.16), rgba(16, 185, 129, 0.2));
     --primary: light-dark(#059669, #10b981);
     --primary-hover: light-dark(#047857, #34d399);
-    --on-primary: light-dark(#ffffff, #09090b);
-    --on-primary-wash: light-dark(rgba(255, 255, 255, 0.22), rgba(9, 9, 11, 0.1));
+    --on-primary: light-dark(#ffffff, #0a0a0a);
+    --on-primary-wash: light-dark(rgba(255, 255, 255, 0.22), rgba(10, 10, 10, 0.1));
     --danger: light-dark(#dc2626, #f87171);
     --danger-wash: light-dark(rgba(220, 38, 38, 0.08), rgba(239, 68, 68, 0.1));
     --danger-border: light-dark(rgba(220, 38, 38, 0.3), rgba(239, 68, 68, 0.3));
-    --grid-line: light-dark(rgba(24, 24, 27, 0.06), rgba(255, 255, 255, 0.05));
+    --grid-line: light-dark(rgba(23, 23, 23, 0.06), rgba(255, 255, 255, 0.05));
     --selection-bg: light-dark(rgba(5, 150, 105, 0.16), rgba(16, 185, 129, 0.25));
     --selection-fg: light-dark(#047857, #34d399);
+    --glass-edge: light-dark(rgba(23, 23, 23, 0.06), rgba(23, 23, 23, 0.7));
+    --glass-peak: light-dark(rgba(23, 23, 23, 0.3), #525252);
     --elevated-shadow:
-      0 1px 2px light-dark(rgba(24, 24, 27, 0.06), rgba(0, 0, 0, 0.4)),
-      0 4px 12px light-dark(rgba(24, 24, 27, 0.05), rgba(0, 0, 0, 0.35)),
-      0 25px 50px -12px light-dark(rgba(24, 24, 27, 0.08), rgba(0, 0, 0, 0.5));
+      0 1px 2px light-dark(rgba(23, 23, 23, 0.06), rgba(0, 0, 0, 0.55)),
+      0 4px 12px light-dark(rgba(23, 23, 23, 0.05), rgba(0, 0, 0, 0.5)),
+      0 25px 50px -12px light-dark(rgba(23, 23, 23, 0.08), rgba(0, 0, 0, 0.7));
   }
 
   :root[data-theme="light"] {
@@ -124,6 +135,8 @@ html {
   --color-accent-wash: var(--accent-wash);
   --color-accent-wash-border: var(--accent-wash-border);
   --color-accent-wash-strong: var(--accent-wash-strong);
+  /* Ikon link (hover) dan ring fokus ProjectList; mengikuti aksen tema */
+  --color-accent-500: var(--accent);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
   --color-on-primary: var(--on-primary);
@@ -334,4 +347,69 @@ pre.shiki::-webkit-scrollbar-thumb {
 .shiki-wrapper>.shiki::-webkit-scrollbar-track,
 pre.shiki::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+/* ==========================================
+   PROJECT LIST (gaya pendukung <ProjectList />)
+   ========================================== */
+
+@utility default-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-accent-500);
+    outline-offset: 3px;
+  }
+}
+
+.composite-exclude,
+.glass-icon::before {
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.glass-icon {
+  --borderWidth: 1;
+  --glass-ring: linear-gradient(to bottom right, var(--glass-edge) 0%, var(--glass-peak) 62%, var(--glass-edge) 100%);
+  border: 1px solid transparent;
+}
+
+.glass-icon::before {
+  content: '';
+  position: absolute;
+  inset: calc(var(--borderWidth) * -1px);
+  padding: calc(var(--borderWidth) * 1px);
+  border-radius: inherit;
+  background: var(--glass-ring);
+  pointer-events: none;
+}
+
+.glass-follow {
+  transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-tracking] .glass-follow {
+  transition: none;
+}
+
+@keyframes project-list-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.project-list[data-fade] {
+  animation: project-list-in 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--fade, 0) * 100ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-list[data-fade] {
+    animation: none;
+  }
+
+  .glass-follow {
+    transition: none;
+  }
 }

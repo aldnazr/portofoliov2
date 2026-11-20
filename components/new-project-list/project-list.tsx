@@ -46,7 +46,7 @@ export function ProjectList({
       <ul
         data-fade={fade}
         style={{ "--fade": fade } as CSSProperties}
-        className={`project-list mt-6 grid gap-8`}
+        className="project-list mt-6 grid grid-cols-1 gap-8"
       >
         {currentProjects.map((project, i) => (
           <ProjectCard key={i} project={project} reverse={i % 2 === 0} />
@@ -106,7 +106,7 @@ function ProjectCard({
         )}
       </div>
 
-      <div className="grow rounded-xl rounded-t-none border border-dashed border-neutral-900 p-6 lg:rounded-t-xl lg:p-8">
+      <div className="min-w-0 grow rounded-xl rounded-t-none border border-dashed border-neutral-900 p-6 lg:rounded-t-xl lg:p-8">
         <h3 className="text-4xl font-semibold tracking-tight text-neutral-50">
           {title}
         </h3>
@@ -114,16 +114,13 @@ function ProjectCard({
           {description}
         </p>
 
-        <div className="mt-6 flex text-sm font-medium items-start gap-2">
-          <p className="text-nowrap text-foreground-soft">Tech Stack:</p>
-          <div className="flex flex-wrap text-ellipsis items-center gap-1 text-neutral-300">
-            {technologies.map((tech, i) => (
-              <span key={tech} className="inline-flex items-center">
-                <span className="text-foreground-soft">{tech}</span>
-                {i < technologies.length - 1 && ","}
-              </span>
-            ))}
-          </div>
+        <div className="mt-6 flex items-start gap-2 text-sm font-medium">
+          <p className="shrink-0 whitespace-nowrap text-foreground-soft">
+            Tech Stack:
+          </p>
+          <p className="min-w-0 flex-1 truncate text-foreground-soft lg:max-w-[80%]">
+            {technologies.join(", ")}
+          </p>
         </div>
 
         <div className="mt-10 flex w-full flex-wrap items-center justify-between gap-4">
