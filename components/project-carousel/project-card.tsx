@@ -3,13 +3,13 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { LayersIcon, UserIcon } from "./icons.tsx";
 import { CarouselProject } from "@/data/types.ts";
-import { CARD_CAROUSEL_RADIUS, cn, pad } from "@/lib/utils.ts";
+import { CARD_CAROUSEL_RADIUS, cn } from "@/lib/utils.ts";
 import {
   BrowserIcon,
   GithubIcon,
   ArrowIcon,
 } from "@/components/svg-icons/icons.tsx";
-import ProjectVisual from "@/components/project-visual.tsx";
+import OutlineTextBackground from "@/components/background/outline-text-background";
 import ArrowIconGlass from "../svg-icons/arrow-icon-glass.tsx";
 import GlassButton from "../button/glass-button.tsx";
 
@@ -73,7 +73,6 @@ export function ProjectCard({
     status,
     image,
     imageAlt,
-    category,
     role,
     stack,
     href,
@@ -106,11 +105,9 @@ export function ProjectCard({
         />
       ) : (
         <div className="absolute inset-0" style={{ colorScheme: "dark" }}>
-          <ProjectVisual
-            number={pad(index + 1)}
-            title={title}
-            category={category}
-            variant="hero"
+          <OutlineTextBackground
+            text={title.slice(0, 4)}
+            fill
             className="h-full rounded-none border-0 -translate-y-8 sm:-translate-y-10"
           />
         </div>
