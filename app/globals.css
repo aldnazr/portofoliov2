@@ -55,9 +55,13 @@ html {
   --grid-line: rgba(255, 255, 255, 0.05);
   --selection-bg: rgba(16, 185, 129, 0.25);
   --selection-fg: #34d399;
-  /* Ring gradient kotak ikon ProjectList (.glass-icon) */
+  /* Glass ProjectList: ring ikon (.glass-icon), highlight ikon, glow dan ring tombol (GlassLink) */
   --glass-edge: rgba(23, 23, 23, 0.7);
   --glass-peak: #525252;
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+  --glass-glow: rgba(255, 255, 255, 0.07);
+  --glass-ring-spot: rgba(255, 255, 255, 0.2);
+  --glass-ring-base: rgb(40, 40, 40);
   --elevated-shadow:
     0 1px 2px rgba(0, 0, 0, 0.55),
     0 4px 12px rgba(0, 0, 0, 0.5),
@@ -99,6 +103,10 @@ html {
     --selection-fg: light-dark(#047857, #34d399);
     --glass-edge: light-dark(rgba(23, 23, 23, 0.06), rgba(23, 23, 23, 0.7));
     --glass-peak: light-dark(rgba(23, 23, 23, 0.3), #525252);
+    --glass-highlight: light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.08));
+    --glass-glow: light-dark(rgba(23, 23, 23, 0.06), rgba(255, 255, 255, 0.07));
+    --glass-ring-spot: light-dark(rgba(23, 23, 23, 0.28), rgba(255, 255, 255, 0.2));
+    --glass-ring-base: light-dark(#dddddd, rgb(40, 40, 40));
     --elevated-shadow:
       0 1px 2px light-dark(rgba(23, 23, 23, 0.06), rgba(0, 0, 0, 0.55)),
       0 4px 12px light-dark(rgba(23, 23, 23, 0.05), rgba(0, 0, 0, 0.5)),
@@ -360,6 +368,7 @@ pre.shiki::-webkit-scrollbar-track {
   }
 }
 
+/* Ring 1px dari gradient: dua mask di-exclude, yang tersisa hanya bingkai padding-nya. */
 .composite-exclude,
 .glass-icon::before {
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -368,6 +377,9 @@ pre.shiki::-webkit-scrollbar-track {
   mask-composite: exclude;
 }
 
+/* Border gradient untuk kotak ikon di dalam tombol.
+   Variabel lokal sengaja BUKAN --background: itu token tema global, dan menimpanya
+   di sini membuat bg-background di turunan .glass-icon jadi invalid. */
 .glass-icon {
   --borderWidth: 1;
   --glass-ring: linear-gradient(to bottom right, var(--glass-edge) 0%, var(--glass-peak) 62%, var(--glass-edge) 100%);
@@ -384,6 +396,7 @@ pre.shiki::-webkit-scrollbar-track {
   pointer-events: none;
 }
 
+/* Highlight tombol: tanpa transisi saat kursor melacak, meluncur halus saat kembali ke tengah. */
 .glass-follow {
   transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -392,6 +405,8 @@ pre.shiki::-webkit-scrollbar-track {
   transition: none;
 }
 
+/* Fade-in berurutan: data-fade="N" → mulai N × 100ms setelah halaman muncul.
+   Hanya keyframe `from`, jadi tanpa animasi konten tetap terlihat. */
 @keyframes project-list-in {
   from {
     opacity: 0;

@@ -5,7 +5,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { LuGithub, LuLink } from "react-icons/lu";
 import { GlassLink } from "./glass-link";
 import { ProjectImage } from "./project-image";
-import OutlineTextBackground from "@/components/background/OutlineTextBackground";
+import OutlineTextBackground from "@/components/background/outline-text-background";
 import { Project } from "@/data/types";
 import { slugifyProject } from "@/data/projects";
 import Pagination from "@/components/pagination.tsx";
@@ -38,7 +38,7 @@ export function ProjectList({
   );
 
   if (projects.length === 0) {
-    return <p className="mt-6 text-neutral-400">No projects yet.</p>;
+    return <p className="mt-6 text-muted">No projects yet.</p>;
   }
 
   return (
@@ -78,7 +78,7 @@ function ProjectCard({
       <div className="relative aspect-video shrink-0 lg:aspect-square lg:h-full">
         {image ? (
           <>
-            <figure className="pointer-events-none isolate z-1 hidden h-full overflow-hidden rounded-xl border border-neutral-900 shadow-sm lg:block lg:aspect-square dark:shadow-none">
+            <figure className="pointer-events-none isolate z-1 hidden h-full overflow-hidden rounded-xl border border-hairline-soft shadow-sm lg:block lg:aspect-square dark:shadow-none">
               <ProjectImage
                 src={image?.src}
                 alt={image?.alt}
@@ -88,7 +88,7 @@ function ProjectCard({
               />
             </figure>
 
-            <figure className="pointer-events-none isolate z-1 aspect-video overflow-hidden rounded-xl rounded-b-none border border-b-0 border-dashed border-neutral-900 shadow-sm lg:hidden dark:shadow-none">
+            <figure className="pointer-events-none isolate z-1 aspect-video overflow-hidden rounded-xl rounded-b-none border border-b-0 border-dashed border-hairline-soft shadow-sm lg:hidden dark:shadow-none">
               <ProjectImage
                 src={image?.src}
                 alt={image?.alt}
@@ -106,8 +106,8 @@ function ProjectCard({
         )}
       </div>
 
-      <div className="min-w-0 grow rounded-xl rounded-t-none border border-dashed border-neutral-900 p-6 lg:rounded-t-xl lg:p-8">
-        <h3 className="text-4xl font-semibold tracking-tight text-neutral-50">
+      <div className="min-w-0 grow rounded-xl rounded-t-none border border-dashed border-hairline-soft p-6 lg:rounded-t-xl lg:p-8">
+        <h3 className="text-4xl font-semibold tracking-tight text-foreground">
           {title}
         </h3>
         <p className="mt-6 text-sm font-medium text-foreground-soft">
@@ -168,11 +168,11 @@ function ExternalLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group default-ring flex items-center gap-1.5 text-sm text-neutral-300 underline decoration-transparent transition-colors hover:decoration-current focus-visible:decoration-current active:decoration-[color-mix(in_srgb,currentColor_65%,#171717)]"
+      className="group default-ring flex items-center gap-1.5 text-sm text-foreground-soft underline decoration-transparent transition-colors hover:decoration-current focus-visible:decoration-current active:decoration-[color-mix(in_srgb,currentColor_65%,var(--background))]"
     >
       <span
         aria-hidden="true"
-        className="flex text-neutral-500 transition-colors group-hover:text-accent-500 group-focus-visible:text-accent-500"
+        className="flex text-subtle transition-colors group-hover:text-accent-500 group-focus-visible:text-accent-500"
       >
         {icon}
       </span>

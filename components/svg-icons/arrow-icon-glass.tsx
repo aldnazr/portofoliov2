@@ -19,6 +19,8 @@ export default function ArrowIconGlass({
   className = "",
   ...props
 }: ArrowIconGlassProps) {
+  // Ring 1px dikerjakan .glass-icon::before di globals.css (token --glass-edge / --glass-peak).
+  // CSS tanpa @layer menang atas utility Tailwind, jadi before:* di sini tidak akan pernah terpakai.
   return (
     <span
       aria-hidden="true"
@@ -27,21 +29,11 @@ export default function ArrowIconGlass({
         flex size-6 shrink-0
         items-center justify-center
         rounded-lg
-        bg-white/5
-        text-neutral-100
-        shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]
+        bg-overlay
+        text-foreground
+        shadow-[inset_0_1px_0_var(--glass-highlight)]
         backdrop-blur-sm
         transition-colors duration-200
-        before:pointer-events-none
-        before:absolute
-        before:inset-0
-        before:content-['']
-        before:rounded-[inherit]
-        before:p-px
-        before:bg-[linear-gradient(45deg,rgba(255,255,255,0.35)_0%,rgba(255,255,255,0.06)_35%,rgba(255,255,255,0.06)_65%,rgba(255,255,255,0.35)_100%)]
-        before:mask-[linear-gradient(#000_0_0),linear-gradient(#000_0_0)]
-        before:[mask-clip:content-box,border-box]
-        before:mask-exclude
 
         ${className}
       `}

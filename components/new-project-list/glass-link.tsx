@@ -25,6 +25,9 @@ function centerCursor(el: HTMLElement) {
  * langsung pada <a> — tanpa state, jadi tidak ada re-render per gerakan mouse.
  * Dua layer dekoratif membacanya lewat `transform`: glow lembut di dalam tombol
  * dan ring 1px di tepinya (gradient yang di-mask).
+ *
+ * Warna layer dekoratif diambil dari token tema di globals.css
+ * (--glass-glow, --glass-ring-spot, --glass-ring-base), jadi otomatis ikut light/dark.
  */
 export function GlassLink({
   children,
@@ -66,7 +69,7 @@ export function GlassLink({
         el.removeAttribute("data-tracking"); // transisi aktif lagi → highlight meluncur ke tengah
         centerCursor(el);
       }}
-      className={`group default-ring relative inline-flex items-center gap-3 rounded-xl border border-transparent px-4 py-3 text-neutral-200 backdrop-blur-xs supports-safari:[&_.glass-icon]:backdrop-blur-[0px] ${className}`}
+      className={`group default-ring relative inline-flex items-center gap-3 rounded-xl border border-transparent px-4 py-3 text-foreground backdrop-blur-xs supports-safari:[&_.glass-icon]:backdrop-blur-[0px] ${className}`}
     >
       {/* glow di dalam tombol */}
       <span
@@ -76,8 +79,7 @@ export function GlassLink({
         <span
           className="glass-follow absolute left-0 top-0 block h-[400%] w-[200%]"
           style={{
-            background:
-              "radial-gradient(rgba(255, 255, 255, 0.07), transparent 40%)",
+            background: "radial-gradient(var(--glass-glow), transparent 40%)",
             opacity: 0.7,
             transform:
               "translateX(calc(var(--cursorX) - 50%)) translateY(calc(var(--cursorY) - 50%)) scale(1.7) rotate(-45deg)",
@@ -104,21 +106,13 @@ export function GlassLink({
           className="glass-follow block h-162.5 w-62.5"
           style={{
             background:
-              "radial-gradient(rgba(255, 255, 255, 0.2), rgb(40, 40, 40) 22%) rgb(36, 36, 36)",
+              "radial-gradient(var(--glass-ring-spot), var(--glass-ring-base) 22%) var(--glass-ring-base)",
             transform:
               "translate(calc(var(--cursorX) - 50%), calc(var(--cursorY) - 50%)) rotate(80deg)",
           }}
         />
       </span>
-
       <span className="relative">{children}</span>
-
-      {/* <span
-        aria-hidden="true"
-        className="glass-icon relative isolate flex size-6 items-center justify-center rounded-lg bg-white/5 backdrop-blur-xs"
-      >
-        <LuChevronRight className="size-[70%]" strokeWidth={1.3} />
-      </span> */}
       <ArrowIconGlass direction="right" />
     </Link>
   );

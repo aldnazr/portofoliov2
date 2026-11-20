@@ -57,15 +57,18 @@ export default function OutlineTextBackground({
 
   return (
     <div
-      className={`relative isolate overflow-hidden bg-[#0d0d0d] ${
-        fill ? "size-full" : "aspect-square rounded-xl border border-[#171717]"
+      className={`relative isolate overflow-hidden bg-overlay-faint ${
+        fill
+          ? "size-full"
+          : "aspect-square rounded-xl border border-hairline-soft"
       } ${className}`}
     >
+      {/* text-foreground: warna outline (currentColor di stop gradient) ikut tema */}
       <svg
         aria-hidden="true"
         viewBox="0 0 352 352"
         preserveAspectRatio="xMinYMin slice"
-        className="pointer-events-none absolute inset-0 size-full"
+        className="pointer-events-none absolute inset-0 size-full text-foreground"
       >
         {layout ? (
           <>
@@ -78,8 +81,8 @@ export default function OutlineTextBackground({
                 x2="0"
                 y2={-ASCENDER * 0.15}
               >
-                <stop offset="0" stopColor="#fff" stopOpacity="0.27" />
-                <stop offset="1" stopColor="#fff" stopOpacity="0.035" />
+                <stop offset="0" stopColor="currentColor" stopOpacity="0.27" />
+                <stop offset="1" stopColor="currentColor" stopOpacity="0.035" />
               </linearGradient>
             </defs>
             <g

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import OutlineTextBackground from "../background/OutlineTextBackground";
+import OutlineTextBackground from "../background/outline-text-background";
 
 type ProjectImageProps = {
   src: string;
