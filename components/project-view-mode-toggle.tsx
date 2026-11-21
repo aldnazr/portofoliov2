@@ -1,0 +1,44 @@
+"use client";
+
+import { useProjectViewMode } from "@/lib/use-project-view-mode.ts";
+import { IconCarousel, IconList } from "@/components/svg-icons/icons";
+
+export function ProjectViewModeToggle() {
+  const viewMode = useProjectViewMode((s) => s.viewMode);
+  const setViewMode = useProjectViewMode((s) => s.setViewMode);
+
+  return (
+    <div
+      role="group"
+      aria-label="Mode tampilan proyek"
+      className="inline-flex self-start sm:self-end items-center gap-1 rounded-full border border-hairline bg-overlay p-1"
+    >
+      <button
+        type="button"
+        onClick={() => setViewMode("carousel")}
+        aria-pressed={viewMode === "carousel"}
+        className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+          viewMode === "carousel"
+            ? "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
+            : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
+        }`}
+      >
+        <IconCarousel className="size-3.5 shrink-0" />
+        <span>Carousel</span>
+      </button>
+      <button
+        type="button"
+        onClick={() => setViewMode("list")}
+        aria-pressed={viewMode === "list"}
+        className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+          viewMode === "list"
+            ? "bg-accent-wash-strong text-accent-strong border border-accent-wash-border font-semibold shadow-xs"
+            : "border border-transparent text-muted hover:text-foreground hover:bg-overlay"
+        }`}
+      >
+        <IconList className="size-3.5 shrink-0" />
+        <span>List</span>
+      </button>
+    </div>
+  );
+}
