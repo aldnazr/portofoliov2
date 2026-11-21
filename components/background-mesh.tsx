@@ -5,7 +5,7 @@ export default function BackgroundMesh() {
       className="pointer-events-none absolute inset-0 overflow-hidden opacity-65"
     >
       {/* wash emerald yang sudah ada */}
-      {/* <div className="absolute inset-0 [background:radial-gradient(560px_340px_at_88%_-6%,var(--accent-wash),transparent_62%)]" /> */}
+      <div className="absolute inset-0 [background:radial-gradient(560px_340px_at_88%_-6%,var(--accent-wash),transparent_62%)]" />
 
       {/* glow di balik kaca */}
       {/* <div className="absolute right-[-12%] top-[-16%] aspect-square w-[55%] rounded-full bg-emerald-500/50 blur-2xl" /> */}
