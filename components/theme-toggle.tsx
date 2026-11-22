@@ -67,6 +67,9 @@ export default function ThemeToggle() {
 
   const apply = (next: ThemeMode) => {
     document.documentElement.setAttribute("data-theme", next);
+    document
+      .querySelector('meta[name="color-scheme"]')
+      ?.setAttribute("content", next === "system" ? "light dark" : next);
     setMode(next);
   };
 

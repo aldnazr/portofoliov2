@@ -39,9 +39,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${googleSansFlex.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <meta name="color-scheme" content="light dark" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"||t==="system")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()`,
+            __html: `(function(){try{var t=localStorage.getItem("theme");var d=document.documentElement;if(t==="light"||t==="dark"||t==="system"){d.setAttribute("data-theme",t)}var m=document.querySelector('meta[name="color-scheme"]');if(m){m.setAttribute("content",t==="light"||t==="dark"?t:"light dark")}}catch(e){}})()`,
           }}
         />
       </head>
