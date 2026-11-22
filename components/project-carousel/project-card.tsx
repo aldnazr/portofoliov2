@@ -1,17 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { LayersIcon, UserIcon } from "./icons.tsx";
 import { CarouselProject } from "@/data/types.ts";
 import { CARD_CAROUSEL_RADIUS, cn } from "@/lib/utils.ts";
-import {
-  BrowserIcon,
-  GithubIcon,
-  ArrowIcon,
-} from "@/components/svg-icons/icons.tsx";
+import { BrowserIcon, GithubIcon } from "@/components/svg-icons/icons.tsx";
 import OutlineTextBackground from "@/components/background/outline-text-background";
-import ArrowIconGlass from "../svg-icons/arrow-icon-glass.tsx";
-import GlassButton from "../button/glass-button.tsx";
+import { GlassButton } from "../button/glass-button.tsx";
 
 export type ProjectStatusTone = "success" | "warning" | "neutral";
 
@@ -184,14 +178,8 @@ export function ProjectCard({
             </a>
           )}
 
-          <GlassButton
-            href={href}
-            draggable={false}
-            aria-label={`View project: ${title}`}
-            className="w-full justify-center"
-          >
-            View project
-            <ArrowIconGlass direction="right" />
+          <GlassButton href={href} className="w-full justify-center">
+            View Project
           </GlassButton>
         </div>
       </div>

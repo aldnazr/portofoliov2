@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
 import { LuGithub, LuLink } from "react-icons/lu";
-import { GlassLink } from "./glass-link";
+import { GlassButton } from "../button/glass-button";
 import { ProjectImage } from "./project-image";
 import OutlineTextBackground from "@/components/background/outline-text-background";
 import { Project } from "@/data/types";
@@ -124,9 +124,7 @@ function ProjectCard({
         </div>
 
         <div className="mt-10 flex w-full flex-wrap items-center justify-between gap-4">
-          <GlassLink href={detailHref}>
-            View Project<span className="sr-only">: {title}</span>
-          </GlassLink>
+          <GlassButton href={detailHref}>View Project</GlassButton>
 
           {(sourceUrl || demoUrl) && (
             <div className="flex items-center gap-6">

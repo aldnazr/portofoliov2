@@ -1,142 +1,110 @@
 "use client";
 
 import Link from "next/link";
-import type {
-  AnchorHTMLAttributes,
-  CSSProperties,
-  PointerEvent,
-  ReactNode,
-} from "react";
+import { useEffect, useRef, type ComponentProps } from "react";
+import { LuChevronRight } from "react-icons/lu";
+import ArrowIconGlass from "../svg-icons/arrow-icon-glass";
+import { cn } from "@/lib/utils.ts";
 
-type GlassLinkProps = Omit<
-  AnchorHTMLAttributes<HTMLAnchorElement>,
-  "children"
-> & {
-  children?: ReactNode;
-};
+type GlassLinkProps = Omit<ComponentProps<typeof Link>, "ref">;
 
-type CSSVars = CSSProperties & {
-  "--cursor-x": string;
-  "--cursor-y": string;
-};
+function setCursor(el: HTMLElement, x: number, y: number) {
+  el.style.setProperty("--cursorX", `${x}px`);
+  el.style.setProperty("--cursorY", `${y}px`);
+}
 
-export default function GlassButton({
-  href = "/#blog-intro",
-  children = "Learn How",
-  className = "",
-  style,
+function centerCursor(el: HTMLElement) {
+  const { width, height } = el.getBoundingClientRect();
+  setCursor(el, width / 2, height / 2);
+}
+
+export function GlassButton({
+  children,
+  className,
   onPointerMove,
   onPointerLeave,
   ...props
 }: GlassLinkProps) {
-  const handlePointerMove = (event: PointerEvent<HTMLAnchorElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
+  const ref = useRef<HTMLAnchorElement>(null);
 
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-    event.currentTarget.style.setProperty("--cursor-x", `${x}px`);
-    event.currentTarget.style.setProperty("--cursor-y", `${y}px`);
-
-    onPointerMove?.(event);
-  };
-
-  const handlePointerLeave = (event: PointerEvent<HTMLAnchorElement>) => {
-    event.currentTarget.style.setProperty("--cursor-x", "50%");
-    event.currentTarget.style.setProperty("--cursor-y", "50%");
-
-    onPointerLeave?.(event);
-  };
+    centerCursor(el);
+    const ro = new ResizeObserver(() => {
+      if (!el.hasAttribute("data-tracking")) centerCursor(el);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
     <Link
       {...props}
-      href={href}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-      style={
-        {
-          "--cursor-x": "50%",
-          "--cursor-y": "50%",
-          ...style,
-        } as CSSVars
-      }
-      className={`
-        group relative isolate flex items-center gap-3
-        overflow-hidden rounded-xl
-        border border-white/10
-        bg-neutral-950/30
-        px-4 py-3
-        text-sm font-medium text-neutral-100
-        shadow-sm backdrop-blur-md
-        transition-all duration-200
-        active:scale-[0.98]
-        focus-visible:outline-none
-        focus-visible:ring-2
-        focus-visible:ring-white/50
-        focus-visible:ring-offset-2
-        focus-visible:ring-offset-neutral-950
-        motion-reduce:transition-none
-        ${className}
-      `}
+      ref={ref}
+      onPointerMove={(e) => {
+        onPointerMove?.(e);
+        if (e.pointerType !== "mouse") return;
+        const el = e.currentTarget;
+        const { left, top } = el.getBoundingClientRect();
+        el.setAttribute("data-tracking", "");
+        setCursor(el, e.clientX - left, e.clientY - top);
+      }}
+      onPointerLeave={(e) => {
+        onPointerLeave?.(e);
+        const el = e.currentTarget;
+        el.removeAttribute("data-tracking");
+        centerCursor(el);
+      }}
+      className={cn(
+        "group default-ring relative inline-flex items-center gap-3 rounded-xl border border-transparent px-4 py-3 text-foreground backdrop-blur-xs supports-safari:[&_.glass-icon]:backdrop-blur-[0px]",
+        className,
+      )}
     >
-      {/* Dynamic border glow */}
+      {/* glow di dalam tombol */}
       <span
         aria-hidden="true"
-        className="
-          pointer-events-none absolute inset-0 z-0
-          overflow-hidden rounded-[inherit]
-        "
+        className="pointer-events-none absolute inset-0 isolate z-[-1] select-none overflow-hidden rounded-[inherit] transition-opacity group-active:opacity-80"
       >
         <span
-          className="absolute left-0 top-0 h-162.5 w-62.5"
+          className="glass-follow absolute left-0 top-0 block h-[400%] w-[200%]"
           style={{
-            transform: `
-              translate(
-                calc(var(--cursor-x) - 50%),
-                calc(var(--cursor-y) - 50%)
-              ) rotate(80deg)
-            `,
-            background:
-              "radial-gradient(rgba(255,255,255,0.2), rgb(40,40,40) 22%) rgb(36,36,36)",
+            background: "radial-gradient(var(--glass-glow), transparent 40%)",
+            opacity: 0.7,
+            transform:
+              "translateX(calc(var(--cursorX) - 50%)) translateY(calc(var(--cursorY) - 50%)) scale(1.7) rotate(-45deg)",
           }}
         />
-
-        <span
-          className="
-            absolute inset-px
-            rounded-[inherit]
-            bg-neutral-950/90
-            backdrop-blur-md
-          "
-        />
       </span>
 
-      {/* Cursor spotlight */}
+      {/* ring 1px di tepi tombol */}
       <span
         aria-hidden="true"
-        className="
-          pointer-events-none absolute inset-0 z-1
-          rounded-[inherit]
-          opacity-70
-          transition-opacity duration-200
-          group-active:opacity-40
-        "
+        className="pointer-events-none absolute -inset-px select-none overflow-hidden p-px transition-opacity group-active:opacity-80"
         style={{
-          background: `
-            radial-gradient(
-              circle at var(--cursor-x) var(--cursor-y),
-              rgba(255,255,255,0.07),
-              transparent 40%
-            )
-          `,
+          borderRadius: 13,
+          // Mask inline: ring hanya bingkai 1px (padding). Sengaja tidak lewat CSS eksternal
+          // supaya kalau stylesheet belum ter-load, layer ini tidak jadi kotak penuh.
+          WebkitMask:
+            "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          WebkitMaskComposite: "xor",
+          mask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          maskComposite: "exclude",
         }}
-      />
-
-      {/* Content: supports text, icons, and other React components */}
-      <span className="relative z-10 inline-flex items-center gap-3">
-        {children}
+      >
+        <span
+          className="glass-follow block h-162.5 w-62.5"
+          style={{
+            background:
+              "radial-gradient(var(--glass-ring-spot), var(--glass-ring-base) 22%) var(--glass-ring-base)",
+            transform:
+              "translate(calc(var(--cursorX) - 50%), calc(var(--cursorY) - 50%)) rotate(80deg)",
+          }}
+        />
       </span>
+      <span className="relative">{children}</span>
+      <ArrowIconGlass direction="right" />
     </Link>
   );
 }
