@@ -5,7 +5,7 @@ import { useProjectViewMode } from "@/lib/use-project-view-mode.ts";
 import { ProjectCarousel } from "@/components/project-carousel/project-carousel.tsx";
 import { ProjectViewModeToggle } from "@/components/project-view-mode-toggle";
 import SectionHeader from "@/components/section-header.tsx";
-import { ProjectList } from "../new-project-list/project-list";
+import { ProjectList } from "../project-list/project-list";
 
 export default function ProjectsSection() {
   const viewMode = useProjectViewMode((s) => s.viewMode);
