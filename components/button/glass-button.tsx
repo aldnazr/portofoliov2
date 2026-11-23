@@ -8,6 +8,11 @@ import { cn } from "@/lib/utils.ts";
 
 type GlassLinkProps = Omit<ComponentProps<typeof Link>, "ref">;
 
+type GlassButtonProps = GlassLinkProps & {
+  /** Paksa palet gelap (glass + teks) walau tema aplikasi sedang terang. */
+  alwaysDark?: boolean;
+};
+
 function setCursor(el: HTMLElement, x: number, y: number) {
   el.style.setProperty("--cursorX", `${x}px`);
   el.style.setProperty("--cursorY", `${y}px`);
@@ -21,10 +26,12 @@ function centerCursor(el: HTMLElement) {
 export function GlassButton({
   children,
   className,
+  alwaysDark = false,
+  style,
   onPointerMove,
   onPointerLeave,
   ...props
-}: GlassLinkProps) {
+}: GlassButtonProps) {
   const ref = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -43,6 +50,7 @@ export function GlassButton({
     <Link
       {...props}
       ref={ref}
+      style={alwaysDark ? { ...style, colorScheme: "dark" } : style}
       onPointerMove={(e) => {
         onPointerMove?.(e);
         if (e.pointerType !== "mouse") return;
@@ -104,7 +112,7 @@ export function GlassButton({
         />
       </span>
       <span className="relative">{children}</span>
-      <ArrowIconGlass direction="right" />
+      <ArrowIconGlass direction="right" alwaysDark={alwaysDark} />
     </Link>
   );
 }

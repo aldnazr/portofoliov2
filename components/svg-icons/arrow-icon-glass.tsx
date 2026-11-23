@@ -5,6 +5,8 @@ type ArrowDirection = "left" | "right" | "up" | "down";
 
 interface ArrowIconGlassProps extends HTMLAttributes<HTMLSpanElement> {
   direction?: ArrowDirection;
+  /** Paksa palet gelap (ring + teks) walau tema aplikasi sedang terang. */
+  alwaysDark?: boolean;
 }
 
 const rotation = {
@@ -16,7 +18,9 @@ const rotation = {
 
 export default function ArrowIconGlass({
   direction = "down",
+  alwaysDark = false,
   className = "",
+  style,
   ...props
 }: ArrowIconGlassProps) {
   // Ring 1px dikerjakan .glass-icon::before di globals.css (token --glass-edge / --glass-peak).
@@ -37,6 +41,7 @@ export default function ArrowIconGlass({
 
         ${className}
       `}
+      style={alwaysDark ? { ...style, colorScheme: "dark" } : style}
       {...props}
     >
       {rotation[direction]}

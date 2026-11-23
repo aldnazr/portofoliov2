@@ -178,7 +178,7 @@ export function ProjectCard({
             </a>
           )}
 
-          <GlassButton href={href} className="w-full justify-center">
+          <GlassButton href={href} className="w-full justify-center" alwaysDark>
             View Project
           </GlassButton>
         </div>
