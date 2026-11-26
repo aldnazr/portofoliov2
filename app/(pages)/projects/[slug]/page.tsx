@@ -57,7 +57,11 @@ export default async function ProjectDetailPage({
     projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null;
 
   return (
-    <PageShell currentLabel={project.title} backHref="/#project">
+    <PageShell
+      currentLabel={project.title}
+      backHref="/#project"
+      backLabel="Kembali ke halaman awal"
+    >
       <article className="overflow-hidden rounded-3xl border border-hairline bg-surface shadow-elevated sm:rounded-4xl">
         <div className="grid lg:grid-cols-12">
           <div className="relative aspect-16/10 overflow-hidden bg-neutral-950 lg:order-2 lg:col-span-5 lg:aspect-auto lg:min-h-96">

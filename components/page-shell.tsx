@@ -27,7 +27,7 @@ export default function PageShell({
       <main
         className={`relative z-10 mx-auto ${containerClassName} px-4 pb-24 pt-8 sm:px-6 sm:pt-12`}
       >
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-6 sm:mb-8">
+        <div className="mb-6 flex flex-row-reverse md:flex-row md:flex-wrap items-center justify-end sm:justify-between gap-4 sm:gap-6 sm:mb-8">
           <Breadcrumb currentLabel={currentLabel} />
           <BackLink href={backHref} label={backLabel} />
         </div>
