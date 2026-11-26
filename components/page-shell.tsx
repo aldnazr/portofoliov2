@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import BackLink from "@/components/back-link.tsx";
+import BackLink from "@/components/button/back-link";
 
 import Breadcrumb from "@/components/breadcrumb.tsx";
 import Footer from "@/components/footer.tsx";
@@ -18,7 +18,7 @@ export default function PageShell({
   containerClassName = "max-w-6xl",
   currentLabel,
   backHref = "/",
-  backLabel = "Kembali ke Portofolio",
+  backLabel = "Kembali",
 }: PageShellProps) {
   return (
     <div className="relative min-h-screen bg-background text-foreground">

@@ -2,19 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowIcon } from "./svg-icons/icons.tsx";
+import { ArrowIcon } from "../svg-icons/icons.tsx";
 
 type BackLinkProps = {
-  /** Tujuan navigasi back. Default `/` (halaman utama portofolio). */
   href?: string;
-  /** Teks label tombol. */
   label: string;
 };
 
-/**
- * Link "Kembali" lintas halaman. Mirror dari next-topic-link:
- * lingkaran ikon 44px + label, tanpa blur/pill.
- */
 export default function BackLink({ href = "/", label }: BackLinkProps) {
   const pathname = usePathname();
   const isRenderingDemo =

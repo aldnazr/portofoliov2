@@ -11,16 +11,30 @@ import {
 } from "motion/react";
 import { navigation } from "@/data/navigation.ts";
 import ThemeToggle from "@/components/theme-toggle.tsx";
+import { useActiveSection } from "@/hooks/use-active-section.ts";
 import Link from "next/link";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 const CONCEAL_AFTER = 96;
 const ANCHOR_GRACE = 1200;
+const SECTION_IDS = navigation.map((item) => item.href.split("#")[1]);
+
+const navLinkClass = (isActive: boolean, layout: "desktop" | "mobile") => {
+  const base =
+    layout === "desktop"
+      ? "px-4 py-1.5 text-sm tracking-tight font-medium rounded-full transition-colors"
+      : "px-4 py-2.5 text-sm font-medium rounded-xl transition-colors";
+  const state = isActive
+    ? "bg-overlay-strong text-foreground"
+    : "text-foreground-soft hover:text-foreground hover:bg-overlay";
+  return `${base} ${state} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:text-foreground`;
+};
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [concealed, setConcealed] = useState(false);
   const reduceMotion = useReducedMotion();
+  const activeSection = useActiveSection(SECTION_IDS);
   const { scrollY } = useScroll();
   const lastScrollY = useRef<number | null>(null);
   const graceUntil = useRef(0);
@@ -70,16 +84,21 @@ export default function Header() {
       <div className="flex items-center justify-between md:justify-center rounded-2xl p-0 md:px-6 md:py-3 bg-transparent md:bg-surface/40 backdrop-blur-none md:backdrop-blur-sm shadow-none md:shadow-elevated">
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={keepVisibleDuringAnchorJump}
-              className="px-4 py-1.5 text-sm tracking-tight font-medium text-foreground-soft hover:text-foreground hover:bg-overlay rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navigation.map((item) => {
+            const isActive = activeSection === item.href.split("#")[1];
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={keepVisibleDuringAnchorJump}
+                aria-current={isActive ? "location" : undefined}
+                className={navLinkClass(isActive, "desktop")}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right Action Area */}
@@ -148,6 +167,11 @@ export default function Header() {
               <motion.a
                 key={item.href}
                 href={item.href}
+                aria-current={
+                  activeSection === item.href.split("#")[1]
+                    ? "location"
+                    : undefined
+                }
                 onClick={() => {
                   setMobileMenuOpen(false);
                   keepVisibleDuringAnchorJump();
@@ -167,7 +191,10 @@ export default function Header() {
                   y: 6,
                   transition: { duration: duration(0.2), ease: EASE },
                 }}
-                className="px-4 py-2.5 text-sm font-medium text-foreground-soft hover:text-foreground hover:bg-overlay rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className={navLinkClass(
+                  activeSection === item.href.split("#")[1],
+                  "mobile",
+                )}
               >
                 {item.label}
               </motion.a>
