@@ -24,7 +24,7 @@ export default function HeroSection() {
   });
 
   return (
-    <section id="beranda" className="relative min-h-screen overflow-hidden">
+    <section id="home" className="relative min-h-screen overflow-hidden">
       <BackgroundMesh />
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 flex flex-col justify-center space-y-10 min-h-screen">
         <motion.div {...reveal(0)} className="max-w-fit">
